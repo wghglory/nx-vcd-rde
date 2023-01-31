@@ -1,0 +1,20 @@
+<ul *ngIf="(products$ | async)?.values as products; else loadingOrError">
+  <li *ngFor="let product of products" class="flex">
+    <div class="flex w-1/4 space-x-6">
+      <input
+        clrRadio
+        type="radio"
+        name="product"
+        [(ngModel)]="selectedItem"
+        (ngModelChange)="selectItem(selectedItem!)"
+        [value]="product.entity"
+      />
+      <a [routerLink]="product.id">{{ product.name }}</a>
+    </div>
+    <p cds-text class="w-3/4">{{ product.entity.description }}</p>
+  </li>
+</ul>
+
+<ng-template #loadingOrError>
+  <seed-loading-or-error [error]="error$ | async"></seed-loading-or-error>
+</ng-template>
