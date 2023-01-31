@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+  <form class="login" #loginForm="ngForm" autocomplete="off" novalidate (ngSubmit)="login(loginForm.value)">
+    <h1 [innerHTML]="'common.vcd' | vtranslate"></h1>
+    <h3 class="mt-1" [innerHTML]="'common.product' | vtranslate"></h3>
+    <div class="login-group">
+      <input
+        clrInput
+        placeholder="username"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        trim="blur"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        required
+      />
+
+      <input
+        clrInput
+        placeholder="password"
+        type="text"
+        [(ngModel)]="password"
+        name="password"
+        trim="blur"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        required
+      />
+
+      <seed-alert [key]="alertKey"></seed-alert>
+
+      <button class="btn btn-primary" type="submit" [clrLoading]="submitting" [disabled]="loginForm.form.invalid">
+        {{ 'common.login' | vtranslate }}
+      </button>
+    </div>
+  </form>
+</div>

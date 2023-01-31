@@ -1,0 +1,9 @@
+
+GET http://localhost:3333/cloudapi/1.0.0/tenants
+Authorization: Basic admin:password
+
+###
+
+GET http://localhost:3333/cloudapi/1.0.0/tenants/acme
+Authorization: Bearer admin
+

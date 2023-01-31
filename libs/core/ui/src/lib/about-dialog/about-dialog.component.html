@@ -1,0 +1,28 @@
+<clr-modal [clrModalOpen]="dialogOpen" (clrModalOpenChange)="cancel()" class="modal-lg">
+  <h3 class="modal-title">{{ 'common.about' | vtranslate }}</h3>
+  <div class="modal-body">
+    <div class="card-media-block items-center">
+      <cds-icon shape="storage" size="36" solid status="info" class="mt-2"></cds-icon>
+
+      <div class="card-media-description">
+        <span class="card-media-title">
+          <h4 class="mt-0">
+            <strong [innerHTML]="appName"></strong>
+          </h4>
+        </span>
+
+        <span class="card-media-text"> {{ 'common.version' | vtranslate }}: {{ appVersion }} </span>
+      </div>
+    </div>
+
+    <div class="card-text">
+      <div class="my-4">
+        <time>{{ 'common.buildDate' | vtranslate }}: {{ buildDate | dateFormat : 'medium' }}</time>
+      </div>
+
+      <p cds-text [innerHTML]="'common.aboutDesc' | vtranslate : licenseYear"></p>
+      <p cds-text [innerHTML]="'common.aboutDescTradeMark' | vtranslate"></p>
+    </div>
+  </div>
+  <div class="modal-footer"></div>
+</clr-modal>

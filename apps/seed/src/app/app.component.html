@@ -1,8 +1,7 @@
-<clr-main-container class="main-container">
-  <seed-navbar></seed-navbar>
-  <div class="content-container">
-    <main class="content-area">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
-</clr-main-container>
+<ng-container [ngSwitch]="layout$ | async">
+  <seed-sidebar-layout *ngSwitchCase="'sidebar'"></seed-sidebar-layout>
+
+  <router-outlet *ngSwitchCase="'blank'"></router-outlet>
+
+  <!-- <seed-default-layout *ngSwitchDefault></seed-default-layout> -->
+</ng-container>

@@ -44,19 +44,18 @@ Run `nx graph` to see a diagram of the dependencies of the projects.
 
 Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and make CI faster.
 
-
 ## Structure (TODO)
 
 ```
 Shared Libraries:
 
 - shared/ui: angular library, standalone, tailwind, buildable
-- shared/service: angular library
+- shared/services: angular library
 - shared/pipe： angular library
 - shared/directive： angular library
 - shared/validator: angular library
 - shared/util: js library
-- shared/model: js library
+- shared/models: js library
 
 Core Libraries:
 

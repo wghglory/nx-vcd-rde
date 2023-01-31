@@ -6,16 +6,28 @@
   "prefix": "seed",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@nrwl/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "customWebpackConfig": {
+          "path": "apps/seed/webpack.config.js"
+        },
+        "allowedCommonJsDependencies": ["decimal.js-light", "lodash"],
         "outputPath": "dist/apps/seed",
         "index": "apps/seed/src/index.html",
         "main": "apps/seed/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/seed/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/seed/src/favicon.ico", "apps/seed/src/assets"],
+        "assets": [
+          "apps/seed/src/favicon.ico",
+          "apps/seed/src/assets",
+          {
+            "input": "libs/common-assets/src/assets",
+            "glob": "**/*",
+            "output": "/assets/"
+          }
+        ],
         "styles": ["node_modules/@clr/ui/clr-ui.min.css", "apps/seed/src/styles.scss"],
         "scripts": []
       },
@@ -25,12 +37,12 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "6kb"
             }
           ],
           "outputHashing": "all"
@@ -47,7 +59,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nrwl/angular:webpack-dev-server",
       "configurations": {
         "production": {
           "browserTarget": "seed:build:production"

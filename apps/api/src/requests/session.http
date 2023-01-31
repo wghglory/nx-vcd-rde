@@ -1,0 +1,18 @@
+### Login form
+
+POST http://localhost:3333/api/sessions
+Authorization: Basic admin:password
+# Authorization: Basic ta:password
+# Authorization: Basic tu:password
+
+### get current user after login
+
+GET http://localhost:3333/api/session
+# Authorization: Bearer admin
+Authorization: Bearer ta
+# Authorization: Bearer tu
+
+### logout
+
+DELETE http://localhost:3333/api/session
+Authorization: Bearer admin
