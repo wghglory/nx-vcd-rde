@@ -5,9 +5,8 @@ Convert to API HttpParams =>
 
 {page: 1, pageSize: 9, filter: 'name==*aaa*;productionDate==*bbb*', sortAsc: 'description'}
 */
+import { PageQuery } from '@seed/rde';
 import { pickBy } from 'lodash';
-
-import { PageQuery } from '../models/page-query';
 
 const DEFAULT_PAGE_SIZE = 9;
 
@@ -36,7 +35,7 @@ function filterHandler(state: CardState) {
     return '';
   }
   return filters
-    .map((filter) => {
+    .map(filter => {
       const { property, value } = <{ property: string; value: string }>filter;
       return `${property}==*${value}*`;
     })

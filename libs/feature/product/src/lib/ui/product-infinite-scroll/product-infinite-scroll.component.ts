@@ -3,9 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-import { CardState, cardStateHandler, RDEList } from '@seed/rde';
+import { RDEList } from '@seed/rde';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
-import { startWithTap } from '@seed/shared/utils';
+import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BehaviorSubject, catchError, concatMap, EMPTY, finalize, scan, Subject, tap, withLatestFrom } from 'rxjs';
 
@@ -35,39 +35,39 @@ export class ProductInfiniteScrollComponent {
   refresh$ = this.productStateService.refreshAction$.pipe(
     tap(() => {
       this.state$.next({ ...this.state$.value, current: 1 });
-    })
+    }),
   );
 
   // loadMore --> change page --> get paged products --> scan
   products$ = this.state$.pipe(
-    concatMap((state) => {
+    concatMap(state => {
       const params = cardStateHandler(state);
       return this.productService.getProducts(params).pipe(
         startWithTap(() => this.loading$.next(true)),
         finalize(() => this.loading$.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.error$.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
     scan((acc, curr) => {
       return { ...acc, values: [...acc.values, ...curr.values] };
-    })
+    }),
   );
 
   // filter and load more
   productsWithFilter$ = this.state$.pipe(
-    concatMap((state) => {
+    concatMap(state => {
       const params = cardStateHandler(state);
 
       return this.productService.getProducts(params).pipe(
         startWithTap(() => this.loading$.next(true)),
         finalize(() => this.loading$.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.error$.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
     withLatestFrom(this.state$),
@@ -76,7 +76,7 @@ export class ProductInfiniteScrollComponent {
     // another approach: https://codesandbox.io/s/clear-scan-qsbeuc?file=/src/app/app.component.ts
     scan((acc, [rde, state]) => {
       return state.current === 1 ? rde : { ...acc, values: [...acc.values, ...rde.values], page: state.current };
-    }, {} as RDEList<Product>)
+    }, {} as RDEList<Product>),
   );
 
   deleteProduct(product: Product) {

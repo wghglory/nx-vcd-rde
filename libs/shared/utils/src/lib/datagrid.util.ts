@@ -29,9 +29,8 @@ Convert to API HttpParams =>
 {page: 1, pageSize: 10, filter: 'name==*aaa*;productionDate==*bbb*', sortAsc: 'description'}
 */
 import { ClrDatagridStateInterface } from '@clr/angular';
+import { PageQuery } from '@seed/rde';
 import { isEmpty, pickBy } from 'lodash';
-
-import { PageQuery } from '../models/page-query';
 
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -81,7 +80,7 @@ function filterHandler(state: ClrDatagridStateInterface) {
     return '';
   }
   return filters
-    .map((filter) => {
+    .map(filter => {
       const { property, value } = <{ property: string; value: string }>filter;
       return `${property}==*${value}*`;
     })

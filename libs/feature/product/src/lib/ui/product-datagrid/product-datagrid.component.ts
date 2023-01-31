@@ -3,8 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule, ClrDatagridStateInterface } from '@clr/angular';
-import { stateHandler } from '@seed/rde';
-import { startWithTap } from '@seed/shared/utils';
+import { startWithTap, stateHandler } from '@seed/shared/utils';
 import { isEqual } from 'lodash';
 import {
   BehaviorSubject,
@@ -55,7 +54,7 @@ export class ProductDatagridComponent {
     }),
     map(([prev, curr]) => curr),
     // if prev and curr state are the same, no need to emit. e.g. filter was 'a', user type 'aa' and quickly rollback to 'a'
-    distinctUntilChanged(isEqual)
+    distinctUntilChanged(isEqual),
   ) as Observable<ClrDatagridStateInterface>;
 
   products$ = combineLatest([
@@ -69,13 +68,13 @@ export class ProductDatagridComponent {
         finalize(() => {
           this.loadingSource.next(false);
         }),
-        catchError((err) => {
+        catchError(err => {
           this.errorSource.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
-    share() // avoid datagrid async pipe twice 2 subscription AND delete
+    share(), // avoid datagrid async pipe twice 2 subscription AND delete
   );
 
   // will be called right after initially datagrid loads data

@@ -3,9 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-import { CardState, cardStateHandler, RDEList } from '@seed/rde';
+import { RDEList } from '@seed/rde';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
-import { startWithTap } from '@seed/shared/utils';
+import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, scan, Subject, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { Product } from '../../models/product';
@@ -45,26 +45,26 @@ export class ProductCardListComponent {
 
   // loadMore --> change page --> get paged products --> scan
   products$ = this.currentPage$.pipe(
-    switchMap((page) => {
+    switchMap(page => {
       const params = cardStateHandler({ current: page });
       return this.productService.getProducts(params).pipe(
         startWithTap(() => this.loading$.next(true)),
         finalize(() => this.loading$.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.error$.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
     scan((acc, curr) => {
       return { ...acc, values: [...acc.values, ...curr.values] };
-    })
+    }),
   );
 
   refresh$ = this.productStateService.refreshAction$.pipe(
     tap(() => {
       this.currentPage$.next(1);
-    })
+    }),
   );
 
   // filter and load more
@@ -79,10 +79,10 @@ export class ProductCardListComponent {
       return this.productService.getProducts(params).pipe(
         startWithTap(() => this.loading$.next(true)),
         finalize(() => this.loading$.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.error$.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
     withLatestFrom(this.currentPage$),
@@ -91,7 +91,7 @@ export class ProductCardListComponent {
     // another approach: https://codesandbox.io/s/clear-scan-qsbeuc?file=/src/app/app.component.ts
     scan((acc, [rde, page]) => {
       return page === 1 ? rde : { ...acc, values: [...acc.values, ...rde.values], page };
-    }, {} as RDEList<Product>)
+    }, {} as RDEList<Product>),
   );
 
   deleteProduct(product: Product) {
