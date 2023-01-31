@@ -43,3 +43,48 @@ Run `nx graph` to see a diagram of the dependencies of the projects.
 ## Remote caching
 
 Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and make CI faster.
+
+
+## Structure (TODO)
+
+```
+Shared Libraries:
+
+- shared/ui: angular library, standalone, tailwind, buildable
+- shared/service: angular library
+- shared/pipe： angular library
+- shared/directive： angular library
+- shared/validator: angular library
+- shared/util: js library
+- shared/model: js library
+
+Core Libraries:
+
+- core/ui: nav, login, about which used only once
+- core/interceptor
+- core/service: authService currentUser$
+- core/guard
+
+Feature Libraries:
+
+- provider/
+
+  - feature1 (library)
+    - model
+    - util
+    - service
+    - ui
+
+  - feature2 (library)
+    - model
+    - util
+    - service
+    - ui
+
+- tenant/
+```
+
+## TODOS
+
+1. [x] - Display a welcome page (Shared ui) for both provider and tenant. Wire route for home page.
+   1. `npx nx generate @nrwl/angular:component welcome --project=shared-ui --changeDetection=OnPush --standalone --no-interactive`

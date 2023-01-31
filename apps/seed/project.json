@@ -58,7 +58,7 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/seed/proxy.conf.json"
+        "proxyConfig": "apps/seed/proxy.conf.mjs"
       }
     },
     "extract-i18n": {
