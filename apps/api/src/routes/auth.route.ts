@@ -67,7 +67,7 @@ authRouter.get('/session', (req: Request, res: Response) => {
 
   currentUser = getUserByToken(token);
   if (currentUser) {
-    return res.send(currentUser);
+    res.send(currentUser);
   } else {
     res.status(401).json({ message: `No user found with this token ${token}` });
   }

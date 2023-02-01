@@ -11,7 +11,7 @@ export default function (req: Request, res: Response, next: NextFunction) {
     }
 
     if (!authorization) {
-      res.status(401).json({ message: 'User is not authorized' });
+      return res.status(401).json({ message: 'User is not authorized' });
     }
 
     next();

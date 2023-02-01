@@ -39,9 +39,10 @@ productRouter.patch('/:id', (req, res) => {
     found.name = name;
     found.entity.name = name;
     found.entity.description = description;
-    return res.send(found);
+    res.send(found);
+  } else {
+    res.status(404).send({ message: 'not found' });
   }
-  return res.status(404).send({ message: 'not found' });
 });
 
 productRouter.delete('/:id', (req, res) => {
