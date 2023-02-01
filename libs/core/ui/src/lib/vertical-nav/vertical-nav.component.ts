@@ -4,6 +4,7 @@ import { ClarityIcons, cogIcon, dashboardIcon, homeIcon, infoStandardIcon, organ
 import { NAV_CONFIG } from '@seed/shared/constant';
 import { SharedModule } from '@seed/shared/modules';
 import { AuthService } from '@seed/shared/services';
+import { VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { L10nService } from '@vmw/ngx-vip';
 import { map } from 'rxjs';
 
@@ -17,7 +18,7 @@ ClarityIcons.addIcons(infoStandardIcon, homeIcon, cogIcon, usersIcon, dashboardI
   styleUrls: ['./vertical-nav.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SharedModule, RouterModule, AboutDialogComponent],
+  imports: [SharedModule, RouterModule, VmwThemeToolsModule, AboutDialogComponent],
 })
 export class VerticalNavComponent {
   constructor(public authService: AuthService, private l10nService: L10nService, private router: Router) {}

@@ -3,7 +3,7 @@
     {{ 'common.skipToMain' | vtranslate }}
   </button>
   <h2 class="nav-link !mt-0 flex !h-auto items-center !text-lg" data-testid="product">
-    <span class="nav-text py-3 !text-gray-900">
+    <span class="nav-text py-3 !text-gray-900 dark:!text-gray-50">
       {{ 'common.product' | vtranslate }}
     </span>
   </h2>
@@ -20,6 +20,8 @@
   </a>
 
   <button class="btn btn-secondary btn-sm mx-6" *ngIf="isDevMode" (click)="logout()">Logout</button>
+
+  <vmw-theme-switch-button></vmw-theme-switch-button>
 </clr-vertical-nav>
 
 <seed-about-dialog *ngIf="aboutDialogOpen" [(dialogOpen)]="aboutDialogOpen" [activeElement]="activeElement"></seed-about-dialog>

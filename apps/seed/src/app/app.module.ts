@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { isDevMode, NgModule } from '@angular/core';
+import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -10,12 +10,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { NavbarComponent, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
+import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { VIPModule } from '@vmw/ngx-vip';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarLayoutComponent } from './layout/sidebar-layout/sidebar-layout.component';
 import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone-layout.component';
+import { themePreloader } from './theme-loader';
 
 @NgModule({
   declarations: [AppComponent, SidebarLayoutComponent, StandaloneLayoutComponent],
@@ -24,6 +26,7 @@ import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone
     BrowserAnimationsModule,
     ClarityModule,
     VIPModule.forRoot(),
+    VmwThemeToolsModule.forRoot(),
     HttpClientModule,
     RouterModule,
     StoreModule.forRoot({}),
@@ -44,7 +47,15 @@ import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone
     // share
     AlertModule,
   ],
-  providers: [interceptorProviders],
+  providers: [
+    interceptorProviders,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: themePreloader,
+      deps: [VmwClarityThemeService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

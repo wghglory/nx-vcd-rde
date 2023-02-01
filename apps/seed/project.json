@@ -12,7 +12,7 @@
         "customWebpackConfig": {
           "path": "apps/seed/webpack.config.js"
         },
-        "allowedCommonJsDependencies": ["decimal.js-light", "lodash"],
+        "allowedCommonJsDependencies": ["decimal.js-light", "lodash", "dompurify"],
         "outputPath": "dist/apps/seed",
         "index": "apps/seed/src/index.html",
         "main": "apps/seed/src/main.ts",
@@ -22,6 +22,16 @@
         "assets": [
           "apps/seed/src/favicon.ico",
           "apps/seed/src/assets",
+          {
+            "glob": "clr-ui-dark.min.css",
+            "input": "node_modules/@clr/ui",
+            "output": "/assets/css"
+          },
+          {
+            "glob": "clr-ui.min.css",
+            "input": "node_modules/@clr/ui",
+            "output": "/assets/css"
+          },
           {
             "input": "libs/common-assets/src/assets",
             "glob": "**/*",
