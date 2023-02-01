@@ -21,7 +21,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.use(delayMiddleware, authMiddleware);
 
-app.use(`${apiPrefix}/tenants`, tenantRouter);
+// app.use(`${apiPrefix}/tenants`, tenantRouter);
 
 // vcd task API
 app.use(`/api/task`, taskRouter);
@@ -32,10 +32,11 @@ app.use(`/api/products`, productRouter);
 app.use(`/api`, authRouter);
 
 // RDE routes
-// app.use(apiPrefix, [
-//   // DON'T DELETE BELOW COMMENT. It's hygen's insertion point
-//   // <!--ENTITY_ROUTES-->
-// ]);
+app.use(apiPrefix, [
+  // DON'T DELETE BELOW COMMENT. It's hygen's insertion point
+  // <!--ENTITY_ROUTES-->
+  tenantRouter,
+]);
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {

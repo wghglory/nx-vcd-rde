@@ -1,6 +1,6 @@
 ---
 inject: true
-to: server.ts
+to: main.ts
 after: <!--ENTITY_ROUTES-->
 ---
   <%=entityType%>Router,

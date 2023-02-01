@@ -1,56 +1,5 @@
 # Express mock server
 
-## How path alias work?
-
-There're 2 cases:
-
-1. import models from the react app like this
-
-```ts
-import { VcdSession } from '@/share/models';
-import { Project } from '@/pages/project/models/project.model';
-```
-
-These are plain type import, which doesn't pass thru nodejs server, so it is resolved by tsconfig.json:
-
-```json
-{
-  "paths": {
-    "@/*": ["../*"]
-  },
-  "baseUrl": "."
-}
-```
-
-2. import variable that is used in the nodejs server
-
-```ts
-// auth.middleware.ts
-import { X_VCLOUD_AUTHORIZATION } from '@/core/config/const';
-```
-
-This variable is used during nodejs server start up, so nodejs has to understand and resolve it someway.
-
-To solve this problem, we import `module-alias` lib.
-
-a. in package.json, add below:
-
-```json
-"_moduleAliases": {
- "@": ".."
-}
-```
-
-b. when nodejs server starts up, add this:
-
-```ts
-import 'module-alias/register';
-```
-
-## What to do if @/share/ path has red error line in vscode?
-
-`command shift p`: typescript: restart TS server
-
 ## How to restrict params in the route path?
 
 To have more control over the exact string that can be matched by a route parameter, append a regular expression in

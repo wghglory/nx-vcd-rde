@@ -1,6 +1,6 @@
 ---
 inject: true
-to: server.ts
+to: main.ts
 after: import[^]*;
 ---
 import <%=entityType%>Router from './routes/<%=entityType%>.route';

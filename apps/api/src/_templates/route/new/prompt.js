@@ -2,6 +2,6 @@ module.exports = [
   {
     type: 'input',
     name: 'entityType',
-    message: 'entityType? registry | project | credential',
+    message: 'entityType? e.g. registry, project',
   },
 ];
