@@ -14,7 +14,7 @@ import { ProductStateService } from '../../services/product-state.service';
 @Component({
   selector: 'seed-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, ClarityModule, FormsModule, LoadingOrErrorComponent, ProductListComponent],
+  imports: [CommonModule, RouterModule, ClarityModule, FormsModule, LoadingOrErrorComponent],
   templateUrl: './product-list.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,10 +30,10 @@ export class ProductListComponent {
     switchMap(() => {
       return this.productService.products$;
     }),
-    catchError((err) => {
+    catchError(err => {
       this.error$.next(err);
       return EMPTY;
-    })
+    }),
   );
 
   selectItem(product: Product) {

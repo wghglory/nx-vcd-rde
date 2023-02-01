@@ -17,7 +17,9 @@ describe('ProductShellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
+      imports: [
+        SharedSpecModule,
+        FormsModule,
         MockComponent(ProductListComponent),
         MockComponent(ProductCardListComponent),
         MockComponent(ProductDatagridComponent),
@@ -25,7 +27,6 @@ describe('ProductShellComponent', () => {
         MockComponent(ProductEditComponent),
         MockComponent(ProductInfiniteScrollComponent),
       ],
-      imports: [ProductShellComponent, SharedSpecModule, FormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductShellComponent);
