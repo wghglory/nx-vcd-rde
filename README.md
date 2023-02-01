@@ -52,7 +52,7 @@ Shared Libraries:
 - shared/constant: nrwl library
 - shared/models: nrwl library
 - shared/modules: angular library
-- core/services: angular library
+- shared/services: angular library, authService authGuard
 - shared/ui: angular library
 - shared/pipe： angular library
 - shared/directive： angular library
@@ -63,22 +63,25 @@ Core Libraries:
 
 - core/ui: nav, login, about which used only once
 - core/interceptor
-- core/services: authService authGuard
+
+rde Library
+
+common-assets Library: images, svg, etc
 
 Feature Libraries:
 
 - provider/
 
   - feature1 (library)
-    - model
-    - util
-    - service
+    - models
+    - utils
+    - services
     - ui
 
   - feature2 (library)
-    - model
-    - util
-    - service
+    - models
+    - utils
+    - services
     - ui
 
 - tenant/
@@ -88,3 +91,9 @@ Feature Libraries:
 
 1. [x] - Display a welcome page (Shared ui) for both provider and tenant. Wire route for home page.
    1. `npx nx generate @nrwl/angular:component welcome --project=shared-ui --changeDetection=OnPush --standalone --no-interactive`
+1. [ ] - UT
+1. [ ] - Cypress
+1. [ ] - Schematics
+1. [ ] - a11y
+1. [ ] - upgrade clarity, ngx
+1. [ ] - dark mode
