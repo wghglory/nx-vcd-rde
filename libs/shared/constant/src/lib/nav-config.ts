@@ -10,11 +10,6 @@ const homeMenuItem: MenuItem = {
 export const NAV_CONFIG: Record<Role, MenuItem[]> = {
   'System Administrator': [
     { caption: 'nav.home', link: '/provider/home', shape: 'home' },
-    {
-      caption: 'nav.tenants',
-      link: '/provider/tenants',
-      shape: 'organization',
-    },
     { caption: 'nav.setting', link: '/provider/setting', shape: 'cog' },
   ],
   'Organization Administrator': [

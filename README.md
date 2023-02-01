@@ -49,20 +49,21 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ```
 Shared Libraries:
 
-- shared/ui: angular library, standalone, tailwind, buildable
-- shared/services: angular library
+- shared/constant: nrwl library
+- shared/models: nrwl library
+- shared/modules: angular library
+- core/services: angular library
+- shared/ui: angular library
 - shared/pipe： angular library
 - shared/directive： angular library
 - shared/validator: angular library
-- shared/util: js library
-- shared/models: js library
+- shared/utils: nrwl library
 
 Core Libraries:
 
 - core/ui: nav, login, about which used only once
 - core/interceptor
-- core/service: authService currentUser$
-- core/guard
+- core/services: authService authGuard
 
 Feature Libraries:
 
