@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedSpecModule } from '@seed/shared/modules';
 
 import { ProductCardListComponent } from './product-card-list.component';
 
@@ -8,7 +9,7 @@ describe('ProductCardListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductCardListComponent],
+      imports: [ProductCardListComponent, SharedSpecModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductCardListComponent);

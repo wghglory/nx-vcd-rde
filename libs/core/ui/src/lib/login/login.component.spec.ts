@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { SharedSpecModule } from '@seed/shared/modules';
@@ -13,7 +14,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent, SharedSpecModule, StoreModule.forRoot({})],
+      imports: [LoginComponent, SharedSpecModule, NoopAnimationsModule, StoreModule.forRoot({})],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
 

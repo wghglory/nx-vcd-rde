@@ -2,18 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SharedSpecModule } from '@seed/shared/modules';
 
-import { NavbarComponent } from './navbar.component';
+import { VerticalNavComponent } from './vertical-nav.component';
 
-describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
+describe('VerticalNavComponent', () => {
+  let component: VerticalNavComponent;
+  let fixture: ComponentFixture<VerticalNavComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent, RouterTestingModule, SharedSpecModule],
+      imports: [VerticalNavComponent, RouterTestingModule, SharedSpecModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NavbarComponent);
+    fixture = TestBed.createComponent(VerticalNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

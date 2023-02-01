@@ -1,32 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LoadingOrErrorComponent } from '@seed/shared/ui';
-import { MockComponent } from 'ng-mocks';
+import { fireEvent, render, screen } from '@testing-library/angular';
 import { of } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
+import { ProductStateService } from '../../services/product-state.service';
 import { ProductListComponent } from './product-list.component';
 
 describe('ProductListComponent', () => {
-  let component: ProductListComponent;
-  let fixture: ComponentFixture<ProductListComponent>;
   const productServiceStub = {
     products$: of([] as Product[]),
   };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ProductListComponent],
-      providers: [{ provide: ProductService, useValue: productServiceStub }],
-      declarations: [MockComponent(LoadingOrErrorComponent)],
-    }).compileComponents();
+  it('should render', async () => {
+    await render(ProductListComponent, {
+      componentProperties: {},
+      providers: [
+        { provide: ProductService, useValue: productServiceStub },
+        { provide: ProductStateService, useValue: productServiceStub },
+      ],
+    });
 
-    fixture = TestBed.createComponent(ProductListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    const valueControl = screen.getByTestId('value');
+    expect(valueControl).toHaveTextContent('0');
   });
 });

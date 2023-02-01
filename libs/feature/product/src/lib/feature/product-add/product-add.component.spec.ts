@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedSpecModule } from '@seed/shared/modules';
 
 import { ProductAddComponent } from './product-add.component';
 
@@ -8,7 +10,7 @@ describe('ProductAddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductAddComponent],
+      imports: [ProductAddComponent, SharedSpecModule, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductAddComponent);
