@@ -15,8 +15,6 @@ export class AppComponent {
   layout$: Observable<Layout> = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
     map(() => this.activatedRoute),
-
-    tap(() => console.log(this.activatedRoute)),
     map(route => {
       while (route.firstChild) {
         route = route.firstChild;
