@@ -2,21 +2,21 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable, isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 import { AUTH_CONTEXT, TENANT_CONTEXT } from '@seed/shared/constant';
-import { SignInPayload, Tenant, VcdSession } from '@seed/shared/models';
-import { BehaviorSubject, catchError, of, retry, tap, throwError } from 'rxjs';
+import { SignInPayload, VcdSession } from '@seed/shared/models';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // private currentUserSub = new Subject<User | void>();
-  // TODO: test, to be removed
-  private currentUserSub = new BehaviorSubject<VcdSession | null>({
-    user: 'admin',
-    org: 'System',
-    userId: 'admin-id',
-    roles: 'System Administrator',
-  } as VcdSession);
+  private currentUserSub = new BehaviorSubject<VcdSession | null>(null);
+  // ----- Test Sub: -----
+  // private currentUserSub = new BehaviorSubject<VcdSession | null>({
+  //   user: 'admin',
+  //   org: 'System',
+  //   userId: 'admin-id',
+  //   roles: 'System Administrator',
+  // } as VcdSession);
   currentUser$ = this.currentUserSub.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
