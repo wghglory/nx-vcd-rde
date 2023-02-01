@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { alertActions } from '@seed/shared/ui';
 import { filter, map, mergeMap, Observable } from 'rxjs';
 
 import { Layout } from './layout/layout';
@@ -12,23 +10,7 @@ import { Layout } from './layout/layout';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private store: Store, private router: Router, private activatedRoute: ActivatedRoute) {
-    store.dispatch(
-      alertActions.addAlert({
-        alert: {
-          id: Symbol(1),
-          message: 'alert.support',
-          alertKey: 'global',
-        },
-      }),
-    );
-
-    store.dispatch(
-      alertActions.addAlert({
-        alert: { type: 'success', message: 'alert.todayDesc', alertKey: 'global', params: ['Tuesday'] },
-      }),
-    );
-  }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   layout$: Observable<Layout> = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
