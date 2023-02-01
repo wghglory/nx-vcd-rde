@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClarityModule } from '@clr/angular';
-import { VerticalNavComponent } from '@seed/core/ui';
+import { NavbarComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
 import { MockComponent, MockModule } from 'ng-mocks';
 
-import { SidebarLayoutComponent } from './sidebar-layout.component';
+import { StandaloneLayoutComponent } from './standalone-layout.component';
 
-describe('SidebarLayoutComponent', () => {
-  let component: SidebarLayoutComponent;
-  let fixture: ComponentFixture<SidebarLayoutComponent>;
+describe('StandaloneLayoutComponent', () => {
+  let component: StandaloneLayoutComponent;
+  let fixture: ComponentFixture<StandaloneLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SidebarLayoutComponent, MockComponent(VerticalNavComponent), MockModule(ClarityModule), MockModule(AlertModule)],
+      declarations: [StandaloneLayoutComponent, MockComponent(NavbarComponent), MockModule(ClarityModule), MockModule(AlertModule)],
       imports: [RouterTestingModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SidebarLayoutComponent);
+    fixture = TestBed.createComponent(StandaloneLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
