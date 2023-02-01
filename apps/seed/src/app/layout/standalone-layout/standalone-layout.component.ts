@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'seed-sidebar-layout',
-  templateUrl: './sidebar-layout.component.html',
+  selector: 'seed-standalone-layout',
+  templateUrl: './standalone-layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarLayoutComponent {}
+export class StandaloneLayoutComponent {}

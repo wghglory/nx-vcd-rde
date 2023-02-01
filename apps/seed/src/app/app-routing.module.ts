@@ -7,13 +7,13 @@ import { WelcomeComponent } from '@seed/shared/ui';
 
 import { Layout } from './layout/layout';
 
+const layout = (process.env['NX_MODE'] || 'sidebar') as Layout;
+
 const routes: Route[] = [
   {
     path: 'provider',
     canActivate: [AuthGuard],
-    data: {
-      layout: 'sidebar' as Layout,
-    },
+    data: { layout },
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
@@ -29,9 +29,7 @@ const routes: Route[] = [
   {
     path: 'tenant',
     canActivate: [AuthGuard],
-    data: {
-      layout: 'sidebar' as Layout,
-    },
+    data: { layout },
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
@@ -55,23 +53,17 @@ const routes: Route[] = [
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full',
-    data: {
-      layout: 'sidebar' as Layout,
-    },
+    data: { layout },
   },
   {
     path: 'products',
     children: productRoutes,
-    data: {
-      layout: 'sidebar' as Layout,
-    },
+    data: { layout },
   },
   {
     path: '**',
     component: NotFoundComponent,
-    data: {
-      layout: 'sidebar' as Layout,
-    },
+    data: { layout },
   },
 ];
 

@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "api": "npx nx serve api",
-    "seed": "NX_BUILD_DATE=$(date) npx nx serve seed",
+    "seed": "NX_BUILD_DATE=$(date) NX_MODE=standalone npx nx serve seed",
     "build": "NX_BUILD_DATE=$(date) npx nx build seed",
     "start": "npm run api & npm run seed",
     "test": "npx nx run-many --all --target=test --parallel",

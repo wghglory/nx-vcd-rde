@@ -1,1 +1,1 @@
-export type Layout = 'sidebar' | 'blank';
+export type Layout = 'sidebar' | 'standalone' | 'blank';

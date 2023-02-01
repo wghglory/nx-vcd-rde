@@ -1,14 +1,27 @@
 <header class="header-6">
+  <!-- <button class="btn btn-primary skip-to-main" (click)="focusOnMain()">
+    {{ 'common.skipToMain' | vtranslate }}
+  </button> -->
   <div class="branding">
     <a routerLink="/" class="nav-link">
       <cds-icon shape="vm-bug"></cds-icon>
-      <span class="title">Clarity Design</span>
+      <span class="title"> {{ 'common.product' | vtranslate }}</span>
     </a>
   </div>
   <div class="header-nav">
-    <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-link" aria-current="page"
-      ><span class="nav-text">Dashboard</span></a
-    >
+    <ng-container *ngFor="let menu of menuItems$ | async">
+      <a
+        [routerLink]="menu.link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active"
+        class="nav-link"
+        [attr.aria-current]="menu.link"
+        [title]="menu.caption | vtranslate"
+      >
+        <span class="nav-text">{{ menu.caption | vtranslate }}</span>
+      </a>
+    </ng-container>
+
     <a routerLink="/products" routerLinkActive="active" class="nav-link"><span class="nav-text">Products</span></a>
   </div>
   <div class="header-actions">

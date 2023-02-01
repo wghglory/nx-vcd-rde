@@ -15,9 +15,10 @@ import { VIPModule } from '@vmw/ngx-vip';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarLayoutComponent } from './layout/sidebar-layout/sidebar-layout.component';
+import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone-layout.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarLayoutComponent],
+  declarations: [AppComponent, SidebarLayoutComponent, StandaloneLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -1,5 +1,6 @@
 <ng-container [ngSwitch]="layout$ | async">
   <seed-sidebar-layout *ngSwitchCase="'sidebar'"></seed-sidebar-layout>
+  <seed-standalone-layout *ngSwitchCase="'standalone'"></seed-standalone-layout>
 
   <router-outlet *ngSwitchCase="'blank'"></router-outlet>
 

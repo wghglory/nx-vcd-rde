@@ -8,8 +8,8 @@ if (process.env['NODE_ENV'] === 'production') {
 }
 
 // This is defined in our .env file.
-console.log('>>> NX_APP_NAME', process.env['NX_APP_NAME']);
-console.log('>>> NX_BUILD_DATE', process.env['NX_BUILD_DATE']);
+// console.log('>>> NX_APP_NAME', process.env['NX_APP_NAME']);
+// console.log('>>> NX_BUILD_DATE', process.env['NX_BUILD_DATE']);
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
