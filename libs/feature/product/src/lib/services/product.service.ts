@@ -10,7 +10,7 @@ import { Product } from '../models/product';
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  products$ = this.http.get<RDEList<Product>>('/api/products');
+  products$ = this.http.get<RDEList<Product>>('/api/prodsucts');
 
   getProducts(params: Partial<PageQuery>) {
     return this.http.get<RDEList<Product>>('/api/products', {
@@ -25,7 +25,7 @@ export class ProductService {
   addProduct(
     payload: Partial<{
       name: string;
-    }>
+    }>,
   ) {
     return this.http.post<RDEValue<Product>>(`/api/products`, payload);
   }
@@ -35,7 +35,7 @@ export class ProductService {
     payload: Partial<{
       name: string;
       description: string;
-    }>
+    }>,
   ) {
     return this.http.patch<RDEValue<Product>>(`/api/products/${id}`, payload);
   }

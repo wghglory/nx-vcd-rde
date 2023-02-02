@@ -18,6 +18,7 @@ import { ProductStateService } from '../../services/product-state.service';
   standalone: true,
   imports: [CommonModule, InfiniteScrollModule, ClarityModule, RouterModule, LoadingOrErrorComponent],
   templateUrl: './product-infinite-scroll.component.html',
+  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductInfiniteScrollComponent {
