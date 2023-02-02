@@ -3,6 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { SharedSpecModule } from '@seed/shared/modules';
+import { AuthService } from '@seed/shared/services';
 import { AlertModule } from '@seed/shared/ui';
 import { MockModule } from 'ng-mocks';
 import { of } from 'rxjs';
@@ -18,8 +20,9 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [MockModule(ClarityModule), MockModule(AlertModule)],
+      imports: [MockModule(ClarityModule), MockModule(AlertModule), SharedSpecModule],
       providers: [
+        AuthService,
         provideMockStore({ initialState }),
         {
           provide: Router,

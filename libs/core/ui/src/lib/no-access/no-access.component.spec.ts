@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedSpecModule } from '@seed/shared/modules';
 
 import { NoAccessComponent } from './no-access.component';
 
@@ -8,7 +9,7 @@ describe('NoAccessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoAccessComponent],
+      imports: [NoAccessComponent, SharedSpecModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NoAccessComponent);
