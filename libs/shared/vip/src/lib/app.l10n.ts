@@ -13,4 +13,5 @@ export const ENGLISH = {
   'common.aboutDescTradeMark': `
         VMware is a registered trademark or trademark of VMware, Inc. in the United States and other jurisdictions.
         All other marks and names mentioned herein may be trademarks of their respective companies.`,
+  'common.noAccess': 'Sorry, you do not have access to this page.',
 };

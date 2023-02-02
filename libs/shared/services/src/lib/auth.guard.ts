@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { NAV_CONFIG } from '@seed/shared/constant';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -21,9 +21,21 @@ export class AuthGuard implements CanActivate {
           console.error(route.routeConfig);
           throw new Error('why route.routeConfig error');
         }
-        return NAV_CONFIG[user.roles].some(config => route.routeConfig?.children?.some(c => c.path && config.link.includes(c.path)));
+
+        const canActivate = NAV_CONFIG[user.roles].some(config =>
+          route.routeConfig?.children?.some(c => c.path && config.link.includes(route.routeConfig?.path + '/' + c.path)),
+        );
+
+        if (canActivate === false) {
+          this.router.navigate(['/no-access'], { replaceUrl: true });
+        }
+
+        return canActivate;
       }),
       catchError(() => {
+        if (isDevMode()) {
+          this.router.navigate(['/login'], { replaceUrl: true });
+        }
         return of(false);
       }),
     );

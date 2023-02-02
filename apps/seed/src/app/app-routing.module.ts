@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { NotFoundComponent } from '@seed/core/ui';
+import { NoAccessComponent, NotFoundComponent } from '@seed/core/ui';
 import { productRoutes } from '@seed/feature/product';
 import { AuthGuard } from '@seed/shared/services';
 import { WelcomeComponent } from '@seed/shared/ui';
@@ -48,6 +48,11 @@ const routes: Route[] = [
       layout: 'blank' as Layout,
     },
     children: [{ path: '', loadComponent: () => import('@seed/core/ui').then(m => m.LoginComponent) }],
+  },
+  {
+    path: 'no-access',
+    component: NoAccessComponent,
+    data: { layout },
   },
   {
     path: '',
