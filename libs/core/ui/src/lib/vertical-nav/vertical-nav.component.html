@@ -19,9 +19,11 @@
     <span class="nav-text"> {{ 'common.about' | vtranslate }}</span>
   </a>
 
-  <button class="btn btn-secondary btn-sm mx-6" *ngIf="isDevMode" (click)="logout()">Logout</button>
+  <div class="mt-auto">
+    <button class="btn btn-secondary btn-sm mx-6 w-full" *ngIf="isDevMode" (click)="logout()">Logout</button>
 
-  <vmw-theme-switch-button></vmw-theme-switch-button>
+    <vmw-theme-switch-button></vmw-theme-switch-button>
+  </div>
 </clr-vertical-nav>
 
 <seed-about-dialog *ngIf="aboutDialogOpen" [(dialogOpen)]="aboutDialogOpen" [activeElement]="activeElement"></seed-about-dialog>
