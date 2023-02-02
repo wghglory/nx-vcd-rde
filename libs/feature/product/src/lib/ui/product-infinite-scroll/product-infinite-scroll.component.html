@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-3 gap-x-6">
+  <div class="grid grid-cols-3 gap-6">
     <div *ngFor="let product of products.values" class="card mt-0 flex flex-col">
       <h3 class="card-header">
         <a [routerLink]="product.id">{{ product.name }}</a>
