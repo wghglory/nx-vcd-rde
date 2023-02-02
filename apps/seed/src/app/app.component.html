@@ -4,5 +4,16 @@
 
   <router-outlet *ngSwitchCase="'blank'"></router-outlet>
 
+  <div *ngIf="authService.currentUser$ | async as user">{{ user | json }}</div>
+
+  <!-- get current user loading, for landing any page -->
+  <div
+    class="top-15 absolute left-0 right-0 bottom-0 flex flex-col items-center justify-center backdrop-blur-lg"
+    *ngIf="authService.loading$ | async"
+  >
+    <div class="spinner"></div>
+    <div>Checking User Information</div>
+  </div>
+
   <!-- <seed-default-layout *ngSwitchDefault></seed-default-layout> -->
 </ng-container>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '@seed/shared/services';
 import { filter, map, mergeMap, Observable, tap } from 'rxjs';
 
 import { Layout } from './layout/layout';
@@ -10,7 +11,7 @@ import { Layout } from './layout/layout';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public authService: AuthService) {}
 
   layout$: Observable<Layout> = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),

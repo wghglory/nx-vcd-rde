@@ -9,6 +9,9 @@ import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  private loadingSub = new BehaviorSubject(false);
+  loading$ = this.loadingSub.asObservable();
+
   private currentUserSub = new BehaviorSubject<VcdSession | null>(null);
   // ----- Test Sub: -----
   // private currentUserSub = new BehaviorSubject<VcdSession | null>({
@@ -29,6 +32,8 @@ export class AuthService {
   }
 
   getUserInfo(headers?: Record<string, string>) {
+    this.loadingSub.next(true);
+
     // note: interceptor adds {{AUTH_TOKEN}} into header already
     return this.http
       .get<VcdSession>(`/api/session`, {
@@ -37,12 +42,14 @@ export class AuthService {
       .pipe(
         tap(user => {
           this.currentUserSub.next(user);
+          this.loadingSub.next(false);
           // sessionStorage.setItem(TENANT_CONTEXT, session.orgId);
           // sessionStorage.setItem(AUTH_CONTEXT, user.org);
         }),
         // retry(1),
         catchError((err: HttpErrorResponse) => {
           this.currentUserSub.next(null);
+          this.loadingSub.next(false);
 
           sessionStorage.clear();
 

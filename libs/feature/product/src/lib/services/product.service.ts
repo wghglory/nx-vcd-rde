@@ -10,7 +10,7 @@ import { Product } from '../models/product';
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  products$ = this.http.get<RDEList<Product>>('/api/prodsucts');
+  products$ = this.http.get<RDEList<Product>>('/api/products');
 
   getProducts(params: Partial<PageQuery>) {
     return this.http.get<RDEList<Product>>('/api/products', {

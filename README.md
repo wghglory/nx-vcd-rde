@@ -96,4 +96,4 @@ Feature Libraries:
 1. [ ] - Schematics
 1. [ ] - a11y
 1. [ ] - upgrade clarity, ngx
-1. [ ] - dark mode, tailwind.
+1. [x] - dark mode, tailwind.
