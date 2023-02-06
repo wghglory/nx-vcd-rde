@@ -1,6 +1,6 @@
 import { VmwClarityThemeConfig, VmwClarityThemeService } from '@vmw/ngx-utils';
 
-export function themePreloader(themeService: VmwClarityThemeService) {
+export function themeFactory(themeService: VmwClarityThemeService) {
   // Optional config object to be passed to initialize() call
   const config = {
     clarityDarkPath: '/assets/css/clr-ui-dark.min.css',

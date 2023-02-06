@@ -10,18 +10,13 @@ export function initVIPConfig(vipService: VIPService, localeService: LocaleServi
     localeService.init(getBrowserCultureLang());
 
     vipService.initData({
-      productID: 'oss',
+      productID: process.env['NX_VIP_PRODUCT_ID'] || 'seed',
       component: 'AngularClient',
-      version: '1.0.0',
-      host: '/',
-      isPseudo: true,
-      i18nScope: [
-        PatternCategories.DATE,
-        PatternCategories.NUMBER,
-        PatternCategories.PLURAL,
-        PatternCategories.CURRENCIES,
-      ],
-      collectSource: false,
+      version: process.env['NX_VIP_VERSION'] || '0.0.0',
+      host: process.env['NX_VIP_HOST'] || '/',
+      isPseudo: process.env['NX_VIP_ISPSEUDO'] === 'true',
+      i18nScope: [PatternCategories.DATE, PatternCategories.NUMBER, PatternCategories.PLURAL, PatternCategories.CURRENCIES],
+      collectSource: process.env['NX_VIP_COLLECT_SOURCE'] === 'true',
       sourceBundles: [AppEng, CoreEng],
     });
   };

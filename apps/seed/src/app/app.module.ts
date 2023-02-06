@@ -17,19 +17,25 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarLayoutComponent } from './layout/sidebar-layout/sidebar-layout.component';
 import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone-layout.component';
-import { themePreloader } from './theme-loader';
+import { bootstrapFactory, PreloadService } from './services/preload.service';
+import { themeFactory } from './theme/theme-factory';
 
 @NgModule({
   declarations: [AppComponent, SidebarLayoutComponent, StandaloneLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ClarityModule,
-    VIPModule.forRoot(),
-    VmwThemeToolsModule.forRoot(),
     HttpClientModule,
     RouterModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(
+      {},
+      {
+        runtimeChecks: {
+          strictStateImmutability: true,
+          strictActionImmutability: true,
+        },
+      },
+    ),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -38,6 +44,10 @@ import { themePreloader } from './theme-loader';
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
+    ClarityModule,
+    VIPModule.forRoot(),
+    VmwThemeToolsModule.forRoot(),
+    // SharedVipModule,
     AppRoutingModule,
 
     // core
@@ -51,7 +61,13 @@ import { themePreloader } from './theme-loader';
     interceptorProviders,
     {
       provide: APP_INITIALIZER,
-      useFactory: themePreloader,
+      useFactory: bootstrapFactory,
+      deps: [PreloadService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: themeFactory,
       deps: [VmwClarityThemeService],
       multi: true,
     },
