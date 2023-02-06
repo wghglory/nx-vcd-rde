@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PageQuery, RDEList, RDEValue } from '@seed/rde';
+import { PageQuery, RDEList, RDEValue } from '@seed/shared/models';
 
 import { Product } from '../models/product';
 

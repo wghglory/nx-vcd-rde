@@ -1,4 +1,4 @@
-import { RDEList } from '@seed/rde';
+import { RDEList } from '@seed/shared/models';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
 import { render, screen } from '@testing-library/angular';
 import { MockComponent } from 'ng-mocks';

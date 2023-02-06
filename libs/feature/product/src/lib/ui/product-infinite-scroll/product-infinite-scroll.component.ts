@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-import { RDEList } from '@seed/rde';
+import { RDEList } from '@seed/shared/models';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
