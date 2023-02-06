@@ -1,7 +1,7 @@
 <div class="login-wrapper">
   <form class="login" #loginForm="ngForm" autocomplete="off" novalidate (ngSubmit)="login(loginForm.value)">
     <h1 [innerHTML]="'common.vcd' | vtranslate"></h1>
-    <h3 class="mt-1" [innerHTML]="'common.product' | vtranslate"></h3>
+    <h2 class="mt-1" [innerHTML]="'common.product' | vtranslate"></h2>
     <div class="login-group">
       <input
         clrInput
@@ -33,7 +33,7 @@
 
       <seed-alert [key]="alertKey"></seed-alert>
 
-      <button class="btn btn-primary" type="submit" [clrLoading]="submitting" [disabled]="loginForm.form.invalid">
+      <button class="btn btn-primary" type="submit" name="login button" [clrLoading]="submitting" [disabled]="loginForm.form.invalid">
         {{ 'common.login' | vtranslate }}
       </button>
     </div>
