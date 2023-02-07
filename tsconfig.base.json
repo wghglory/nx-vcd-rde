@@ -19,6 +19,7 @@
       "@seed/core/interceptor": ["libs/core/interceptor/src/index.ts"],
       "@seed/core/ui": ["libs/core/ui/src/index.ts"],
       "@seed/feature/product": ["libs/feature/product/src/index.ts"],
+      "@seed/plugin-generator": ["libs/plugin-generator/src/index.ts"],
       "@seed/provider/home": ["libs/provider/home/src/index.ts"],
       "@seed/provider/setting": ["libs/provider/setting/src/index.ts"],
       "@seed/shared/constant": ["libs/shared/constant/src/index.ts"],
