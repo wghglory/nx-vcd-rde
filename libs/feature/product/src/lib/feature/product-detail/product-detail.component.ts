@@ -24,9 +24,9 @@ export class ProductDetailComponent {
     switchMap(({ id }) => {
       return this.productService.getProduct(id);
     }),
-    catchError((err) => {
+    catchError(err => {
       this.error$.next(err);
       return EMPTY;
-    })
+    }),
   );
 }

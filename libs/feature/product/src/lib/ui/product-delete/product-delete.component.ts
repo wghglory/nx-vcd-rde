@@ -32,10 +32,10 @@ export class ProductDeleteComponent {
     switchMap(([product, _]) => {
       return this.productService.deleteProduct(product.id).pipe(
         finalize(() => this.loadingSource.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.errorSource.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
     tap(() => {
@@ -43,7 +43,7 @@ export class ProductDeleteComponent {
       this.close();
       this.productStateService.selectItem(null);
       this.productStateService.refreshList();
-    })
+    }),
   );
 
   close() {

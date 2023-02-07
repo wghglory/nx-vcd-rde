@@ -38,10 +38,10 @@ export class ProductEditComponent implements OnInit {
     switchMap(([product, _]) => {
       return this.productService.updateProduct(product.id, this.productForm.value).pipe(
         finalize(() => this.loadingSource.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.errorSource.next(err);
           return EMPTY;
-        })
+        }),
       );
     }),
     tap(() => {
@@ -49,7 +49,7 @@ export class ProductEditComponent implements OnInit {
       this.close();
       this.productStateService.selectItem(null);
       this.productStateService.refreshList();
-    })
+    }),
   );
 
   close() {
@@ -64,7 +64,7 @@ export class ProductEditComponent implements OnInit {
 
   ngOnInit() {
     // init form
-    this.productStateService.selectedItem$.pipe(filter(Boolean), take(1)).subscribe((product) => {
+    this.productStateService.selectedItem$.pipe(filter(Boolean), take(1)).subscribe(product => {
       this.productForm.setValue({
         name: product.name,
         description: product.description,

@@ -38,12 +38,12 @@ export class ProductAddComponent {
           this.goBack();
         }),
         finalize(() => this.loadingSource.next(false)),
-        catchError((err) => {
+        catchError(err => {
           this.errorSource.next(err);
           return EMPTY;
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
   save() {

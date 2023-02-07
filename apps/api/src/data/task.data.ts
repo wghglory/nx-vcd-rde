@@ -84,7 +84,7 @@ const task = ({
       vcTask: [],
       vCloudExtension: [],
     },
-    result: status === 'success' ? {resultContent, resultReference: null} : null,
+    result: status === 'success' ? { resultContent, resultReference: null } : null,
     status,
     operation: `Invoked ${id}`,
     operationName: 'executeBehavior',
@@ -97,4 +97,4 @@ const task = ({
   };
 };
 
-export {task};
+export { task };
