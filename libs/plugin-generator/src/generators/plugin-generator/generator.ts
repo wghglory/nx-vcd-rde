@@ -1,5 +1,6 @@
 import { addProjectConfiguration, formatFiles, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
 import * as path from 'path';
+
 import { PluginGeneratorGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends PluginGeneratorGeneratorSchema {

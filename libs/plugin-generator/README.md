@@ -17,6 +17,16 @@ Add below in `nx.json`:
 
 So now instead of `npx nx generate @seed/plugin-generator:plugin-generator <a-custom-library-name>`, you can simply run `npx nx g plugin-generator <a-custom-library-name>`
 
+## Create a new generator by a generator
+
+```bash
+npx nx generate @nrwl/nx-plugin:generator angular-library --project=plugin-generator
+```
+
+It will create a new `angular-library` generator.
+
+Build own generator by modifying the official generator [schema.json](https://github.com/nrwl/nx/blob/master/packages/angular/src/generators/library/schema.json) and [schema.d.ts](https://github.com/nrwl/nx/blob/master/packages/angular/src/generators/library/schema.d.ts).
+
 ## Building
 
 Run `nx build plugin-generator` to build the library.
@@ -24,3 +34,7 @@ Run `nx build plugin-generator` to build the library.
 ## Running unit tests
 
 Run `nx test plugin-generator` to execute the unit tests via [Jest](https://jestjs.io).
+
+## Reference
+
+<https://dev.to/this-is-learning/create-own-default-plugin-to-nx-workspace-2fen>

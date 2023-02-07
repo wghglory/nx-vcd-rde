@@ -1,0 +1,6 @@
+# <%= name %>
+
+This is Angular library for <%= domain %>
+
+type: <%= type %>
+scope: <%= scope %>
