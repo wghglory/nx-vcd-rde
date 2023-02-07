@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "$id": "new-article",
+  "title": "Custom New Article Generator",
+  "description": "Custom New Article Generator",
   "type": "object",
   "properties": {
     "title": {

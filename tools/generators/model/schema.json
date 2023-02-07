@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "model",
+  "title": "Custom Model(Interface) Generator",
+  "description": "Custom Model Generator",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Model Name",
+      "x-prompt": "What's the model name?",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "projectName": {
+      "type": "string",
+      "description": "Project Name",
+      "x-prompt": "What's the project name you put this model?",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": ["name", "projectName"]
+}
