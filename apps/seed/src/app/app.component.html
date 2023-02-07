@@ -6,7 +6,7 @@
 
   <!-- get current user loading, for landing any page -->
   <div
-    class="top-15 absolute left-0 right-0 bottom-0 flex flex-col items-center justify-center backdrop-blur-lg"
+    class="top-15 absolute left-0 right-0 bottom-0 z-10 flex flex-col items-center justify-center backdrop-blur-lg"
     *ngIf="authService.loading$ | async"
   >
     <div class="spinner"></div>
