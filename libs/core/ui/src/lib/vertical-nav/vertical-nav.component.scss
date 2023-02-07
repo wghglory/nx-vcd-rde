@@ -1,12 +1,22 @@
-.skip-to-main {
-  position: fixed;
-  margin: 0;
-  left: 46px;
-  top: 0;
-  transform: translateY(-50px);
-  z-index: 9999;
+:host {
+  ::ng-deep .nav-content {
+    div[role='list'] {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
 
-  &:focus {
-    transform: translateY(0);
+  .skip-to-main {
+    position: fixed;
+    margin: 0;
+    left: 46px;
+    top: 0;
+    transform: translateY(-50px);
+    z-index: 9999;
+
+    &:focus {
+      transform: translateY(0);
+    }
   }
 }
