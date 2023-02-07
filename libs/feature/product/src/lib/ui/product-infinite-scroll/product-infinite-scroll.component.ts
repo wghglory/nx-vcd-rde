@@ -6,6 +6,7 @@ import { ClarityModule } from '@clr/angular';
 import { RDEList } from '@seed/shared/models';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
+import { VmwInfiniteScrollDirectiveModule } from '@vmw/ngx-utils';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BehaviorSubject, catchError, concatMap, EMPTY, finalize, scan, Subject, tap, withLatestFrom } from 'rxjs';
 
@@ -16,7 +17,7 @@ import { ProductStateService } from '../../services/product-state.service';
 @Component({
   selector: 'seed-product-infinite-scroll',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, ClarityModule, RouterModule, LoadingOrErrorComponent],
+  imports: [CommonModule, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, ClarityModule, RouterModule, LoadingOrErrorComponent],
   templateUrl: './product-infinite-scroll.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

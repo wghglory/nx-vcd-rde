@@ -11,12 +11,17 @@
   </div>
 </div>
 
+<!--
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+[scrollWindow]="false"
+(scrolled)="loadMore(products.pageCount)"
+-->
 <div
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="50"
-  [scrollWindow]="false"
-  (scrolled)="loadMore(products.pageCount)"
+  vmwInfiniteScroll
+  [scrollPercentTrigger]="80"
+  (loadMoreItems)="loadMore(products.pageCount)"
   class="h-fit max-h-[600px] overflow-y-auto"
   *ngIf="productsWithFilter$ | async as products; else loadingOrError"
 >
