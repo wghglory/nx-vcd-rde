@@ -12,7 +12,7 @@ export function initVIPConfig(vipService: VIPService, localeService: LocaleServi
     vipService.initData({
       productID: process.env['NX_VIP_PRODUCT_ID'] || 'seed',
       component: 'AngularClient',
-      version: process.env['NX_VIP_VERSION'] || '0.0.0',
+      version: process.env['NX_VIP_VERSION'] || '0.0.1',
       host: process.env['NX_VIP_HOST'] || '/',
       isPseudo: process.env['NX_VIP_ISPSEUDO'] === 'true',
       i18nScope: [PatternCategories.DATE, PatternCategories.NUMBER, PatternCategories.PLURAL, PatternCategories.CURRENCIES],

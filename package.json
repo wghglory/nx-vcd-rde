@@ -39,7 +39,7 @@
     "update": "nx migrate latest",
     "update:check": "ng update",
     "dep-graph": "nx dep-graph",
-    "postinstall": "ngcc; mkdir -p tmp; nx dep-graph --file=tmp/output.json",
+    "postinstall": "_ngcc; mkdir -p tmp; nx dep-graph --file=tmp/output.json",
     "axe": "npx axe --axe-source ./node_modules/axe-core/axe.min.js --verbose --browser chrome",
     "axe.save": "npx axe --dir ./vpat/axe-results",
     "lighthouse": "npx lighthouse --view",
