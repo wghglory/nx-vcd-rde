@@ -38,7 +38,7 @@
             "output": "/assets/"
           }
         ],
-        "styles": ["node_modules/@clr/ui/clr-ui.min.css", "apps/seed/src/styles.scss"],
+        "styles": ["apps/seed/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
