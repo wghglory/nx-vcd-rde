@@ -5,6 +5,12 @@
   "description": "Creates an Angular library.",
   "type": "object",
   "cli": "nx",
+  "examples": [
+    {
+      "command": "npx nx generate @seed/plugin-generator:angular-library book --scope=feature --domain=web --type=feature --directory=provider",
+      "description": "create a new angular feature library for provider"
+    }
+  ],
   "properties": {
     "name": {
       "type": "string",

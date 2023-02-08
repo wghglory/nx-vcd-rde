@@ -1,5 +1,5 @@
 import { libraryGenerator } from '@nrwl/angular/generators';
-import { generateFiles, getWorkspaceLayout, joinPathFragments, names, Tree } from '@nrwl/devkit';
+import { formatFiles, generateFiles, getWorkspaceLayout, joinPathFragments, names, Tree } from '@nrwl/devkit';
 
 import { AngularLibraryGeneratorSchema } from './schema';
 
@@ -18,6 +18,7 @@ export default async function (tree: Tree, options: AngularLibraryGeneratorSchem
     tree, // the virtual file system
     joinPathFragments(__dirname, './files'), // path to the file templates)
     projectRoot, // destination path of the files
-    { ...options, name: names(options.name).className, template: '' }, // config object to replace variable in file templates
+    { ...options, ...names(options.name), template: '' }, // config object to replace variable in file templates
   );
+  await formatFiles(tree);
 }
