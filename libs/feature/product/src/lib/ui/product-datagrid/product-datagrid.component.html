@@ -11,7 +11,7 @@
   (clrDgRefresh)="refresh($event)"
   [clrDgLoading]="(loading$ | async) === true"
   [(clrDgSingleSelected)]="selectedItem"
-  (clrDgSingleSelectedChange)="productStateService.selectItem($event!)"
+  (clrDgSingleSelectedChange)="productService.selectItem($event!)"
 >
   <clr-dg-column>Product ID</clr-dg-column>
   <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>

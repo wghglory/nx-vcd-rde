@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 
-import { ProductStateService } from '../../services/product-state.service';
+import { ProductService } from '../../services/product.service';
 import { ProductCardListComponent } from '../../ui/product-card-list/product-card-list.component';
 import { ProductDatagridComponent } from '../../ui/product-datagrid/product-datagrid.component';
 import { ProductDeleteComponent } from '../../ui/product-delete/product-delete.component';
@@ -32,7 +32,7 @@ import { ProductListComponent } from '../../ui/product-list/product-list.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductShellComponent {
-  constructor(public productStateService: ProductStateService) {}
+  constructor(public productService: ProductService) {}
 
   openDeleteDialog = false;
   openEditDialog = false;

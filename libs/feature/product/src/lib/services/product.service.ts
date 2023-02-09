@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PageQuery, RDEList, RDEValue } from '@seed/shared/models';
+import { BehaviorSubject } from 'rxjs';
 
 import { Product } from '../models/product';
 
@@ -11,6 +12,20 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   products$ = this.http.get<RDEList<Product>>('/api/products');
+
+  private refreshAction = new BehaviorSubject<void>(undefined);
+  refreshAction$ = this.refreshAction.asObservable();
+
+  private selectedItemSource = new BehaviorSubject<Product | null>(null); // product-delete *ngIf initializes late, so using Subject won't work.
+  selectedItem$ = this.selectedItemSource.asObservable();
+
+  refreshList() {
+    this.refreshAction.next();
+  }
+
+  selectItem(product: Product | null) {
+    this.selectedItemSource.next(product);
+  }
 
   getProducts(params: Partial<PageQuery>) {
     return this.http.get<RDEList<Product>>('/api/products', {

@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ProductStateService } from './../../services/product-state.service';
 import { ProductListComponent } from './product-list.component';
 
 describe('ProductListComponent', () => {
@@ -40,11 +39,13 @@ describe('ProductListComponent', () => {
         },
       ],
     } as RDEList<Product>),
+    selectItem: jest.fn(),
+    refreshAction$: of(true),
   };
 
   it('should render', async () => {
     await render(ProductListComponent, {
-      providers: [{ provide: ProductService, useValue: productServiceStub }, ProductStateService],
+      providers: [{ provide: ProductService, useValue: productServiceStub }],
       imports: [MockComponent(LoadingOrErrorComponent)],
     });
 

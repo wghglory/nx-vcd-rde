@@ -12,7 +12,6 @@ import { BehaviorSubject, catchError, concatMap, EMPTY, finalize, scan, Subject,
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ProductStateService } from '../../services/product-state.service';
 
 @Component({
   selector: 'seed-product-infinite-scroll',
@@ -23,7 +22,7 @@ import { ProductStateService } from '../../services/product-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductInfiniteScrollComponent {
-  constructor(private productService: ProductService, private productStateService: ProductStateService) {}
+  constructor(private productService: ProductService) {}
 
   @Output() deleteEvent = new EventEmitter();
 
@@ -34,7 +33,7 @@ export class ProductInfiniteScrollComponent {
 
   state$ = new BehaviorSubject<CardState>({ current: 1, filters: [] });
 
-  refresh$ = this.productStateService.refreshAction$.pipe(
+  refresh$ = this.productService.refreshAction$.pipe(
     tap(() => {
       this.state$.next({ ...this.state$.value, current: 1 });
     }),
@@ -82,7 +81,7 @@ export class ProductInfiniteScrollComponent {
   );
 
   deleteProduct(product: Product) {
-    this.productStateService.selectItem(product);
+    this.productService.selectItem(product);
     this.deleteEvent.emit();
   }
 

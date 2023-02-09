@@ -1,10 +1,10 @@
 <h2 class="!mt-0">Products</h2>
 
 <div class="my-2">
-  <button class="btn btn-secondary" [disabled]="(productStateService.selectedItem$ | async) === null" (click)="openDeleteDialog = true">
+  <button class="btn btn-secondary" [disabled]="(productService.selectedItem$ | async) === null" (click)="openDeleteDialog = true">
     Delete
   </button>
-  <button class="btn btn-secondary" [disabled]="(productStateService.selectedItem$ | async) === null" (click)="openEditDialog = true">
+  <button class="btn btn-secondary" [disabled]="(productService.selectedItem$ | async) === null" (click)="openEditDialog = true">
     Edit
   </button>
   <button class="btn btn-secondary" [routerLink]="'@/add'">Add</button>

@@ -10,7 +10,6 @@ import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, scan, Subj
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ProductStateService } from '../../services/product-state.service';
 
 @Component({
   selector: 'seed-product-card-list',
@@ -21,11 +20,11 @@ import { ProductStateService } from '../../services/product-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardListComponent {
-  constructor(private productService: ProductService, private productStateService: ProductStateService) {}
+  constructor(private productService: ProductService) {}
 
   @Output() deleteEvent = new EventEmitter();
 
-  // products$ = this.productStateService.refreshAction$.pipe(
+  // products$ = this.productService.refreshAction$.pipe(
   //   switchMap(() => {
   //     return this.productService.products$;
   //   }),
@@ -61,7 +60,7 @@ export class ProductCardListComponent {
     }),
   );
 
-  refresh$ = this.productStateService.refreshAction$.pipe(
+  refresh$ = this.productService.refreshAction$.pipe(
     tap(() => {
       this.currentPage$.next(1);
     }),
@@ -95,7 +94,7 @@ export class ProductCardListComponent {
   );
 
   deleteProduct(product: Product) {
-    this.productStateService.selectItem(product);
+    this.productService.selectItem(product);
     this.deleteEvent.emit();
   }
 

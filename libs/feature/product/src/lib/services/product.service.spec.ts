@@ -1,6 +1,8 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
 
+import { Product } from '../models/product';
 import { ProductService } from './product.service';
 
 describe('ProductService', () => {
@@ -104,6 +106,25 @@ describe('ProductService', () => {
         description: 'new description',
       },
     });
+  });
+
+  it('refresh list', () => {
+    service.refreshList();
+
+    expect(subscribeSpyTo(service.refreshAction$).getFirstValue()).toBeUndefined();
+  });
+
+  it('select item', () => {
+    const product = {
+      id: 'mockId',
+      name: 'mock product',
+      description: 'description',
+      productionDate: new Date().toISOString(),
+    } as Product;
+
+    service.selectItem(product);
+
+    expect(subscribeSpyTo(service.selectedItem$).getFirstValue()).toEqual(product);
   });
 
   afterEach(() => {

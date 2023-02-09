@@ -24,7 +24,6 @@ import {
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
-import { ProductStateService } from '../../services/product-state.service';
 
 @Component({
   selector: 'seed-product-datagrid',
@@ -34,7 +33,7 @@ import { ProductStateService } from '../../services/product-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDatagridComponent {
-  constructor(private productService: ProductService, public productStateService: ProductStateService) {}
+  constructor(public productService: ProductService) {}
 
   selectedItem: Product | undefined;
 
@@ -59,7 +58,7 @@ export class ProductDatagridComponent {
 
   products$ = combineLatest([
     this.dgState$,
-    this.productStateService.refreshAction$, // actions like successful deletion to refresh the data
+    this.productService.refreshAction$, // actions like successful deletion to refresh the data
   ]).pipe(
     switchMap(([state]) => {
       const params = stateHandler(state);
