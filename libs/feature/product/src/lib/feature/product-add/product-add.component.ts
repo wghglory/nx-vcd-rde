@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { catchError, EMPTY, finalize, Subject, switchMap, tap } from 'rxjs';
@@ -20,8 +20,8 @@ export class ProductAddComponent {
   constructor(public productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
   productForm = new FormGroup({
-    name: new FormControl('', { nonNullable: true }),
-    description: new FormControl('', { nonNullable: true }),
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
   private saveAction = new Subject<void>();
