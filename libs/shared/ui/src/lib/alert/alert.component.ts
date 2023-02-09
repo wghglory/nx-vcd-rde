@@ -54,7 +54,7 @@ export class AlertComponent {
     if (id) {
       this.store.dispatch(deleteAlert({ id }));
     } else {
-      console.warn('no alert id provided');
+      throw new Error('no alert id provided');
     }
   }
 
@@ -67,8 +67,6 @@ export class AlertComponent {
     if (event.target.tagName === 'A' && event.target.getAttribute('href') && !DOMAIN_REGEX.test(event.target.getAttribute('href'))) {
       this.router.navigateByUrl(event.target.getAttribute('href'));
       event.preventDefault();
-    } else {
-      return;
     }
   }
 }
