@@ -10,6 +10,8 @@ export default {
   transform: {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
+  coverageReporters: ['lcov', 'json', 'text-summary'],
+  collectCoverage: true,
   coverageDirectory: '../../../coverage/libs/shared/utils',
 };
