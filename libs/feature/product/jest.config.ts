@@ -2,7 +2,10 @@
 export default {
   displayName: 'feature-product',
   preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  setupFilesAfterEnv: [
+    '<rootDir>/src/test-setup.ts',
+    '<rootDir>/../../../node_modules/@hirez_io/observer-spy/dist/setup-auto-unsubscribe.js',
+  ],
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
