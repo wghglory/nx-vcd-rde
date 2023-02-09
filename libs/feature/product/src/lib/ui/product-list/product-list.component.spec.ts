@@ -52,4 +52,19 @@ describe('ProductListComponent', () => {
     const firstHref = screen.getByRole('link', { name: /test-product/i });
     expect(firstHref).toBeInTheDocument();
   });
+
+  it('should select item', async () => {
+    const { fixture } = await render(ProductListComponent, {
+      providers: [{ provide: ProductService, useValue: productServiceStub }],
+      imports: [MockComponent(LoadingOrErrorComponent)],
+    });
+
+    jest.spyOn(productServiceStub, 'selectItem');
+
+    const product = { id: 'test-product' } as Product;
+
+    fixture.componentInstance.selectItem(product);
+
+    expect(productServiceStub.selectItem).toBeCalledWith(product);
+  });
 });

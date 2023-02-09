@@ -18,7 +18,7 @@ const routes: Route[] = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
-        loadComponent: () => import('@seed/provider/home').then(m => m.ProviderHomeComponent), // TODO: nested route?
+        loadComponent: () => import('@seed/provider/home').then(m => m.ProviderHomeComponent),
       },
       {
         path: 'setting',

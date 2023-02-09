@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { RDEValue } from '@seed/shared/models';
 import { SharedSpecModule } from '@seed/shared/modules';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from './../../services/product.service';
@@ -52,7 +52,17 @@ describe('ProductAddComponent', () => {
 
     expect(routerStub.navigate).toBeCalled();
     expect(productServiceStub.addProduct).toBeCalledWith(formValue);
+  });
 
-    // expect(observerSpy.getValues()).toBe({ name: '1' }); // TODO
+  it('should catchError if add product fails', () => {
+    const formValue = { name: 'test', description: 'test description' };
+    productServiceStub.addProduct.mockReturnValueOnce(throwError(() => new Error('fail')));
+
+    component.productForm.setValue(formValue);
+    component.save();
+
+    const observerSpy = subscribeSpyTo(component.error$);
+
+    expect(productServiceStub.addProduct).toBeCalledWith(formValue);
   });
 });

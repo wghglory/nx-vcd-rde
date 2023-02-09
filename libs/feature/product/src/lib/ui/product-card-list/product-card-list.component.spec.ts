@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { RDEList } from '@seed/shared/models';
 import { SharedSpecModule } from '@seed/shared/modules';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from './../../services/product.service';
@@ -96,6 +96,14 @@ describe('ProductCardListComponent', () => {
     const result = subscribeSpyTo(component.products$).getFirstValue();
 
     expect(result).toEqual(products1);
+  });
+
+  it('should catchError if get product fails', () => {
+    productServiceStub.getProducts.mockReturnValueOnce(throwError(() => new Error('fail')));
+
+    const observerSpy = subscribeSpyTo(component.error$);
+
+    expect(productServiceStub.getProducts).toBeCalled();
   });
 
   it('should return 2nd emitted product$ due to scan', () => {
