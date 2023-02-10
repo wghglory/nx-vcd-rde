@@ -11,6 +11,13 @@
   </div>
 </div>
 
+<clr-alert class="mb-4" [clrAlertType]="'danger'" *ngIf="error$ | async as error">
+  <clr-alert-item>
+    <span class="alert-text">
+      {{ error.message }}
+    </span>
+  </clr-alert-item>
+</clr-alert>
 <!--
 infiniteScroll
 [infiniteScrollDistance]="2"
@@ -23,7 +30,7 @@ infiniteScroll
   [scrollPercentTrigger]="80"
   (loadMoreItems)="loadMore(products.pageCount)"
   class="h-fit max-h-[600px] overflow-y-auto"
-  *ngIf="productsWithFilter$ | async as products; else loadingOrError"
+  *ngIf="productsWithFilter$ | async as products; else initialLoading"
 >
   <!-- -mb-[1px] to make sure the parent div is always scrollable -->
   <div class="-mb-[1px] grid grid-cols-3 gap-6">
@@ -42,8 +49,8 @@ infiniteScroll
   <div class="spinner mx-auto my-4 block" *ngIf="loading$ | async">loading...</div>
 </div>
 
-<ng-template #loadingOrError>
-  <seed-loading-or-error [error]="error$ | async"></seed-loading-or-error>
+<ng-template #initialLoading>
+  <seed-spinner></seed-spinner>
 </ng-template>
 
 <ng-container *ngIf="refresh$ | async"></ng-container>

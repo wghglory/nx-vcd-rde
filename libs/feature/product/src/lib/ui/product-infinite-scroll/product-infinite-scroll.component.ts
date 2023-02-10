@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { RDEList } from '@seed/shared/models';
-import { LoadingOrErrorComponent } from '@seed/shared/ui';
+import { SpinnerComponent } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
 import { VmwInfiniteScrollDirectiveModule } from '@vmw/ngx-utils';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -16,7 +16,7 @@ import { ProductService } from '../../services/product.service';
 @Component({
   selector: 'seed-product-infinite-scroll',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, ClarityModule, RouterModule, LoadingOrErrorComponent],
+  imports: [CommonModule, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, ClarityModule, RouterModule, SpinnerComponent],
   templateUrl: './product-infinite-scroll.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,30 +40,16 @@ export class ProductInfiniteScrollComponent {
   );
 
   // loadMore --> change page --> get paged products --> scan
-  products$ = this.state$.pipe(
-    concatMap(state => {
-      const params = cardStateHandler(state);
-      return this.productService.getProducts(params).pipe(
-        startWithTap(() => this.loading$.next(true)),
-        finalize(() => this.loading$.next(false)),
-        catchError(err => {
-          this.error$.next(err);
-          return EMPTY;
-        }),
-      );
-    }),
-    scan((acc, curr) => {
-      return { ...acc, values: [...acc.values, ...curr.values] };
-    }),
-  );
-
   // filter and load more
   productsWithFilter$ = this.state$.pipe(
     concatMap(state => {
       const params = cardStateHandler(state);
 
       return this.productService.getProducts(params).pipe(
-        startWithTap(() => this.loading$.next(true)),
+        startWithTap(() => {
+          this.loading$.next(true);
+          this.error$.next(null); // error will be covered by next request
+        }),
         finalize(() => this.loading$.next(false)),
         catchError(err => {
           this.error$.next(err);

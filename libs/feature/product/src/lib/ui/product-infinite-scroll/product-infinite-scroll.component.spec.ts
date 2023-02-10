@@ -93,16 +93,10 @@ describe('ProductInfiniteScrollComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return product$', () => {
-    const result = subscribeSpyTo(component.products$).getFirstValue();
+  it('should return product$', async () => {
+    const result = subscribeSpyTo(component.productsWithFilter$).getFirstValue();
 
     expect(result).toEqual(products1);
-  });
-
-  it('should return 2nd emitted product$ due to scan', () => {
-    const result = subscribeSpyTo(component.products$).getLastValue();
-
-    expect(result?.values.length).toEqual(2);
   });
 
   it('should catchError if get product fails', () => {

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
@@ -50,8 +50,6 @@ describe('ProductDeleteComponent', () => {
     const observerSpy = subscribeSpyTo(component.delete$);
 
     expect(productServiceStub.deleteProduct).toBeCalledWith('product-id');
-
-    // expect(observerSpy.getValues()).toBe({ name: '1' }); // TODO
   });
 
   it('should catchError if delete product fails', () => {

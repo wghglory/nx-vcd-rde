@@ -1,4 +1,5 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ObserverSpy, queueForAutoUnsubscribe, subscribeSpyTo } from '@hirez_io/observer-spy';
 import { RDEList } from '@seed/shared/models';
 import { SharedSpecModule } from '@seed/shared/modules';
@@ -188,5 +189,20 @@ describe('ProductDatagridComponent', () => {
     expect(service.getProducts).toBeCalledWith({ page: 2, pageSize: 15 });
     expect(result).toBeUndefined();
     expect(errorSpy.getFirstValue()).toBeDefined();
+  }));
+
+  it('should return error alert if service fails', fakeAsync(() => {
+    productServiceStub.getProducts.mockReturnValue(throwError(() => new Error('fail')));
+
+    const state = {
+      page: { from: 1, to: 15, size: 15, current: 2 },
+    };
+    component.refresh(state); // trigger load data
+
+    tick();
+    fixture.detectChanges();
+
+    const alert = fixture.debugElement.query(By.css(`.alert-text`));
+    expect(alert.nativeElement).toHaveTextContent('fail');
   }));
 });
