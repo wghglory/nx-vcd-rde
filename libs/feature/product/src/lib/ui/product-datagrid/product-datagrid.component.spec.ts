@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ObserverSpy, queueForAutoUnsubscribe, subscribeSpyTo } from '@hirez_io/observer-spy';
 import { RDEList } from '@seed/shared/models';
 import { SharedSpecModule } from '@seed/shared/modules';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from './../../services/product.service';
@@ -98,17 +98,95 @@ describe('ProductDatagridComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('can refresh datagrid', () => {
-    const state1 = {
+  it('can refresh datagrid using subscribeSpyTo', fakeAsync(() => {
+    const observerSpy = subscribeSpyTo(component.dgState$).getValues();
+
+    const state = {
       page: { from: 1, to: 15, size: 15, current: 2 },
     };
-    const state2 = {
-      page: { from: 16, to: 30, size: 15, current: 3 },
-    };
-    component.refresh(state1);
-    component.refresh(state2);
+    component.refresh(state);
 
-    const result = subscribeSpyTo(component.dgState$).getLastValue();
-    // expect(result).toStrictEqual(state2); // TODO: debounce timer, pairwise..
-  });
+    tick();
+
+    expect(observerSpy[0]).toStrictEqual(state);
+  }));
+
+  it('can refresh datagrid using ObserverSpy', fakeAsync(() => {
+    const spy = new ObserverSpy();
+    const subscription = component.dgState$.subscribe(spy);
+    queueForAutoUnsubscribe(subscription);
+
+    const state = {
+      page: { from: 1, to: 15, size: 15, current: 2 },
+    };
+    component.refresh(state);
+
+    tick();
+
+    expect(spy.getFirstValue()).toStrictEqual(state);
+  }));
+
+  it('can return products when refreshing', fakeAsync(() => {
+    const spy = new ObserverSpy();
+    const subscription = component.products$.subscribe(spy);
+    queueForAutoUnsubscribe(subscription);
+
+    const state = {
+      page: { from: 1, to: 15, size: 15, current: 2 },
+    };
+    component.refresh(state);
+
+    tick();
+
+    const products = spy.getFirstValue() as RDEList<Product>;
+
+    expect(productServiceStub.getProducts).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(products.values).toBeDefined();
+  }));
+
+  it('can return products when refreshing with jest spy', fakeAsync(() => {
+    const service = TestBed.inject(ProductService);
+    const products = { resultTotal: 10 } as RDEList<Product>;
+    jest.spyOn(service, 'getProducts').mockReturnValue(of(products));
+
+    const spy = new ObserverSpy();
+    const subscription = component.products$.subscribe(spy);
+    queueForAutoUnsubscribe(subscription);
+
+    const state = {
+      page: { from: 1, to: 15, size: 15, current: 2 },
+    };
+    component.refresh(state);
+
+    tick();
+
+    const result = spy.getFirstValue();
+
+    expect(service.getProducts).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(result).toBe(products);
+  }));
+
+  it('can return error if service fails', fakeAsync(() => {
+    const service = TestBed.inject(ProductService);
+    jest.spyOn(service, 'getProducts').mockReturnValue(throwError(() => new Error('fail')));
+
+    const spy = new ObserverSpy();
+    const subscription = component.products$.subscribe(spy);
+    queueForAutoUnsubscribe(subscription);
+
+    const errorSpy = subscribeSpyTo(component.error$);
+
+    const state = {
+      page: { from: 1, to: 15, size: 15, current: 2 },
+    };
+    component.refresh(state);
+
+    tick();
+
+    const result = spy.getFirstValue();
+
+    expect(service.getProducts).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(result).toBeUndefined();
+    expect(errorSpy.getFirstValue()).toBeDefined();
+  }));
 });
