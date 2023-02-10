@@ -18,7 +18,7 @@ import { ProductService } from '../../services/product.service';
 export class ProductDetailComponent {
   constructor(private productService: ProductService, private route: ActivatedRoute) {}
 
-  readonly error$ = new Subject<HttpErrorResponse>();
+  readonly error$ = new Subject<HttpErrorResponse | null>();
 
   product$ = this.route.params.pipe(
     switchMap(({ id }) => {

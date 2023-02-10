@@ -28,7 +28,7 @@ export class ProductInfiniteScrollComponent {
 
   pageSize = 9;
 
-  error$ = new Subject<HttpErrorResponse>();
+  error$ = new Subject<HttpErrorResponse | null>();
   loading$ = new Subject<boolean>();
 
   state$ = new BehaviorSubject<CardState>({ current: 1, filters: [] });

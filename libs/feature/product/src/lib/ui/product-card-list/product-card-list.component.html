@@ -32,7 +32,7 @@
 
 <clr-alert class="mb-4" [clrAlertType]="'danger'" *ngIf="error$ | async as error">
   <clr-alert-item>
-    <span class="alert-text" data-testid="alert">
+    <span class="alert-text">
       {{ error.message }}
     </span>
   </clr-alert-item>

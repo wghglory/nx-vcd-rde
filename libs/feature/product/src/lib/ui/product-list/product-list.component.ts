@@ -23,7 +23,7 @@ export class ProductListComponent {
 
   selectedItem: Product | undefined;
 
-  error$ = new Subject<HttpErrorResponse>();
+  error$ = new Subject<HttpErrorResponse | null>();
 
   products$ = this.productService.refreshAction$.pipe(
     switchMap(() => {

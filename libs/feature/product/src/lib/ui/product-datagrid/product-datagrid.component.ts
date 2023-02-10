@@ -39,7 +39,7 @@ export class ProductDatagridComponent {
 
   private loadingSource = new BehaviorSubject<boolean>(true);
   loading$ = this.loadingSource.asObservable();
-  private errorSource = new Subject<HttpErrorResponse>();
+  private errorSource = new Subject<HttpErrorResponse | null>();
   error$ = this.errorSource.asObservable();
 
   private dgSource = new BehaviorSubject<ClrDatagridStateInterface | null>(null);
@@ -63,7 +63,10 @@ export class ProductDatagridComponent {
     switchMap(([state]) => {
       const params = stateHandler(state);
       return this.productService.getProducts(params).pipe(
-        startWithTap(() => this.loadingSource.next(true)),
+        startWithTap(() => {
+          this.loadingSource.next(true);
+          this.errorSource.next(null);
+        }),
         finalize(() => {
           this.loadingSource.next(false);
         }),

@@ -129,7 +129,7 @@ describe('ProductCardListComponent', () => {
 
     fixture.detectChanges();
 
-    const alert = fixture.debugElement.query(By.css(`[data-testid="alert"]`));
+    const alert = fixture.debugElement.query(By.css(`.alert-text`));
     expect(alert.nativeElement).toHaveTextContent('fail');
     expect(observerSpy).toBeUndefined();
   });
