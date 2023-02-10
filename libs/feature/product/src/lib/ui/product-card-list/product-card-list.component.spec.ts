@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { RDEList } from '@seed/shared/models';
 import { SharedSpecModule } from '@seed/shared/modules';
@@ -93,23 +94,9 @@ describe('ProductCardListComponent', () => {
   });
 
   it('should return product$', () => {
-    const result = subscribeSpyTo(component.products$).getFirstValue();
+    const result = subscribeSpyTo(component.productsWithFilter$).getFirstValue();
 
     expect(result).toEqual(products1);
-  });
-
-  it('should catchError if get product fails', () => {
-    productServiceStub.getProducts.mockReturnValueOnce(throwError(() => new Error('fail')));
-
-    const observerSpy = subscribeSpyTo(component.error$);
-
-    expect(productServiceStub.getProducts).toBeCalled();
-  });
-
-  it('should return 2nd emitted product$ due to scan', () => {
-    const result = subscribeSpyTo(component.products$).getLastValue();
-
-    expect(result?.values.length).toEqual(2);
   });
 
   it('should load more products when clicking loadMore', () => {
@@ -133,5 +120,17 @@ describe('ProductCardListComponent', () => {
 
     expect(subscribeSpyTo(component.currentPage$).getLastValue()).toBe(1);
     expect(subscribeSpyTo(component.filterName$).getLastValue()).toBe('test');
+  });
+
+  it('should return error alert if service fails', () => {
+    productServiceStub.getProducts.mockReturnValue(throwError(() => new Error('fail')));
+
+    const observerSpy = subscribeSpyTo(component.productsWithFilter$).getFirstValue(); // necessary to subscribe, so error will display
+
+    fixture.detectChanges();
+
+    const alert = fixture.debugElement.query(By.css(`[data-testid="alert"]`));
+    expect(alert.nativeElement).toHaveTextContent('fail');
+    expect(observerSpy).toBeUndefined();
   });
 });

@@ -4,9 +4,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { RDEList } from '@seed/shared/models';
-import { LoadingOrErrorComponent } from '@seed/shared/ui';
+import { SpinnerComponent } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
-import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, scan, Subject, switchMap, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, of, scan, Subject, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
@@ -14,7 +14,7 @@ import { ProductService } from '../../services/product.service';
 @Component({
   selector: 'seed-product-card-list',
   standalone: true,
-  imports: [CommonModule, ClarityModule, RouterModule, LoadingOrErrorComponent],
+  imports: [CommonModule, ClarityModule, RouterModule, SpinnerComponent],
   templateUrl: './product-card-list.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +36,7 @@ export class ProductCardListComponent {
 
   pageSize = 9;
 
-  error$ = new Subject<HttpErrorResponse>();
+  error$ = new Subject<HttpErrorResponse | null>();
   loading$ = new Subject<boolean>();
   currentPage$ = new BehaviorSubject<number>(1);
 
@@ -47,7 +47,10 @@ export class ProductCardListComponent {
     switchMap(page => {
       const params = cardStateHandler({ current: page });
       return this.productService.getProducts(params).pipe(
-        startWithTap(() => this.loading$.next(true)),
+        startWithTap(() => {
+          this.loading$.next(true);
+          this.error$.next(null);
+        }),
         finalize(() => this.loading$.next(false)),
         catchError(err => {
           this.error$.next(err);
@@ -76,7 +79,10 @@ export class ProductCardListComponent {
       const params = cardStateHandler(state);
 
       return this.productService.getProducts(params).pipe(
-        startWithTap(() => this.loading$.next(true)),
+        startWithTap(() => {
+          this.loading$.next(true);
+          this.error$.next(null);
+        }),
         finalize(() => this.loading$.next(false)),
         catchError(err => {
           this.error$.next(err);

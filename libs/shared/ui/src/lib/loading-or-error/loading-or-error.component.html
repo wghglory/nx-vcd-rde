@@ -5,13 +5,5 @@
 </clr-alert>
 
 <ng-template #loading>
-  <div
-    class="spinner my-6 !block"
-    [ngClass]="{
-      'spinner-lg': spinnerSize === 'lg',
-      'spinner-md': spinnerSize === 'md',
-      'spinner-sm': spinnerSize === 'sm',
-      'mx-auto': spinnerCenter
-    }"
-  ></div>
+  <seed-spinner [spinnerSize]="spinnerSize" [spinnerCenter]="spinnerCenter"></seed-spinner>
 </ng-template>
