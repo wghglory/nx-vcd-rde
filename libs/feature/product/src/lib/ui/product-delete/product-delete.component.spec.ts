@@ -1,27 +1,31 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { InteractivityChecker } from '@angular/cdk/a11y';
+import { EventEmitter } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { RDEValue } from '@seed/shared/models';
 import { SharedSpecModule } from '@seed/shared/modules';
+import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/angular';
 import { of, throwError } from 'rxjs';
 
 import { Product } from '../../models/product';
 import { ProductService } from './../../services/product.service';
 import { ProductDeleteComponent } from './product-delete.component';
 
+const productServiceStub = {
+  deleteProduct: jest.fn().mockImplementation(id => of({})),
+  selectedItem$: of({
+    id: 'product-id',
+    entity: { name: 'test', description: 'test description', id: 'product-id' },
+  } as RDEValue<Product>),
+  refreshList: jest.fn(),
+  selectItem: jest.fn(),
+};
+
 describe('ProductDeleteComponent', () => {
   let component: ProductDeleteComponent;
   let fixture: ComponentFixture<ProductDeleteComponent>;
-  const productServiceStub = {
-    deleteProduct: jest.fn().mockImplementation(id => of({})),
-    selectedItem$: of({
-      id: 'product-id',
-      entity: { name: 'test', description: 'test description', id: 'product-id' },
-    } as RDEValue<Product>),
-    refreshList: jest.fn(),
-    selectItem: jest.fn(),
-  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -45,22 +49,85 @@ describe('ProductDeleteComponent', () => {
   });
 
   it('should delete product when confirm', async () => {
+    jest.spyOn(component, 'close');
+    jest.spyOn(productServiceStub, 'selectItem');
+    jest.spyOn(productServiceStub, 'refreshList');
+
     component.confirm();
 
     const observerSpy = subscribeSpyTo(component.delete$);
 
     expect(productServiceStub.deleteProduct).toBeCalledWith('product-id');
+    expect(component.close).toBeCalled();
+    expect(productServiceStub.selectItem).toBeCalledWith(null);
+    expect(productServiceStub.refreshList).toBeCalled();
   });
+});
 
-  it('should catchError if delete product fails', () => {
+describe('ProductDeleteComponent use testing library', () => {
+  it('should display error when delete api fails', async () => {
+    await render(ProductDeleteComponent, {
+      componentInputs: {
+        open: true,
+      },
+      imports: [SharedSpecModule, NoopAnimationsModule],
+      providers: [
+        { provide: ProductService, useValue: productServiceStub },
+        {
+          // '[cdkFocusInitial]' is not focusable warning, when running jest unit test of a dialog component with cdkFocusInitial?
+          provide: InteractivityChecker,
+          useValue: {
+            isFocusable: () => true, // This checks focus trap, set it to true to avoid the warning
+          },
+        },
+      ],
+    });
+
     productServiceStub.deleteProduct.mockReturnValueOnce(throwError(() => new Error('fail')));
 
-    component.confirm();
-
-    const observerSpy = subscribeSpyTo(component.error$);
+    const confirmBtn = screen.getByRole('button', { name: /confirm/i });
+    fireEvent.click(confirmBtn);
 
     expect(productServiceStub.deleteProduct).toBeCalledWith('product-id');
 
-    // expect(observerSpy.getValues()).toBe({ name: '1' }); // TODO
+    const alert = await screen.findByRole('alert');
+    expect(alert).toBeVisible();
+    expect(alert).toHaveTextContent('fail');
+  });
+
+  it('should close dialog after delete successfully', async () => {
+    await render(ProductDeleteComponent, {
+      componentInputs: {
+        open: true,
+      },
+      componentOutputs: { openChange: new EventEmitter<boolean>() },
+      imports: [SharedSpecModule, NoopAnimationsModule],
+      providers: [
+        { provide: ProductService, useValue: productServiceStub },
+        {
+          // '[cdkFocusInitial]' is not focusable warning, when running jest unit test of a dialog component with cdkFocusInitial?
+          provide: InteractivityChecker,
+          useValue: {
+            isFocusable: () => true, // This checks focus trap, set it to true to avoid the warning
+          },
+        },
+      ],
+    });
+
+    jest.spyOn(productServiceStub, 'selectItem');
+    jest.spyOn(productServiceStub, 'refreshList');
+
+    const confirmBtn = screen.getByRole('button', { name: /confirm/i });
+    fireEvent.click(confirmBtn);
+
+    expect(productServiceStub.deleteProduct).toBeCalledWith('product-id');
+
+    // since no parent component to control delete component, close will not happen
+    // await waitForElementToBeRemoved(() => screen.findByRole('button', { name: /confirm/i }));
+    // expect(confirmBtn).not.toBeInTheDocument();
+
+    expect(productServiceStub.deleteProduct).toBeCalledWith('product-id');
+    expect(productServiceStub.selectItem).toBeCalledWith(null);
+    expect(productServiceStub.refreshList).toBeCalled();
   });
 });

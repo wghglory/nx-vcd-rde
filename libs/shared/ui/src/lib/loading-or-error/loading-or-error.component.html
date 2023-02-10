@@ -1,6 +1,6 @@
 <clr-alert *ngIf="error; else loading" [clrAlertType]="'danger'" [clrAlertSizeSmall]="alertSmall">
   <clr-alert-item>
-    <span class="alert-text">{{ error.message }}</span>
+    <span class="alert-text" role="alert">{{ error.message }}</span>
   </clr-alert-item>
 </clr-alert>
 
