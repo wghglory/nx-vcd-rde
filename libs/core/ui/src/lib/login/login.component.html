@@ -15,6 +15,7 @@
         autocapitalize="none"
         spellcheck="false"
         required
+        data-testid="username"
       />
 
       <input
@@ -29,11 +30,19 @@
         autocapitalize="none"
         spellcheck="false"
         required
+        data-testid="password"
       />
 
       <seed-alert [key]="alertKey"></seed-alert>
 
-      <button class="btn btn-primary" type="submit" name="login button" [clrLoading]="submitting" [disabled]="loginForm.form.invalid">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        name="login button"
+        [clrLoading]="submitting"
+        [disabled]="loginForm.form.invalid"
+        data-testid="login"
+      >
         {{ 'common.login' | vtranslate }}
       </button>
     </div>

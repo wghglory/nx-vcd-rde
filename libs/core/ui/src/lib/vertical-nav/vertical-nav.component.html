@@ -8,13 +8,20 @@
     </span>
   </h2>
   <ng-container *ngFor="let menu of menuItems$ | async">
-    <a clrVerticalNavLink [routerLink]="menu.link" [title]="menu.caption | vtranslate" routerLinkActive="active">
+    <a
+      clrVerticalNavLink
+      [routerLink]="menu.link"
+      routerLinkActive="active"
+      [title]="menu.caption | vtranslate"
+      [attr.aria-current]="menu.caption | vtranslate"
+      [attr.data-testid]="menu.caption"
+    >
       <cds-icon clrVerticalNavIcon [attr.shape]="menu.shape" size="16"></cds-icon>
       {{ menu.caption | vtranslate }}
     </a>
   </ng-container>
 
-  <a href="javascript:void(0)" aria-current="about" class="nav-link btn-link cursor-pointer" (click)="aboutOpen()">
+  <a href="javascript:void(0)" aria-current="about" class="nav-link btn-link cursor-pointer" (click)="aboutOpen()" data-testid="about">
     <cds-icon clrVerticalNavIcon shape="info-standard" size="16"></cds-icon>
     <span class="nav-text"> {{ 'common.about' | vtranslate }}</span>
   </a>
