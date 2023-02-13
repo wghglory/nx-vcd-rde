@@ -1,4 +1,4 @@
-<div class="login-wrapper">
+<main class="login-wrapper">
   <form class="login" #loginForm="ngForm" autocomplete="off" novalidate (ngSubmit)="login(loginForm.value)">
     <h1 [innerHTML]="'common.vcd' | vtranslate"></h1>
     <h2 class="mt-1" [innerHTML]="'common.product' | vtranslate"></h2>
@@ -47,4 +47,4 @@
       </button>
     </div>
   </form>
-</div>
+</main>

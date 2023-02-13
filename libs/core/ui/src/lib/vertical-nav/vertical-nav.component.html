@@ -1,36 +1,38 @@
-<clr-vertical-nav [clrVerticalNavCollapsible]="true" class="h-full">
-  <button class="btn btn-primary skip-to-main" (click)="focusOnMain()">
-    {{ 'common.skipToMain' | vtranslate }}
-  </button>
-  <h2 class="nav-link !mt-0 flex !h-auto items-center !text-lg" data-testid="product">
-    <span class="nav-text py-3 !text-gray-900 dark:!text-gray-50">
-      {{ 'common.product' | vtranslate }}
-    </span>
-  </h2>
-  <ng-container *ngFor="let menu of menuItems$ | async">
-    <a
-      clrVerticalNavLink
-      [routerLink]="menu.link"
-      routerLinkActive="active"
-      [title]="menu.caption | vtranslate"
-      [attr.aria-current]="menu.caption | vtranslate"
-      [attr.data-testid]="menu.caption"
-    >
-      <cds-icon clrVerticalNavIcon [attr.shape]="menu.shape" size="16"></cds-icon>
-      {{ menu.caption | vtranslate }}
+<aside class="h-full">
+  <clr-vertical-nav [clrVerticalNavCollapsible]="true" class="h-full">
+    <button class="btn btn-primary skip-to-main" (click)="focusOnMain()">
+      {{ 'common.skipToMain' | vtranslate }}
+    </button>
+    <h2 class="nav-link !mt-0 flex !h-auto items-center !text-lg" data-testid="product">
+      <span class="nav-text py-3 !text-gray-900 dark:!text-gray-50">
+        {{ 'common.product' | vtranslate }}
+      </span>
+    </h2>
+    <ng-container *ngFor="let menu of menuItems$ | async">
+      <a
+        clrVerticalNavLink
+        [routerLink]="menu.link"
+        routerLinkActive="active"
+        [title]="menu.caption | vtranslate"
+        [attr.aria-current]="menu.caption | vtranslate"
+        [attr.data-testid]="menu.caption"
+      >
+        <cds-icon clrVerticalNavIcon [attr.shape]="menu.shape" size="16"></cds-icon>
+        {{ menu.caption | vtranslate }}
+      </a>
+    </ng-container>
+
+    <a href="javascript:void(0)" aria-current="about" class="nav-link btn-link cursor-pointer" (click)="aboutOpen()" data-testid="about">
+      <cds-icon clrVerticalNavIcon shape="info-standard" size="16"></cds-icon>
+      <span class="nav-text"> {{ 'common.about' | vtranslate }}</span>
     </a>
-  </ng-container>
 
-  <a href="javascript:void(0)" aria-current="about" class="nav-link btn-link cursor-pointer" (click)="aboutOpen()" data-testid="about">
-    <cds-icon clrVerticalNavIcon shape="info-standard" size="16"></cds-icon>
-    <span class="nav-text"> {{ 'common.about' | vtranslate }}</span>
-  </a>
+    <div class="mt-auto">
+      <button class="btn btn-secondary btn-sm w-full" *ngIf="isDevMode" (click)="logout()">Logout</button>
 
-  <div class="mt-auto">
-    <button class="btn btn-secondary btn-sm w-full" *ngIf="isDevMode" (click)="logout()">Logout</button>
+      <vmw-theme-switch-button></vmw-theme-switch-button>
+    </div>
+  </clr-vertical-nav>
 
-    <vmw-theme-switch-button></vmw-theme-switch-button>
-  </div>
-</clr-vertical-nav>
-
-<seed-about-dialog *ngIf="aboutDialogOpen" [(dialogOpen)]="aboutDialogOpen" [activeElement]="activeElement"></seed-about-dialog>
+  <seed-about-dialog *ngIf="aboutDialogOpen" [(dialogOpen)]="aboutDialogOpen" [activeElement]="activeElement"></seed-about-dialog>
+</aside>

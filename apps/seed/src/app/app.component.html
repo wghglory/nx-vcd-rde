@@ -5,13 +5,15 @@
   <router-outlet *ngSwitchCase="'blank'"></router-outlet>
 
   <!-- get current user loading, for landing any page -->
-  <div
+  <section
+    role="region"
+    aria-label="Loading"
     class="top-15 absolute left-0 right-0 bottom-0 z-10 flex flex-col items-center justify-center backdrop-blur-lg"
     *ngIf="authService.loading$ | async"
   >
     <div class="spinner"></div>
     <div>Checking User Information</div>
-  </div>
+  </section>
 
   <!-- <seed-default-layout *ngSwitchDefault></seed-default-layout> -->
 </ng-container>

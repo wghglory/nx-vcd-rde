@@ -1,12 +1,16 @@
 import { getGreeting } from '../support/app.po';
 
 describe('seed', () => {
-  beforeEach(() => cy.visit('/'));
+  beforeEach(() => {
+    cy.visit('/');
+    cy.injectAxe();
+  });
 
   it('should redirect to login page when providing wrong session', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // TODO: current url contains /login
+    cy.checkA11y();
   });
 
   it('should display alert if post session API fails', () => {
@@ -16,6 +20,8 @@ describe('seed', () => {
     cy.contains(/login/i).click();
 
     cy.findByRole('alert').should('exist').should('have.class', 'alert-text');
+
+    cy.checkA11y();
   });
 
   it('should display home page with provider nav items after provider logins', () => {
@@ -31,5 +37,7 @@ describe('seed', () => {
       .should('exist')
       .contains(/setting/i);
     cy.findByTestId('about').should('exist').contains('About');
+
+    cy.checkA11y();
   });
 });
