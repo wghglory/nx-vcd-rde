@@ -1,5 +1,14 @@
 # Seed
 
+## Generate axe and lighthouse reports
+
+```shell
+npm run axe.save http://localhost:4200
+npm run lighthouse.save http://localhost:4200
+```
+
+vpat folder will be created. Use these commands after finishing the development. Fixing issues.
+
 ## How to generate this repo?
 
 1. npx create-nx-workspace@15.6.1
