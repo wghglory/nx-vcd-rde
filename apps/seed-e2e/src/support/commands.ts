@@ -12,19 +12,27 @@
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
-    login(email: string, password: string): void;
-    getByTestId(selector: string): Cypress.Chainable;
+    login(username: string, password: string): void;
+    checkAlert(): void;
+    // getByTestId(selector: string): Cypress.Chainable;
   }
 }
 
-Cypress.Commands.add('getByTestId', selector => {
-  return cy.get(`[data-testid=${selector}]`);
-});
+// Cypress.Commands.add('getByTestId', selector => {
+//   return cy.get(`[data-testid=${selector}]`);
+// });
 
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+Cypress.Commands.add('login', (username, password) => {
+  cy.findByTestId('username').type(username);
+  cy.findByTestId('password').type(password);
+  // cy.findByTestId('login').click();
+  cy.contains(/login/i).click();
+});
+
+Cypress.Commands.add('checkAlert', () => {
+  cy.findByRole('alert').should('have.class', 'alert-text');
 });
 //
 // -- This is a child command --

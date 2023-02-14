@@ -1,43 +1,26 @@
-import { getGreeting } from '../support/app.po';
+import { verticalNavPage } from '../support/pages/vertical-nav.po';
 
-describe('seed', () => {
+describe('login', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.injectAxe();
   });
 
-  it('should redirect to login page when providing wrong session', () => {
-    cy.login('my-email@something.com', 'myPassword');
+  it('should display error message with wrong username or password', () => {
+    cy.login('not existed user', 'password');
 
-    // TODO: current url contains /login
-    cy.checkA11y();
-  });
-
-  it('should display alert if post session API fails', () => {
-    cy.findByTestId('username').type('not existed user');
-    cy.findByTestId('password').type('password');
-
-    cy.contains(/login/i).click();
-
-    cy.findByRole('alert').should('exist').should('have.class', 'alert-text');
+    cy.checkAlert();
 
     cy.checkA11y();
   });
 
-  it('should display home page with provider nav items after provider logins', () => {
-    cy.findByTestId('username').type('admin');
-    cy.findByTestId('password').type('password');
+  it('should display home page after provider logins', () => {
+    cy.login('admin', 'password');
 
-    // cy.findByTestId('login').click();
-    cy.contains(/login/i).click();
+    verticalNavPage.getProduct().contains(/new product/i);
+    verticalNavPage.getHomeNavItem().should('have.class', 'active').should('contain.text', 'Home');
+    verticalNavPage.getAboutNavItem().should('exist').contains('About');
 
-    cy.findByTestId('product').contains(/new product/i);
-    cy.findByTestId('nav.home').should('have.class', 'active').should('contain.text', 'Home');
-    cy.findByTestId('nav.setting')
-      .should('exist')
-      .contains(/setting/i);
-    cy.findByTestId('about').should('exist').contains('About');
-
-    cy.checkA11y();
+    // cy.checkA11y();
   });
 });

@@ -99,6 +99,7 @@
     "@angular/cli": "~15.1.0",
     "@angular/compiler-cli": "~15.1.0",
     "@angular/language-service": "~15.1.0",
+    "@axe-core/cli": "^4.6.0",
     "@cypress/code-coverage": "^3.10.0",
     "@faker-js/faker": "^7.6.0",
     "@hirez_io/observer-spy": "^2.2.0",
