@@ -12,7 +12,7 @@
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
-    login(username: string, password: string): void;
+    waitSpinnerToDisappear(): void;
     checkAlert(): void;
     // getByTestId(selector: string): Cypress.Chainable;
   }
@@ -24,11 +24,8 @@ declare namespace Cypress {
 
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', (username, password) => {
-  cy.findByTestId('username').type(username);
-  cy.findByTestId('password').type(password);
-  // cy.findByTestId('login').click();
-  cy.contains(/login/i).click();
+Cypress.Commands.add('waitSpinnerToDisappear', () => {
+  cy.get('.spinner', { timeout: 6000 }).should('not.exist');
 });
 
 Cypress.Commands.add('checkAlert', () => {
