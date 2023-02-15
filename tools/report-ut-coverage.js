@@ -77,6 +77,7 @@ async function main() {
       mergeAllReports(coverageMap, reports);
       generateReport(coverageMap, 'text');
       generateReport(coverageMap, 'html');
+      generateReport(coverageMap, 'json');
     }
   });
 }
