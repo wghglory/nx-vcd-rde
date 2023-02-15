@@ -8,6 +8,9 @@ export default defineConfig({
     ...nxE2EPreset(__dirname),
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
+      require('@cypress/code-coverage/task')(on, config);
+
+      return config;
     },
   },
   reporter: '../../node_modules/cypress-mochawesome-reporter',

@@ -5,6 +5,8 @@ vpat
 
 # cypress
 **/reports
+**/coverage
+**/.nyc_output
 
 # compiled output
 dist
