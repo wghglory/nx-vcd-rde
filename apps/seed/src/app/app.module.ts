@@ -10,8 +10,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { NavbarComponent, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
+import { initVIPConfig } from '@seed/shared/vip';
 import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
-import { VIPModule } from '@vmw/ngx-vip';
+import { LocaleService, VIPModule, VIPService } from '@vmw/ngx-vip';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -47,7 +48,6 @@ import { themeFactory } from './theme/theme-factory';
     ClarityModule,
     VIPModule.forRoot(),
     VmwThemeToolsModule.forRoot(),
-    // SharedVipModule,
     AppRoutingModule,
 
     // core
@@ -69,6 +69,12 @@ import { themeFactory } from './theme/theme-factory';
       provide: APP_INITIALIZER,
       useFactory: themeFactory,
       deps: [VmwClarityThemeService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initVIPConfig,
+      deps: [VIPService, LocaleService],
       multi: true,
     },
   ],

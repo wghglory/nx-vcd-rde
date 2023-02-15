@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ClarityModule } from '@clr/angular';
+import { SharedModule } from '@seed/shared/modules';
 
 import { ProductService } from '../../services/product.service';
 import { ProductCardListComponent } from '../../ui/product-card-list/product-card-list.component';
@@ -16,9 +15,8 @@ import { ProductListComponent } from '../../ui/product-list/product-list.compone
   selector: 'seed-product-shell',
   standalone: true,
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule,
-    ClarityModule,
     FormsModule,
     ProductListComponent,
     ProductCardListComponent,
