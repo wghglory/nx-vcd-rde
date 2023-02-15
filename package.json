@@ -14,7 +14,7 @@
     "e2e": "npx nx run seed-e2e:e2e",
     "e2e:watch": "npm run e2e -- --watch",
     "test": "npx nx run-many --all --target=test --parallel=6 --runInBand --coverage",
-    "coverage:ut": "node ./tools/report-all-coverage.js && open -a 'Google Chrome' coverage/report/index.html",
+    "coverage:ut": "node ./tools/report-ut-coverage.js && open -a 'Google Chrome' coverage/report/index.html",
     "coverage:e2e:combine": "node ./tools/merge_coverage_cypress.js",
     "coverage:combine": "./tools/combine_test_reports.sh",
     "coverage:reset": "rm -rf reports",
