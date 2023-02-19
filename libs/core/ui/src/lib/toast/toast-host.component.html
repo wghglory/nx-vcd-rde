@@ -1,0 +1,19 @@
+<seed-toast-container>
+  <seed-toast
+    *ngFor="let toast of toasts$ | async"
+    [primaryButtonText]="toast.primaryButtonText"
+    (primaryButtonClick)="toast.primaryButtonClick?.()"
+    [secondaryButtonText]="toast.secondaryButtonText"
+    (secondaryButtonClick)="toast.secondaryButtonClick?.()"
+    [type]="toast.type"
+    [timeoutSeconds]="toast.timeoutSeconds"
+    [dismissible]="toast.dismissible"
+    (dismissed)="remove(toast)"
+  >
+    <div class="toast-title">{{ toast.title }}</div>
+    <p class="toast-description" [innerHTML]="toast.description"></p>
+    <!-- <span class="toast-date">{{ toast.date }}</span> -->
+  </seed-toast>
+
+  <div>{{ toasts$ | async | json }}</div>
+</seed-toast-container>

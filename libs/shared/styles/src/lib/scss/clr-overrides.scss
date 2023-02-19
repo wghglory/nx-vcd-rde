@@ -1,0 +1,7 @@
+// With @clr/ui@13.11.0 the framework no longer hides the underline of the links.
+// This is documented by https://github.com/vmware-clarity/ng-clarity/issues/352.
+@mixin remove-text-decoration() {
+  & {
+    text-decoration: none;
+  }
+}

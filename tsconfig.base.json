@@ -26,6 +26,7 @@
       "@seed/shared/models": ["libs/shared/models/src/index.ts"],
       "@seed/shared/modules": ["libs/shared/modules/src/index.ts"],
       "@seed/shared/services": ["libs/shared/services/src/index.ts"],
+      "@seed/shared/styles": ["libs/shared/styles/src/index.ts"],
       "@seed/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@seed/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@seed/shared/vip": ["libs/shared/vip/src/index.ts"],

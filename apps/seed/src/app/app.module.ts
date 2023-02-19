@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
-import { NavbarComponent, VerticalNavComponent } from '@seed/core/ui';
+import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
 import { initVIPConfig } from '@seed/shared/vip';
 import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
@@ -53,6 +53,7 @@ import { themeFactory } from './theme/theme-factory';
     // core
     VerticalNavComponent,
     NavbarComponent,
+    ToastModule,
 
     // share
     AlertModule,

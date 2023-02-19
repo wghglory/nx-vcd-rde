@@ -4,6 +4,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
+import { Store } from '@ngrx/store';
+import { toastActions } from '@seed/core/ui';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
 import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 
@@ -19,7 +21,13 @@ import { ProductService } from '../../services/product.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent {
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private store: Store) {
+    store.dispatch(
+      toastActions.addToast({
+        toast: { title: 'First Toast', description: 'Hi, test toast component', timeoutSeconds: -1 },
+      }),
+    );
+  }
 
   selectedItem: Product | undefined;
 

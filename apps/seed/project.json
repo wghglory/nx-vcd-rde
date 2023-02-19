@@ -19,6 +19,9 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/seed/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/styles/src/lib/scss"]
+        },
         "assets": [
           "apps/seed/src/favicon.ico",
           "apps/seed/src/assets",
