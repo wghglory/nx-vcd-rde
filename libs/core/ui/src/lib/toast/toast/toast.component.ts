@@ -239,7 +239,7 @@ export class ToastComponent implements OnInit {
   @Output() secondaryButtonClick = new EventEmitter();
 
   disableAutoDismiss = false;
-  height = 0; // TODO
+  height = 0;
   animate = true;
 
   constructor(
@@ -249,8 +249,6 @@ export class ToastComponent implements OnInit {
     @Optional() private segmentService: VmwSegmentService,
   ) {
     this.translateService.loadTranslationsForComponent('toast', TRANSLATIONS);
-
-    console.log(this.dismissible);
   }
 
   ngOnInit() {
