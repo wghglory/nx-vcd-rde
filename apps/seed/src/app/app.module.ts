@@ -59,11 +59,10 @@ import { themeFactory } from './theme/theme-factory';
     AlertModule,
   ],
   providers: [
-    interceptorProviders,
     {
       provide: APP_INITIALIZER,
-      useFactory: bootstrapFactory,
-      deps: [PreloadService],
+      useFactory: initVIPConfig,
+      deps: [VIPService, LocaleService],
       multi: true,
     },
     {
@@ -74,10 +73,11 @@ import { themeFactory } from './theme/theme-factory';
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: initVIPConfig,
-      deps: [VIPService, LocaleService],
+      useFactory: bootstrapFactory,
+      deps: [PreloadService],
       multi: true,
     },
+    interceptorProviders,
   ],
   bootstrap: [AppComponent],
 })
