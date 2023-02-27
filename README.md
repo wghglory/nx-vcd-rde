@@ -105,3 +105,10 @@ Feature Libraries:
 1. [ ] - a11y
 1. [ ] - upgrade clarity, ngx
 1. [x] - dark mode, tailwind.
+
+## Generate MFE
+
+```shell
+# add remote app
+npx nx g @nrwl/angular:remote shop-mfe --host=seed
+```

@@ -8,5 +8,5 @@ import { of } from 'rxjs';
 })
 export class MfeContainerComponent {
   // TODO: load this from a json File. a generator will update this json
-  apps$ = of([{ id: 1, name: 'First App', description: 'First remote app', url: 'http://localhost:4301' }]);
+  apps$ = of([{ id: 1, name: 'Shop App', description: 'First Shop remote app', url: 'http://localhost:4201' }]);
 }
