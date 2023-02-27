@@ -16,7 +16,19 @@
         "tsConfig": "apps/shop-mfe/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/shop-mfe/src/favicon.ico", "apps/shop-mfe/src/assets"],
-        "styles": ["apps/shop-mfe/src/styles.scss"],
+        "styles": [
+          {
+            "input": "node_modules/@clr/ui/clr-ui.min.css",
+            "bundleName": "clr-ui.min",
+            "inject": false
+          },
+          {
+            "input": "node_modules/@clr/ui/clr-ui-dark.min.css",
+            "bundleName": "clr-ui-dark.min",
+            "inject": false
+          },
+          "apps/shop-mfe/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/shop-mfe/webpack.config.js"

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+import { VmwClarityTheme, VmwClarityThemeService } from '@vmw/ngx-utils';
 
 @Component({
   selector: 'seed-root',
-  template: '<router-outlet></router-outlet>',
+  templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private themeService: VmwClarityThemeService) {
+    this.themeService.theme = VmwClarityTheme.Dark;
+  }
+}
