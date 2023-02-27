@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { loadRemoteModule } from '@nrwl/angular/mf';
 import { NoAccessComponent, NotFoundComponent } from '@seed/core/ui';
 import { MfeContainerComponent } from '@seed/feature/mfe';
 import { productRoutes } from '@seed/feature/product';
@@ -13,7 +14,7 @@ export const routes: Route[] = [
   // npx nx g @nrwl/angular:remote shop-mfe --host=seed
   {
     path: 'shop-mfe',
-    loadChildren: () => import('shop-mfe/Module').then(m => m.RemoteEntryModule),
+    loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
   },
   {
     path: 'provider',
