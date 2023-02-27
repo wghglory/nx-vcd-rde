@@ -58,7 +58,10 @@
               "maximumError": "6kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/seed/webpack.prod.config.js"
+          }
         },
         "development": {
           "buildOptimizer": false,
@@ -72,7 +75,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-dev-server",
+      "executor": "@nrwl/angular:module-federation-dev-server",
       "configurations": {
         "production": {
           "browserTarget": "seed:build:production"
@@ -83,7 +86,8 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/seed/proxy.conf.mjs"
+        "proxyConfig": "apps/seed/proxy.conf.mjs",
+        "publicHost": "http://localhost:4200"
       }
     },
     "extract-i18n": {
