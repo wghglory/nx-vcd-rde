@@ -23,6 +23,7 @@
       "@seed/feature/product/model": ["libs/feature/product/model/src/index.ts"],
       "@seed/feature/product/ui": ["libs/feature/product/ui/src/index.ts"],
       "@seed/feature/product/util": ["libs/feature/product/util/src/index.ts"],
+      "@seed/feature/mfe": ["libs/feature/mfe/src/index.ts"],
       "@seed/plugin-generator": ["libs/plugin-generator/src/index.ts"],
       "@seed/provider/home/data-access": ["libs/provider/home/data-access/src/index.ts"],
       "@seed/provider/home/feature": ["libs/provider/home/feature/src/index.ts"],

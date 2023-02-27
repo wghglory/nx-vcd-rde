@@ -10,10 +10,7 @@ describe('ToastEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        ToastEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [ToastEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(ToastEffects);

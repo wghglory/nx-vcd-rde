@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { NoAccessComponent, NotFoundComponent } from '@seed/core/ui';
+import { MfeContainerComponent } from '@seed/feature/mfe';
 import { productRoutes } from '@seed/feature/product/feature';
 import { AuthGuard } from '@seed/shared/data-access';
 import { WelcomeComponent } from '@seed/shared/ui';
@@ -63,6 +64,11 @@ const routes: Route[] = [
   {
     path: 'products',
     children: productRoutes,
+    data: { layout },
+  },
+  {
+    path: 'mfe',
+    component: MfeContainerComponent,
     data: { layout },
   },
   {
