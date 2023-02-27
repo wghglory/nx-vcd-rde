@@ -1,10 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@seed/shared/modules';
 
 import { MfeContainerComponent } from './ui/mfe-container/mfe-container.component';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [RouterModule, SharedModule],
   declarations: [MfeContainerComponent],
   exports: [MfeContainerComponent],
 })
