@@ -18,6 +18,7 @@
       "@seed/common-assets": ["libs/common-assets/src/index.ts"],
       "@seed/core/interceptor": ["libs/core/interceptor/src/index.ts"],
       "@seed/core/ui": ["libs/core/ui/src/index.ts"],
+      "@seed/feature/mfe": ["libs/feature/mfe/src/index.ts"],
       "@seed/feature/product": ["libs/feature/product/src/index.ts"],
       "@seed/plugin-generator": ["libs/plugin-generator/src/index.ts"],
       "@seed/provider/home": ["libs/provider/home/src/index.ts"],

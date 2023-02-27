@@ -20,13 +20,16 @@ export default async function (tree: Tree, options: AngularLibraryGeneratorSchem
   const projectRoot = joinPathFragments(libsDir, projectDirectory);
   const libraryName = options.directory ? `${options.directory}-${options.name}` : options.name;
 
-  const tags = `project:${options.domain},scope:${options.scope},type:${options.type},framework:angular`;
+  const tags = `domain:${options.domain},scope:${options.scope},type:${options.type}`;
+  // const importPath = `@seed/${options.scope}/${options.domain}/${options.name}`;
+  // options.directory = `${options.scope}/${options.domain}/${options.type}`;
 
   // console.log(libsDir); // libs
-  // console.log(name); // book
-  // console.log(projectDirectory); // provider/book
-  // console.log(projectRoot); // libs/provider/book
-  // console.log(libraryName); // provider-book
+  // console.log(options.directory); // feature
+  // console.log(name); // mfe
+  // console.log(projectDirectory); // feature/mfe
+  // console.log(projectRoot); // libs/feature/mfe
+  // console.log(libraryName); // feature-mfe
 
   // run the original generator
   await libraryGenerator(tree, { ...options, tags });
