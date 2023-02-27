@@ -51,7 +51,8 @@
       "@seed/tenant/setting/feature": ["libs/tenant/setting/feature/src/index.ts"],
       "@seed/tenant/setting/model": ["libs/tenant/setting/model/src/index.ts"],
       "@seed/tenant/setting/ui": ["libs/tenant/setting/ui/src/index.ts"],
-      "@seed/tenant/setting/util": ["libs/tenant/setting/util/src/index.ts"]
+      "@seed/tenant/setting/util": ["libs/tenant/setting/util/src/index.ts"],
+      "@seed/shop/ui": ["libs/shop/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,5 +1,10 @@
 import { Route } from '@angular/router';
+import { ShopDetailComponent, ShopHomeComponent } from '@seed/shop/ui';
 
-import { RemoteEntryComponent } from './entry.component';
-
-export const remoteRoutes: Route[] = [{ path: '', component: RemoteEntryComponent }];
+export const remoteRoutes: Route[] = [
+  { path: '', component: ShopHomeComponent },
+  {
+    path: 'detail',
+    component: ShopDetailComponent,
+  },
+];
