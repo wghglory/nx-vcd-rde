@@ -10,6 +10,11 @@ import { Layout } from './layout/layout';
 const layout = (process.env['NX_MODE'] || 'sidebar') as Layout;
 
 export const routes: Route[] = [
+  // npx nx g @nrwl/angular:remote shop-mfe --host=seed
+  {
+    path: 'shop-mfe',
+    loadChildren: () => import('shop-mfe/Module').then(m => m.RemoteEntryModule),
+  },
   {
     path: 'provider',
     canActivate: [AuthGuard],
