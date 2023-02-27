@@ -5,13 +5,13 @@
   <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <div *ngFor="let app of apps$ | async" class="card mt-0 flex flex-col">
       <h3 class="card-header border-none">
-        <a [href]="app.url" target="_blank">{{ app.name }}</a>
+        <a [routerLink]="app.path">{{ app.name }}</a>
       </h3>
       <div class="card-block min-h-[5rem] flex-1">
         <p cds-text>{{ app.description }}</p>
       </div>
       <div class="card-footer">
-        <a class="btn btn-sm btn-link" [href]="app.url" target="_blank">Open</a>
+        <a class="btn btn-sm btn-link" [routerLink]="app.path">Open</a>
       </div>
     </div>
   </div>

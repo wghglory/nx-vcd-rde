@@ -31,6 +31,7 @@
       "@seed/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@seed/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@seed/shared/vip": ["libs/shared/vip/src/index.ts"],
+      "@seed/shop/ui": ["libs/shop/ui/src/index.ts"],
       "@seed/tenant/home": ["libs/tenant/home/src/index.ts"],
       "@seed/tenant/setting": ["libs/tenant/setting/src/index.ts"]
     }

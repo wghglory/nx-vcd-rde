@@ -15,6 +15,7 @@ export const routes: Route[] = [
   {
     path: 'shop-mfe',
     loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
+    data: { layout },
   },
   {
     path: 'provider',
