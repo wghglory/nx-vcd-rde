@@ -40,6 +40,7 @@ const sharedLibraries = new Set([
   '@seed/shared/ui',
   '@seed/shared/utils',
   '@seed/shared/vip',
+  '@seed/core/interceptors',
 ]);
 
 // --------------------------------------------------------------------------------------------

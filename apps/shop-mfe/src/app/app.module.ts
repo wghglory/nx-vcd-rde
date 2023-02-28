@@ -8,6 +8,7 @@ import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { interceptorProviders } from '@seed/core/interceptor';
 import { HeaderMfeComponent, NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
 import { COMMON_ICONS, themeFactory } from '@seed/shared/utils';
@@ -69,6 +70,7 @@ import { AppComponent } from './app.component';
       deps: [VmwClarityThemeService],
       multi: true,
     },
+    interceptorProviders,
   ],
   bootstrap: [AppComponent],
 })
