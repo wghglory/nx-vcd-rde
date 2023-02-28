@@ -11,7 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
-import { COMMON_ICONS } from '@seed/shared/utils';
+import { COMMON_ICONS, themeFactory } from '@seed/shared/utils';
 import { initVIPConfig } from '@seed/shared/vip';
 import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { LocaleService, VIPModule, VIPService } from '@vmw/ngx-vip';
@@ -21,7 +21,6 @@ import { routes } from './app.routes';
 import { SidebarLayoutComponent } from './layout/sidebar-layout/sidebar-layout.component';
 import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone-layout.component';
 import { bootstrapFactory, PreloadService } from './services/preload.service';
-import { themeFactory } from './theme/theme-factory';
 
 @NgModule({
   declarations: [AppComponent, SidebarLayoutComponent, StandaloneLayoutComponent],

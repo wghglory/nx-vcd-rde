@@ -4,3 +4,4 @@ export * from './lib/icon.util';
 export * from './lib/operators/operator.logger';
 export * from './lib/operators/operator.startWithTap';
 export * from './lib/test.util';
+export * from './lib/theme.util';
