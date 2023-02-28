@@ -8,28 +8,13 @@ import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
+import { HeaderMfeComponent, NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
-import { COMMON_ICONS } from '@seed/shared/utils';
-import { VmwClarityThemeConfig, VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
+import { COMMON_ICONS, themeFactory } from '@seed/shared/utils';
+import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { VIPModule } from '@vmw/ngx-vip';
 
 import { AppComponent } from './app.component';
-
-export function themeLoader(themeService: VmwClarityThemeService) {
-  return () => {
-    return new Promise<void>(resolve => {
-      themeService
-        .initialize({
-          clarityDarkPath: '/clr-ui-dark.min.css',
-          clarityLightPath: '/clr-ui.min.css',
-        } as VmwClarityThemeConfig)
-        .then(() => {
-          resolve();
-        });
-    });
-  };
-}
 
 @NgModule({
   declarations: [AppComponent],
@@ -62,6 +47,7 @@ export function themeLoader(themeService: VmwClarityThemeService) {
     VerticalNavComponent,
     NavbarComponent,
     ToastModule,
+    HeaderMfeComponent,
 
     // share
     AlertModule,
@@ -79,7 +65,7 @@ export function themeLoader(themeService: VmwClarityThemeService) {
   providers: [
     {
       provide: APP_INITIALIZER,
-      useFactory: themeLoader,
+      useFactory: themeFactory,
       deps: [VmwClarityThemeService],
       multi: true,
     },

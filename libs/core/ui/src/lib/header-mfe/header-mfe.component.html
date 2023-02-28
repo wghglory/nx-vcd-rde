@@ -1,0 +1,12 @@
+<header class="header-6">
+  <div class="branding">
+    <a routerLink="/" class="nav-link">
+      <cds-icon shape="vm-bug"></cds-icon>
+      <span class="title">{{ name }}</span>
+    </a>
+  </div>
+  <div class="header-actions">
+    <vmw-theme-switch-button classes="nav-icon nav-link"></vmw-theme-switch-button>
+    <span>{{ (user$ | async)?.user }}</span>
+  </div>
+</header>
