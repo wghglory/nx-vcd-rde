@@ -10,10 +10,12 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { HeaderMfeComponent, NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
+import { bootstrapFactory, PreloadService } from '@seed/shared/services';
 import { AlertModule } from '@seed/shared/ui';
 import { COMMON_ICONS, themeFactory } from '@seed/shared/utils';
+import { initVIPConfig } from '@seed/shared/vip';
 import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
-import { VIPModule } from '@vmw/ngx-vip';
+import { LocaleService, VIPModule, VIPService } from '@vmw/ngx-vip';
 
 import { AppComponent } from './app.component';
 
@@ -44,15 +46,6 @@ import { AppComponent } from './app.component';
     VIPModule.forRoot(),
     VmwThemeToolsModule.forRoot(),
 
-    // core
-    VerticalNavComponent,
-    NavbarComponent,
-    ToastModule,
-    HeaderMfeComponent,
-
-    // share
-    AlertModule,
-
     RouterModule.forRoot(
       [
         {
@@ -62,12 +55,33 @@ import { AppComponent } from './app.component';
       ],
       { initialNavigation: 'enabledBlocking' },
     ),
+
+    // core
+    VerticalNavComponent,
+    NavbarComponent,
+    ToastModule,
+    HeaderMfeComponent,
+
+    // share
+    AlertModule,
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
+      useFactory: initVIPConfig,
+      deps: [VIPService, LocaleService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
       useFactory: themeFactory,
       deps: [VmwClarityThemeService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: bootstrapFactory,
+      deps: [PreloadService],
       multi: true,
     },
     interceptorProviders,
