@@ -3,6 +3,7 @@ import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ClarityIcons } from '@cds/core/icon';
 import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -10,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
+import { COMMON_ICONS } from '@seed/shared/utils';
 import { initVIPConfig } from '@seed/shared/vip';
 import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { LocaleService, VIPModule, VIPService } from '@vmw/ngx-vip';
@@ -84,4 +86,8 @@ import { themeFactory } from './theme/theme-factory';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    ClarityIcons.addIcons(...COMMON_ICONS);
+  }
+}

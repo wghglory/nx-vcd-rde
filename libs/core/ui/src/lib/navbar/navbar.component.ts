@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, isDevMode } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { ClarityIcons, cogIcon, vmBugIcon } from '@cds/core/icon';
 import { NAV_CONFIG } from '@seed/shared/constant';
 import { SharedModule } from '@seed/shared/modules';
 import { AuthService } from '@seed/shared/services';
@@ -9,14 +8,13 @@ import { L10nService } from '@vmw/ngx-vip';
 import { map } from 'rxjs';
 
 import { AboutDialogComponent } from '../about-dialog/about-dialog.component';
-
-ClarityIcons.addIcons(cogIcon, vmBugIcon);
+import { HeaderDropdownComponent } from './../header-dropdown/header-dropdown.component';
 
 @Component({
   selector: 'seed-navbar',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SharedModule, RouterModule, VmwThemeToolsModule, AboutDialogComponent],
+  imports: [SharedModule, RouterModule, VmwThemeToolsModule, AboutDialogComponent, HeaderDropdownComponent],
   templateUrl: './navbar.component.html',
   styles: [],
 })
@@ -28,9 +26,7 @@ export class NavbarComponent {
   aboutDialogOpen = false;
   activeElement: HTMLAnchorElement | undefined;
 
-  get isDevMode() {
-    return isDevMode();
-  }
+  isDevMode = isDevMode();
 
   // tab click trigger below event instead of routerLink
   // easier way to catch lazy loading modules that cannot be found [Loading chunk... err]
