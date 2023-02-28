@@ -21,7 +21,8 @@ import { HeaderDropdownComponent } from './../header-dropdown/header-dropdown.co
 export class NavbarComponent {
   constructor(public authService: AuthService, private l10nService: L10nService, private router: Router) {}
 
-  menuItems$ = this.authService.currentUser$.pipe(map(user => (user ? NAV_CONFIG[user.roles] : [])));
+  user$ = this.authService.currentUser$;
+  menuItems$ = this.user$.pipe(map(user => (user ? NAV_CONFIG[user.roles] : [])));
 
   aboutDialogOpen = false;
   activeElement: HTMLAnchorElement | undefined;
