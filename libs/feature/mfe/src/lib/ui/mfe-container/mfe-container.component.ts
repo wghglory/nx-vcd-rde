@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@seed/shared/modules';
+import { MfeLookupService } from '@seed/shared/services';
 import { RemoteAppCardComponent } from '@seed/shared/ui';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'seed-mfe-container',
@@ -12,6 +12,8 @@ import { of } from 'rxjs';
   imports: [RouterModule, SharedModule, RemoteAppCardComponent],
 })
 export class MfeContainerComponent {
-  // TODO: load this from a json File. a generator will update this json
-  apps$ = of([{ id: 1, name: 'Shop App', description: 'First Shop remote app', path: '/shop-mfe' }]);
+  constructor(private mfeLookupService: MfeLookupService) {}
+
+  // { name: 'Shop App', path: '/shop-mfe' }
+  mfeApps$ = this.mfeLookupService.mfeApps$;
 }

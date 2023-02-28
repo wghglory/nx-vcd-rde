@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityIcons, pluginIcon } from '@cds/core/icon';
 import { SharedModule } from '@seed/shared/modules';
+import { MfeLookupService } from '@seed/shared/services';
 import { DEFAULT_ICON_SIZE } from '@seed/shared/utils';
 import { VmwClarityTheme } from '@vmw/ngx-utils';
 import { map } from 'rxjs';
@@ -29,7 +29,7 @@ type RemoteApp = {
   imports: [RouterModule, SharedModule],
 })
 export class HeaderDropdownComponent {
-  constructor(private http: HttpClient) {
+  constructor(private mfeLookupService: MfeLookupService) {
     ClarityIcons.addIcons(pluginIcon);
   }
 
@@ -41,15 +41,8 @@ export class HeaderDropdownComponent {
 
   readonly DEFAULT_ICON_SIZE = DEFAULT_ICON_SIZE;
 
-  mfeApps$ = this.http.get<Record<string, string>>('assets/module-federation.manifest.json').pipe(
-    map(json => {
-      const result: { name: string; url: string }[] = [];
-      for (const [key, value] of Object.entries(json)) {
-        result.push({ name: key, url: value });
-      }
-      return result;
-    }),
-  );
+  // { name: 'Shop App', path: '/shop-mfe' }
+  mfeApps$ = this.mfeLookupService.mfeApps$;
 
   openRemoteAppMfeTab(remoteApp: RemoteApp): void {
     window.open(remoteApp.url);
