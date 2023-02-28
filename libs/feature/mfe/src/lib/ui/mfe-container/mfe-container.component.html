@@ -3,6 +3,6 @@
   <p>All below cards are standalone remote apps.</p>
 
   <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    <seed-remote-app-card *ngFor="let app of apps$ | async" [app]="app"></seed-remote-app-card>
+    <seed-remote-app-card *ngFor="let app of mfeApps$ | async" [app]="app"></seed-remote-app-card>
   </div>
 </section>
