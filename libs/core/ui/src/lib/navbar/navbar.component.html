@@ -25,11 +25,22 @@
     <a routerLink="/products" routerLinkActive="active" class="nav-link"><span class="nav-text">Products</span></a>
   </div>
   <div class="header-actions">
-    <div class="header-actions">
+    <div>
       <vmw-theme-switch-button classes="nav-icon nav-link"></vmw-theme-switch-button>
     </div>
-    <a routerLink="/" class="nav-link nav-icon" aria-label="settings">
-      <cds-icon shape="cog"></cds-icon>
-    </a>
+    <clr-dropdown>
+      <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
+        <cds-icon shape="cog"></cds-icon>
+        <cds-icon shape="angle" direction="down"></cds-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a href="javascript:void(0)" aria-current="about" (click)="aboutOpen()" data-testid="about" clrDropdownItem>
+          {{ 'common.about' | vtranslate }}</a
+        >
+        <a href="javascript:void(0)" (click)="logout()" clrDropdownItem>Log out</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
   </div>
 </header>
+
+<seed-about-dialog *ngIf="aboutDialogOpen" [(dialogOpen)]="aboutDialogOpen" [activeElement]="activeElement"></seed-about-dialog>

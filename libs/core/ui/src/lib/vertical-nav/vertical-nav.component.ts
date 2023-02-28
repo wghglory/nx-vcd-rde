@@ -58,17 +58,6 @@ export class VerticalNavComponent {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      sessionStorage.clear();
-
-      if (isDevMode()) {
-        localStorage.removeItem('jwt');
-      }
-
-      this.authService.setCurrentUser(null);
-      this.authService.completeUserStream();
-
-      window.location.href = window.location.origin + '/login';
-    });
+    this.authService.logout().subscribe();
   }
 }

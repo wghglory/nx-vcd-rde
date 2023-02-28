@@ -3,7 +3,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 import { AUTH_CONTEXT, TENANT_CONTEXT } from '@seed/shared/constant';
 import { SignInPayload, VcdSession } from '@seed/shared/models';
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +32,10 @@ export class AuthService {
   }
 
   getUserInfo(headers?: Record<string, string>) {
+    if (this.currentUserSub.value) {
+      return of(this.currentUserSub.value);
+    }
+
     this.loadingSub.next(true);
 
     // note: interceptor adds {{AUTH_TOKEN}} into header already
@@ -94,6 +98,19 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.delete(`/api/session`, {});
+    return this.http.delete(`/api/session`, {}).pipe(
+      tap(() => {
+        sessionStorage.clear();
+
+        if (isDevMode()) {
+          localStorage.removeItem('jwt');
+        }
+
+        this.setCurrentUser(null);
+        this.completeUserStream();
+
+        window.location.href = window.location.origin + '/login';
+      }),
+    );
   }
 }
