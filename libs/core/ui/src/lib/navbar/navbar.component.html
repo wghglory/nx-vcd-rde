@@ -31,6 +31,7 @@
   <div class="header-actions">
     <div>
       <vmw-theme-switch-button classes="nav-icon nav-link"></vmw-theme-switch-button>
+      <span>{{ (user$ | async)?.user }}</span>
     </div>
     <clr-dropdown>
       <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">

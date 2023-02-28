@@ -31,14 +31,15 @@ const sharedNpmPackages = new Set([
   'rxjs',
 ]);
 
+// this is important because remote and host apps will share the singleton instance, so AuthService currentUser$ is sharable.
 const sharedLibraries = new Set([
-  '@seed/shared-models',
-  '@seed/shared-modules',
-  '@seed/shared-services',
-  '@seed/shared-styles',
-  '@seed/shared-ui',
-  '@seed/shared-utils',
-  '@seed/shared-vip',
+  '@seed/shared/models',
+  '@seed/shared/modules',
+  '@seed/shared/services',
+  '@seed/shared/styles',
+  '@seed/shared/ui',
+  '@seed/shared/utils',
+  '@seed/shared/vip',
 ]);
 
 // --------------------------------------------------------------------------------------------
