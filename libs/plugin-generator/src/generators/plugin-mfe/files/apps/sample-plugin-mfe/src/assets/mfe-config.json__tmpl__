@@ -1,0 +1,9 @@
+{
+   "remoteName": "<%= name %>",
+   "displayName": "<%= displayName %>",
+   "ngMainModule": "<%= fullName %>RemoteModule",
+   "ngCardModule": "<%= fullName %>RemoteCardModule",
+   "resourceTypesWithDetailView": [],
+   "serviceApis": [],
+   "featureFlag": "enable.ccs.<%= fullName %>"
+}

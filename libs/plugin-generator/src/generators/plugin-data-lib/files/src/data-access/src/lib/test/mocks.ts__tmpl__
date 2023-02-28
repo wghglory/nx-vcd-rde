@@ -1,0 +1,71 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { KubernetesResourceType } from '@ccs-ui/sdk-utils';
+
+import { EndpointModel } from '../models/ns-endpoint.model';
+import { ServiceModel } from '../models/ns-service.model';
+
+const NAMESPACE = 'sv114a';
+export const SERVICE_NAME2 = 'nginx-service';
+
+// Test a couple of different conversions:
+export const SERVICES_MOCK: ServiceModel[] = [
+   {
+      createdOn: new Date('2022-06-29T01:38:26.000Z'),
+      uid: '5374659f-9886-42dc-a3ac-2d1c9e98fae8',
+      type: KubernetesResourceType.SERVICE,
+      name: 'hostname-service',
+      namespace: NAMESPACE,
+      rawYaml: undefined,
+      status: undefined,
+      labels: ['app: echo-hostname'],
+
+      annotations: {
+         'ncp/error.loadbalancer': 'IP_POOL_EXHAUSTED',
+      },
+      loadBalancerType: 'LoadBalancer',
+      clusterIP: '10.96.4.85',
+      externalIP: undefined,
+      ports: [
+         {
+            port: 8080,
+            protocol: 'TCP',
+            targetPort: '80',
+            nodePort: 30163,
+         },
+      ],
+   },
+   {
+      createdOn: new Date('2022-06-28T19:16:19.000Z'),
+      uid: '1018cc58-1554-43ab-912f-c4f093aafab2',
+      type: KubernetesResourceType.SERVICE,
+      name: SERVICE_NAME2,
+      namespace: NAMESPACE,
+      rawYaml: undefined,
+      status: undefined,
+      labels: ['app.kubernetes.io/name: proxy'],
+
+      annotations: {},
+      loadBalancerType: 'ClusterIP',
+      clusterIP: '10.96.2.241',
+      externalIP: undefined,
+      ports: [
+         {
+            name: 'name-of-service-port',
+            port: 80,
+            protocol: 'TCP',
+            targetPort: 'http-web-svc',
+         },
+      ],
+   },
+] as ServiceModel[];
+
+export const ENDPOINT_MOCK: EndpointModel = {
+   createdOn: new Date('2022-06-28T19:16:19.000Z'),
+   uid: '4fce4130-3570-4523-812b-96e0238e17ef',
+   type: KubernetesResourceType.ENDPOINT,
+   name: SERVICE_NAME2,
+   namespace: NAMESPACE,
+   rawYaml: undefined,
+   status: undefined,
+   labels: [],
+};

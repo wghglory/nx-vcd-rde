@@ -1,0 +1,14 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Component } from '@angular/core';
+import { VmwClarityThemeService, VmwClarityTheme } from '@vmw/ngx-utils';
+
+@Component({
+   selector: '<%= name %>-root',
+   templateUrl: './app.component.html',
+   styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+   constructor(private themeService: VmwClarityThemeService) {
+      this.themeService.theme = VmwClarityTheme.Dark;
+   }
+}

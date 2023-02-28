@@ -1,0 +1,40 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ClarityModule } from '@clr/angular';
+import { VmwClarityTheme, VmwClarityThemeService } from '@vmw/ngx-utils';
+
+import { StandaloneHeaderComponent, RouterNavComponent } from '@ccs-ui/sdk-ui-components';
+
+import { AppComponent } from './app.component';
+
+class MockVmwClarityThemeService {
+   initialize = () => null;
+   theme = () => VmwClarityTheme.Dark;
+}
+
+describe('AppComponent', () => {
+   let fixture: ComponentFixture<AppComponent>;
+   let component: AppComponent;
+
+   beforeEach(async () => {
+      await TestBed.configureTestingModule({
+         imports: [RouterTestingModule, ClarityModule, HttpClientTestingModule],
+         declarations: [AppComponent, StandaloneHeaderComponent, RouterNavComponent],
+         providers: [{ provide: VmwClarityThemeService, useClass: MockVmwClarityThemeService }],
+      }).compileComponents();
+   });
+
+   beforeEach(() => {
+      fixture = TestBed.createComponent(AppComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+   });
+
+   it('should create the app and render its title', () => {
+      expect(component).toBeTruthy();
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.querySelector('header')?.textContent).toContain('<%= fullName %> Standalone');
+   });
+});

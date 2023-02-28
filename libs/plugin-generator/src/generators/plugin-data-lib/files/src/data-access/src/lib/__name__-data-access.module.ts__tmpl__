@@ -1,0 +1,21 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgxsModule } from '@ngxs/store';
+
+import { K8sDataAccessModule } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>ApiService } from './api/<%= name %>-api.service';
+import { <%= fullName %>State } from './store/<%= name %>.state';
+
+@NgModule({
+   imports: [CommonModule, K8sDataAccessModule.forRoot(), NgxsModule.forFeature([<%= fullName %>State])],
+})
+export class <%= fullName %>DataAccessModule {
+   static forRoot(): ModuleWithProviders<<%= fullName %>DataAccessModule> {
+      return {
+         ngModule: <%= fullName %>DataAccessModule,
+         providers: [<%= fullName %>ApiService],
+      };
+   }
+}

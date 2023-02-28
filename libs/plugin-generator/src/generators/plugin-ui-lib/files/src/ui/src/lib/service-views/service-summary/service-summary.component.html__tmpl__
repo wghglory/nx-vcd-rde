@@ -1,0 +1,32 @@
+<ng-container *transloco="let t">
+   <div class="summary-container">
+      <h5>
+         {{ t('<%= camelName %>Ui.services.summary.label.details') }}
+      </h5>
+      <div>
+         <ccs-ui-property-row [label]="t('sdk.label.name')">{{ model.name }}</ccs-ui-property-row>
+         <ccs-ui-property-row [label]="t('<%= camelName %>Ui.services.datagrid.columns.type')">{{
+            getLoadBalancerTypeLabel(t, model.loadBalancerType)
+         }}</ccs-ui-property-row>
+         <ccs-ui-property-row [label]="t('<%= camelName %>Ui.services.datagrid.columns.clusterIP')">{{
+            model.clusterIP
+         }}</ccs-ui-property-row>
+         <ccs-ui-property-row [label]="t('<%= camelName %>Ui.services.datagrid.columns.externalIP')">{{
+            model.externalIP
+         }}</ccs-ui-property-row>
+         <ccs-ui-property-row [label]="t('<%= camelName %>Ui.services.datagrid.columns.ports')">{{
+            portsToStr(model.ports)
+         }}</ccs-ui-property-row>
+         <ccs-ui-property-row [label]="t('<%= camelName %>Ui.services.datagrid.columns.labels')">
+            <span class="label label-blue" *ngFor="let label of model.labels">
+               {{ label }}
+            </span>
+         </ccs-ui-property-row>
+         <ccs-ui-property-row [label]="t('<%= camelName %>Ui.services.datagrid.columns.annotations')">
+            <span class="label label-blue" *ngFor="let name of getAnnotationNames(model)">
+               {{ name }}: {{ getAnnotationValue(model, name) }}
+            </span>
+         </ccs-ui-property-row>
+      </div>
+   </div>
+</ng-container>

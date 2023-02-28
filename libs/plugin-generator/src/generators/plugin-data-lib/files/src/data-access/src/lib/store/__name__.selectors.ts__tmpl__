@@ -1,0 +1,44 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { RouterState, RouterStateModel } from '@ngxs/router-plugin';
+import { Selector } from '@ngxs/store';
+
+import { CcsRouterStateModel, getProjectPlusNamespaceKey } from '@ccs-ui/sdk-utils';
+
+import { ServiceModel } from '../models/ns-service.model';
+
+import { <%= fullName %>StateModel } from './<%= name %>-object.model';
+import { <%= fullName %>State } from './<%= name %>.state';
+
+/**
+ * The selectors for `<%= fullName %>State`.
+ * @see <%= fullName %>State
+ */
+export class <%= fullName %>StateSelectors {
+   /**
+    * @returns all `Service` objects for the current project + namespace.
+    */
+   @Selector([<%= fullName %>State, RouterState])
+   static allServices(
+      state: <%= fullName %>StateModel,
+      routerState: RouterStateModel<CcsRouterStateModel>
+   ): ServiceModel[] {
+      const projectPlusNamespace = getProjectPlusNamespaceKey(routerState);
+      return Object.values(state.allServices[projectPlusNamespace] || {});
+   }
+
+   /**
+    * @returns the current Service for the selected route.
+    */
+   @Selector([<%= fullName %>State, RouterState])
+   static selectedService(
+      state: <%= fullName %>StateModel,
+      routerState: RouterStateModel<CcsRouterStateModel>
+   ): ServiceModel | undefined {
+      const projectPlusNamespace = getProjectPlusNamespaceKey(routerState);
+      const objs = state.allServices[projectPlusNamespace];
+      const objName = routerState.state?.objectName;
+
+      return objs && objName ? objs.find((obj) => obj.name === objName) : undefined;
+   }
+}

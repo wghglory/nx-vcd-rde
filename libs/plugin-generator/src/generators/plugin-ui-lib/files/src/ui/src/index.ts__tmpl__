@@ -1,0 +1,7 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+export * from './lib/service-card/service-card.module';
+export * from './lib/plugin-home/plugin-home.module';
+export * from './lib/service-views/service-views.module';
+export * from './lib/utils/route.constants';
+export { <%= fullName %>CardComponent } from './lib/service-card/service-card.component';
+export { ServiceSummaryComponent } from './lib/service-views/service-summary/service-summary.component';

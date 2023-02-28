@@ -1,0 +1,41 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { PortModel } from '@ccs-ui/<%= name %>-data-access';
+
+/**
+ * Transforms K8s Service ports into a string representation similarly to how `kubectl` does it.
+ * @param ports a list of ports
+ * @return a comma-separated string which maps each port to "node-port" and displays the protocol.
+ * @example '80/tcp, 80:60078/tcp'
+ */
+export const portsToStr = (ports: PortModel[]) => {
+   let s = '';
+
+   for (const port of ports) {
+      if (s !== '') {
+         s += ', ';
+      }
+
+      s += port.port;
+      if (port.nodePort) {
+         s += ':' + port.nodePort;
+      }
+      s += '/' + port.protocol;
+   }
+
+   return s;
+};
+
+/**
+ * Translates Load Balancer type into a label or N/A.
+ * @param translocoTranslate translation function
+ * @param lbType LB type
+ * @return properly formatted label.
+ */
+export const getLoadBalancerTypeLabel = (
+   translocoTranslate: (key: string) => string,
+   lbType: string | undefined
+): string => {
+   return lbType
+      ? translocoTranslate(`<%= camelName %>Ui.service.lbType.${lbType}`)
+      : translocoTranslate('sdk.text.notApplicable');
+};

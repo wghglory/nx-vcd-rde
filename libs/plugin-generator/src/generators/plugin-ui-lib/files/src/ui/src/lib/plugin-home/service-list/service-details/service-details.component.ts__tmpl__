@@ -1,0 +1,18 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Component, Input } from '@angular/core';
+
+import { ServiceModel } from '@ccs-ui/<%= name %>-data-access';
+
+import { getLoadBalancerTypeLabel, portsToStr } from '../../../utils/utils';
+
+@Component({
+   selector: 'ccs-ui-<%= name %>-service-details',
+   templateUrl: './service-details.component.html',
+   styleUrls: ['./service-details.component.scss'],
+})
+export class ServiceDetailsComponent {
+   portsToStr = portsToStr;
+   getLoadBalancerTypeLabel = getLoadBalancerTypeLabel;
+
+   @Input() service!: ServiceModel;
+}

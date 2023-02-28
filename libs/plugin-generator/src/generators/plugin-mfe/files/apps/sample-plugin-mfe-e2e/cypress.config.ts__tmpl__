@@ -1,0 +1,17 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { nxE2EPreset } from '@nrwl/cypress/plugins/cypress-preset';
+import { defaultCypressJsonConfig } from '@test/e2e/support';
+import { defineConfig } from 'cypress';
+
+import setupNodeEvents from '../../shared-e2e/plugins/index';
+
+const cypressJsonConfig = defaultCypressJsonConfig('<%= mfeName + "-e2e" %>');
+
+export default defineConfig({
+   e2e: {
+      ...nxE2EPreset(__dirname),
+      ...cypressJsonConfig,
+      setupNodeEvents,
+   },
+});

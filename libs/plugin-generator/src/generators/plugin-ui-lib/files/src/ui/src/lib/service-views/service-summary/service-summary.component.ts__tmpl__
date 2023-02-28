@@ -1,0 +1,33 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Component, Input } from '@angular/core';
+
+import { ServiceModel } from '@ccs-ui/<%= name %>-data-access';
+
+import { getLoadBalancerTypeLabel, portsToStr } from '../../utils/utils';
+
+const getAnnotations = (service: ServiceModel) => service.annotations ?? {};
+
+@Component({
+   selector: 'ccs-ui-<%= name %>-service-summary',
+   templateUrl: './service-summary.component.html',
+   styleUrls: ['./service-summary.component.scss'],
+})
+export class ServiceSummaryComponent {
+   portsToStr = portsToStr;
+   getLoadBalancerTypeLabel = getLoadBalancerTypeLabel;
+
+   @Input() model!: ServiceModel;
+
+   getAnnotationValue(service: ServiceModel, name: string) {
+      return getAnnotations(service)[name];
+   }
+
+   /**
+    * Extracts annotation names which are keys on the annotation dictionary.
+    * @param service
+    * @return a list of annotation names
+    */
+   getAnnotationNames(service: ServiceModel) {
+      return Object.keys(getAnnotations(service));
+   }
+}

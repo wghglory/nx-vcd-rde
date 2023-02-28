@@ -1,0 +1,13 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { NgModule } from '@angular/core';
+
+import { <%= fullName %>DataAccessModule } from '@ccs-ui/<%= name %>-data-access';
+import { <%= fullName %>CardComponent, <%= fullName %>CardModule } from '@ccs-ui/<%= name %>-ui';
+
+@NgModule({
+   imports: [<%= fullName %>DataAccessModule.forRoot(), <%= fullName %>CardModule],
+})
+export class <%= fullName %>RemoteCardModule {}
+
+// Remote module attributes used for loading components, see MfeProxyComponent.
+export { <%= fullName %>CardComponent as targetComponent };

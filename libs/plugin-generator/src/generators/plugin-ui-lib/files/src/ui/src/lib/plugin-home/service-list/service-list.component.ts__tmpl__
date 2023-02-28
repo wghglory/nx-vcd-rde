@@ -1,0 +1,101 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Component, OnInit } from '@angular/core';
+import { ClrDatagridPagination } from '@clr/angular/data/datagrid/datagrid-pagination';
+import { TranslocoService } from '@ngneat/transloco';
+import { Store } from '@ngxs/store';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+
+import { EnableReloadComponent } from '@ccs-ui/sdk-ui-components';
+import {
+   DEFAULT_PAGE_SIZE_OPTIONS,
+   getDatagridFooterLabel,
+   searchDataSource,
+   SearchState,
+} from '@ccs-ui/sdk-utils';
+import {
+   <%= fullName %>StateSelectors,
+   RefreshServices,
+   ServiceModel,
+} from '@ccs-ui/<%= name %>-data-access';
+
+import { <%= fullName %>Routes, <%= fullName %>ServiceRoutes } from '../../utils/route.constants';
+import { getLoadBalancerTypeLabel, portsToStr } from '../../utils/utils';
+
+@Component({
+   selector: 'ccs-ui-<%= name %>-service-list',
+   templateUrl: './service-list.component.html',
+   styleUrls: ['./service-list.component.scss'],
+})
+export class ServiceListComponent extends EnableReloadComponent implements OnInit {
+   portsToStr = portsToStr;
+   getLoadBalancerTypeLabel = getLoadBalancerTypeLabel;
+
+   services$!: Observable<ServiceModel[]>;
+
+   @SearchState()
+   searchValue$!: BehaviorSubject<string>;
+
+   private readonly searchableFields: string[] = [
+      'name',
+      'loadBalancerType',
+      'clusterIP',
+      'externalIP',
+   ];
+
+   readonly SERVICES_PER_PAGE: number = 25;
+   readonly DEFAULT_PAGE_SIZE_OPTIONS = DEFAULT_PAGE_SIZE_OPTIONS;
+
+   constructor(private store: Store, private translocoService: TranslocoService) {
+      super();
+      this.initServices();
+   }
+
+   ngOnInit(): void {
+      this.reloadData();
+   }
+
+   override reloadData(): void {
+      this.store.dispatch(new RefreshServices());
+   }
+
+   // Combine the Services observable with the filter data from user search
+   private initServices() {
+      this.services$ = combineLatest([
+         this.store.select(<%= fullName %>StateSelectors.allServices),
+         this.searchValue$,
+      ]).pipe(
+         searchDataSource<ServiceModel>(this.searchableFields, (service, searchValue) => {
+            return (
+               // Search by localized health
+               this.searchLocalizedValue(
+                  `<%= camelName %>Ui.service.lbType.${service.loadBalancerType}`,
+                  searchValue
+               ) ||
+               // Search by labels
+               !!service.labels?.some((label) => label.includes(searchValue))
+            );
+         })
+      );
+   }
+
+   private searchLocalizedValue(value: string, searchValue: string): boolean {
+      return this.translocoService.translate(value).includes(searchValue);
+   }
+
+   getSummaryUrl(svc: ServiceModel): string {
+      const base = `../../${<%= fullName %>Routes.VIEW_SERVICE}/${<%= fullName %>ServiceRoutes.SERVICE}`;
+      return `${base}/${svc.name}`; // /summary is the default view
+   }
+
+   getDatagridFooterLabel(objs: ServiceModel[] | null, pagination: ClrDatagridPagination): string {
+      return getDatagridFooterLabel(
+         this.translocoService,
+         objs?.length || 0,
+         pagination,
+         this.SERVICES_PER_PAGE,
+         '<%= camelName %>Ui.services.datagrid.footer.service',
+         '<%= camelName %>Ui.services.datagrid.footer.services',
+         '<%= camelName %>Ui.services.datagrid.footer.page'
+      );
+   }
+}

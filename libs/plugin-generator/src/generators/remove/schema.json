@@ -1,0 +1,27 @@
+{
+   "$schema": "http://json-schema.org/schema",
+   "cli": "nx",
+   "$id": "Remove",
+   "title": "Remove CCS plugin",
+   "description": "Remove a CCS plugin from the workspace.",
+   "type": "object",
+   "examples": [
+      {
+         "command": "nx g  @ccs-ui/plugin-generator:remove my-service-mfe",
+         "description": "Remove `my-service-mfe` and libraries in /libs/my-service from the workspace"
+      }
+   ],
+   "properties": {
+      "projectName": {
+         "type": "string",
+         "alias": "project",
+         "description": "Click to select the <service>-mfe project to remove.",
+         "default": "-mfe",
+         "$default": {
+            "$source": "argv",
+            "index": 0
+         }
+      }
+   },
+   "required": ["projectName"]
+}

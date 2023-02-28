@@ -1,0 +1,33 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ClarityModule } from '@clr/angular';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+
+import { SdkI18nModule, SingleModuleInstance, translocoScopeLoader } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>CardComponent } from './service-card.component';
+
+@NgModule({
+   imports: [CommonModule, ClarityModule, RouterModule, SdkI18nModule],
+   providers: [
+      {
+         provide: TRANSLOCO_SCOPE,
+         multi: true,
+         useValue: {
+            scope: '<%= fullName %>Ui',
+            loader: translocoScopeLoader((lang) => import(`../../../assets/i18n/${lang}.json`)),
+         },
+      },
+   ],
+   declarations: [<%= fullName %>CardComponent],
+   exports: [<%= fullName %>CardComponent],
+})
+export class <%= fullName %>CardModule extends SingleModuleInstance {
+   constructor() {
+      // <%= fullName %>CardModule is used in <%= fullName %>RemoteCardModule and can have multiple instance
+      // so we pass false to avoid an error from SingleModuleInstance
+      super(false);
+   }
+}

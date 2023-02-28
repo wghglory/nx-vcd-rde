@@ -1,0 +1,39 @@
+{
+   "name": "<%= mfeName %>-e2e",
+   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+   "sourceRoot": "apps/<%= mfeName + '-e2e' %>/src",
+   "projectType": "application",
+   "targets": {
+      "e2e": {
+         "executor": "@nrwl/cypress:cypress",
+         "options": {
+            "cypressConfig": "apps/<%= mfeName + '-e2e' %>/cypress.config.ts",
+            "devServerTarget": "<%= mfeName %>:serve:development",
+            "testingType": "e2e"
+         },
+         "configurations": {
+            "production": {
+               "devServerTarget": "<%= mfeName %>:serve:production"
+            }
+         }
+      },
+      "e2e_ci": {
+         "executor": "nx:run-commands",
+         "options": {
+            "commands": [
+               "echo Starting <%= mfeName %>-e2e tests in CI mode",
+               "WAIT_ON_TIMEOUT=600000 start-server-and-test \"npm run json-server\" 3000 \"nx e2e <%= mfeName %>-e2e\""
+            ]
+         }
+      },
+      "lint": {
+         "executor": "@nrwl/linter:eslint",
+         "outputs": ["{options.outputFile}"],
+         "options": {
+            "lintFilePatterns": ["apps/<%= mfeName + '-e2e' %>/**/*.{js,ts}"]
+         }
+      }
+   },
+   "tags": [],
+   "implicitDependencies": ["<%= mfeName %>"]
+}

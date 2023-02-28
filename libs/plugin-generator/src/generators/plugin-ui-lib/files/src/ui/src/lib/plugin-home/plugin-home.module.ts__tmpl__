@@ -1,0 +1,72 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ClarityIcons, containerVolumeIcon, networkGlobeIcon, nodesIcon } from '@cds/core/icon';
+import { ClarityModule } from '@clr/angular';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+
+import { SdkUiComponentsModule } from '@ccs-ui/sdk-ui-components';
+import { SdkI18nModule, SingleModuleInstance, translocoScopeLoader } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>ServiceViewModule } from '../service-views/service-views.module';
+import { <%= fullName %>Routes } from '../utils/route.constants';
+
+import { <%= fullName %>HomeComponent } from './plugin-home.component';
+import { ServiceDetailsComponent } from './service-list/service-details/service-details.component';
+import { ServiceListComponent } from './service-list/service-list.component';
+
+@NgModule({
+   imports: [
+      CommonModule,
+      ClarityModule,
+      RouterModule.forChild([
+         {
+            path: '',
+            component: <%= fullName %>HomeComponent,
+            data: {
+               moduleRouteRoot: true,
+            },
+            children: [
+               {
+                  path: <%= fullName %>Routes.SERVICES,
+                  component: ServiceListComponent,
+               },
+               {
+                  path: '',
+                  pathMatch: 'full',
+                  redirectTo: <%= fullName %>Routes.SERVICES,
+               },
+               {
+                  path: '**',
+                  redirectTo: <%= fullName %>Routes.SERVICES,
+               },
+            ],
+         },
+      ]),
+      SdkI18nModule,
+      SdkUiComponentsModule,
+      <%= fullName %>ServiceViewModule,
+   ],
+   providers: [
+      {
+         provide: TRANSLOCO_SCOPE,
+         multi: true,
+         useValue: {
+            scope: '<%= fullName %>Ui',
+            loader: translocoScopeLoader((lang) => import(`../../../assets/i18n/${lang}.json`)),
+         },
+      },
+   ],
+   declarations: [
+      <%= fullName %>HomeComponent,
+      ServiceDetailsComponent,
+      ServiceListComponent,
+   ],
+})
+export class <%= fullName %>HomeModule extends SingleModuleInstance {
+   constructor() {
+      super();
+      ClarityIcons.addIcons(containerVolumeIcon, networkGlobeIcon, nodesIcon);
+   }
+}

@@ -1,0 +1,19 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+/**
+ * Use routing constants to avoid hard-coding route paths in the source.
+ *
+ * Those paths must also match what is defined in <%= name %>-mfe/src/assets/app-routes.json.
+ */
+export enum <%= fullName %>Routes {
+   CARD = 'card',
+   HOME = 'home',
+   VIEW = 'view',
+   VIEW_SERVICE = 'view-service',
+   SERVICES = 'services',
+}
+
+export enum <%= fullName %>ServiceRoutes {
+   SERVICE = 'service',
+   SUMMARY = 'summary',
+}

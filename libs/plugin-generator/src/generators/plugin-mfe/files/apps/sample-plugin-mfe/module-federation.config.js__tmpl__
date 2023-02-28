@@ -1,0 +1,12 @@
+// Nx config file: see https://nx.dev/module-federation/micro-frontend-architecture#micro-frontend-architecture
+const baseConfig = require('../../module-federation.config');
+
+module.exports = {
+   ...baseConfig,
+
+   name: '<%= mfeName %>',
+   exposes: {
+      './MainModule': 'apps/<%= mfeName %>/src/app/remote-entry/entry.module.ts',
+      './CardModule': 'apps/<%= mfeName %>/src/app/remote-entry/entry-card.module.ts',
+   },
+};

@@ -1,0 +1,19 @@
+/* Copyright (c) 2021 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Routes } from '@angular/router';
+
+import { <%= fullName %>CardComponent, <%= fullName %>Routes } from '@ccs-ui/<%= name %>-ui';
+
+export const appRoutes: Routes = [
+   {
+      // This path to the service card is only used in dev mode in the standalone mfe app
+      // In the CCS app, the card is loaded dynamically by the MfeProxyComponent.
+      path: <%= fullName %>Routes.CARD,
+      component: <%= fullName %>CardComponent,
+   },
+   {
+      // Default path to load the <%= fullName %>RemoteModule
+      path: '',
+      loadChildren: () =>
+         import('./remote-entry/entry.module').then((m) => m.<%= fullName %>RemoteModule),
+   },
+];

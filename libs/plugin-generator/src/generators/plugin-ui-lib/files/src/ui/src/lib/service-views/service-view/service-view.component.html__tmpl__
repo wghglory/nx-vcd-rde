@@ -1,0 +1,12 @@
+<ng-container *transloco="let t">
+   <ccs-ui-breadcrumbs></ccs-ui-breadcrumbs>
+   <ng-container *ngIf="service$ | async as service">
+      <h3>
+         <ccs-ui-icon-label size="32" shape="network-globe" [label]="service.name">
+         </ccs-ui-icon-label>
+      </h3>
+
+      <!-- TODO implement YAML tab here -->
+      <ccs-ui-<%= name %>-service-summary [model]="service"></ccs-ui-<%= name %>-service-summary>
+   </ng-container>
+</ng-container>

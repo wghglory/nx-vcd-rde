@@ -1,0 +1,8 @@
+<div class="main-container">
+   <ccs-ui-standalone-header title="<%= fullName %> Standalone"></ccs-ui-standalone-header>
+   <div class="content-container">
+      <div class="router-container">
+         <router-outlet></router-outlet>
+      </div>
+   </div>
+</div>

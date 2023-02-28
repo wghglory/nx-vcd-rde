@@ -1,0 +1,29 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxsModule } from '@ngxs/store';
+
+import { NGXS_DEV_OPTIONS } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>CardComponent } from './service-card.component';
+
+describe('ServiceSummaryComponent', () => {
+   let component: <%= fullName %>CardComponent;
+   let fixture: ComponentFixture<<%= fullName %>CardComponent>;
+
+   beforeEach(async () => {
+      await TestBed.configureTestingModule({
+         imports: [NgxsModule.forRoot([], NGXS_DEV_OPTIONS)],
+         declarations: [<%= fullName %>CardComponent],
+      }).compileComponents();
+   });
+
+   beforeEach(() => {
+      fixture = TestBed.createComponent(<%= fullName %>CardComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+   });
+
+   it('should create', () => {
+      expect(component).toBeTruthy();
+   });
+});

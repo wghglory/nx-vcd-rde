@@ -1,0 +1,13 @@
+<ng-container *transloco="let t">
+   <ccs-ui-breadcrumbs></ccs-ui-breadcrumbs>
+   <h3>{{ t('<%= camelName %>Ui.home.title') }}</h3>
+   <span>
+      {{ t('<%= camelName %>Ui.home.description') }}
+   </span>
+</ng-container>
+<!-- Plugin view starts here -->
+<ccs-ui-router-outlet-tabs
+   [tabs]="tabs"
+   (activate)="onRouterOutletActivate($event)"
+   (deactivate)="onRouterOutletDeactivate()"
+></ccs-ui-router-outlet-tabs>

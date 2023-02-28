@@ -1,0 +1,70 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { KubernetesObject } from '@k8s-svc/apis/model/KubernetesObject';
+
+import {
+   convertApiObjectToUiModel,
+   KubernetesObjectModel,
+   KubernetesResourceType,
+} from '@ccs-ui/sdk-utils';
+
+/**
+ * K8s Service network port descriptor.
+ */
+export interface PortModel {
+   protocol: string;
+   port: number;
+   targetPort: string;
+   nodePort: number;
+   name?: string;
+}
+
+/**
+ * K8s Service associated with a namespace.
+ */
+export class ServiceModel implements KubernetesObjectModel {
+   name!: string;
+   namespace!: string;
+   type: string = KubernetesResourceType.EVENT;
+   uid!: string;
+   createdOn?: Date;
+   status?: string;
+   labels?: string[];
+   rawYaml?: string;
+
+   annotations?: { [key: string]: string };
+   clusterIP!: string;
+   externalIP?: string;
+   loadBalancerType!: string;
+   ports!: PortModel[];
+
+   static fromK8sObject(item: KubernetesObject): ServiceModel {
+      const uiModel = convertApiObjectToUiModel(item);
+      if (!uiModel) {
+         throw new Error('Invalid K8s Service object received.');
+      }
+      if (!item.metadata) {
+         throw new Error('K8s Service metadata is empty.');
+      }
+      const annotations = item.metadata.annotations ?? {};
+      delete annotations['kubectl.kubernetes.io/last-applied-configuration'];
+
+      const ports = item.spec.ports.map((port: PortModel) => {
+         return { ...port, targetPort: '' + port.targetPort } as PortModel;
+      });
+
+      return {
+         ...uiModel,
+         ...{
+            // Manually set the type as objects do not have their 'kind' field populated by the API.
+            type: KubernetesResourceType.SERVICE,
+
+            annotations,
+            clusterIP: item.spec.clusterIP,
+            externalIP: item.spec.externalIP,
+            ports,
+            loadBalancerType: item.spec.type,
+         },
+      };
+   }
+}

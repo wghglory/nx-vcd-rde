@@ -1,0 +1,26 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgxsModule } from '@ngxs/store';
+
+import { NGXS_DEV_OPTIONS } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>HomeComponent } from './plugin-home.component';
+
+describe('<%= displayName %> home component', () => {
+   let fixture: ComponentFixture<<%= fullName %>HomeComponent>;
+
+   beforeEach(async () => {
+      await TestBed.configureTestingModule({
+         declarations: [<%= fullName %>HomeComponent],
+         schemas: [NO_ERRORS_SCHEMA],
+         imports: [NgxsModule.forRoot([], NGXS_DEV_OPTIONS)],
+      });
+      fixture = TestBed.createComponent(<%= fullName %>HomeComponent);
+      fixture.detectChanges();
+   });
+
+   it('should create', () => {
+      expect(fixture.componentInstance).toBeTruthy();
+   });
+});

@@ -1,0 +1,40 @@
+{
+   "name": "<%= name %>-ui",
+   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+   "sourceRoot": "libs/<%= name %>/ui/src",
+   "projectType": "library",
+   "targets": {
+      "build": {
+         "executor": "@nrwl/angular:ng-packagr-lite",
+         "outputs": ["{workspaceRoot}/dist/libs/<%= name %>/ui"],
+         "options": {
+            "project": "libs/<%= name %>/ui/ng-package.json"
+         },
+         "configurations": {
+            "production": {
+               "tsConfig": "libs/<%= name %>/ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+               "tsConfig": "libs/<%= name %>/ui/tsconfig.lib.json"
+            }
+         },
+         "defaultConfiguration": "production"
+      },
+      "lint": {
+         "executor": "@nrwl/linter:eslint",
+         "outputs": ["{options.outputFile}"],
+         "options": {
+            "lintFilePatterns": ["libs/<%= name %>/ui/**/*.ts"]
+         }
+      },
+      "test": {
+         "executor": "@nrwl/jest:jest",
+         "outputs": ["{workspaceRoot}/coverage/libs/<%= name %>/ui"],
+         "options": {
+            "jestConfig": "libs/<%= name %>/ui/jest.config.ts",
+            "passWithNoTests": true
+         }
+      }
+   },
+   "tags": ["<%= name %>:ui"]
+}

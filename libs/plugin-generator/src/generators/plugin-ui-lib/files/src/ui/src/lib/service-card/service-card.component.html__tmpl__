@@ -1,0 +1,18 @@
+<ng-container *transloco="let t">
+   <div class="card" *ngIf="serviceHomeRoute$ | async as serviceHomeRoute">
+      <div class="card-block">
+         <div class="card-title" [title]="mfeConfig.displayName">
+            <cds-icon shape="block" size="20"></cds-icon>
+            <span>{{ mfeConfig.displayName }}</span>
+         </div>
+         <div class="card-text">This service MFE was auto-generated.</div>
+      </div>
+      <div class="card-footer">
+         <a [routerLink]="serviceHomeRoute(mfeConfig.remoteName)">
+            <button class="btn btn-sm btn-link" data-test-id="service-card-button">
+               {{ t('sdk.button.open') }}
+            </button>
+         </a>
+      </div>
+   </div>
+</ng-container>

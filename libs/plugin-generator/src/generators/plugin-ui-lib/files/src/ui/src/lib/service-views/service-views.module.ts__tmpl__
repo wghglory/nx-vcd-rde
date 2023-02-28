@@ -1,0 +1,62 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ClarityIcons, networkGlobeIcon } from '@cds/core/icon';
+import { ClarityModule } from '@clr/angular';
+import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+
+import { SdkUiComponentsModule } from '@ccs-ui/sdk-ui-components';
+import { SdkI18nModule, SingleModuleInstance, translocoScopeLoader } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>ServiceRoutes } from '../utils/route.constants';
+
+import { ServiceSummaryComponent } from './service-summary/service-summary.component';
+import { ServiceViewComponent } from './service-view/service-view.component';
+
+@NgModule({
+   imports: [
+      CommonModule,
+      ClarityModule,
+      RouterModule.forChild([
+         {
+            path: <%= fullName %>ServiceRoutes.SERVICE + '/:objectName',
+            component: ServiceViewComponent,
+            children: [
+               {
+                  path: <%= fullName %>ServiceRoutes.SUMMARY,
+                  component: ServiceSummaryComponent,
+               },
+               {
+                  path: '',
+                  component: ServiceSummaryComponent,
+               },
+               {
+                  path: '**',
+                  component: ServiceSummaryComponent,
+               },
+            ],
+         },
+      ]),
+      SdkI18nModule,
+      SdkUiComponentsModule,
+   ],
+   providers: [
+      {
+         provide: TRANSLOCO_SCOPE,
+         multi: true,
+         useValue: {
+            scope: '<%= fullName %>Ui',
+            loader: translocoScopeLoader((lang) => import(`../../../assets/i18n/${lang}.json`)),
+         },
+      },
+   ],
+   declarations: [ServiceSummaryComponent, ServiceViewComponent],
+   exports: [ServiceSummaryComponent],
+})
+export class <%= fullName %>ServiceViewModule extends SingleModuleInstance {
+   constructor() {
+      super(false);
+      ClarityIcons.addIcons(networkGlobeIcon);
+   }
+}

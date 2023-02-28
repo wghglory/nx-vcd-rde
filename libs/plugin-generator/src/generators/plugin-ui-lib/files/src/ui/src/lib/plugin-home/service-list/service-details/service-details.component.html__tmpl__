@@ -1,0 +1,47 @@
+<ng-container *transloco="let t">
+   <div class="details-parent">
+      <div class="clr-row detail-item">
+         <p class="clr-col-4 p3 no-margin-top">
+            {{ t('sdk.label.name') }}
+         </p>
+         <p class="clr-col-8 p3 no-margin-top">{{ service.name }}</p>
+      </div>
+      <div class="clr-row detail-item">
+         <p class="clr-col-4 p3 no-margin-top">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.type') }}
+         </p>
+         <p class="clr-col-8 p3 no-margin-top">
+            {{ getLoadBalancerTypeLabel(t, service.loadBalancerType) }}
+         </p>
+      </div>
+      <div class="clr-row detail-item">
+         <p class="clr-col-4 p3 no-margin-top">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.clusterIP') }}
+         </p>
+         <p class="clr-col-8 p3 no-margin-top">{{ service.clusterIP }}</p>
+      </div>
+      <div class="clr-row detail-item">
+         <p class="clr-col-4 p3 no-margin-top">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.externalIP') }}
+         </p>
+         <p class="clr-col-8 p3 no-margin-top">{{ service.externalIP }}</p>
+      </div>
+      <div class="clr-row detail-item">
+         <p class="clr-col-4 p3 no-margin-top">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.ports') }}
+         </p>
+         <p class="clr-col-8 p3 no-margin-top">{{ portsToStr(service.ports) }}</p>
+      </div>
+      <div class="clr-row detail-item">
+         <p class="clr-col-4 p3 no-margin-top">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.labels') }}
+         </p>
+         <p class="clr-col-8 p3 no-margin-top" *ngIf="service.labels?.length; else noLabels">
+            <span class="label label-blue" *ngFor="let label of service.labels">{{ label }}</span>
+         </p>
+         <ng-template #noLabels>
+            <p class="clr-col-8 p3 no-margin-top">-</p>
+         </ng-template>
+      </div>
+   </div>
+</ng-container>

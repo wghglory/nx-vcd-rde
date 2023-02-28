@@ -1,0 +1,70 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { ccsUiFilterInput, clickButton, ClrDatagridTester } from '@test/e2e/support';
+
+// Basic "smoke tests" to check that the MFE app is working
+// NOTE: we are not using shared-e2e utilities because they are not part of the @sdk
+import { HomePage } from '../support/home.po';
+
+describe('<%= mfeName %> smoke tests', () => {
+   let homePage: HomePage;
+   let servicesGridTester: ClrDatagridTester;
+
+   beforeEach(() => {
+      cy.visit('/');
+      homePage = new HomePage();
+      homePage.getAppTitle().contains('<%= fullName %> Standalone');
+      servicesGridTester = homePage.getServicesGridTester();
+   });
+
+   it('checks home view', () => {
+      homePage.getPageTitle().contains('<%= fullName %>');
+
+      clickButton('Services', 'ccs-tab-services');
+      homePage.getServicesList().should('exist');
+   });
+
+   it('checks the datagrid columns and data', () => {
+      servicesGridTester.testColumnheaders([
+         'Name',
+         'Type',
+         'Labels',
+         'Created On',
+         'Cluster IP',
+         'External IP',
+         'Ports',
+      ]);
+      // checks that the labels column is hidden by default
+      servicesGridTester
+         .getColumns()
+         .get(`clr-dg-column:contains("Labels")`)
+         .should('have.class', 'datagrid-hidden-column');
+
+      servicesGridTester.getRows().should('have.length', 2);
+   });
+
+   it('checks the services filter and data', () => {
+      // test that filtering by name works
+      ccsUiFilterInput('nginx');
+      servicesGridTester.getRows().should('have.length', 1);
+
+      // test that no item found placeholder is shown
+      ccsUiFilterInput('no such data');
+      servicesGridTester.hasPlaceholder();
+   });
+
+   it('checks summary view', () => {
+      cy.visit('view-service/service/hostname-service');
+      cy.get('h3').contains('hostname-service');
+      cy.get('ccs-ui-<%= name %>-service-summary')
+         .should('contain', 'Service Details')
+         .and('contain', 'hostname-service');
+   });
+
+   it('checks the details', () => {
+      servicesGridTester.clickRowDetailsWithContent('nginx-service');
+      cy.get('ccs-ui-<%= name %>-service-details')
+         .should('contain', 'nginx-service')
+         .and('contain', 'nginx-service');
+   });
+});

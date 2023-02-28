@@ -1,0 +1,44 @@
+{
+   "home": {
+      "title": "<%= fullName %>",
+      "description": "(Add a short description here)"
+   },
+   "services": {
+      "title": "Services",
+      "button": {
+         "backToServiceList": "Back to Service list"
+      },
+      "datagrid": {
+         "columns": {
+            "type": "Type",
+            "clusterIP": "Cluster IP",
+            "externalIP": "External IP",
+            "ports": "Ports",
+            "labels": "Labels",
+            "annotations": "Annotations",
+            "createdOn": "Created On"
+         },
+         "details": {
+            "title": "{{name}} Details"
+         },
+         "footer": {
+            "serviceList": "Services per page",
+            "service": "1 service",
+            "services": "{{length}} services",
+            "page": "{{first}} - {{last}} of {{length}} services"
+         }
+      },
+      "summary": {
+         "label": {
+            "tab": "Summary",
+            "details": "Service Details"
+         }
+      }
+   },
+   "service": {
+      "lbType": {
+         "LoadBalancer": "Load Balancer",
+         "ClusterIP": "Cluster IP"
+      }
+   }
+}

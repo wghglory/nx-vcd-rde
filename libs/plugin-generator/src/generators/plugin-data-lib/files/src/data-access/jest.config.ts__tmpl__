@@ -1,0 +1,46 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+/* eslint-disable */
+export default {
+   displayName: '<%= name %>-data-access',
+
+   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+   globals: {
+      'ts-jest': {
+         tsconfig: '<rootDir>/tsconfig.spec.json',
+         stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+   },
+   collectCoverage: true,
+   collectCoverageFrom: [
+      './src/**/*.ts',
+      '!**/*.module.ts',
+      '!**/*.model.ts',
+      '!**/*.actions.ts',
+      '!**/test/**',
+   ],
+   coverageThreshold: {
+      global: {
+         branches: 0,
+         functions: 0,
+         lines: 25,
+         statements: 25,
+      },
+   },
+   coverageDirectory: '../../../coverage/libs/<%= name %>/data-access',
+   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
+   moduleNameMapper: {
+      '@cds/core/icon': '<rootDir>/../../../node_modules/@cds/core/icon/index.js',
+   },
+   transform: {
+      'node_modules/(?!.*.mjs$)': 'jest-esm-transformer-2',
+      '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
+   },
+   transformIgnorePatterns: [],
+   snapshotSerializers: [
+      'jest-preset-angular/build/serializers/no-ng-attributes',
+      'jest-preset-angular/build/serializers/ng-snapshot',
+      'jest-preset-angular/build/serializers/html-comment',
+   ],
+   resolver: '@nrwl/jest/plugins/resolver',
+   preset: 'jest-preset-angular/presets/defaults-esm',
+};

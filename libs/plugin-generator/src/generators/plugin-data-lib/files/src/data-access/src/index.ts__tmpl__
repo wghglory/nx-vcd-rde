@@ -1,0 +1,10 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+export * from './lib/api/<%= name %>-api.service';
+export * from './lib/models/ns-endpoint.model';
+export * from './lib/models/ns-service.model';
+export * from './lib/store/<%= name %>.state';
+export * from './lib/store/<%= name %>.actions';
+export * from './lib/store/<%= name %>.selectors';
+export * from './lib/store/<%= name %>-object.model';
+export * from './lib/<%= name %>-data-access.module';
+export * from './lib/test/mocks';

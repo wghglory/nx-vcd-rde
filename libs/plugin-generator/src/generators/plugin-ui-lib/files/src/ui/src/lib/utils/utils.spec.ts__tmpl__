@@ -1,0 +1,35 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { PortModel } from '@ccs-ui/<%= name %>-data-access';
+
+import { portsToStr } from './utils';
+
+describe('<%= displayName %> UI Utils', () => {
+   it('portsToStr', () => {
+      expect(portsToStr([])).toEqual('');
+      expect(
+         portsToStr([
+            {
+               port: 80,
+               protocol: 'tcp',
+            } as PortModel,
+         ])
+      ).toEqual('80/tcp');
+      expect(
+         portsToStr([
+            {
+               port: 80,
+               protocol: 'tcp',
+               nodePort: 0, // Empty
+            } as PortModel,
+            {
+               port: 80,
+               protocol: 'tcp',
+               targetPort: '8080',
+               nodePort: 60078,
+               name: 'my-port', // Doesn't matter
+            } as PortModel,
+         ])
+      ).toEqual('80/tcp, 80:60078/tcp');
+   });
+});

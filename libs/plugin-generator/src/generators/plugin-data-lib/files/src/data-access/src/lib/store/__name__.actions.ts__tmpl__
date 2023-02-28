@@ -1,0 +1,8 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+/**
+ * Refreshes the list of Services for the current project and namespace.
+ */
+export class RefreshServices {
+   static readonly type = '[<%= displayName %> API] Refresh Services';
+}

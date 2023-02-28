@@ -1,0 +1,53 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TestScheduler } from 'rxjs/testing';
+
+import { ApiService, DEMO_NS_1, mockResponses } from '@ccs-ui/sdk-utils';
+
+import MockApiService from '../../../../../../server/mock-db';
+import { ENDPOINT_MOCK, SERVICE_NAME2, SERVICES_MOCK } from '../test/mocks';
+
+import { <%= fullName %>ApiService } from './<%= name %>-api.service';
+
+const makeService = () => new <%= fullName %>ApiService(new ApiService({} as HttpClient));
+
+// For more details on the 'marbles' DSL and the overall approach see:
+// https://confluence.eng.vmware.com/display/ROGUE/CCS+UI+-+Unit+Testing
+describe('<%= fullName %>ApiService', () => {
+   let testScheduler: TestScheduler;
+
+   beforeEach(async () => {
+      testScheduler = new TestScheduler((actual, expected) => {
+         expect(actual).toEqual(expected); // Specifying the comparison function to be used.
+      });
+   });
+
+   it('getServiceList$', () => {
+      ApiService.prototype.get = mockResponses(MockApiService.services);
+
+      testScheduler.run(({ expectObservable }) => {
+         const result$ = makeService()
+            .getServiceList$(DEMO_NS_1)
+            .pipe(map((objs) => Object.values(objs)));
+         expectObservable(result$).toBe('(a|)', { a: SERVICES_MOCK }); // Yield and complete.
+      });
+   });
+
+   it('getEndpointList$', () => {
+      ApiService.prototype.get = mockResponses(MockApiService.endpoints);
+
+      testScheduler.run(({ expectObservable }) => {
+         const result$ = makeService()
+            .getEndpointList$(DEMO_NS_1)
+            .pipe(
+               // Expect to get multiple objects, but check only one to simplify.
+               tap((objs) => expect(Object.keys(objs).length).toBe(2)),
+               map((objs) => objs.find((obj) => obj.name === SERVICE_NAME2))
+            );
+         expectObservable(result$).toBe('(a|)', { a: ENDPOINT_MOCK }); // Yield and complete.
+      });
+   });
+});

@@ -1,0 +1,117 @@
+{
+   "name": "<%= mfeName %>",
+   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+   "projectType": "application",
+   "sourceRoot": "apps/<%= mfeName %>/src",
+   "prefix": "<%= mfeName %>",
+   "targets": {
+      "build": {
+         "executor": "@nrwl/angular:webpack-browser",
+         "outputs": ["{options.outputPath}"],
+         "options": {
+            "outputPath": "dist/apps/plugin/<%= mfeName %>",
+            "index": "apps/<%= mfeName %>/src/index.html",
+            "main": "apps/<%= mfeName %>/src/main.ts",
+            "polyfills": "apps/<%= mfeName %>/src/polyfills.ts",
+            "tsConfig": "apps/<%= mfeName %>/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/<%= mfeName %>/src/favicon.ico", "apps/<%= mfeName %>/src/assets"],
+            "styles": [
+               {
+                  "input": "node_modules/@clr/ui/clr-ui.min.css",
+                  "bundleName": "clr-ui.min",
+                  "inject": false
+               },
+               {
+                  "input": "node_modules/@clr/ui/clr-ui-dark.min.css",
+                  "bundleName": "clr-ui-dark.min",
+                  "inject": false
+               },
+               "node_modules/@clr/icons/clr-icons.min.css",
+               "apps/<%= mfeName %>/src/styles.scss"
+            ],
+            "scripts": [],
+            "customWebpackConfig": {
+               "path": "apps/<%= mfeName %>/webpack.config.js"
+            }
+         },
+         "configurations": {
+            "production": {
+               "budgets": [
+                  {
+                     "type": "initial",
+                     "maximumWarning": "500kb",
+                     "maximumError": "1mb"
+                  },
+                  {
+                     "type": "anyComponentStyle",
+                     "maximumWarning": "2kb",
+                     "maximumError": "4kb"
+                  }
+               ],
+               "fileReplacements": [
+                  {
+                     "replace": "apps/<%= mfeName %>/src/environments/environment.ts",
+                     "with": "apps/<%= mfeName %>/src/environments/environment.prod.ts"
+                  }
+               ],
+               "outputHashing": "all",
+               "customWebpackConfig": {
+                  "path": "apps/<%= mfeName %>/webpack.prod.config.js"
+               }
+            },
+            "development": {
+               "buildOptimizer": false,
+               "optimization": false,
+               "vendorChunk": true,
+               "extractLicenses": false,
+               "sourceMap": true,
+               "namedChunks": true
+            }
+         },
+         "defaultConfiguration": "production"
+      },
+      "serve": {
+         "executor": "@nrwl/angular:webpack-dev-server",
+         "configurations": {
+            "production": {
+               "browserTarget": "<%= mfeName %>:build:production"
+            },
+            "development": {
+               "browserTarget": "<%= mfeName %>:build:development"
+            }
+         },
+         "defaultConfiguration": "development",
+         "options": {
+            "port": <%= port %>,
+            "proxyConfig": "proxy.conf.json",
+            "publicHost": "http://localhost:<%= port %>",
+            "disableHostCheck": true
+         }
+      },
+      "extract-i18n": {
+         "executor": "@angular-devkit/build-angular:extract-i18n",
+         "options": {
+            "browserTarget": "<%= mfeName %>:build"
+         }
+      },
+      "lint": {
+         "executor": "@nrwl/linter:eslint",
+         "options": {
+            "lintFilePatterns": [
+               "apps/<%= mfeName %>/src/**/*.ts",
+               "apps/<%= mfeName %>/src/**/*.html"
+            ]
+         }
+      },
+      "test": {
+         "executor": "@nrwl/jest:jest",
+         "outputs": ["{workspaceRoot}/coverage/apps/<%= mfeName %>"],
+         "options": {
+            "jestConfig": "apps/<%= mfeName %>/jest.config.ts",
+            "passWithNoTests": true
+         }
+      }
+   },
+   "tags": ["<%= name %>:app"]
+}

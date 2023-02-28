@@ -12,6 +12,16 @@
       "factory": "./src/generators/angular-library/generator",
       "schema": "./src/generators/angular-library/schema.json",
       "description": "angular-library generator"
+    },
+    "plugin-mfe": {
+      "factory": "./src/generators/plugin-mfe/generator",
+      "schema": "./src/generators/plugin-mfe/schema.json",
+      "description": "Generate a full CCS UI plugin!"
+    },
+    "remove": {
+      "factory": "./src/generators/remove/generator",
+      "schema": "./src/generators/remove/schema.json",
+      "description": "Remove a full CCS UI plugin"
     }
   }
 }

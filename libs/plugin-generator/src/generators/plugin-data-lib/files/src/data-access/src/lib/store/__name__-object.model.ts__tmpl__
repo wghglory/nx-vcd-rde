@@ -1,0 +1,14 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { ServiceModel } from '../models/ns-service.model';
+
+/**
+ * All Service objects fetched from the backend, indexed by project+namespace.
+ */
+export type GlobalServiceMap = {
+   [project_plus_namespace: string]: ServiceModel[];
+};
+
+export type <%= fullName %>StateModel = {
+   allServices: GlobalServiceMap;
+};

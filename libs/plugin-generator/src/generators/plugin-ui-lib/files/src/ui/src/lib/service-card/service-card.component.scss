@@ -1,0 +1,7 @@
+@import '@ccs/styles/css-utils';
+
+// TODO see VRAE-25029 to define shared styles
+:host {
+   @include ccs-column-flex-container;
+   @include ccs-service-card;
+}

@@ -1,0 +1,28 @@
+/* Copyright (c) 2021 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { NgModule } from '@angular/core';
+import { TRANSLOCO_CONFIG, translocoConfig, TranslocoModule } from '@ngneat/transloco';
+
+import { AVAILABLE_LANGS } from '@ccs-ui/sdk-utils';
+
+import { environment } from '../environments/environment';
+
+/**
+ * set up transloco at app level, and inline loading is used in child module
+ */
+@NgModule({
+   exports: [TranslocoModule],
+   providers: [
+      {
+         provide: TRANSLOCO_CONFIG,
+         useValue: translocoConfig({
+            availableLangs: AVAILABLE_LANGS,
+            fallbackLang: AVAILABLE_LANGS[0], // 'en'
+            missingHandler: {
+               useFallbackTranslation: true,
+            },
+            prodMode: environment.production,
+         }),
+      },
+   ],
+})
+export class TranslocoRootModule {}

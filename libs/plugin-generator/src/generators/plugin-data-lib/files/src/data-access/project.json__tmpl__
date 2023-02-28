@@ -1,0 +1,43 @@
+{
+    "name": "<%= name %>-data-access",
+   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+   "projectType": "library",
+   "sourceRoot": "libs/<%= name %>/data-access/src",
+   "prefix": "<%= name %>",
+   "targets": {
+      "build": {
+         "executor": "@nrwl/angular:ng-packagr-lite",
+         "outputs": ["{workspaceRoot}/dist/libs/<%= name %>/data-access"],
+         "options": {
+            "project": "libs/<%= name %>/data-access/ng-package.json"
+         },
+         "configurations": {
+            "production": {
+               "tsConfig": "libs/<%= name %>/data-access/tsconfig.lib.prod.json"
+            },
+            "development": {
+               "tsConfig": "libs/<%= name %>/data-access/tsconfig.lib.json"
+            }
+         },
+         "defaultConfiguration": "production"
+      },
+      "test": {
+         "executor": "@nrwl/jest:jest",
+         "outputs": ["{workspaceRoot}/coverage/libs/<%= name %>/data-access"],
+         "options": {
+            "jestConfig": "libs/<%= name %>/data-access/jest.config.ts",
+            "passWithNoTests": true
+         }
+      },
+      "lint": {
+         "executor": "@nrwl/linter:eslint",
+         "options": {
+            "lintFilePatterns": [
+               "libs/<%= name %>/data-access/src/**/*.ts",
+               "libs/<%= name %>/data-access/src/**/*.html"
+            ]
+         }
+      }
+   },
+   "tags": ["<%= name %>:data"]
+}

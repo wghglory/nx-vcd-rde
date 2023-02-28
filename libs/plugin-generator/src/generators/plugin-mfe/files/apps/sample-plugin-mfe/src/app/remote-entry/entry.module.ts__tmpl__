@@ -1,0 +1,32 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TranslocoModule } from '@ngneat/transloco';
+
+import { <%= fullName %>DataAccessModule } from '@ccs-ui/<%= name %>-data-access';
+import { <%= fullName %>Routes } from '@ccs-ui/<%= name %>-ui';
+
+const <%= camelName %>Routes: Routes = [
+   {
+      path: <%= fullName %>Routes.HOME,
+      loadChildren: () => import('@ccs-ui/<%= name %>-ui').then((m) => m.<%= fullName %>HomeModule),
+   },
+   {
+      path: <%= fullName %>Routes.VIEW_SERVICE,
+      loadChildren: () =>
+         import('@ccs-ui/<%= name %>-ui').then((m) => m.<%= fullName %>ServiceViewModule),
+   },
+   { path: '', redirectTo: <%= fullName %>Routes.HOME, pathMatch: 'full' },
+   { path: '**', redirectTo: <%= fullName %>Routes.HOME },
+];
+@NgModule({
+   imports: [
+      CommonModule,
+      RouterModule.forChild(<%= camelName %>Routes),
+      TranslocoModule,
+      <%= fullName %>DataAccessModule.forRoot(),
+   ],
+   providers: [],
+})
+export class <%= fullName %>RemoteModule {}

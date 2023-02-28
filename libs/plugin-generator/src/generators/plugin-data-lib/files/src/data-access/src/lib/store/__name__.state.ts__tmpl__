@@ -1,0 +1,43 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { Injectable } from '@angular/core';
+import { Action, State, StateContext, Store } from '@ngxs/store';
+import produce from 'immer';
+import { tap } from 'rxjs/operators';
+
+import { getProjectPlusNamespaceIdKey, NamespaceId, RouterSelectors } from '@ccs-ui/sdk-utils';
+
+import { <%= fullName %>ApiService } from '../api/<%= name %>-api.service';
+
+import { <%= fullName %>StateModel } from './<%= name %>-object.model';
+import { RefreshServices } from './<%= name %>.actions';
+
+@State<<%= fullName %>StateModel>({
+   name: '<%= camelName %>State',
+   defaults: {
+      allServices: {},
+   },
+})
+@Injectable()
+export class <%= fullName %>State {
+   constructor(private store: Store, protected dataService: <%= fullName %>ApiService) {}
+
+   /**
+    * Global refresh of Services for the current project & namespace.
+    */
+   @Action(RefreshServices)
+   refreshServices(ctx: StateContext<<%= fullName %>StateModel>) {
+      const namespaceId = this.store.selectSnapshot(RouterSelectors.namespaceId) as NamespaceId;
+      const projectPlusNamespace = getProjectPlusNamespaceIdKey(namespaceId);
+
+      return this.dataService.getServiceList$(namespaceId).pipe(
+         tap((services) => {
+            ctx.setState(
+               produce((draft) => {
+                  draft.allServices[projectPlusNamespace] = services;
+               })
+            );
+         })
+      );
+   }
+}

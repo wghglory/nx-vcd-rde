@@ -1,0 +1,8 @@
+@import '@ccs/styles/css-utils';
+
+:host {
+   .summary-container {
+      margin-right: $clr-container-spacing;
+      margin-bottom: $clr-container-spacing;
+   }
+}

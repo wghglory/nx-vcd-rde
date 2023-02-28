@@ -1,0 +1,25 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+
+import {
+   <%= fullName %>StateSelectors,
+   RefreshServices,
+   ServiceModel,
+} from '@ccs-ui/<%= name %>-data-access';
+
+@Component({
+   selector: 'ccs-ui-<%= name %>-service-view',
+   templateUrl: './service-view.component.html',
+   styleUrls: ['./service-view.component.scss'],
+})
+export class ServiceViewComponent {
+   service$: Observable<ServiceModel | undefined> = this.store.select(
+      <%= fullName %>StateSelectors.selectedService
+   );
+
+   constructor(private store: Store) {
+      store.dispatch(new RefreshServices());
+   }
+}

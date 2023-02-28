@@ -1,0 +1,56 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { Injectable } from '@angular/core';
+import { KubernetesObjectList } from '@k8s-svc/apis/model/KubernetesObjectList';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import {
+   ApiService,
+   CommonK8sApiService,
+   KubernetesResourceType,
+   NamespaceId,
+} from '@ccs-ui/sdk-utils';
+
+import { EndpointModel } from '../models/ns-endpoint.model';
+import { ServiceModel } from '../models/ns-service.model';
+
+@Injectable({
+   providedIn: 'root',
+})
+export class <%= fullName %>ApiService extends CommonK8sApiService {
+   constructor(override api: ApiService) {
+      super(api);
+   }
+
+   /*
+    * Fetch namespace Services.
+    * @param namespaceId namespace id.
+    * @returns list of Services attached to the namespace.
+    */
+   getServiceList$(namespaceId: NamespaceId): Observable<ServiceModel[]> {
+      return this.getKubernetesObjectList$(
+         namespaceId,
+         KubernetesResourceType.SERVICE,
+      ).pipe(
+         map((result: KubernetesObjectList) =>
+            result.items?.map((item) => ServiceModel.fromK8sObject(item))
+         )
+      );
+   }
+
+   /*
+    * Fetch namespace Endpoints.
+    * @param namespaceId namespace id.
+    * @returns list of Endpoints attached to the namespace.
+    */
+   getEndpointList$(namespaceId: NamespaceId): Observable<EndpointModel[]> {
+      return this.getKubernetesObjectList$(
+         namespaceId,
+         KubernetesResourceType.ENDPOINT,
+      ).pipe(
+         map((result: KubernetesObjectList) =>
+            result.items?.map((item) => EndpointModel.fromK8sObject(item))
+         )
+      );
+   }
+}

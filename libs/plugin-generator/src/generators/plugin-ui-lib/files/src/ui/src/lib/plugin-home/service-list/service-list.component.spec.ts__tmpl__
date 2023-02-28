@@ -1,0 +1,85 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ClrDatagridPagination } from '@clr/angular/data/datagrid/datagrid-pagination';
+import { TranslocoService } from '@ngneat/transloco';
+import { NgxsModule, Store } from '@ngxs/store';
+import { of } from 'rxjs';
+
+import * as SDK_UTILS from '@ccs-ui/sdk-utils';
+import {
+   initializeCommonK8sStoreForTest,
+   MockTranslocoService,
+   NGXS_DEV_OPTIONS,
+   NgxsActionCollector,
+} from '@ccs-ui/sdk-utils';
+import { RefreshServices, SERVICES_MOCK } from '@ccs-ui/<%= name %>-data-access';
+
+import { ServiceListComponent } from './service-list.component';
+
+describe('ServiceListComponent', () => {
+   let component: ServiceListComponent;
+   let fixture: ComponentFixture<ServiceListComponent>;
+   let actionCollector: NgxsActionCollector;
+   let store: Store;
+   const mockService = SERVICES_MOCK[0];
+   const pagination = { firstItem: 0, lastItem: 2, totalItems: 2 } as ClrDatagridPagination;
+
+   beforeEach(async () => {
+      await TestBed.configureTestingModule({
+         imports: [NgxsModule.forRoot([], NGXS_DEV_OPTIONS), NgxsActionCollector.collectActions()],
+         declarations: [ServiceListComponent],
+         providers: [{ provide: TranslocoService, useClass: MockTranslocoService }],
+      }).compileComponents();
+      actionCollector = TestBed.inject(NgxsActionCollector);
+      actionCollector.start();
+      store = initializeCommonK8sStoreForTest();
+      store.select = jest.fn(() => of(SERVICES_MOCK));
+      jest.spyOn(store, 'select');
+      jest.spyOn(SDK_UTILS, 'getDatagridFooterLabel');
+   });
+
+   beforeEach(() => {
+      fixture = TestBed.createComponent(ServiceListComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+   });
+
+   afterEach(() => {
+      actionCollector.reset();
+   });
+
+   it('should refresh the list on init', () => {
+      expect(component).toBeTruthy();
+      expect(actionCollector.dispatched.length).toBe(1);
+      expect(actionCollector.dispatched[0] instanceof RefreshServices).toBeTruthy();
+      expect(store.select).toHaveBeenCalledTimes(1);
+   });
+
+   // TODO see why subcribe is called twice, first with 2 services then with 1.
+   xit('should load the full data', fakeAsync(() => {
+      component.services$.subscribe((services) => {
+         expect(services.length).toBe(2);
+      });
+   }));
+
+   it('should filter based on name', fakeAsync(() => {
+      component.searchValue$.next(mockService.name);
+      tick();
+      fixture.detectChanges();
+      component.services$.subscribe((service) => {
+         expect(service.length).toBe(1);
+         expect(service[0].name).toBe(mockService.name);
+      });
+   }));
+
+   it('should get the summary URL', () => {
+      expect(component.getSummaryUrl(mockService)).toBe(
+         `../../view-service/service/${mockService.name}` // /summary is the default view
+      );
+   });
+
+   it('should get the datagrid footer from sdk util', () => {
+      component.getDatagridFooterLabel([], pagination);
+      expect(SDK_UTILS.getDatagridFooterLabel).toHaveBeenCalledTimes(1);
+   });
+});

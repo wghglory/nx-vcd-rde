@@ -1,0 +1,40 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { KubernetesObject } from '@k8s-svc/apis/model/KubernetesObject';
+
+import {
+   convertApiObjectToUiModel,
+   KubernetesObjectModel,
+   KubernetesResourceType,
+} from '@ccs-ui/sdk-utils';
+
+/**
+ * K8s Endpoint assigned to a Service by label and associated with a namespace.
+ */
+export class EndpointModel implements KubernetesObjectModel {
+   name!: string;
+   namespace!: string;
+   type: string = KubernetesResourceType.EVENT;
+   uid!: string;
+   createdOn?: Date;
+   status?: string;
+   labels?: string[];
+   rawYaml?: string;
+
+   static fromK8sObject(item: KubernetesObject): EndpointModel {
+      const uiModel = convertApiObjectToUiModel(item);
+      if (!uiModel) {
+         throw new Error('Invalid K8s Endpoint object received.');
+      }
+      if (!item.metadata) {
+         throw new Error('K8s Endpoint metadata is empty.');
+      }
+
+      return {
+         ...uiModel,
+         ...{
+            // Manually set the type as objects do not have their 'kind' field populated by the API.
+            type: KubernetesResourceType.ENDPOINT,
+         },
+      };
+   }
+}

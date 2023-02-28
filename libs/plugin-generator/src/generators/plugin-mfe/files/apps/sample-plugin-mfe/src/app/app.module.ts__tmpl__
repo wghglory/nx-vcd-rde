@@ -1,0 +1,84 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ClarityIcons } from '@cds/core/icon';
+import { ClarityModule } from '@clr/angular';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsRouterPluginModule, RouterStateSerializer } from '@ngxs/router-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { VmwClarityThemeConfig, VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
+
+import { SdkUiComponentsModule } from '@ccs-ui/sdk-ui-components';
+import {
+   CCS_PROJECT_DATA_SERVICE,
+   MockProjectDataService,
+   SdkUtilsModule,
+   COMMON_ICONS,
+   createStandaloneRouterStateSerializer,
+   NGXS_DEV_OPTIONS
+} from '@ccs-ui/sdk-utils';
+
+import { AppComponent } from './app.component';
+import { appRoutes } from './app.routes';
+import { <%= fullName %>RemoteCardModule } from './remote-entry/entry-card.module';
+import { TranslocoRootModule } from './transloco-root.module';
+
+export function themeLoader(themeService: VmwClarityThemeService) {
+   return () => {
+      return new Promise<void>((resolve) => {
+         themeService
+            .initialize({
+               clarityDarkPath: '/clr-ui-dark.min.css',
+               clarityLightPath: '/clr-ui.min.css',
+            } as VmwClarityThemeConfig)
+            .then(() => {
+               resolve();
+            });
+      });
+   };
+}
+
+@NgModule({
+   declarations: [AppComponent],
+   imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      ClarityModule,
+      NgxsModule.forRoot([], NGXS_DEV_OPTIONS),
+      NgxsRouterPluginModule.forRoot(),
+      NgxsReduxDevtoolsPluginModule.forRoot({
+         name: '<%= fullName %> store',
+      }),
+      RouterModule.forRoot(appRoutes),
+      <%= fullName %>RemoteCardModule,
+      VmwThemeToolsModule.forRoot(),
+      TranslocoRootModule,
+      SdkUiComponentsModule,
+      SdkUtilsModule.forRoot(),
+   ],
+   providers: [
+      {
+         provide: APP_INITIALIZER,
+         useFactory: themeLoader,
+         deps: [VmwClarityThemeService],
+         multi: true,
+      },
+      {
+         provide: RouterStateSerializer,
+         useFactory: createStandaloneRouterStateSerializer('<%= name %>'),
+      },
+      {
+         // CcsProjectDataService provides project specific data through the SDK
+         provide: CCS_PROJECT_DATA_SERVICE,
+         useClass: MockProjectDataService,
+      },
+   ],
+   bootstrap: [AppComponent],
+})
+export class AppModule {
+   constructor() {
+      ClarityIcons.addIcons(...COMMON_ICONS);
+   }
+}

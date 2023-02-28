@@ -1,0 +1,21 @@
+/* Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential */
+
+import { ClrDatagridTester } from '@test/e2e/support';
+
+export class HomePage {
+   getAppTitle(): Cypress.Chainable<JQuery<HTMLHeadingElement>> {
+      return cy.get('ccs-ui-standalone-header');
+   }
+
+   getPageTitle(): Cypress.Chainable<JQuery<HTMLHeadingElement>> {
+      return cy.get('ccs-ui-<%= name %>-home > h3');
+   }
+
+   getServicesList(): Cypress.Chainable<JQuery<HTMLHeadingElement>> {
+      return cy.get('ccs-ui-<%= name %>-service-list');
+   }
+
+   getServicesGridTester(): ClrDatagridTester {
+      return new ClrDatagridTester('services-list');
+   }
+}

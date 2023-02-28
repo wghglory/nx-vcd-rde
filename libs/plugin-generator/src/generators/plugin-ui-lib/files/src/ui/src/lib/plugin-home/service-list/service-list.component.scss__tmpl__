@@ -1,0 +1,11 @@
+// Copyright (c) 2023 VMware, Inc. All rights reserved. -- VMware Confidential
+@import '@ccs/styles/css-utils';
+
+:host {
+   @include ccs-column-flex-container;
+   @include clr-datagrid-layout;
+
+   .service-labels {
+      overflow: hidden;
+   }
+}

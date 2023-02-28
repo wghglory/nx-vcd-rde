@@ -1,0 +1,7 @@
+# <%= name %>-data-access
+
+This library contains the data API logic specific to the <%= displayName %>.
+
+## Running unit tests
+
+Run `nx test <%= name %>-data-access` to execute the unit tests.

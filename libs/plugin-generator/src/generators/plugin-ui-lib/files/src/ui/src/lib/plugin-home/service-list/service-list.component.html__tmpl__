@@ -1,0 +1,91 @@
+<ng-container *transloco="let t">
+   <clr-datagrid data-test-id="services-list">
+      <!--  Action Bar  -->
+      <clr-dg-action-bar class="action-bar">
+         <div class="btn-group"><!-- Currently a placeholder to make "filter" go right. --></div>
+         <ccs-ui-filter-input
+            [value]="(searchValue$ | async) || ''"
+            (searchValueChange)="this.searchValue$.next($event)"
+         ></ccs-ui-filter-input>
+      </clr-dg-action-bar>
+
+      <!--  Columns  -->
+      <clr-dg-column [clrDgSortBy]="'name'">{{ t('sdk.label.name') }}</clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="'type'">{{
+         t('<%= camelName %>Ui.services.datagrid.columns.type')
+      }}</clr-dg-column>
+      <clr-dg-column>
+         <!-- TODO: aneverov checking the label column change the row size -->
+         <ng-container *clrDgHideableColumn="{ hidden: true }">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.labels') }}
+         </ng-container>
+      </clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="'createdOn'">
+         <ng-container *clrDgHideableColumn="{ hidden: true }">
+            {{ t('<%= camelName %>Ui.services.datagrid.columns.createdOn') }}
+         </ng-container>
+      </clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="'clusterIP'">{{
+         t('<%= camelName %>Ui.services.datagrid.columns.clusterIP')
+      }}</clr-dg-column>
+      <clr-dg-column [clrDgSortBy]="'externalIP'">{{
+         t('<%= camelName %>Ui.services.datagrid.columns.externalIP')
+      }}</clr-dg-column>
+      <clr-dg-column>{{ t('<%= camelName %>Ui.services.datagrid.columns.ports') }}</clr-dg-column>
+
+      <!--  Placeholder  -->
+
+      <!--  Rows  -->
+      <clr-dg-row *clrDgItems="let service of (services$ | async) || []" [clrDgItem]="service">
+         <clr-dg-cell>
+            <ccs-ui-icon-label
+               shape="network-globe"
+               [label]="service.name"
+               [routerLink]="getSummaryUrl(service)"
+               [showCopyIcon]="true"
+            >
+            </ccs-ui-icon-label>
+         </clr-dg-cell>
+         <clr-dg-cell>{{ getLoadBalancerTypeLabel(t, service.loadBalancerType) }} </clr-dg-cell>
+         <clr-dg-cell class="service-labels" data-test-id="service-labels">
+            <span class="label label-blue" *ngFor="let label of service.labels">
+               {{ label }}
+            </span>
+         </clr-dg-cell>
+         <clr-dg-cell>{{ service.createdOn | date: 'short' }}</clr-dg-cell>
+         <clr-dg-cell>{{ service.clusterIP }}</clr-dg-cell>
+         <clr-dg-cell> </clr-dg-cell>
+         <clr-dg-cell>{{ portsToStr(service.ports) }}</clr-dg-cell>
+      </clr-dg-row>
+
+      <!--  Detail  -->
+      <clr-dg-detail *clrIfDetail="let detail">
+         <clr-dg-detail-header>
+            <ccs-ui-icon-label size="32" shape="network-globe" [label]="detail.name">
+            </ccs-ui-icon-label>
+         </clr-dg-detail-header>
+         <clr-dg-detail-body>
+            <ccs-ui-<%= name %>-service-details
+               [service]="detail"
+            ></ccs-ui-<%= name %>-service-details>
+         </clr-dg-detail-body>
+      </clr-dg-detail>
+
+      <!--  Footer  -->
+      <clr-dg-footer>
+         <clr-dg-pagination
+            #pagination
+            [hidden]="!((services$ | async) || []).length"
+            [clrDgPageSize]="SERVICES_PER_PAGE"
+            [clrDgTotalItems]="((services$ | async) || []).length"
+         >
+            <clr-dg-page-size [clrPageSizeOptions]="DEFAULT_PAGE_SIZE_OPTIONS">{{
+               t('<%= camelName %>Ui.services.datagrid.footer.serviceList')
+            }}</clr-dg-page-size>
+            {{ getDatagridFooterLabel(services$ | async, pagination) }}
+         </clr-dg-pagination>
+      </clr-dg-footer>
+   </clr-datagrid>
+
+   <!--  Confirmation Modal  -->
+</ng-container>

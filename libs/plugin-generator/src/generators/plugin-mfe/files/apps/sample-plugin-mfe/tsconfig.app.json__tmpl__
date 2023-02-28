@@ -1,0 +1,17 @@
+{
+   "extends": "./tsconfig.json",
+   "compilerOptions": {
+      "outDir": "../../dist/out-tsc",
+      "types": [],
+      "target": "ES2022",
+      "useDefineForClassFields": false
+   },
+   "files": [
+      "src/main.ts",
+      "src/polyfills.ts",
+      "src/app/remote-entry/entry.module.ts",
+      "src/app/remote-entry/entry-card.module.ts"
+   ],
+   "include": ["src/**/*.d.ts"],
+   "exclude": ["src/test-setup.ts", "**/*.spec.ts", "jest.config.ts"]
+}
