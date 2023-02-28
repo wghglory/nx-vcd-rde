@@ -2,6 +2,9 @@
   <!-- <button class="btn btn-primary skip-to-main" (click)="focusOnMain()">
     {{ 'common.skipToMain' | vtranslate }}
   </button> -->
+
+  <seed-header-dropdown *ngIf="isDevMode"></seed-header-dropdown>
+
   <div class="branding">
     <a routerLink="/" class="nav-link">
       <cds-icon shape="vm-bug"></cds-icon>

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, isDevMode } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { ClarityIcons, cogIcon, dashboardIcon, homeIcon, infoStandardIcon, organizationIcon, usersIcon } from '@cds/core/icon';
 import { AuthService } from '@seed/shared/data-access';
 import { SharedModule } from '@seed/shared/module';
 import { NAV_CONFIG } from '@seed/shared/util';
@@ -9,8 +8,6 @@ import { L10nService } from '@vmw/ngx-vip';
 import { map } from 'rxjs';
 
 import { AboutDialogComponent } from '../about-dialog/about-dialog.component';
-
-ClarityIcons.addIcons(infoStandardIcon, homeIcon, cogIcon, usersIcon, dashboardIcon, organizationIcon);
 
 @Component({
   selector: 'seed-vertical-nav',
@@ -28,9 +25,7 @@ export class VerticalNavComponent {
   aboutDialogOpen = false;
   activeElement: HTMLAnchorElement | undefined;
 
-  get isDevMode() {
-    return isDevMode();
-  }
+  isDevMode = isDevMode();
 
   // tab click trigger below event instead of routerLink
   // easier way to catch lazy loading modules that cannot be found [Loading chunk... err]

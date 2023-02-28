@@ -3,12 +3,14 @@ import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ClarityIcons } from '@cds/core/icon';
 import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
 import { AlertModule } from '@seed/shared/ui';
+import { COMMON_ICONS } from '@seed/shared/utils';
 import { VmwClarityThemeConfig, VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { VIPModule } from '@vmw/ngx-vip';
 
@@ -84,4 +86,8 @@ export function themeLoader(themeService: VmwClarityThemeService) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    ClarityIcons.addIcons(...COMMON_ICONS);
+  }
+}

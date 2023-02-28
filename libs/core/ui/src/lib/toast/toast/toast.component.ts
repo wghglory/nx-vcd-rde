@@ -1,6 +1,5 @@
 import { animate, animateChild, group, keyframes, query, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, HostListener, Input, NgZone, OnInit, Optional, Output } from '@angular/core';
-import { ClarityIcons, timesIcon } from '@cds/core/icon';
 import {
   componentPrimaryEnterCurve,
   componentPrimaryEnterTiming,
@@ -31,8 +30,6 @@ const TRACKED_TAG = {
   A: true,
   BUTTON: true,
 };
-
-ClarityIcons.addIcons(timesIcon);
 
 @Component({
   selector: 'seed-toast',
