@@ -1,1 +1,18 @@
-<p>shop-detail works!</p>
+<h2 class="mt0">Shop Detail</h2>
+
+<table class="mb2 table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data$ | async">
+      <td>{{ item.entity.name }}</td>
+      <td>{{ item.entity.description }}</td>
+      <td>{{ item.entity.productionDate }}</td>
+    </tr>
+  </tbody>
+</table>

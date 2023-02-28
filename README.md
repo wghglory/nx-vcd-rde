@@ -113,3 +113,8 @@ Feature Libraries:
 # add remote app
 npx nx g @nrwl/angular:remote shop-mfe --host=seed
 ```
+
+## Issues
+
+- Tailwind not working in remote app. https://github.com/nrwl/nx/issues/9784
+- how to pass user session in standalone remote app?

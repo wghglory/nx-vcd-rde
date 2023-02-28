@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedModule } from '@seed/shared/modules';
+import { ShopService } from '@seed/shop/services';
 
 @Component({
   selector: 'seed-shop-detail',
@@ -8,4 +9,8 @@ import { SharedModule } from '@seed/shared/modules';
   standalone: true,
   imports: [SharedModule],
 })
-export class ShopDetailComponent {}
+export class ShopDetailComponent {
+  constructor(private shopService: ShopService) {}
+
+  data$ = this.shopService.products$;
+}
