@@ -11,12 +11,6 @@ import { Layout } from './layout/layout';
 const layout = (process.env['NX_MODE'] || 'sidebar') as Layout;
 
 export const routes: Route[] = [
-  // npx nx g @nrwl/angular:remote shop-mfe --host=seed
-  {
-    path: 'shop-mfe',
-    loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
-    data: { layout },
-  },
   {
     path: 'provider',
     canActivate: [AuthGuard],
@@ -30,6 +24,15 @@ export const routes: Route[] = [
       {
         path: 'setting',
         loadComponent: () => import('@seed/provider/setting').then(m => m.ProviderSettingComponent),
+      },
+      {
+        path: 'mfe',
+        component: MfeContainerComponent,
+      },
+      // npx nx g @nrwl/angular:remote shop-mfe --host=seed
+      {
+        path: 'shop-mfe',
+        loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
       },
     ],
   },
@@ -70,11 +73,6 @@ export const routes: Route[] = [
   {
     path: 'products',
     children: productRoutes,
-    data: { layout },
-  },
-  {
-    path: 'mfe',
-    component: MfeContainerComponent,
     data: { layout },
   },
   {
