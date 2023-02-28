@@ -15,7 +15,7 @@ import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { LocaleService, VIPModule, VIPService } from '@vmw/ngx-vip';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { routes } from './app.routes';
 import { SidebarLayoutComponent } from './layout/sidebar-layout/sidebar-layout.component';
 import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone-layout.component';
 import { bootstrapFactory, PreloadService } from './services/preload.service';
@@ -48,7 +48,10 @@ import { themeFactory } from './theme/theme-factory';
     ClarityModule,
     VIPModule.forRoot(),
     VmwThemeToolsModule.forRoot(),
-    AppRoutingModule,
+    RouterModule.forRoot(routes, {
+      // initialNavigation: 'enabledBlocking',
+      // enableTracing: false, // turn on for debugging
+    }),
 
     // core
     VerticalNavComponent,
