@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ClrCommonStringsService } from '@clr/angular';
-import { AuthGuard } from '@seed/shared/data-access';
 import { SharedVipSpecModule } from '@seed/shared/vip';
 
+import { AuthGuard } from './auth.guard';
 import { PreloadService } from './preload.service';
 
 describe('PreloadService', () => {

@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/ui';
+import { bootstrapFactory, PreloadService } from '@seed/shared/services';
 import { AlertModule } from '@seed/shared/ui';
 import { COMMON_ICONS, themeFactory } from '@seed/shared/utils';
 import { initVIPConfig } from '@seed/shared/vip';
@@ -20,7 +21,6 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { SidebarLayoutComponent } from './layout/sidebar-layout/sidebar-layout.component';
 import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone-layout.component';
-import { bootstrapFactory, PreloadService } from './services/preload.service';
 
 @NgModule({
   declarations: [AppComponent, SidebarLayoutComponent, StandaloneLayoutComponent],
@@ -28,7 +28,6 @@ import { bootstrapFactory, PreloadService } from './services/preload.service';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule,
     StoreModule.forRoot(
       {},
       {
@@ -49,6 +48,7 @@ import { bootstrapFactory, PreloadService } from './services/preload.service';
     ClarityModule,
     VIPModule.forRoot(),
     VmwThemeToolsModule.forRoot(),
+
     RouterModule.forRoot(routes, {
       // initialNavigation: 'enabledBlocking',
       // enableTracing: false, // turn on for debugging

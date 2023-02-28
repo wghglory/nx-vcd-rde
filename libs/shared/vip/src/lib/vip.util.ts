@@ -3,7 +3,8 @@ import { getBrowserCultureLang, LocaleService, PatternCategories, VIPService } f
 import { ENGLISH as AppEng } from './app.l10n';
 import { ENGLISH as CoreEng } from './core.l10n';
 
-// VIP
+// TODO: each mfe should have its own intiVIPConfig with specific sourceBundles, which may locate per app.
+// Naming: seed-app.l10n, shop-[feature].l10n
 export function initVIPConfig(vipService: VIPService, localeService: LocaleService) {
   return () => {
     // Specify locale, either from browser language or user's profile.

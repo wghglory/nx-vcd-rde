@@ -1,6 +1,6 @@
 const { withModuleFederation } = require('@nrwl/angular/module-federation');
 const moduleFederationConfig = require('./module-federation.config');
-const { addDefineEnvPlugin, addIstanbulLoader } = require('./webpack.custom-config');
+const { addDefineEnvPlugin, addIstanbulLoader } = require('../../webpack.custom-config');
 
 module.exports = async (config, context) => {
   const fromModuleFederation = await withModuleFederation({

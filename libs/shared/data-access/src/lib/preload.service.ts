@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ClrCommonStringsService } from '@clr/angular';
-import { AuthGuard } from '@seed/shared/data-access';
 import { L10nService } from '@vmw/ngx-vip';
+
+import { AuthGuard } from './auth.guard';
 
 @Injectable({
   providedIn: 'root',
