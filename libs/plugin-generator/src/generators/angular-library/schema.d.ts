@@ -1,5 +1,5 @@
 export interface AngularLibraryGeneratorSchema {
-  type: 'feature' | 'ui' | 'data-access' | 'util' | 'model' | 'all';
+  type: 'feature' | 'ui' | 'data-access';
   scope: 'shared' | 'core' | 'tenant' | 'provider';
   domain: string;
   name: string;

@@ -74,7 +74,7 @@ function modifyJsonFiles(tree: Tree, options: NormalizedSchema) {
 export default async function (tree: Tree, options: TypescriptLibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
 
-  console.log(normalizedOptions);
+  // console.log(normalizedOptions);
 
   addFiles(tree, normalizedOptions);
 

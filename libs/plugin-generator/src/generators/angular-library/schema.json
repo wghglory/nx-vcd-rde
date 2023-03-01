@@ -35,20 +35,8 @@
         "type": "list",
         "items": [
           {
-            "value": "all",
-            "label": "All"
-          },
-          {
             "value": "data-access",
             "label": "Data Access"
-          },
-          {
-            "value": "model",
-            "label": "Model"
-          },
-          {
-            "value": "util",
-            "label": "Util"
           },
           {
             "value": "feature",
