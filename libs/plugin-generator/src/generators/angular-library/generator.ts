@@ -19,7 +19,7 @@ function normalizeOptions(tree: Tree, options: AngularLibraryGeneratorSchema): N
   const projectDirectory = `${options.scope}/${options.domain}`;
   const projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
   const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
-  const tags = `scope:${options.scope},domain:${options.domain},type:${options.type};framework:angular`;
+  const tags = `scope:${options.scope},domain:${options.domain},type:${options.type},framework:angular`;
   const name = options.type;
   const directory = projectDirectory;
 
