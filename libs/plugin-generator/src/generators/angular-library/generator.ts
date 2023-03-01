@@ -14,24 +14,29 @@ import {
 import { AngularLibraryGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: AngularLibraryGeneratorSchema) {
-  const { libsDir } = getWorkspaceLayout(tree);
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name;
-  const projectRoot = joinPathFragments(libsDir, projectDirectory);
-  const libraryName = options.directory ? `${options.directory}-${options.name}` : options.name;
+  const { libsDir } = getWorkspaceLayout(tree); // libs | apps
+  const name = names(options.name).fileName; // library name: book
+  const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name; // provider/book
+  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-'); // provider-book
+  const projectRoot = joinPathFragments(libsDir, projectDirectory); // libs/provider/book
 
-  const tags = `project:${options.domain},scope:${options.scope},type:${options.type},framework:angular`;
+  // const directory = `${options.scope}/${options.domain}/${options.type}`; // shared/products/ui
+
+  // options.tags = `scope:${options.scope},domain:${options.domain},type:${options.type},framework:angular`;
+  // options.importPath = `@seed/${directory}/${options.name}`; // add path in tsconfig.base.json
+  // options.directory = directory;
+  // options.changeDetection = 'OnPush';
 
   // console.log(libsDir); // libs
   // console.log(name); // book
   // console.log(projectDirectory); // provider/book
+  // console.log(projectName); // provider-book
   // console.log(projectRoot); // libs/provider/book
-  // console.log(libraryName); // provider-book
 
   // run the original generator
-  await libraryGenerator(tree, { ...options, tags });
+  await libraryGenerator(tree, { ...options });
 
-  // const libraryRoot = readProjectConfiguration(tree, libraryName);
+  // const libraryRoot = readProjectConfiguration(tree, projectName);
 
   // https://nx.dev/packages/devkit/documents/index#offsetfromroot
   const relativeOffset = offsetFromRoot(projectRoot); // ../../../
@@ -41,7 +46,7 @@ export default async function (tree: Tree, options: AngularLibraryGeneratorSchem
     tree, // the virtual file system
     joinPathFragments(__dirname, './files'), // path to the file templates)
     projectRoot, // destination path of the files
-    { ...options, projectRoot, libraryName, relativeOffset, ...names(options.name), template: '' }, // config object to replace variable in file templates
+    { ...options, projectRoot, projectName, relativeOffset, ...names(options.name), template: '' }, // config object to replace variable in file templates
   );
 
   await formatFiles(tree);
