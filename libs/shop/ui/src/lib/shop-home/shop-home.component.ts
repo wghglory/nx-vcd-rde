@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { SharedModule } from '@seed/shared/modules';
-import { AuthService } from '@seed/shared/services';
+import { AuthService } from '@seed/shared/data-access';
+import { SharedModule } from '@seed/shared/module';
 import { alertActions } from '@seed/shared/ui';
 
 @Component({

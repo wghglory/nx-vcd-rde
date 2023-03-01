@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '@seed/shared/modules';
-import { MfeLookupService } from '@seed/shared/services';
+import { MfeLookupService } from '@seed/shared/data-access';
+import { SharedModule } from '@seed/shared/module';
 import { RemoteAppCardComponent } from '@seed/shared/ui';
 
 @Component({

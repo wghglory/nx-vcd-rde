@@ -3,7 +3,7 @@ import { loadRemoteModule } from '@nrwl/angular/mf';
 import { NoAccessComponent, NotFoundComponent } from '@seed/core/ui';
 import { MfeContainerComponent } from '@seed/feature/mfe';
 import { productRoutes } from '@seed/feature/product';
-import { AuthGuard } from '@seed/shared/services';
+import { AuthGuard } from '@seed/shared/data-access';
 import { WelcomeComponent } from '@seed/shared/ui';
 
 import { Layout } from './layout/layout';

@@ -4,9 +4,9 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { SignInPayload } from '@seed/shared/models';
-import { SharedModule } from '@seed/shared/modules';
-import { AuthService } from '@seed/shared/services';
+import { AuthService } from '@seed/shared/data-access';
+import { SignInPayload } from '@seed/shared/model';
+import { SharedModule } from '@seed/shared/module';
 import { VmwThemeToolsModule } from '@vmw/ngx-utils';
 
 @Component({

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '@seed/feature/product';
-import { RDEList } from '@seed/shared/models';
+import { RDEList } from '@seed/shared/model';
 import { map } from 'rxjs';
 
 @Injectable({

@@ -31,7 +31,7 @@
           }
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/shared/styles/src/lib/scss"]
+          "includePaths": ["libs/shared/style/src/lib/scss"]
         },
         "styles": ["apps/shop-mfe/src/styles.scss"],
         "scripts": [],
@@ -45,12 +45,12 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "6kb"
             }
           ],
           "outputHashing": "all",

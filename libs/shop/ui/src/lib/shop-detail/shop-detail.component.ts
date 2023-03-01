@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SharedModule } from '@seed/shared/modules';
+import { SharedModule } from '@seed/shared/module';
 import { ShopService } from '@seed/shop/services';
 
 @Component({

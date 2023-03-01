@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityIcons, pluginIcon } from '@cds/core/icon';
-import { SharedModule } from '@seed/shared/modules';
-import { MfeLookupService } from '@seed/shared/services';
-import { DEFAULT_ICON_SIZE } from '@seed/shared/utils';
+import { MfeLookupService } from '@seed/shared/data-access';
+import { SharedModule } from '@seed/shared/module';
+import { DEFAULT_ICON_SIZE } from '@seed/shared/util';
 import { VmwClarityTheme } from '@vmw/ngx-utils';
 import { map } from 'rxjs';
 
