@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "AllLibraries",
+  "title": "Generate feature, ui, data-access, util, model libs",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "type": "string",
+      "description": "A scope for the lib.",
+      "alias": "sc",
+      "x-prompt": {
+        "message": "What's the scope?",
+        "items": ["shared", "core", "provider", "tenant"]
+      }
+    },
+    "domain": {
+      "type": "string",
+      "description": "Library domain.",
+      "x-prompt": "Library domain?"
+    }
+  },
+  "required": ["scope", "domain"]
+}

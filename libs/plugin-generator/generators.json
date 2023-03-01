@@ -17,6 +17,11 @@
       "factory": "./src/generators/typescript-library/generator",
       "schema": "./src/generators/typescript-library/schema.json",
       "description": "typescript-library generator"
+    },
+    "all-libraries": {
+      "factory": "./src/generators/all-libraries/generator",
+      "schema": "./src/generators/all-libraries/schema.json",
+      "description": "all-libraries generator"
     }
   }
 }
