@@ -12,6 +12,11 @@
       "factory": "./src/generators/angular-library/generator",
       "schema": "./src/generators/angular-library/schema.json",
       "description": "angular-library generator"
+    },
+    "plugin-lib": {
+      "factory": "./src/generators/plugin-lib/generator",
+      "schema": "./src/generators/plugin-lib/schema.json",
+      "description": "plugin-lib generator"
     }
   }
 }
