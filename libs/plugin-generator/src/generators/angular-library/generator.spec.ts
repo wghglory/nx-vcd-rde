@@ -9,9 +9,8 @@ describe('angular-library generator', () => {
   let appTree: Tree;
   const options: AngularLibraryGeneratorSchema = {
     name: 'test',
-    domain: 'web',
     scope: 'shared',
-    type: 'data',
+    type: 'data-access',
     linter: Linter.EsLint,
     style: 'none',
   };

@@ -19,13 +19,13 @@ export default async function (tree: Tree, options: AngularLibraryGeneratorSchem
   const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name; // provider/book
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-'); // provider-book
   const projectRoot = joinPathFragments(libsDir, projectDirectory); // libs/provider/book
-
+  const domain = options.domain || name;
   // const directory = `${options.scope}/${options.domain}/${options.type}`; // shared/products/ui
 
-  // options.tags = `scope:${options.scope},domain:${options.domain},type:${options.type},framework:angular`;
+  options.domain = domain;
+  options.tags = `scope:${options.scope},domain:${domain},type:${options.type}`;
+  options.changeDetection = 'OnPush';
   // options.importPath = `@seed/${directory}/${options.name}`; // add path in tsconfig.base.json
-  // options.directory = directory;
-  // options.changeDetection = 'OnPush';
 
   // console.log(libsDir); // libs
   // console.log(name); // book

@@ -7,8 +7,16 @@
   "cli": "nx",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:angular-library book --scope=feature --domain=web --type=feature --directory=provider",
-      "description": "create a new angular feature library for provider"
+      "command": "npx nx generate @seed/plugin-generator:angular-library book --scope=provider --type=feature",
+      "description": "create a new angular feature library: libs/book"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:angular-library book --scope=provider --type=feature --directory=provider",
+      "description": "create a new angular feature library under provider directory: libs/provider/book"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:angular-library data-access --scope=provider --type=data-access --directory=provider/book --domain=book",
+      "description": "generate a data-access library: libs/provider/book/data-access"
     }
   ],
   "properties": {
@@ -22,31 +30,16 @@
       "x-prompt": "What name would you like to use for the library?",
       "pattern": "^[a-zA-Z].*$"
     },
-    "domain": {
-      "description": "Domain where this library belongs.",
-      "type": "string",
-      "default": "none",
-      "alias": "dom",
-      "x-prompt": {
-        "message": "Which domain this library belongs?",
-        "type": "list",
-        "items": [
-          {
-            "value": "web",
-            "label": "Web"
-          },
-          {
-            "value": "common",
-            "label": "Common"
-          }
-        ]
-      }
-    },
     "scope": {
       "type": "string",
       "description": "A scope for the lib.",
       "alias": "sc",
       "x-prompt": "What's the scope?"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Library domain.",
+      "x-prompt": "Library domain (optional)?"
     },
     "type": {
       "description": "Library type",
@@ -267,5 +260,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["name", "type", "scope", "domain"]
+  "required": ["name", "type", "scope"]
 }

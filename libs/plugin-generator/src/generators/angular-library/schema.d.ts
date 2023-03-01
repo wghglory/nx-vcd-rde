@@ -1,7 +1,7 @@
 export interface AngularLibraryGeneratorSchema {
-  domain: 'web' | 'common';
-  type: 'data' | 'model' | 'util' | 'feature' | 'ui';
-  scope: string;
+  type: 'feature' | 'ui' | 'data-access' | 'util' | 'model' | 'all';
+  scope: 'shared' | 'core' | 'tenant' | 'provider';
+  domain?: string;
   name: string;
   addTailwind?: boolean;
   skipFormat?: boolean;
