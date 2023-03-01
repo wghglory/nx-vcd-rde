@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "TypescriptLibrary",
+  "title": "Typescript library for model and util",
+  "type": "object",
+  "examples": [
+    {
+      "command": "npx nx generate @seed/plugin-generator:typescript-library --domain=bookStore --scope=provider --type=model --no-interactive",
+      "description": "create a new model library: libs/provider/book-store/model"
+    }
+  ],
+  "properties": {
+    "scope": {
+      "type": "string",
+      "description": "A scope for the lib.",
+      "alias": "sc",
+      "x-prompt": {
+        "message": "What's the scope?",
+        "items": ["shared", "core", "provider", "tenant"]
+      }
+    },
+    "domain": {
+      "type": "string",
+      "description": "Library domain.",
+      "x-prompt": "Library domain?"
+    },
+    "type": {
+      "description": "Library type",
+      "type": "string",
+      "alias": "t",
+      "x-prompt": {
+        "message": "Select library type?",
+        "type": "list",
+        "items": [
+          {
+            "value": "model",
+            "label": "Model"
+          },
+          {
+            "value": "util",
+            "label": "Util"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["type", "domain", "scope"]
+}

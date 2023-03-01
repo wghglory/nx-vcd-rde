@@ -12,6 +12,11 @@
       "factory": "./src/generators/angular-library-advanced/generator",
       "schema": "./src/generators/angular-library-advanced/schema.json",
       "description": "angular-library-advanced generator"
+    },
+    "typescript-library": {
+      "factory": "./src/generators/typescript-library/generator",
+      "schema": "./src/generators/typescript-library/schema.json",
+      "description": "typescript-library generator"
     }
   }
 }
