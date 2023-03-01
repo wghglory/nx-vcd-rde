@@ -3,9 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-import { RDEList } from '@seed/shared/models';
+import { RDEList } from '@seed/shared/model';
 import { SpinnerComponent } from '@seed/shared/ui';
-import { CardState, cardStateHandler, startWithTap } from '@seed/shared/utils';
+import { CardState, cardStateHandler, startWithTap } from '@seed/shared/util';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, of, scan, Subject, switchMap, tap, withLatestFrom } from 'rxjs';
 
 import { Product } from '../../models/product';

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { SharedSpecModule } from '@seed/shared/module';
 import { L10nService } from '@vmw/ngx-vip';
 
 import { deleteAlert } from './+state/alerts.actions';

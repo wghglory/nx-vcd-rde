@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { SharedModule } from '@seed/shared/modules';
+import { SharedModule } from '@seed/shared/module';
 
 import * as fromAlerts from './+state/alerts.reducer';
 import { AlertComponent } from './alert.component';

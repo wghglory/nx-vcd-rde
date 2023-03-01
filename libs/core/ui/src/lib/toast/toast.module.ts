@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { SharedModule } from '@seed/shared/modules';
+import { SharedModule } from '@seed/shared/module';
 import { VmwSimpleTranslateModule } from '@vmw/ngx-utils';
 
 import * as fromToast from './+state/toast.reducer';

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { SharedSpecModule } from '@seed/shared/module';
 
 import { AboutDialogComponent } from './about-dialog.component';
 

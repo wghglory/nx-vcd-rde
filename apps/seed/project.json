@@ -20,7 +20,7 @@
         "tsConfig": "apps/seed/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/shared/styles/src/lib/scss"]
+          "includePaths": ["libs/shared/style/src/lib/scss"]
         },
         "assets": [
           "apps/seed/src/favicon.ico",

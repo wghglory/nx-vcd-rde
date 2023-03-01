@@ -4,7 +4,7 @@ import { ClarityModule } from '@clr/angular';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AuthService } from '@seed/shared/data-access';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { SharedSpecModule } from '@seed/shared/module';
 import { AlertModule } from '@seed/shared/ui';
 import { MockModule } from 'ng-mocks';
 import { of } from 'rxjs';

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '@seed/shared/modules';
+import { SharedModule } from '@seed/shared/module';
 
 import { ProductService } from '../../services/product.service';
 import { ProductCardListComponent } from '../../ui/product-card-list/product-card-list.component';

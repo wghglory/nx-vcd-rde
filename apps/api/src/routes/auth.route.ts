@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { VcdSession } from '@seed/shared/models';
-import { X_VCLOUD_AUTHORIZATION } from '@seed/shared/utils';
+import { VcdSession } from '@seed/shared/model';
+import { X_VCLOUD_AUTHORIZATION } from '@seed/shared/util';
 import express, { Application, Request, Response } from 'express';
 
 import { users } from '../data/session.data';

@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule, ClrDatagridStateInterface } from '@clr/angular';
-import { startWithTap, stateHandler } from '@seed/shared/utils';
+import { startWithTap, stateHandler } from '@seed/shared/util';
 import { isEqual } from 'lodash';
 import {
   BehaviorSubject,

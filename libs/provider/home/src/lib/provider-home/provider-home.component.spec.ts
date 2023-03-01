@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClarityModule } from '@clr/angular';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { SharedSpecModule } from '@seed/shared/module';
 import { WelcomeComponent } from '@seed/shared/ui';
 import { MockComponent } from 'ng-mocks';
 

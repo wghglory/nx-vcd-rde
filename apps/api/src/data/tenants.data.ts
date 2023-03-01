@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Tenant } from '@seed/shared/models';
+import { Tenant } from '@seed/shared/model';
 
 const tenants: Tenant[] = [
   {

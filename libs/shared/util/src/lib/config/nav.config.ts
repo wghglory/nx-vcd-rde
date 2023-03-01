@@ -1,4 +1,4 @@
-import { Role } from '@seed/shared/models';
+import { Role } from '@seed/shared/model';
 
 // Tenant menu items
 const homeMenuItem: MenuItem = {

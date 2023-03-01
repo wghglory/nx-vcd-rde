@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { RDEList } from '@seed/shared/models';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { RDEList } from '@seed/shared/model';
+import { SharedSpecModule } from '@seed/shared/module';
 import { of, throwError } from 'rxjs';
 
 import { Product } from '../../models/product';

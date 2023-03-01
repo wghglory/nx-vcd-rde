@@ -1,6 +1,6 @@
 import { ExpressionNode, getSelector, getValue, isComparisonNode } from '@rsql/ast';
 import { parse } from '@rsql/parser';
-import { RDEEntityState, RDEList, RDEValue } from '@seed/shared/models';
+import { RDEEntityState, RDEList, RDEValue } from '@seed/shared/model';
 import { Request, Response } from 'express';
 import { filter, get } from 'lodash';
 

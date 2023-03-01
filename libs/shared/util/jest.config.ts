@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-utils',
+  displayName: 'shared-util',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -13,5 +13,5 @@ export default {
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
   collectCoverage: true,
-  coverageDirectory: '../../../coverage/libs/shared/utils',
+  coverageDirectory: '../../../coverage/libs/shared/util',
 };

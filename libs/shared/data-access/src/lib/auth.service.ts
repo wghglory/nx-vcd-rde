@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
-import { SignInPayload, VcdSession } from '@seed/shared/models';
-import { AUTH_CONTEXT, TENANT_CONTEXT } from '@seed/shared/utils';
+import { SignInPayload, VcdSession } from '@seed/shared/model';
+import { AUTH_CONTEXT, TENANT_CONTEXT } from '@seed/shared/util';
 import { BehaviorSubject, catchError, of, tap, throwError } from 'rxjs';
 
 @Injectable({

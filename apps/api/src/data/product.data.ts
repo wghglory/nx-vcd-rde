@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Product } from '@seed/feature/product';
-import { RDEList, RDEValue } from '@seed/shared/models';
+import { RDEList, RDEValue } from '@seed/shared/model';
 
 const createProduct = ({ name, description, state }: { name: string; description?: string; state: boolean }): RDEValue<Product> => {
   const id = `urn:vcloud:entity:vmware:product:${faker.datatype.uuid()}`;

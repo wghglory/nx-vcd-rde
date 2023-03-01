@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SharedModule } from '@seed/shared/modules';
+import { SharedModule } from '@seed/shared/module';
 
 @Component({
   selector: 'seed-no-access',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ClarityIcons, storageIcon } from '@cds/core/icon';
-import { SharedModule } from '@seed/shared/modules';
+import { SharedModule } from '@seed/shared/module';
 
 ClarityIcons.addIcons(storageIcon);
 

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { SharedSpecModule } from '@seed/shared/module';
 import { MockComponent } from 'ng-mocks';
 
 import { ProductCardListComponent } from '../../ui/product-card-list/product-card-list.component';

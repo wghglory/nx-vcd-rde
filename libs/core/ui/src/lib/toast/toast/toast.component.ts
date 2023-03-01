@@ -19,7 +19,7 @@ import {
   lineSecondaryEnterDelay,
   lineSecondaryEnterTiming,
   multiply,
-} from '@seed/shared/styles';
+} from '@seed/shared/style';
 import { VmwSegmentService, VmwSimpleTranslateService } from '@vmw/ngx-utils';
 import { take, timer } from 'rxjs';
 

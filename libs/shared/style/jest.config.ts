@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-styles',
+  displayName: 'shared-style',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: [
     '<rootDir>/src/test-setup.ts',
@@ -15,7 +15,7 @@ export default {
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
   collectCoverage: true,
-  coverageDirectory: '../../../coverage/libs/shared/styles',
+  coverageDirectory: '../../../coverage/libs/shared/style',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

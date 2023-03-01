@@ -7,7 +7,7 @@ import { ClarityModule } from '@clr/angular';
 import { Store } from '@ngrx/store';
 import { toastActions } from '@seed/core/ui';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
-import { logger } from '@seed/shared/utils';
+import { logger } from '@seed/shared/util';
 import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 
 import { Product } from '../../models/product';

@@ -11,7 +11,7 @@ configure below in seed project project.json `build` options:
 
 ```
 "stylePreprocessorOptions": {
-  "includePaths": ["libs/shared/styles/src/lib/scss"]
+  "includePaths": ["libs/shared/style/src/lib/scss"]
 },
 ```
 

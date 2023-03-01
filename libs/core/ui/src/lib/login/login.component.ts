@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@seed/shared/data-access';
-import { Role, SignInPayload } from '@seed/shared/models';
-import { SharedModule } from '@seed/shared/modules';
+import { Role, SignInPayload } from '@seed/shared/model';
+import { SharedModule } from '@seed/shared/module';
 import { alertActions, AlertModule } from '@seed/shared/ui';
-import { NAV_CONFIG } from '@seed/shared/utils';
+import { NAV_CONFIG } from '@seed/shared/util';
 import { finalize } from 'rxjs';
 
 @Component({

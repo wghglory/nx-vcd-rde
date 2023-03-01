@@ -1,4 +1,4 @@
-import { VcdSession } from '@seed/shared/models';
+import { VcdSession } from '@seed/shared/model';
 /**
  * several valid users to login
  *

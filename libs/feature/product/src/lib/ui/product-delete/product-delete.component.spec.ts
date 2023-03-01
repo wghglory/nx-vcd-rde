@@ -4,8 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { RDEValue } from '@seed/shared/models';
-import { SharedSpecModule } from '@seed/shared/modules';
+import { RDEValue } from '@seed/shared/model';
+import { SharedSpecModule } from '@seed/shared/module';
 import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/angular';
 import { of, throwError } from 'rxjs';
 

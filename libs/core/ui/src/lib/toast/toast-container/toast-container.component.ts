@@ -1,6 +1,6 @@
 import { animateChild, query, stagger, transition, trigger } from '@angular/animations';
 import { Component, HostBinding, Input } from '@angular/core';
-import { multiply, STAGGER_DURATION } from '@seed/shared/styles';
+import { multiply, STAGGER_DURATION } from '@seed/shared/style';
 
 @Component({
   selector: 'seed-toast-container',
