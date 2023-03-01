@@ -1,10 +1,14 @@
 export interface AngularLibraryGeneratorSchema {
   type: 'feature' | 'ui' | 'data-access' | 'util' | 'model' | 'all';
   scope: 'shared' | 'core' | 'tenant' | 'provider';
-  domain: string;
+  domain?: string;
   name: string;
   addTailwind?: boolean;
   skipFormat?: boolean;
+  /**
+   * @deprecated Use `simpleName` instead. It will be removed in v16.
+   */
+  simpleModuleName?: boolean;
   simpleName?: boolean;
   addModuleSpec?: boolean;
   directory?: string;

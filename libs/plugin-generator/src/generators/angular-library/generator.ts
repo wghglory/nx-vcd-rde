@@ -1,53 +1,56 @@
 import { libraryGenerator } from '@nrwl/angular/generators';
-import {
-  formatFiles,
-  generateFiles,
-  getWorkspaceLayout,
-  installPackagesTask,
-  joinPathFragments,
-  names,
-  offsetFromRoot,
-  readProjectConfiguration,
-  Tree,
-} from '@nrwl/devkit';
+import { formatFiles, generateFiles, getWorkspaceLayout, installPackagesTask, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import * as path from 'path';
 
 import { AngularLibraryGeneratorSchema } from './schema';
 
+interface NormalizedSchema extends AngularLibraryGeneratorSchema {
+  projectName: string;
+  projectRoot: string;
+  projectDirectory: string;
+  tags: string;
+  directory: string;
+  name: string;
+}
+
+// npx nx generate @seed/plugin-generator:plugin-lib --domain=book --scope=provider --type=data-access --no-interactive
+function normalizeOptions(tree: Tree, options: AngularLibraryGeneratorSchema): NormalizedSchema {
+  // const name = names(options.name).fileName;
+  const projectDirectory = `${options.scope}/${options.domain}`;
+  const projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
+  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
+  const tags = `scope:${options.scope},domain:${options.domain},type:${options.type}`;
+  const name = options.type;
+  const directory = projectDirectory;
+
+  return {
+    ...options,
+    projectName,
+    projectRoot,
+    projectDirectory,
+    tags,
+    name,
+    directory,
+  };
+}
+
+function addFiles(tree: Tree, options: NormalizedSchema) {
+  const templateOptions = {
+    ...options,
+    ...names(options.domain),
+    relativeOffset: offsetFromRoot(options.projectRoot),
+    template: '',
+  };
+  generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
+}
+
 export default async function (tree: Tree, options: AngularLibraryGeneratorSchema) {
-  const { libsDir } = getWorkspaceLayout(tree); // libs | apps
-  const name = names(options.name).fileName; // library name: book
-  const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name; // provider/book
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-'); // provider-book
-  const projectRoot = joinPathFragments(libsDir, projectDirectory); // libs/provider/book
-  const domain = options.domain || name;
-  // const directory = `${options.scope}/${options.domain}/${options.type}`; // shared/products/ui
+  const normalizedOptions = normalizeOptions(tree, options);
 
-  options.domain = domain;
-  options.tags = `scope:${options.scope},domain:${domain},type:${options.type}`;
-  options.changeDetection = 'OnPush';
-  // options.importPath = `@seed/${directory}/${options.name}`; // add path in tsconfig.base.json
+  // console.log(normalizedOptions);
+  await libraryGenerator(tree, { ...normalizedOptions });
 
-  // console.log(libsDir); // libs
-  // console.log(name); // book
-  // console.log(projectDirectory); // provider/book
-  // console.log(projectName); // provider-book
-  // console.log(projectRoot); // libs/provider/book
-
-  // run the original generator
-  await libraryGenerator(tree, { ...options });
-
-  // const libraryRoot = readProjectConfiguration(tree, projectName);
-
-  // https://nx.dev/packages/devkit/documents/index#offsetfromroot
-  const relativeOffset = offsetFromRoot(projectRoot); // ../../../
-
-  // Add own custom files
-  generateFiles(
-    tree, // the virtual file system
-    joinPathFragments(__dirname, './files'), // path to the file templates)
-    projectRoot, // destination path of the files
-    { ...options, projectRoot, projectName, relativeOffset, ...names(options.name), template: '' }, // config object to replace variable in file templates
-  );
+  addFiles(tree, normalizedOptions);
 
   await formatFiles(tree);
 

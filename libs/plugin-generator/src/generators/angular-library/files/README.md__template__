@@ -1,6 +1,6 @@
-# <%= domain %> <%= className %>
+# <%= className %> <%= type %>
 
-This is Angular library for <%= domain %>
+This is Angular library for <%= className %>
 
 type: <%= type %>
 scope: <%= scope %>

@@ -1,30 +1,45 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "$id": "AngularLibrary",
-  "title": "Create an Angular library",
+  "$id": "AngularLibraryAdvanced",
+  "title": "Create a library",
   "description": "Creates an Angular library.",
   "type": "object",
   "cli": "nx",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:angular-library --domain=hello --scope=provider --type=feature --no-interactive",
-      "description": "create a new angular feature library: libs/provider/book/data-access"
+      "command": "npx nx generate @seed/plugin-generator:angular-library-advanced book --scope=provider --type=feature",
+      "description": "create a new angular feature library: libs/book"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:angular-library-advanced book --scope=provider --type=feature --directory=provider",
+      "description": "create a new angular feature library under provider directory: libs/provider/book"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:angular-library-advanced data-access --scope=provider --type=data-access --directory=provider/book --domain=book",
+      "description": "generate a data-access library: libs/provider/book/data-access"
     }
   ],
   "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the library.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the library?",
+      "pattern": "^[a-zA-Z].*$"
+    },
     "scope": {
       "type": "string",
       "description": "A scope for the lib.",
       "alias": "sc",
-      "x-prompt": {
-        "message": "What's the scope?",
-        "items": ["shared", "core", "provider", "tenant"]
-      }
+      "x-prompt": "What's the scope?"
     },
     "domain": {
       "type": "string",
       "description": "Library domain.",
-      "x-prompt": "Library domain?"
+      "x-prompt": "Library domain (optional)?"
     },
     "type": {
       "description": "Library type",
@@ -35,12 +50,8 @@
         "type": "list",
         "items": [
           {
-            "value": "all",
-            "label": "All"
-          },
-          {
-            "value": "data-access",
-            "label": "Data Access"
+            "value": "data",
+            "label": "Data"
           },
           {
             "value": "model",
@@ -249,5 +260,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["type", "domain", "scope"]
+  "required": ["name", "type", "scope"]
 }

@@ -22,6 +22,7 @@
       "@seed/plugin-generator": ["libs/plugin-generator/src/index.ts"],
       "@seed/provider/home": ["libs/provider/home/src/index.ts"],
       "@seed/provider/setting": ["libs/provider/setting/src/index.ts"],
+      "@seed/shared/book/data-access": ["libs/shared/book/data-access/src/index.ts"],
       "@seed/shared/constant": ["libs/shared/constant/src/index.ts"],
       "@seed/shared/models": ["libs/shared/models/src/index.ts"],
       "@seed/shared/modules": ["libs/shared/modules/src/index.ts"],
