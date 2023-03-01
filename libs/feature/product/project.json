@@ -27,5 +27,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:feature", "framework:angular"]
 }

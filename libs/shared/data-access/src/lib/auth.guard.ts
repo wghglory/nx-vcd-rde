@@ -1,6 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { NAV_CONFIG } from '@seed/shared/constant';
+import { NAV_CONFIG } from '@seed/shared/utils';
 import { catchError, map, Observable, of } from 'rxjs';
 
 import { AuthService } from './auth.service';

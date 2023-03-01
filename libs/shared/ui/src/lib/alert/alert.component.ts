@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DOMAIN_REGEX } from '@seed/shared/constant';
+import { DOMAIN_REGEX } from '@seed/shared/utils';
 import { L10nService } from '@vmw/ngx-vip';
 import { map } from 'rxjs';
 

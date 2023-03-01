@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { AuthService } from '@seed/shared/services';
+import { AuthService } from '@seed/shared/data-access';
 import { filter, map, mergeMap, Observable, take } from 'rxjs';
 
 import { Layout } from './layout/layout';

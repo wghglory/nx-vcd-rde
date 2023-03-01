@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { NoAccessComponent, NotFoundComponent } from '@seed/core/ui';
 import { productRoutes } from '@seed/feature/product';
-import { AuthGuard } from '@seed/shared/services';
+import { AuthGuard } from '@seed/shared/data-access';
 import { WelcomeComponent } from '@seed/shared/ui';
 
 import { Layout } from './layout/layout';

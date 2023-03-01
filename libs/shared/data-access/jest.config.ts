@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-services',
+  displayName: 'shared-data-access',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -12,7 +12,7 @@ export default {
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
   collectCoverage: true,
-  coverageDirectory: '../../../coverage/libs/shared/services',
+  coverageDirectory: '../../../coverage/libs/shared/data-access',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

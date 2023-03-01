@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, isDevMode } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ClarityIcons, cogIcon, vmBugIcon } from '@cds/core/icon';
-import { NAV_CONFIG } from '@seed/shared/constant';
+import { AuthService } from '@seed/shared/data-access';
 import { SharedModule } from '@seed/shared/modules';
-import { AuthService } from '@seed/shared/services';
+import { NAV_CONFIG } from '@seed/shared/utils';
 import { VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { L10nService } from '@vmw/ngx-vip';
 import { map } from 'rxjs';

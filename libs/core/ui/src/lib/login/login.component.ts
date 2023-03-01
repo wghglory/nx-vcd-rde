@@ -3,11 +3,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { NAV_CONFIG } from '@seed/shared/constant';
+import { AuthService } from '@seed/shared/data-access';
 import { Role, SignInPayload } from '@seed/shared/models';
 import { SharedModule } from '@seed/shared/modules';
-import { AuthService } from '@seed/shared/services';
 import { alertActions, AlertModule } from '@seed/shared/ui';
+import { NAV_CONFIG } from '@seed/shared/utils';
 import { finalize } from 'rxjs';
 
 @Component({
