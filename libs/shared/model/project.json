@@ -1,7 +1,7 @@
 {
   "name": "shared-model",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/model",
+  "sourceRoot": "libs/shared/model/src",
   "projectType": "library",
   "targets": {
     "lint": {
@@ -10,7 +10,21 @@
       "options": {
         "lintFilePatterns": ["libs/shared/model/**/*.ts"]
       }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/shared/model/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
     }
   },
-  "tags": []
+  "tags": ["scope:shared", "type:model"]
 }
