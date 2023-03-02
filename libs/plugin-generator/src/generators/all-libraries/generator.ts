@@ -2,13 +2,17 @@ import { Tree } from '@nrwl/devkit';
 
 import generateAngularLib from '../angular-library/generator';
 import generateTypescriptLib from '../typescript-library/generator';
+import { AngularGeneratorType, TypescriptGeneratorType } from './../generator.model';
 import { AllLibrariesGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: AllLibrariesGeneratorSchema) {
-  await generateAngularLib(tree, { ...options, type: 'feature', name: 'feature' });
-  await generateAngularLib(tree, { ...options, type: 'data-access', name: 'data-access' });
-  await generateAngularLib(tree, { ...options, type: 'ui', name: 'ui' });
+  const angularTypes: AngularGeneratorType[] = ['feature', 'data-access', 'ui'];
+  const typescriptTypes: TypescriptGeneratorType[] = ['model', 'util'];
 
-  await generateTypescriptLib(tree, { ...options, type: 'model' });
-  await generateTypescriptLib(tree, { ...options, type: 'util' });
+  for (const type of angularTypes) {
+    await generateAngularLib(tree, { ...options, type: type, name: type });
+  }
+  for (const type of typescriptTypes) {
+    await generateTypescriptLib(tree, { ...options, type: type });
+  }
 }

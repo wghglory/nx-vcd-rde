@@ -1,5 +1,7 @@
+import { TypescriptGeneratorType } from './../generator.model';
+
 export interface TypescriptLibraryGeneratorSchema {
-  type: 'feature' | 'ui' | 'data-access' | 'util' | 'model' | 'all';
+  type: TypescriptGeneratorType;
   scope: 'shared' | 'core' | 'tenant' | 'provider';
   domain: string;
 }

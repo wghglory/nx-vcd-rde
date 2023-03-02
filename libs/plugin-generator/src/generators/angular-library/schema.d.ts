@@ -1,5 +1,7 @@
+import { AngularGeneratorType } from './../generator.model';
+
 export interface AngularLibraryGeneratorSchema {
-  type: 'feature' | 'ui' | 'data-access';
+  type: AngularGeneratorType;
   scope: 'shared' | 'core' | 'tenant' | 'provider';
   domain: string;
   name: string;
