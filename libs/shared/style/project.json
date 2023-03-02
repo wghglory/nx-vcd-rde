@@ -27,5 +27,5 @@
       }
     }
   },
-  "tags": ["project:web", "scope:shared-style", "type:ui", "framework:angular"]
+  "tags": ["scope:shared", "type:util", "framework:angular"]
 }

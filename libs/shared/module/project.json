@@ -2,7 +2,7 @@
   "name": "shared-module",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/shared/module",
+  "sourceRoot": "libs/shared/module/src",
   "prefix": "seed",
   "targets": {
     "test": {
@@ -21,5 +21,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:shared", "type:data-access", "framework:angular"]
 }
