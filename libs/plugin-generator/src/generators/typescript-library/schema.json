@@ -8,6 +8,10 @@
     {
       "command": "npx nx generate @seed/plugin-generator:typescript-library --domain=bookStore --scope=provider --type=model --no-interactive",
       "description": "create a new model library: libs/provider/book-store/model"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:typescript-library --scope=shared --type=util --no-interactive",
+      "description": "create a new util library: libs/shared/util"
     }
   ],
   "properties": {
