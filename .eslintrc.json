@@ -36,8 +36,7 @@
               },
               {
                 "sourceTag": "type:util",
-                "onlyDependOnLibsWithTags": ["type:model"],
-                "bannedExternalImports": ["@angular/*"]
+                "onlyDependOnLibsWithTags": ["type:util", "type:model"]
               },
               {
                 "sourceTag": "type:model",

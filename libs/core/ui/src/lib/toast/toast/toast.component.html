@@ -35,13 +35,7 @@
       </ng-container>
 
       <ng-container *ngSwitchCase="'success'">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          [attr.aria-label]="'toast.success-icon' | simpleTranslate"
-          title="{{ 'toast.info-icon' | simpleTranslate }}"
-        >
+        <svg width="24" height="24" viewBox="0 0 24 24" [attr.aria-label]="'toast.success-icon' | simpleTranslate">
           <circle class="success-bg" fill="#60B515" cx="12" cy="12" r="10.67" />
           <path [@checkmarkLine] class="checkmark" d="M5.69 11.33 10.21 15.83 18.3 7.76" />
         </svg>

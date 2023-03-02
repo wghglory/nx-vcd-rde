@@ -18,12 +18,17 @@
       "@seed/common-assets": ["libs/common-assets/src/index.ts"],
       "@seed/core/interceptor": ["libs/core/interceptor/src/index.ts"],
       "@seed/core/ui": ["libs/core/ui/src/index.ts"],
+      "@seed/feature/mfe": ["libs/feature/mfe/src/index.ts"],
       "@seed/feature/product/data-access": ["libs/feature/product/data-access/src/index.ts"],
       "@seed/feature/product/feature": ["libs/feature/product/feature/src/index.ts"],
       "@seed/feature/product/model": ["libs/feature/product/model/src/index.ts"],
       "@seed/feature/product/ui": ["libs/feature/product/ui/src/index.ts"],
       "@seed/feature/product/util": ["libs/feature/product/util/src/index.ts"],
-      "@seed/feature/mfe": ["libs/feature/mfe/src/index.ts"],
+      "@seed/mfe/shop/data-access": ["libs/mfe/shop/data-access/src/index.ts"],
+      "@seed/mfe/shop/feature": ["libs/mfe/shop/feature/src/index.ts"],
+      "@seed/mfe/shop/model": ["libs/mfe/shop/model/src/index.ts"],
+      "@seed/mfe/shop/ui": ["libs/mfe/shop/ui/src/index.ts"],
+      "@seed/mfe/shop/util": ["libs/mfe/shop/util/src/index.ts"],
       "@seed/plugin-generator": ["libs/plugin-generator/src/index.ts"],
       "@seed/provider/home/data-access": ["libs/provider/home/data-access/src/index.ts"],
       "@seed/provider/home/feature": ["libs/provider/home/feature/src/index.ts"],
@@ -51,9 +56,7 @@
       "@seed/tenant/setting/feature": ["libs/tenant/setting/feature/src/index.ts"],
       "@seed/tenant/setting/model": ["libs/tenant/setting/model/src/index.ts"],
       "@seed/tenant/setting/ui": ["libs/tenant/setting/ui/src/index.ts"],
-      "@seed/tenant/setting/util": ["libs/tenant/setting/util/src/index.ts"],
-      "@seed/shop/services": ["libs/shop/services/src/index.ts"],
-      "@seed/shop/ui": ["libs/shop/ui/src/index.ts"]
+      "@seed/tenant/setting/util": ["libs/tenant/setting/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
