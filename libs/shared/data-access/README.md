@@ -1,7 +1,6 @@
-# shared-data-access
+# data-access
 
-This library was generated with [Nx](https://nx.dev).
+This is Angular library for data-access
 
-## Running unit tests
-
-Run `nx test shared-data-access` to execute the unit tests.
+type: data-access
+scope: shared
