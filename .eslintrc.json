@@ -28,11 +28,11 @@
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:util", "type:model"]
+                "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:model"]
               },
               {
                 "sourceTag": "type:data-access",
-                "onlyDependOnLibsWithTags": ["type:util", "type:model"]
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:util", "type:model"]
               },
               {
                 "sourceTag": "type:util",
@@ -41,7 +41,7 @@
               },
               {
                 "sourceTag": "type:model",
-                "onlyDependOnLibsWithTags": [],
+                "onlyDependOnLibsWithTags": ["type:model"],
                 "bannedExternalImports": ["@angular/*"]
               },
               // scope
