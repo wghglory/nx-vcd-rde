@@ -10,11 +10,56 @@
           "error",
           {
             "enforceBuildableLibDependency": true,
-            "allow": [],
+            // ignore any checks for these projects for now
+            "allow": ["a-wip-project", "this-one-is-broken-so-ignore-it"],
             "depConstraints": [
               {
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
+              },
+              // type
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:data-access", "type:util", "type:model"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:ui", "type:data-access", "type:util", "type:model"]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:util", "type:model"]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:util", "type:model"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:model"],
+                "bannedExternalImports": ["@angular/*"]
+              },
+              {
+                "sourceTag": "type:model",
+                "onlyDependOnLibsWithTags": [],
+                "bannedExternalImports": ["@angular/*"]
+              },
+              // scope
+              {
+                "sourceTag": "scope:provider",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:tenant",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:core",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": []
               }
             ]
           }
