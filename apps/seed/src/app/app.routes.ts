@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nrwl/angular/mf';
 import { NoAccessComponent, NotFoundComponent } from '@seed/core/ui';
 import { MfeContainerComponent } from '@seed/feature/mfe';
-import { productRoutes } from '@seed/feature/product';
+import { productRoutes } from '@seed/feature/product/feature';
 import { AuthGuard } from '@seed/shared/data-access';
 import { WelcomeComponent } from '@seed/shared/ui';
 
@@ -19,11 +19,11 @@ export const routes: Route[] = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
-        loadComponent: () => import('@seed/provider/home').then(m => m.ProviderHomeComponent),
+        loadComponent: () => import('@seed/provider/home/feature').then(m => m.ProviderHomeComponent),
       },
       {
         path: 'setting',
-        loadComponent: () => import('@seed/provider/setting').then(m => m.ProviderSettingComponent),
+        loadComponent: () => import('@seed/provider/setting/feature').then(m => m.ProviderSettingComponent),
       },
       {
         path: 'mfe',
@@ -44,11 +44,11 @@ export const routes: Route[] = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
-        loadComponent: () => import('@seed/tenant/home').then(m => m.TenantHomeComponent),
+        loadComponent: () => import('@seed/tenant/home/feature').then(m => m.TenantHomeComponent),
       },
       {
         path: 'setting',
-        loadComponent: () => import('@seed/tenant/setting').then(m => m.TenantSettingComponent),
+        loadComponent: () => import('@seed/tenant/setting/feature').then(m => m.TenantSettingComponent),
       },
     ],
   },
