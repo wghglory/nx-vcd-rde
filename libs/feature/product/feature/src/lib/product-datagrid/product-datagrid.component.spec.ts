@@ -1,12 +1,12 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ObserverSpy, queueForAutoUnsubscribe, subscribeSpyTo } from '@hirez_io/observer-spy';
+import { ProductService } from '@seed/feature/product/data-access';
+import { Product } from '@seed/feature/product/model';
 import { RDEList } from '@seed/shared/model';
 import { SharedSpecModule } from '@seed/shared/module';
 import { of, throwError } from 'rxjs';
 
-import { Product } from '../../models/product';
-import { ProductService } from './../../services/product.service';
 import { ProductDatagridComponent } from './product-datagrid.component';
 
 describe('ProductDatagridComponent', () => {

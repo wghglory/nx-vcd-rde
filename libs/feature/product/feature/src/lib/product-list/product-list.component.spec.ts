@@ -1,12 +1,12 @@
 import { provideMockStore } from '@ngrx/store/testing';
+import { ProductService } from '@seed/feature/product/data-access';
+import { Product } from '@seed/feature/product/model';
 import { RDEList } from '@seed/shared/model';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
 import { render, screen } from '@testing-library/angular';
 import { MockComponent } from 'ng-mocks';
 import { of } from 'rxjs';
 
-import { Product } from '../../models/product';
-import { ProductService } from '../../services/product.service';
 import { ProductListComponent } from './product-list.component';
 
 describe('ProductListComponent', () => {

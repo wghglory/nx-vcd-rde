@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from '@seed/shared/module';
 
 import { HeaderMfeComponent } from './header-mfe.component';
 
@@ -8,7 +9,8 @@ describe('HeaderMfeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderMfeComponent],
+      imports: [HeaderMfeComponent, SharedModule],
+      providers: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderMfeComponent);

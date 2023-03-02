@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { ProductService } from '@seed/feature/product/data-access';
+import { Product } from '@seed/feature/product/model';
 import { RDEList } from '@seed/shared/model';
 import { SharedSpecModule } from '@seed/shared/module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { of, throwError } from 'rxjs';
 
-import { Product } from '../../models/product';
-import { ProductService } from './../../services/product.service';
 import { ProductInfiniteScrollComponent } from './product-infinite-scroll.component';
 
 describe('ProductInfiniteScrollComponent', () => {

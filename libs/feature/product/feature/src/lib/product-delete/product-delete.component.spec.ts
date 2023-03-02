@@ -4,13 +4,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { ProductService } from '@seed/feature/product/data-access';
+import { Product } from '@seed/feature/product/model';
 import { RDEValue } from '@seed/shared/model';
 import { SharedSpecModule } from '@seed/shared/module';
 import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/angular';
 import { of, throwError } from 'rxjs';
 
-import { Product } from '../../models/product';
-import { ProductService } from './../../services/product.service';
 import { ProductDeleteComponent } from './product-delete.component';
 
 const productServiceStub = {

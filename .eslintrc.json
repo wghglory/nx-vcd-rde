@@ -59,7 +59,7 @@
               },
               {
                 "sourceTag": "scope:shared",
-                "onlyDependOnLibsWithTags": []
+                "onlyDependOnLibsWithTags": ["scope:shared"]
               }
             ]
           }
