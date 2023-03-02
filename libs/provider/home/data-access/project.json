@@ -1,0 +1,31 @@
+{
+  "name": "provider-home-data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/provider/home/data-access/src",
+  "prefix": "seed",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/provider/home/data-access/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/provider/home/data-access/**/*.ts", "libs/provider/home/data-access/**/*.html"]
+      }
+    }
+  },
+  "tags": ["scope:provider", "domain:home", "type:data-access", "framework:angular"]
+}
