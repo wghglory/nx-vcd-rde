@@ -11,46 +11,75 @@ interface NormalizedSchema extends TypescriptLibraryGeneratorSchema {
   projectDirectory: string;
   tags: string[];
   // names function return below
-  name: string;
-  className: string;
-  propertyName: string;
-  constantName: string;
-  fileName: string;
+  name?: string;
+  className?: string;
+  propertyName?: string;
+  constantName?: string;
+  fileName?: string;
+
+  optionalFileName: string;
 }
 
 /**
  * cli inputs
-  // domain: 'book',
-  // scope: 'core',
-  // type: 'util',
+  1. domain: 'book',
+     scope: 'core',
+     type: 'util',
+
+  2. scope: 'core',
+     type: 'util',
  * @param tree virtual file system
  * @param options
-    // projectDirectory: 'core/book',
-    // projectName: 'core-book-util',
-    // projectRoot: 'libs/core/book/util',
-    // tags: 'scope:core,domain:book,type:util',
-    // name: 'book',
-    // className: 'Book',
-    // propertyName: 'book',
-    // constantName: 'BOOK',
-    // fileName: 'book'
+  1. projectDirectory: 'core/book',
+  1. projectName: 'core-book-util',
+  1. projectRoot: 'libs/core/book/util',
+  1. tags: 'scope:core,domain:book,type:util',
+  1. name: 'book',
+  1. className: 'Book',
+  1. propertyName: 'book',
+  1. constantName: 'BOOK',
+  1. fileName: 'book'
+
+  2. projectDirectory: 'core',
+  2. projectName: 'core-util',
+  2. projectRoot: 'libs/core/util',
+  2. tags: 'scope:core,type:util',
  * @returns
  */
 function normalizeOptions(tree: Tree, options: TypescriptLibraryGeneratorSchema): NormalizedSchema {
-  const domainNames = names(options.domain);
-  const projectDirectory = `${options.scope}/${domainNames.fileName}`;
-  const projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
-  const tags = [`"scope:${options.scope}"`, `"domain:${domainNames.fileName}"`, `"type:${options.type}"`];
+  let projectDirectory, projectName, projectRoot, tags;
 
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    tags,
-    ...domainNames,
-  };
+  if (options.domain) {
+    const domainNames = names(options.domain);
+    projectDirectory = `${options.scope}/${domainNames.fileName}`;
+    projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
+    projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
+    tags = [`"scope:${options.scope}"`, `"domain:${domainNames.fileName}"`, `"type:${options.type}"`];
+
+    return {
+      ...options,
+      projectName,
+      projectRoot,
+      projectDirectory,
+      tags,
+      ...domainNames,
+      optionalFileName: domainNames.fileName + '.',
+    };
+  } else {
+    projectDirectory = `${options.scope}`;
+    projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
+    projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
+    tags = [`"scope:${options.scope}"`, `"type:${options.type}"`];
+
+    return {
+      ...options,
+      projectName,
+      projectRoot,
+      projectDirectory,
+      tags,
+      optionalFileName: '',
+    };
+  }
 }
 
 function addFiles(tree: Tree, options: NormalizedSchema) {

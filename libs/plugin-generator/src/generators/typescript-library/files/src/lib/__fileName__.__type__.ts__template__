@@ -1,9 +1,0 @@
-<% if(type === 'model') { %>
-export interface <%= className %> {
-  name: string;
-}
-<% } %>
-
-<% if(type === 'util') { %>
-export const <%= constantName %> = '<%= propertyName %>';
-<% } %>

@@ -1,0 +1,9 @@
+<% if (type === 'model' && typeof(className) !== "undefined") { %>
+export interface <%= className %> {
+  name: string;
+}
+<% } %>
+
+<% if (type === 'util' && typeof(constantName) !== "undefined") { %>
+export const <%= constantName %> = '<%= propertyName %>';
+<% } %>

@@ -23,6 +23,7 @@
     "domain": {
       "type": "string",
       "description": "Library domain.",
+      "default": "",
       "x-prompt": "Library domain?"
     },
     "type": {
@@ -45,5 +46,5 @@
       }
     }
   },
-  "required": ["type", "domain", "scope"]
+  "required": ["type", "scope"]
 }

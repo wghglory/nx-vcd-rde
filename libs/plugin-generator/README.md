@@ -37,4 +37,5 @@ Run `nx test plugin-generator` to execute the unit tests via [Jest](https://jest
 
 ## Reference
 
-<https://dev.to/this-is-learning/create-own-default-plugin-to-nx-workspace-2fen>
+- <https://dev.to/this-is-learning/create-own-default-plugin-to-nx-workspace-2fen>
+- [EJS template variable is not defined](https://stackoverflow.com/questions/31776471/ejs-template-variable-is-not-defined-on-page-load-and-errors)

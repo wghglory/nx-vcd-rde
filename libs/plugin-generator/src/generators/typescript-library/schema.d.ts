@@ -1,7 +1,7 @@
-import { TypescriptGeneratorType } from './../generator.model';
+import { GeneratorScope, TypescriptGeneratorType } from './../generator.model';
 
 export interface TypescriptLibraryGeneratorSchema {
   type: TypescriptGeneratorType;
-  scope: 'shared' | 'core' | 'tenant' | 'provider';
-  domain: string;
+  scope: GeneratorScope;
+  domain?: string;
 }
