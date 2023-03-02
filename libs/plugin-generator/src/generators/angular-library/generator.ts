@@ -13,13 +13,21 @@ interface NormalizedSchema extends AngularLibraryGeneratorSchema {
   name: string;
 }
 
-// npx nx generate @seed/plugin-generator:plugin-lib --domain=book --scope=provider --type=data-access --no-interactive
 function normalizeOptions(tree: Tree, options: AngularLibraryGeneratorSchema): NormalizedSchema {
-  // const name = names(options.name).fileName;
-  const projectDirectory = `${options.scope}/${options.domain}`;
+  let projectDirectory = '';
+  let tags = '';
+
+  if (options.domain) {
+    // const name = names(options.name).fileName;
+    projectDirectory = `${options.scope}/${options.domain}`;
+    tags = `scope:${options.scope},domain:${options.domain},type:${options.type},framework:angular`;
+  } else {
+    projectDirectory = options.scope;
+    tags = `scope:${options.scope},type:${options.type},framework:angular`;
+  }
+
   const projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
   const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
-  const tags = `scope:${options.scope},domain:${options.domain},type:${options.type},framework:angular`;
   const name = options.type;
   const directory = projectDirectory;
 

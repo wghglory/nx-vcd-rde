@@ -1,6 +1,6 @@
 # <%= className %> <%= type %>
 
-This is Angular library for <%= className %>
+This is Angular library for <%= className %> <%= type %>
 
 type: <%= type %>
 scope: <%= scope %>

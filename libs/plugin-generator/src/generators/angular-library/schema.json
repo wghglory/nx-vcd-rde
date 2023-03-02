@@ -7,8 +7,12 @@
   "cli": "nx",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:angular-library --domain=hello --scope=provider --type=feature --no-interactive",
+      "command": "npx nx generate @seed/plugin-generator:angular-library --domain=book --scope=provider --type=data-access --no-interactive",
       "description": "create a new angular feature library: libs/provider/book/data-access"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:angular-library --scope=shared --type=data-access --no-interactive",
+      "description": "create a new angular feature library: libs/shared/data-access"
     }
   ],
   "properties": {
@@ -24,6 +28,7 @@
     "domain": {
       "type": "string",
       "description": "Library domain.",
+      "default": "",
       "x-prompt": "Library domain?"
     },
     "type": {
@@ -237,5 +242,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["type", "domain", "scope"]
+  "required": ["type", "scope"]
 }

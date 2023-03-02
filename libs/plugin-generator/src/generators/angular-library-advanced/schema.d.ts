@@ -1,6 +1,8 @@
+import { AngularGeneratorType, GeneratorScope } from './../generator.model';
+
 export interface AngularLibraryGeneratorSchema {
-  type: 'feature' | 'ui' | 'data-access' | 'util' | 'model' | 'all';
-  scope: 'shared' | 'core' | 'tenant' | 'provider';
+  type: AngularGeneratorType;
+  scope: GeneratorScope;
   domain?: string;
   name: string;
   addTailwind?: boolean;
