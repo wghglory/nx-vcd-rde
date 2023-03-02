@@ -4,7 +4,7 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import generator from './generator';
 import { AngularLibraryGeneratorSchema } from './schema';
 
-describe('plugin-lib generator', () => {
+describe('angular library generator', () => {
   let appTree: Tree;
   const options = { domain: 'test', scope: 'shared', type: 'ui' } as AngularLibraryGeneratorSchema;
 
@@ -14,7 +14,7 @@ describe('plugin-lib generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'test');
+    const config = readProjectConfiguration(appTree, 'shared-test-ui');
     expect(config).toBeDefined();
   });
 });

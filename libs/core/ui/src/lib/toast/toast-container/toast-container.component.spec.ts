@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedSpecModule } from '@seed/shared/module';
 
 import { ToastContainerComponent } from './toast-container.component';
 
@@ -8,6 +10,7 @@ describe('ToastContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [SharedSpecModule, NoopAnimationsModule],
       declarations: [ToastContainerComponent],
     }).compileComponents();
 

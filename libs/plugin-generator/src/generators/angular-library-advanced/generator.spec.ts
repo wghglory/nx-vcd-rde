@@ -29,11 +29,11 @@ describe('angular-library generator', () => {
     await generator(appTree, options);
     const readme = appTree.read('test/README.md');
     expect(readme.toString()).toMatchInlineSnapshot(`
-      "# Test
+      "# test
 
-      This is Angular library for web
+      This is Angular library for test
 
-      type: data
+      type: data-access
       scope: shared
       "
     `);

@@ -1,3 +1,4 @@
+import { provideMockStore } from '@ngrx/store/testing';
 import { RDEList } from '@seed/shared/model';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';
 import { render, screen } from '@testing-library/angular';
@@ -45,7 +46,7 @@ describe('ProductListComponent', () => {
 
   it('should render', async () => {
     await render(ProductListComponent, {
-      providers: [{ provide: ProductService, useValue: productServiceStub }],
+      providers: [{ provide: ProductService, useValue: productServiceStub }, provideMockStore({ initialState: { toasts: [] } })],
       imports: [MockComponent(LoadingOrErrorComponent)],
     });
 
@@ -55,7 +56,7 @@ describe('ProductListComponent', () => {
 
   it('should select item', async () => {
     const { fixture } = await render(ProductListComponent, {
-      providers: [{ provide: ProductService, useValue: productServiceStub }],
+      providers: [{ provide: ProductService, useValue: productServiceStub }, provideMockStore({ initialState: { toasts: [] } })],
       imports: [MockComponent(LoadingOrErrorComponent)],
     });
 

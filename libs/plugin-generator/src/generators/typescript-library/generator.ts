@@ -1,5 +1,4 @@
 // npx nx generate @seed/plugin-generator:typescript-library --domain=bookStore --scope=provider --type=model --no-interactive --dry-run
-
 import { formatFiles, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree, updateJson } from '@nrwl/devkit';
 import * as path from 'path';
 

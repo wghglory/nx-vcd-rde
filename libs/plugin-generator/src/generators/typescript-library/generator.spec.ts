@@ -6,7 +6,7 @@ import { TypescriptLibraryGeneratorSchema } from './schema';
 
 describe('typescript-library generator', () => {
   let appTree: Tree;
-  const options: TypescriptLibraryGeneratorSchema = { name: 'test' };
+  const options: TypescriptLibraryGeneratorSchema = { type: 'model', scope: 'provider' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();
@@ -14,7 +14,7 @@ describe('typescript-library generator', () => {
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'test');
+    const config = readProjectConfiguration(appTree, 'provider-model');
     expect(config).toBeDefined();
   });
 });

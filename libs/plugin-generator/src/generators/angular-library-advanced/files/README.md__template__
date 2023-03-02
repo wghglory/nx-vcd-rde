@@ -1,4 +1,4 @@
-# <%= domain %> <%= className %>
+# <%= domain %>
 
 This is Angular library for <%= domain %>
 

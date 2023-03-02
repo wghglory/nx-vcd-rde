@@ -1,4 +1,6 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { SharedSpecModule } from '@seed/shared/module';
@@ -20,8 +22,9 @@ describe('ToastHostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ToastHostComponent],
-      imports: [SharedSpecModule],
+      imports: [SharedSpecModule, NoopAnimationsModule],
       providers: [provideMockStore({ initialState })],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
