@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ShopService } from '@seed/mfe/shop/data-access';
+import { SharedSpecModule } from '@seed/shared/module';
 
 import { ShopDetailComponent } from './shop-detail.component';
 
@@ -8,7 +10,8 @@ describe('ShopDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShopDetailComponent],
+      imports: [ShopDetailComponent, SharedSpecModule],
+      providers: [ShopService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ShopDetailComponent);

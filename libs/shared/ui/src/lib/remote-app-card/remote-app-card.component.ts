@@ -12,5 +12,5 @@ import { RemoteApp } from './remote-app.model';
   styles: [],
 })
 export class RemoteAppCardComponent {
-  @Input() app!: RemoteApp;
+  @Input() app = {} as RemoteApp;
 }

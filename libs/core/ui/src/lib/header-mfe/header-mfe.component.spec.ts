@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '@seed/shared/module';
+import { AuthService } from '@seed/shared/data-access';
+import { SharedSpecModule } from '@seed/shared/module';
+import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
 
 import { HeaderMfeComponent } from './header-mfe.component';
 
@@ -9,8 +11,8 @@ describe('HeaderMfeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderMfeComponent, SharedModule],
-      providers: [],
+      imports: [HeaderMfeComponent, SharedSpecModule, VmwThemeToolsModule],
+      providers: [AuthService, VmwClarityThemeService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderMfeComponent);

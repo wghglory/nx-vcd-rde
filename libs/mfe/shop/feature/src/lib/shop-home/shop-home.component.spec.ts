@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { AuthService } from '@seed/shared/data-access';
+import { SharedSpecModule } from '@seed/shared/module';
 
 import { ShopHomeComponent } from './shop-home.component';
 
@@ -8,7 +11,8 @@ describe('ShopHomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShopHomeComponent],
+      imports: [ShopHomeComponent, SharedSpecModule],
+      providers: [AuthService, provideMockStore({ initialState: { alerts: [] } })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ShopHomeComponent);

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MfeLookupService } from '@seed/shared/data-access';
+import { SharedSpecModule } from '@seed/shared/module';
 
 import { MfeContainerComponent } from './mfe-container.component';
 
@@ -8,7 +10,8 @@ describe('MfeContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MfeContainerComponent],
+      imports: [MfeContainerComponent, SharedSpecModule],
+      providers: [MfeLookupService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MfeContainerComponent);
