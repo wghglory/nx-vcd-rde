@@ -117,3 +117,17 @@ npx nx g @nrwl/angular:remote shop-mfe --host=seed
 
 - Tailwind not working in remote app. https://github.com/nrwl/nx/issues/9784
 - how to pass user session in standalone remote app?
+
+## Common Dev Errors
+
+### Import all components in barrel index due to the limitations of micro frontend.
+
+```
+core.mjs:8506
+
+       ERROR Error: Uncaught (in promise): TypeError: Cannot read properties of undefined (reading 'ɵcmp')
+TypeError: Cannot read properties of undefined (reading 'ɵcmp')
+    at getComponentDef (core.mjs:1240:16)
+```
+
+e.g. `export * from './alert/alert.component';` although it is exported from the alert module.

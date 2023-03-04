@@ -3,14 +3,14 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@seed/shared/data-access';
 import { SharedModule } from '@seed/shared/module';
-import { alertActions } from '@seed/shared/ui';
+import { alertActions, PageContainerComponent } from '@seed/shared/ui';
 
 @Component({
   selector: 'seed-shop-home',
   templateUrl: './shop-home.component.html',
   styleUrls: ['./shop-home.component.scss'],
   standalone: true,
-  imports: [SharedModule, RouterModule],
+  imports: [SharedModule, RouterModule, PageContainerComponent],
 })
 export class ShopHomeComponent {
   constructor(private authService: AuthService, private store: Store) {

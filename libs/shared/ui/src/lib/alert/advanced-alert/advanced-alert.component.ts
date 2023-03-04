@@ -5,13 +5,13 @@ import { DOMAIN_REGEX } from '@seed/shared/util';
 import { L10nService } from '@vmw/ngx-vip';
 import { map } from 'rxjs';
 
-import { deleteAlert } from './+state/alerts.actions';
-import { Alert, GLOBAL } from './+state/alerts.models';
-import { selectAlerts } from './+state/alerts.selectors';
+import { deleteAlert } from '../+state/alerts.actions';
+import { Alert, GLOBAL } from '../+state/alerts.models';
+import { selectAlerts } from '../+state/alerts.selectors';
 
 @Component({
-  selector: 'seed-alert',
-  templateUrl: './alert.component.html',
+  selector: 'seed-advanced-alert',
+  templateUrl: './advanced-alert.component.html',
   styles: [
     `
       :host {
@@ -26,7 +26,7 @@ import { selectAlerts } from './+state/alerts.selectors';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertComponent {
+export class AdvancedAlertComponent {
   constructor(private store: Store<{ alerts: Alert[] }>, private l10nService: L10nService, private router: Router) {}
 
   @Input() key = GLOBAL;

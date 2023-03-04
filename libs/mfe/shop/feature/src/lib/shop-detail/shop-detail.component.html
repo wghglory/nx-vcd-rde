@@ -1,18 +1,24 @@
-<h2 class="mt0">Shop Detail</h2>
+<seed-page-container title="Shop Detail">
+  <ng-container *ngIf="data$ | async as queryResult">
+    <seed-spinner *ngIf="queryResult.loading"></seed-spinner>
 
-<table class="mb2 table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of data$ | async">
-      <td>{{ item.entity.name }}</td>
-      <td>{{ item.entity.description }}</td>
-      <td>{{ item.entity.productionDate }}</td>
-    </tr>
-  </tbody>
-</table>
+    <seed-alert *ngIf="queryResult.error" [error]="queryResult.error"></seed-alert>
+
+    <table *ngIf="queryResult.data" class="mb2 table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of queryResult.data">
+          <td>{{ item.entity.name }}</td>
+          <td>{{ item.entity.description }}</td>
+          <td>{{ item.entity.productionDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</seed-page-container>

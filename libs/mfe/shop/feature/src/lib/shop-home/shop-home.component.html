@@ -1,10 +1,8 @@
-<section class="space-y-6">
-  <h2 class="mt0">Shop App</h2>
-
+<seed-page-container title="Shop App">
   <p cds-text>
     Welcome, <strong>{{ (user$ | async)?.user }}</strong
     >! Enjoy your Shop App development journey!
   </p>
 
   <a class="inline-block" [routerLink]="['detail']">See Shop Detail</a>
-</section>
+</seed-page-container>

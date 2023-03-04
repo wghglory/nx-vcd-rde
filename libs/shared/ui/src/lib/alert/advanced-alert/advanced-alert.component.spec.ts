@@ -4,13 +4,13 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { SharedSpecModule } from '@seed/shared/module';
 import { L10nService } from '@vmw/ngx-vip';
 
-import { deleteAlert } from './+state/alerts.actions';
-import { selectAlerts } from './+state/alerts.selectors';
-import { AlertComponent } from './alert.component';
+import { deleteAlert } from '../+state/alerts.actions';
+import { selectAlerts } from '../+state/alerts.selectors';
+import { AdvancedAlertComponent } from './advanced-alert.component';
 
-describe('AlertComponent', () => {
-  let component: AlertComponent;
-  let fixture: ComponentFixture<AlertComponent>;
+describe('AdvancedAlertComponent', () => {
+  let component: AdvancedAlertComponent;
+  let fixture: ComponentFixture<AdvancedAlertComponent>;
   let store: MockStore;
   let router: Router;
   let l10nService: L10nService;
@@ -18,7 +18,7 @@ describe('AlertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AlertComponent],
+      declarations: [AdvancedAlertComponent],
       imports: [SharedSpecModule],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
@@ -28,7 +28,7 @@ describe('AlertComponent', () => {
     l10nService = TestBed.inject(L10nService);
     store.dispatch = jest.fn();
 
-    fixture = TestBed.createComponent(AlertComponent);
+    fixture = TestBed.createComponent(AdvancedAlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
