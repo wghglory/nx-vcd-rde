@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@seed/feature/product/data-access';
 import { SharedUiModule } from '@seed/shared/ui';
 import { catchError, combineLatest, EMPTY, filter, finalize, Subject, switchMap, take, tap } from 'rxjs';
@@ -14,10 +14,12 @@ import { catchError, combineLatest, EMPTY, filter, finalize, Subject, switchMap,
 })
 export class ProductEditComponent implements OnInit {
   constructor(private productService: ProductService) {}
+
   productForm = new FormGroup({
-    name: new FormControl('', { nonNullable: true }),
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     description: new FormControl('', {
       nonNullable: true,
+      validators: [Validators.required],
     }),
   });
 

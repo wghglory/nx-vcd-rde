@@ -3,12 +3,14 @@
   <div class="modal-body">
     <form clrForm *ngIf="productForm" [formGroup]="productForm" (ngSubmit)="confirm()" id="productForm">
       <clr-control-container>
-        <label>Product Name</label>
-        <input clrControl formControlName="name" />
+        <label class="clr-col-md-3">Product Name</label>
+        <input class="clr-col-md-9" clrControl formControlName="name" />
+        <clr-control-error>Required</clr-control-error>
       </clr-control-container>
       <clr-textarea-container>
-        <label>Description</label>
-        <textarea clrTextarea formControlName="description"></textarea>
+        <label class="clr-col-md-3">Description</label>
+        <textarea class="clr-col-md-9 flex-auto" clrTextarea formControlName="description"></textarea>
+        <clr-control-error>Required</clr-control-error>
       </clr-textarea-container>
 
       <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>

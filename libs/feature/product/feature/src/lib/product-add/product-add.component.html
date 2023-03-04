@@ -1,17 +1,16 @@
 <seed-page-container title="Add a new product">
   <form clrForm [formGroup]="productForm" (ngSubmit)="save()">
     <clr-control-container>
-      <label>Product Name</label>
-      <input clrControl formControlName="name" />
+      <label class="clr-col-md-3">Product Name</label>
+      <input class="clr-col-md-9" clrControl formControlName="name" />
       <!-- <clr-control-helper>Helper text that shows while it is pristine and valid</clr-control-helper> -->
       <clr-control-error>Required</clr-control-error>
     </clr-control-container>
-    <clr-control-container>
-      <label>Description</label>
-      <input clrControl formControlName="description" />
-      <clr-control-helper>Please write product description</clr-control-helper>
+    <clr-textarea-container>
+      <label class="clr-col-md-3">Description</label>
+      <textarea class="clr-col-md-9 flex-auto" clrTextarea formControlName="description"></textarea>
       <clr-control-error>Required</clr-control-error>
-    </clr-control-container>
+    </clr-textarea-container>
 
     <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
 
