@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { Store } from '@ngrx/store';
-import { toastActions } from '@seed/core/ui';
+import { toastActions } from '@seed/core/feature';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
 import { LoadingOrErrorComponent } from '@seed/shared/ui';

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClarityModule } from '@clr/angular';
-import { NavbarComponent } from '@seed/core/ui';
+import { NavbarComponent } from '@seed/core/feature';
 import { AlertModule } from '@seed/shared/ui';
 import { MockComponent, MockModule } from 'ng-mocks';
 

@@ -17,7 +17,7 @@
     "paths": {
       "@seed/common-assets": ["libs/common-assets/src/index.ts"],
       "@seed/core/interceptor": ["libs/core/interceptor/src/index.ts"],
-      "@seed/core/ui": ["libs/core/ui/src/index.ts"],
+      "@seed/core/feature": ["libs/core/feature/src/index.ts"],
       "@seed/feature/mfe": ["libs/feature/mfe/src/index.ts"],
       "@seed/feature/product/data-access": ["libs/feature/product/data-access/src/index.ts"],
       "@seed/feature/product/feature": ["libs/feature/product/feature/src/index.ts"],
