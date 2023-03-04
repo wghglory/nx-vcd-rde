@@ -8,3 +8,5 @@ export function api<T>(): UnaryFunction<Observable<T>, Observable<ApiQuery<T>>> 
     catchError(error => of({ loading: false, error, data: null })),
   );
 }
+
+// Improvements: side effect after success or error

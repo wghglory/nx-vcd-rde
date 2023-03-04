@@ -25,6 +25,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["type:app"],
   "implicitDependencies": ["shop-mfe"]
 }
