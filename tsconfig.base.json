@@ -16,9 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@seed/common-assets": ["libs/common-assets/src/index.ts"],
-      "@seed/core/interceptor": ["libs/core/interceptor/src/index.ts"],
       "@seed/core/feature": ["libs/core/feature/src/index.ts"],
-      "@seed/feature/mfe": ["libs/feature/mfe/src/index.ts"],
+      "@seed/core/interceptor": ["libs/core/interceptor/src/index.ts"],
       "@seed/feature/product/data-access": ["libs/feature/product/data-access/src/index.ts"],
       "@seed/feature/product/feature": ["libs/feature/product/feature/src/index.ts"],
       "@seed/feature/product/model": ["libs/feature/product/model/src/index.ts"],
@@ -41,6 +40,7 @@
       "@seed/provider/setting/ui": ["libs/provider/setting/ui/src/index.ts"],
       "@seed/provider/setting/util": ["libs/provider/setting/util/src/index.ts"],
       "@seed/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@seed/shared/feature": ["libs/shared/feature/src/index.ts"],
       "@seed/shared/model": ["libs/shared/model/src/index.ts"],
       "@seed/shared/module": ["libs/shared/module/src/index.ts"],
       "@seed/shared/style": ["libs/shared/style/src/index.ts"],

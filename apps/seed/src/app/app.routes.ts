@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nrwl/angular/mf';
 import { NoAccessComponent, NotFoundComponent } from '@seed/core/feature';
-import { MfeContainerComponent } from '@seed/feature/mfe';
 import { productRoutes } from '@seed/feature/product/feature';
 import { AuthGuard } from '@seed/shared/data-access';
+import { MfeContainerComponent } from '@seed/shared/feature';
 import { WelcomeComponent } from '@seed/shared/ui';
 
 import { Layout } from './layout/layout';

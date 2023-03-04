@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'feature-mfe',
+  displayName: 'shared-feature',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: [
     '<rootDir>/src/test-setup.ts',
@@ -15,7 +15,7 @@ export default {
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
   collectCoverage: true,
-  coverageDirectory: '../../../coverage/libs/feature/mfe',
+  coverageDirectory: '../../../coverage/libs/shared/feature',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
