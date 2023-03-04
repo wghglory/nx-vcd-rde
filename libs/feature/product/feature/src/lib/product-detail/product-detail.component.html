@@ -1,12 +1,12 @@
 <ng-container *ngIf="product$ | async as product; else loadingOrError">
-  <h2>Product Detail -- {{ product.name }}</h2>
+  <seed-page-container [title]="'Product Detail of' + product.name">
+    <div class="space-x-6">
+      <span>Production Date</span>
+      <time class="text-sky-600 dark:text-sky-500">{{ product.entity.productionDate }}</time>
+    </div>
 
-  <div class="space-x-6">
-    <span>Production Date</span>
-    <time class="text-sky-600 dark:text-sky-500">{{ product.entity.productionDate }}</time>
-  </div>
-
-  <p>{{ product.entity.description }}</p>
+    <p>{{ product.entity.description }}</p>
+  </seed-page-container>
 </ng-container>
 
 <ng-template #loadingOrError>

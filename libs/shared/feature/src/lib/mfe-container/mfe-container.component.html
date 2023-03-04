@@ -1,8 +1,7 @@
-<section class="space-y-6">
-  <h2 class="!mt-0">Apps</h2>
+<seed-page-container title="Apps">
   <p>All below cards are standalone remote apps.</p>
 
   <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <seed-remote-app-card *ngFor="let app of mfeApps$ | async" [app]="app"></seed-remote-app-card>
   </div>
-</section>
+</seed-page-container>

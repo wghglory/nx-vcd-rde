@@ -1,25 +1,25 @@
-<h2>Add a new product</h2>
+<seed-page-container title="Add a new product">
+  <form clrForm [formGroup]="productForm" (ngSubmit)="save()">
+    <clr-control-container>
+      <label>Product Name</label>
+      <input clrControl formControlName="name" />
+      <!-- <clr-control-helper>Helper text that shows while it is pristine and valid</clr-control-helper> -->
+      <clr-control-error>Required</clr-control-error>
+    </clr-control-container>
+    <clr-control-container>
+      <label>Description</label>
+      <input clrControl formControlName="description" />
+      <clr-control-helper>Please write product description</clr-control-helper>
+      <clr-control-error>Required</clr-control-error>
+    </clr-control-container>
 
-<form clrForm [formGroup]="productForm" (ngSubmit)="save()">
-  <clr-control-container>
-    <label>Product Name</label>
-    <input clrControl formControlName="name" />
-    <!-- <clr-control-helper>Helper text that shows while it is pristine and valid</clr-control-helper> -->
-    <clr-control-error>Required</clr-control-error>
-  </clr-control-container>
-  <clr-control-container>
-    <label>Description</label>
-    <input clrControl formControlName="description" />
-    <clr-control-helper>Please write product description</clr-control-helper>
-    <clr-control-error>Required</clr-control-error>
-  </clr-control-container>
+    <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
 
-  <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
+    <div class="mt-6">
+      <button class="btn btn-outline" type="button" (click)="goBack()">Cancel</button>
+      <button class="btn btn-primary" [disabled]="productForm.invalid" [clrLoading]="loading$ | async" type="submit">Submit</button>
+    </div>
+  </form>
 
-  <div class="mt-6">
-    <button class="btn btn-outline" type="button" (click)="goBack()">Cancel</button>
-    <button class="btn btn-primary" [disabled]="productForm.invalid" [clrLoading]="loading$ | async" type="submit">Submit</button>
-  </div>
-</form>
-
-<ng-container *ngIf="add$ | async"></ng-container>
+  <ng-container *ngIf="add$ | async"></ng-container>
+</seed-page-container>

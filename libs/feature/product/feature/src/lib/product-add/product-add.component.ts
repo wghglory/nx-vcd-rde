@@ -3,13 +3,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '@seed/feature/product/data-access';
-import { SharedUiModule } from '@seed/shared/ui';
+import { PageContainerComponent, SharedUiModule } from '@seed/shared/ui';
 import { catchError, EMPTY, finalize, Subject, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'seed-product-add',
   standalone: true,
-  imports: [SharedUiModule, ReactiveFormsModule],
+  imports: [SharedUiModule, PageContainerComponent, ReactiveFormsModule],
   templateUrl: './product-add.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

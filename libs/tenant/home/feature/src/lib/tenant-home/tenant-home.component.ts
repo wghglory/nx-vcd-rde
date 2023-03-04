@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WelcomeComponent } from '@seed/shared/ui';
+import { PageContainerComponent, SharedUiModule, WelcomeComponent } from '@seed/shared/ui';
 
 @Component({
   selector: 'seed-tenant-home',
   standalone: true,
-  imports: [CommonModule, WelcomeComponent],
+  imports: [SharedUiModule, PageContainerComponent, WelcomeComponent],
   templateUrl: './tenant-home.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
