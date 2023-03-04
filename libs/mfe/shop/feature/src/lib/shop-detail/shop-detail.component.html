@@ -1,10 +1,10 @@
 <seed-page-container title="Shop Detail">
-  <ng-container *ngIf="data$ | async as queryResult">
-    <seed-spinner *ngIf="queryResult.loading"></seed-spinner>
+  <ng-container *ngIf="data$ | async as apiResult">
+    <seed-spinner *ngIf="apiResult.loading"></seed-spinner>
 
-    <seed-alert *ngIf="queryResult.error" [error]="queryResult.error"></seed-alert>
+    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error"></seed-alert>
 
-    <table *ngIf="queryResult.data" class="mb2 table">
+    <table *ngIf="apiResult.data" class="mb2 table">
       <thead>
         <tr>
           <th>Name</th>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of queryResult.data">
+        <tr *ngFor="let item of apiResult.data">
           <td>{{ item.entity.name }}</td>
           <td>{{ item.entity.description }}</td>
           <td>{{ item.entity.productionDate }}</td>
