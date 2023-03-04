@@ -1,14 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ClarityModule } from '@clr/angular';
 import { ProductService } from '@seed/feature/product/data-access';
+import { SharedUiModule } from '@seed/shared/ui';
 import { catchError, combineLatest, EMPTY, filter, finalize, Subject, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'seed-product-delete',
   standalone: true,
-  imports: [CommonModule, ClarityModule],
+  imports: [SharedUiModule],
   templateUrl: './product-delete.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

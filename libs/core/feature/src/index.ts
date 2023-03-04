@@ -5,8 +5,4 @@ export * from './lib/login/login.component';
 export * from './lib/navbar/navbar.component';
 export * from './lib/no-access/no-access.component';
 export * from './lib/not-found/not-found.component';
-export * from './lib/toast';
-export * from './lib/toast/toast/toast.component';
-export * from './lib/toast/toast-container/toast-container.component';
-export * from './lib/toast/toast-host.component';
 export * from './lib/vertical-nav/vertical-nav.component';

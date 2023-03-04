@@ -3,7 +3,7 @@ import { Product } from '@seed/feature/product/model';
 import { ShopService } from '@seed/mfe/shop/data-access';
 import { ApiQuery, RDEValue } from '@seed/shared/model';
 import { SharedModule } from '@seed/shared/module';
-import { AlertModule, PageContainerComponent, SpinnerComponent } from '@seed/shared/ui';
+import { AlertComponent, PageContainerComponent, SpinnerComponent } from '@seed/shared/ui';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { catchError, map, Observable, of, startWith } from 'rxjs';
   templateUrl: './shop-detail.component.html',
   styleUrls: ['./shop-detail.component.scss'],
   standalone: true,
-  imports: [SharedModule, SpinnerComponent, AlertModule, PageContainerComponent],
+  imports: [SharedModule, SpinnerComponent, AlertComponent, PageContainerComponent],
 })
 export class ShopDetailComponent {
   constructor(private shopService: ShopService) {}

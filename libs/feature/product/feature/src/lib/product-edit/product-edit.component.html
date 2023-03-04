@@ -11,13 +11,7 @@
         <textarea clrTextarea formControlName="description"></textarea>
       </clr-textarea-container>
 
-      <clr-alert class="mt-6" [clrAlertType]="'danger'" *ngIf="error$ | async as error">
-        <clr-alert-item>
-          <span class="alert-text" role="alert">
-            {{ error.message }}
-          </span>
-        </clr-alert-item>
-      </clr-alert>
+      <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
     </form>
   </div>
   <div class="modal-footer">

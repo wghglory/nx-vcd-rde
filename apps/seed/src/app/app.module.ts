@@ -8,10 +8,10 @@ import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NavbarComponent, ToastModule, VerticalNavComponent } from '@seed/core/feature';
+import { NavbarComponent, VerticalNavComponent } from '@seed/core/feature';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { bootstrapFactory, PreloadService } from '@seed/shared/data-access';
-import { AlertModule } from '@seed/shared/ui';
+import { AlertModule, ToastModule } from '@seed/shared/ui';
 import { COMMON_ICONS, themeFactory } from '@seed/shared/util';
 import { initVIPConfig } from '@seed/shared/vip';
 import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
@@ -57,10 +57,10 @@ import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone
     // core
     VerticalNavComponent,
     NavbarComponent,
-    ToastModule,
 
     // share
     AlertModule,
+    ToastModule,
   ],
   providers: [
     {

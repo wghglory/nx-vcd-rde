@@ -1,12 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ClarityModule } from '@clr/angular';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
 import { RDEList } from '@seed/shared/model';
-import { SpinnerComponent } from '@seed/shared/ui';
+import { SharedUiModule } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/util';
 import { VmwInfiniteScrollDirectiveModule } from '@vmw/ngx-utils';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -15,7 +13,7 @@ import { BehaviorSubject, catchError, concatMap, EMPTY, finalize, scan, Subject,
 @Component({
   selector: 'seed-product-infinite-scroll',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, ClarityModule, RouterModule, SpinnerComponent],
+  imports: [SharedUiModule, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, RouterModule],
   templateUrl: './product-infinite-scroll.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

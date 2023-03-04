@@ -1,19 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ClarityModule } from '@clr/angular';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
 import { RDEList } from '@seed/shared/model';
-import { SpinnerComponent } from '@seed/shared/ui';
+import { SharedUiModule } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/util';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, of, scan, Subject, switchMap, tap, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'seed-product-card-list',
   standalone: true,
-  imports: [CommonModule, ClarityModule, RouterModule, SpinnerComponent],
+  imports: [SharedUiModule, RouterModule],
   templateUrl: './product-card-list.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

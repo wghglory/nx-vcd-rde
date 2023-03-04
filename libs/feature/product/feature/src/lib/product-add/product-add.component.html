@@ -14,13 +14,7 @@
     <clr-control-error>Required</clr-control-error>
   </clr-control-container>
 
-  <clr-alert class="mt-6" [clrAlertType]="'danger'" *ngIf="error$ | async as error">
-    <clr-alert-item>
-      <span class="alert-text" role="alert">
-        {{ error.message }}
-      </span>
-    </clr-alert-item>
-  </clr-alert>
+  <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
 
   <div class="mt-6">
     <button class="btn btn-outline" type="button" (click)="goBack()">Cancel</button>

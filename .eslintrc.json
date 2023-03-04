@@ -24,7 +24,7 @@
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:data-access", "type:util", "type:model"]
+                "onlyDependOnLibsWithTags": ["type:ui", "type:data-access", "type:util", "type:model", "scope:shared"]
               },
               {
                 "sourceTag": "type:ui",

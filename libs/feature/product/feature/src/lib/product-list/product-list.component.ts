@@ -1,21 +1,18 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ClarityModule } from '@clr/angular';
 import { Store } from '@ngrx/store';
-import { toastActions } from '@seed/core/feature';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
-import { LoadingOrErrorComponent } from '@seed/shared/ui';
+import { LoadingOrErrorComponent, SharedUiModule, toastActions } from '@seed/shared/ui';
 import { logger } from '@seed/shared/util';
 import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, ClarityModule, FormsModule, LoadingOrErrorComponent],
+  imports: [SharedUiModule, RouterModule, FormsModule, LoadingOrErrorComponent],
   templateUrl: './product-list.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,15 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ClarityModule } from '@clr/angular';
 import { ProductService } from '@seed/feature/product/data-access';
+import { SharedUiModule } from '@seed/shared/ui';
 import { catchError, combineLatest, EMPTY, filter, finalize, Subject, switchMap, take, tap } from 'rxjs';
 
 @Component({
   selector: 'seed-product-edit',
   standalone: true,
-  imports: [CommonModule, ClarityModule, ReactiveFormsModule],
+  imports: [SharedUiModule, ReactiveFormsModule],
   templateUrl: './product-edit.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

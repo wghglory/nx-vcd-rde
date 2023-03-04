@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { SharedModule } from '@seed/shared/module';
+import { ClarityModule } from '@clr/angular';
+import { VIPModule } from '@vmw/ngx-vip';
 
 @Component({
   selector: 'seed-about-dialog',
   standalone: true,
-  imports: [SharedModule],
+  imports: [ClarityModule, CommonModule, VIPModule],
   templateUrl: './about-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

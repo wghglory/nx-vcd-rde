@@ -1,10 +1,4 @@
-<clr-alert class="mb-4" [clrAlertType]="'danger'" *ngIf="error$ | async as error">
-  <clr-alert-item>
-    <span class="alert-text" role="alert">
-      {{ error.message }}
-    </span>
-  </clr-alert-item>
-</clr-alert>
+<seed-alert *ngIf="error$ | async as error" [error]="error" class="mb-4"></seed-alert>
 
 <clr-datagrid
   class="min-h-[200px]"

@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ClarityModule, ClrDatagridStateInterface } from '@clr/angular';
+import { ClrDatagridStateInterface } from '@clr/angular';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
+import { SharedUiModule } from '@seed/shared/ui';
 import { startWithTap, stateHandler } from '@seed/shared/util';
 import { isEqual } from 'lodash';
 import {
@@ -27,7 +27,7 @@ import {
 @Component({
   selector: 'seed-product-datagrid',
   standalone: true,
-  imports: [CommonModule, RouterModule, ClarityModule],
+  imports: [RouterModule, SharedUiModule],
   templateUrl: './product-datagrid.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

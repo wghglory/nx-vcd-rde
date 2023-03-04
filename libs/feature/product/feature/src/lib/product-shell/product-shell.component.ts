@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ProductService } from '@seed/feature/product/data-access';
-import { SharedModule } from '@seed/shared/module';
+import { SharedUiModule } from '@seed/shared/ui';
 
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
 import { ProductDatagridComponent } from '../product-datagrid/product-datagrid.component';
@@ -15,7 +15,7 @@ import { ProductListComponent } from '../product-list/product-list.component';
   selector: 'seed-product-shell',
   standalone: true,
   imports: [
-    SharedModule,
+    SharedUiModule,
     RouterModule,
     FormsModule,
     ProductListComponent,

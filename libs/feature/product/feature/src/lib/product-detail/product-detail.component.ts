@@ -1,15 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@seed/feature/product/data-access';
-import { LoadingOrErrorComponent } from '@seed/shared/ui';
+import { LoadingOrErrorComponent, SharedUiModule } from '@seed/shared/ui';
 import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-product-detail',
   standalone: true,
-  imports: [CommonModule, LoadingOrErrorComponent],
+  imports: [SharedUiModule, LoadingOrErrorComponent],
   templateUrl: './product-detail.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
