@@ -18,7 +18,7 @@ import {
   map,
   Observable,
   pairwise,
-  share,
+  shareReplay,
   Subject,
   switchMap,
   timer,
@@ -75,7 +75,7 @@ export class ProductDatagridComponent {
         }),
       );
     }),
-    share(), // avoid datagrid async pipe twice 2 subscription AND delete
+    shareReplay(1), // avoid datagrid async pipe twice 2 subscription AND delete
   );
 
   // will be called right after initially datagrid loads data

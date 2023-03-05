@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '@seed/feature/product/model';
 import { PageQuery, RDEList, RDEValue } from '@seed/shared/model';
-import { BehaviorSubject, switchMap, take, throwError, timer } from 'rxjs';
+import { BehaviorSubject, interval, switchMap, take, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,8 +29,8 @@ export class ProductService {
   getProducts(params: Partial<PageQuery>) {
     // mock error response
     if (params.page === 2) {
-      return timer(1000).pipe(
-        take(2),
+      return interval(1000).pipe(
+        take(1),
         switchMap(() => throwError(() => new Error('fail'))),
       );
       // return of(1).pipe(
