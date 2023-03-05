@@ -8,8 +8,8 @@
     </a>
   </div>
   <div class="header-actions">
-    <button class="btn btn-link" (click)="login({ username: 'admin', password: 'password' })">Login as provider</button>
-    <button class="btn btn-link" (click)="login({ username: 'ta', password: 'password' })">Login as tenant</button>
+    <button class="btn btn-link btn-inverse" (click)="login({ username: 'admin', password: 'password' })">Login as provider</button>
+    <button class="btn btn-link btn-inverse" (click)="login({ username: 'ta', password: 'password' })">Login as tenant</button>
     <vmw-theme-switch-button classes="nav-icon nav-link"></vmw-theme-switch-button>
     <span class="username">{{ (user$ | async)?.user }}</span>
   </div>
