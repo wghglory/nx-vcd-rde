@@ -5,6 +5,5 @@ export * from './lib/operators/logger.operator';
 export * from './lib/operators/start-with-tap.operator';
 export * from './lib/util/card-state.util';
 export * from './lib/util/datagrid.util';
-export * from './lib/util/icon.util';
 export * from './lib/util/test.util';
 export * from './lib/util/theme.util';

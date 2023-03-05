@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { ClarityIcons, pluginIcon } from '@cds/core/icon';
 import { MfeLookupService } from '@seed/shared/data-access';
 import { SharedModule } from '@seed/shared/module';
-import { DEFAULT_ICON_SIZE } from '@seed/shared/util';
+import { DEFAULT_ICON_SIZE } from '@seed/shared/style';
 import { VmwClarityTheme } from '@vmw/ngx-utils';
 import { map } from 'rxjs';
 
