@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Product } from '@seed/feature/product';
+import { Product } from '@seed/feature/product/model';
 import { RDEList, RDEValue } from '@seed/shared/model';
 
 const createProduct = ({ name, description, state }: { name: string; description?: string; state: boolean }): RDEValue<Product> => {
