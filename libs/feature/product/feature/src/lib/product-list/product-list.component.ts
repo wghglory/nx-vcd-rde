@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
 import { LoadingOrErrorComponent, SharedUiModule, toastActions } from '@seed/shared/ui';
-import { logger } from '@seed/shared/util';
 import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 
 @Component({
@@ -31,10 +30,7 @@ export class ProductListComponent {
   error$ = new Subject<HttpErrorResponse | null>();
 
   products$ = this.productService.refreshAction$.pipe(
-    switchMap(() => {
-      return this.productService.products$;
-    }),
-    logger('table'),
+    switchMap(() => this.productService.products$),
     catchError(err => {
       this.error$.next(err);
       return EMPTY;

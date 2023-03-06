@@ -37,7 +37,6 @@ export class StudentListComponent {
   );
 
   refresh(state: ClrDatagridStateInterface) {
-    console.log('refresh', state);
     this.dgSource.next(state);
   }
 }
