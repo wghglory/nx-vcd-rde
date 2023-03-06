@@ -5,24 +5,8 @@ import { ClrDatagridStateInterface } from '@clr/angular';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
 import { SharedUiModule } from '@seed/shared/ui';
-import { startWithTap, stateHandler } from '@seed/shared/util';
-import { isEqual } from 'lodash';
-import {
-  BehaviorSubject,
-  catchError,
-  combineLatest,
-  debounce,
-  distinctUntilChanged,
-  EMPTY,
-  finalize,
-  map,
-  Observable,
-  pairwise,
-  shareReplay,
-  Subject,
-  switchMap,
-  timer,
-} from 'rxjs';
+import { dgState, startWithTap, stateHandler } from '@seed/shared/util';
+import { BehaviorSubject, catchError, combineLatest, EMPTY, finalize, shareReplay, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-product-datagrid',
@@ -42,18 +26,7 @@ export class ProductDatagridComponent {
   error$ = this.errorSource.asObservable();
 
   private dgSource = new BehaviorSubject<ClrDatagridStateInterface | null>(null);
-  dgState$ = this.dgSource.pipe(
-    // prepare old and new states filters in order to delay
-    // since behaviorSubject and clrDatagrid emits null and null, no need to `startWith(null)`
-    pairwise(),
-    // only when filter changes, timer(500) to defer to simulate typeahead.
-    debounce(([prev, curr]) => {
-      return isEqual(prev?.filters, curr?.filters) ? timer(0) : timer(500);
-    }),
-    map(([prev, curr]) => curr),
-    // if prev and curr state are the same, no need to emit. e.g. filter was 'a', user type 'aa' and quickly rollback to 'a'
-    distinctUntilChanged(isEqual),
-  ) as Observable<ClrDatagridStateInterface>;
+  dgState$ = this.dgSource.pipe(dgState());
 
   products$ = combineLatest([
     this.dgState$,
