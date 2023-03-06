@@ -22,14 +22,14 @@ export class ProductAddComponent {
     description: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
-  private saveAction = new Subject<void>();
+  private saveSubject = new Subject<void>();
 
   private errorSource = new Subject<HttpErrorResponse | null>();
   error$ = this.errorSource.asObservable();
   private loadingSource = new Subject<boolean>();
   loading$ = this.loadingSource.asObservable();
 
-  add$ = this.saveAction.pipe(
+  add$ = this.saveSubject.pipe(
     switchMap(() =>
       this.productService.addProduct(this.productForm.value).pipe(
         tap(() => {
@@ -47,7 +47,7 @@ export class ProductAddComponent {
   save() {
     this.loadingSource.next(true);
     this.errorSource.next(null);
-    this.saveAction.next();
+    this.saveSubject.next();
   }
 
   goBack() {

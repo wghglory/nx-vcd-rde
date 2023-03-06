@@ -1,0 +1,31 @@
+{
+  "name": "feature-student-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/feature/student/feature/src",
+  "prefix": "seed",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/feature/student/feature/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/feature/student/feature/**/*.ts", "libs/feature/student/feature/**/*.html"]
+      }
+    }
+  },
+  "tags": ["scope:feature", "domain:student", "type:feature", "framework:angular"]
+}

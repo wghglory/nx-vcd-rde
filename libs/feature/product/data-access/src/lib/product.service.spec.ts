@@ -37,7 +37,7 @@ describe('ProductService', () => {
       values: [
         {
           entity: {
-            id: 'mock-id',
+            id: 'mockId',
             name: 'mock-name',
             productionDate: 'mock date',
             description: 'description',
@@ -56,7 +56,7 @@ describe('ProductService', () => {
     expect(request.request.method).toEqual('GET');
     request.flush({
       entity: {
-        id: 'mock-id',
+        id: 'mockId',
         name: 'mock-name',
         productionDate: 'mock date',
         description: 'description',
@@ -73,7 +73,7 @@ describe('ProductService', () => {
     expect(request.request.method).toEqual('POST');
     request.flush({
       entity: {
-        id: 'mock-id',
+        id: 'mockId',
         name: 'mock product',
         productionDate: 'mock date',
         description: 'description',
@@ -100,7 +100,7 @@ describe('ProductService', () => {
     expect(request.request.method).toEqual('PATCH');
     request.flush({
       entity: {
-        id: 'mock-id',
+        id: 'mockId',
         name: 'new name',
         productionDate: 'mock date',
         description: 'new description',

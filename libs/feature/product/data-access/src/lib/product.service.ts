@@ -31,7 +31,7 @@ export class ProductService {
     if (params.page === 2) {
       return interval(1000).pipe(
         take(1),
-        switchMap(() => throwError(() => new Error('fail'))),
+        switchMap(() => throwError(() => new Error('throw error for page 2 on purpose to demo error handling'))),
       );
       // return of(1).pipe(
       //   delay(1000),

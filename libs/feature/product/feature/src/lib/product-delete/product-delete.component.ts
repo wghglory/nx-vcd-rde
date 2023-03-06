@@ -18,14 +18,14 @@ export class ProductDeleteComponent {
   @Input() open = false;
   @Output() openChange = new EventEmitter<boolean>();
 
-  private saveAction = new Subject<void>();
+  private saveSubject = new Subject<void>();
 
   private errorSource = new Subject<HttpErrorResponse | null>();
   error$ = this.errorSource.asObservable();
   private loadingSource = new Subject<boolean>();
   loading$ = this.loadingSource.asObservable();
 
-  delete$ = combineLatest([this.productService.selectedItem$.pipe(filter(Boolean)), this.saveAction]).pipe(
+  delete$ = combineLatest([this.productService.selectedItem$.pipe(filter(Boolean)), this.saveSubject]).pipe(
     switchMap(([product, _]) => {
       return this.productService.deleteProduct(product.id).pipe(
         finalize(() => this.loadingSource.next(false)),
@@ -50,6 +50,6 @@ export class ProductDeleteComponent {
   confirm() {
     this.loadingSource.next(true);
     this.errorSource.next(null);
-    this.saveAction.next();
+    this.saveSubject.next();
   }
 }

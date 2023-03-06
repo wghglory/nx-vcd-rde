@@ -57,7 +57,7 @@ export const handlePagedRequest = <T extends RDEEntityState>(req: Request, res: 
     return res.send(getPagedRdeList({ rdeList: originalRdeList, page, pageSize }));
   }
 
-  const filterMap = getFilterMap(filter);
+  const filterMap = getFilterMap(filter); // { 'entity.lastName' : '*searchTerm*'} entity MUST exact match!
 
   const filteredValues = filterByTemplate(originalRdeList.values, filterMap) as RDEValue<T>[];
 
@@ -133,7 +133,7 @@ function filterByTemplate(source: Array<Record<string, any>>, template: Record<s
         if (propertyName === 'name') {
           return entityValue.match(new RegExp(term, 'i'));
         } else {
-          // if property inside entity, only support exact match
+          // NOTE: if property inside entity, only support exact match!!!
           return entityValue.match(new RegExp(`^${term}$`, 'i'));
         }
       }

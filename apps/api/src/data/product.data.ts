@@ -2,8 +2,9 @@ import { faker } from '@faker-js/faker';
 import { Product } from '@seed/feature/product/model';
 import { RDEList, RDEValue } from '@seed/shared/model';
 
-const createProduct = ({ name, description, state }: { name: string; description?: string; state: boolean }): RDEValue<Product> => {
+export function createProduct({ name, description, state }: Partial<Product>): RDEValue<Product> {
   const id = `urn:vcloud:entity:vmware:product:${faker.datatype.uuid()}`;
+
   return {
     id,
     entityType: 'urn:vcloud:type:vmware:product:1.0.0',
@@ -14,8 +15,8 @@ const createProduct = ({ name, description, state }: { name: string; description
       name,
       description,
       productionDate: faker.date.past().toDateString(),
-      state: state ? 'success' : 'error',
-      state_reason: state ? '' : 'some reasons',
+      state,
+      state_reason: state === 'success' ? '' : 'failed for some reasons',
     },
     state: state ? 'RESOLVED' : faker.helpers.arrayElement(['RESOLUTION_ERROR', 'PRE_CREATED']),
     owner: {
@@ -24,11 +25,11 @@ const createProduct = ({ name, description, state }: { name: string; description
     },
     org: faker.helpers.arrayElement([{ name: 'System', id: faker.datatype.uuid() }]),
   };
-};
+}
 
 const productsNum = faker.datatype.number({ min: 40, max: 100 });
 
-const products: RDEList<Product> = {
+export const products: RDEList<Product> = {
   resultTotal: productsNum,
   pageCount: productsNum,
   page: 1,
@@ -38,9 +39,7 @@ const products: RDEList<Product> = {
     _ => <RDEValue<Product>>createProduct({
         name: faker.commerce.productName(),
         description: faker.lorem.sentence(20),
-        state: faker.datatype.boolean(),
+        state: faker.helpers.arrayElement(['success', 'error']),
       }),
   ),
 };
-
-export { createProduct, products };

@@ -6,6 +6,7 @@ import authMiddleware from './middlewares/auth.middleware';
 import delayMiddleware from './middlewares/delay.middleware';
 import { authRouter } from './routes/auth.route';
 import { productRouter } from './routes/product.route';
+import { studentRouter } from './routes/student.route';
 import { taskRouter } from './routes/task.route';
 import { tenantRouter } from './routes/tenant.route';
 
@@ -27,6 +28,7 @@ app.use(delayMiddleware, authMiddleware);
 app.use(`/api/task`, taskRouter);
 
 app.use(`/api/products`, productRouter);
+app.use(`/api/students`, studentRouter);
 
 // /api/sessions
 app.use(`/api`, authRouter);

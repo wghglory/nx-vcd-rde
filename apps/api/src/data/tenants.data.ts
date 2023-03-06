@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Tenant } from '@seed/shared/model';
 
-const tenants: Tenant[] = [
+export const tenants: Tenant[] = [
   {
     id: 'acme',
     name: 'ACME',
@@ -20,5 +20,3 @@ const data = new Array(45).fill(1).map(i => {
   } as Tenant;
 });
 tenants.push(...data);
-
-export { tenants };

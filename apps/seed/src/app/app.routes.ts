@@ -76,6 +76,11 @@ export const routes: Route[] = [
     data: { layout },
   },
   {
+    path: 'students',
+    loadChildren: () => import('@seed/feature/student/feature').then(m => m.FeatureStudentFeatureModule),
+    data: { layout },
+  },
+  {
     path: '**',
     component: NotFoundComponent,
     data: { layout },

@@ -1,4 +1,4 @@
-const task = ({
+export const task = ({
   id,
   status,
   entityId = 'urn:vcloud:entity:vmware:containerRegistry:2899d7c8-1428-4e8f-973f-a73b665c82f0',
@@ -96,5 +96,3 @@ const task = ({
     vCloudExtension: [],
   };
 };
-
-export { task };

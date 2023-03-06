@@ -1,0 +1,9 @@
+
+GET http://localhost:3333/api/students
+Authorization: Basic admin:password
+
+###
+
+GET http://localhost:3333/api/students/1
+Authorization: Bearer admin
+

@@ -21,6 +21,15 @@ export const ENGLISH = {
   'common.warning': 'Warning',
   'common.no-result': 'No result',
   'common.searching': 'Searching',
+  'common.required': 'Required',
+  'common.cancel': 'Cancel',
+  'common.save': 'Save',
+  'common.confirm': 'Confirm',
+  'common.refresh': 'Refresh',
+  'common.delete': 'Delete',
+  'common.delete_x': 'Are you sure to delete <strong>{0}</strong> ?',
+  'common.add': 'Add',
+  'common.edit': 'Edit',
 
   // Clarity common strings
   'clarity-common-strings.open': 'Open',

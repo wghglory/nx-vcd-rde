@@ -20,6 +20,25 @@ import { catchError, map, Observable, of, pipe, startWith, tap, UnaryFunction } 
       api(),
     ),
   );
+
+  Another implementation thought when refreshing the data: instead of startWith, `merge of` emit as the trigger
+
+  subject.pipe(
+    switchMap(() => {
+      return merge(
+        of({ loading: true, error: null, data: null }),
+        this.service.apiCall().pipe(
+          map(data => ({ loading: false, error: null, data })),
+          tap({
+            next: res => callback?.(res.data),
+            error: err => errorCallback?.(err),
+          }),
+          catchError(error => of({ loading: false, error, data: null })),
+        ),
+      )
+    })
+  )
+
  * @param callback successful callback (side effect), e.g. close dialog
  * @param errorCallback error callback, e.g. send toast alert
  */

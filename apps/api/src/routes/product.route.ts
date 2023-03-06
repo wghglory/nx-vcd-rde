@@ -23,7 +23,7 @@ productRouter.get('/:id', (req, res) => {
 productRouter.post('/', (req, res) => {
   const { name, description } = req.body;
 
-  const product = createProduct({ name, description, state: true });
+  const product = createProduct({ name, description, state: 'success' });
 
   addItemToList(product, products);
 

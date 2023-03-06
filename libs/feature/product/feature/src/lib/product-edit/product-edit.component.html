@@ -5,20 +5,22 @@
       <clr-control-container>
         <label class="clr-col-md-3">Product Name</label>
         <input class="clr-col-md-9" clrControl formControlName="name" />
-        <clr-control-error>Required</clr-control-error>
+        <clr-control-error>{{ 'common.required' | vtranslate }}</clr-control-error>
       </clr-control-container>
       <clr-textarea-container>
         <label class="clr-col-md-3">Description</label>
         <textarea class="clr-col-md-9 flex-auto" clrTextarea formControlName="description"></textarea>
-        <clr-control-error>Required</clr-control-error>
+        <clr-control-error>{{ 'common.required' | vtranslate }}</clr-control-error>
       </clr-textarea-container>
 
       <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="close()">Cancel</button>
-    <button form="productForm" type="submit" class="btn btn-primary" [clrLoading]="loading$ | async" (submit)="confirm()">Confirm</button>
+    <button type="button" class="btn btn-outline" (click)="close()">{{ 'common.cancel' | vtranslate }}</button>
+    <button form="productForm" type="submit" class="btn btn-primary" [clrLoading]="loading$ | async" (submit)="confirm()">
+      {{ 'common.save' | vtranslate }}
+    </button>
   </div>
 </clr-modal>
 
