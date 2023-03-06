@@ -23,6 +23,8 @@
       "@seed/feature/product/model": ["libs/feature/product/model/src/index.ts"],
       "@seed/feature/product/ui": ["libs/feature/product/ui/src/index.ts"],
       "@seed/feature/product/util": ["libs/feature/product/util/src/index.ts"],
+      "@seed/feature/student-store/data-access": ["libs/feature/student-store/data-access/src/index.ts"],
+      "@seed/feature/student-store/feature": ["libs/feature/student-store/feature/src/index.ts"],
       "@seed/feature/student/data-access": ["libs/feature/student/data-access/src/index.ts"],
       "@seed/feature/student/feature": ["libs/feature/student/feature/src/index.ts"],
       "@seed/feature/student/model": ["libs/feature/student/model/src/index.ts"],

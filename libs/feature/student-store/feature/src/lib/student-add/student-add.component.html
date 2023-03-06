@@ -1,0 +1,31 @@
+<seed-page-container title="Add Student">
+  <form clrForm [formGroup]="studentForm" (ngSubmit)="save()">
+    <clr-control-container>
+      <label class="clr-col-md-3">First Name</label>
+      <input class="clr-col-md-9" clrControl formControlName="firstName" />
+      <!-- <clr-control-helper>Helper text that shows while it is pristine and valid</clr-control-helper> -->
+      <clr-control-error>{{ 'common.required' | vtranslate }}</clr-control-error>
+    </clr-control-container>
+
+    <clr-control-container>
+      <label class="clr-col-md-3">Last Name</label>
+      <input class="clr-col-md-9" clrControl formControlName="lastName" />
+      <clr-control-error>{{ 'common.required' | vtranslate }}</clr-control-error>
+    </clr-control-container>
+
+    <clr-control-container>
+      <label class="clr-col-md-3">Age</label>
+      <input class="clr-col-md-9" clrControl formControlName="age" />
+      <clr-control-error>{{ 'common.required' | vtranslate }} and Must be a positive number</clr-control-error>
+    </clr-control-container>
+
+    <seed-alert *ngIf="(add$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
+
+    <div class="mt-6">
+      <button class="btn btn-outline" type="button" (click)="goBack()">{{ 'common.cancel' | vtranslate }}</button>
+      <button class="btn btn-primary" [disabled]="studentForm.invalid" [clrLoading]="(add$ | async)?.loading === true" type="submit">
+        {{ 'common.save' | vtranslate }}
+      </button>
+    </div>
+  </form>
+</seed-page-container>

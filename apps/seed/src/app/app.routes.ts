@@ -77,7 +77,7 @@ export const routes: Route[] = [
   },
   {
     path: 'students',
-    loadChildren: () => import('@seed/feature/student/feature').then(m => m.FeatureStudentFeatureModule),
+    loadChildren: () => import('@seed/feature/student-store/feature').then(m => m.FeatureStudentStoreFeatureModule),
     data: { layout },
   },
   {
