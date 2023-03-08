@@ -70,6 +70,7 @@ export const routes: Route[] = [
     pathMatch: 'full',
     data: { layout },
   },
+  // <!--UI_ENTITY_ROUTES-->
   {
     path: 'products',
     children: productRoutes,

@@ -131,3 +131,8 @@ TypeError: Cannot read properties of undefined (reading 'ɵcmp')
 ```
 
 e.g. `export * from './alert/alert.component';` although it is exported from the alert module.
+
+## Generate CRUD
+
+- UI: `npx nx generate @seed/plugin-generator:all-libraries --domain=book --scope=feature --no-interactive`
+- Mock: `npx hygen route new` and type the domain name, e.g. book.

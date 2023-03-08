@@ -24,9 +24,9 @@ export const <%=entityType%>Router = express.Router();
 });
 
 <%=entityType%>Router.post('/', (req, res) => {
-  const { name, description } = req.body;
+  const { name  } = req.body;
 
-  const <%=entityType%> = create<%=h.capitalize(entityType)%>({ name, description, state: 'success' });
+  const <%=entityType%> = create<%=h.capitalize(entityType)%>({ name, state: 'success' });
 
   addItemToList(<%=entityType%>, <%=h.inflection.pluralize(entityType)%>);
 
@@ -41,7 +41,6 @@ export const <%=entityType%>Router = express.Router();
   if (found) {
     found.name = name;
     found.entity.name = name;
-    found.entity.description = description;
     res.send(found);
   } else {
     res.status(404).send({ message: 'not found' });
@@ -88,10 +87,10 @@ export const <%=entityType%>Router = express.Router();
  * Get <%=entityType%> behaviors
  * entityType example:  urn:vcloud:interface:vmware:container<%=h.capitalize(entityType)%>:1.0.0
  */
-# <%=entityType%>Router.get('/interfaces/:entityType(*container<%=h.capitalize(entityType)%>*)/behaviors', (req, res) => {
-#   res.send(<%=entityType%>Behaviors);
-#   // res.status(400).json({message: 'Failed to get <%=entityType%> behaviors'});
-# });
+// <%=entityType%>Router.get('/interfaces/:entityType(*container<%=h.capitalize(entityType)%>*)/behaviors', (req, res) => {
+//   res.send(<%=entityType%>Behaviors);
+//   // res.status(400).json({message: 'Failed to get <%=entityType%> behaviors'});
+// });
 
 /**
  * Create vcd task template
