@@ -19,8 +19,9 @@ function normalizeOptions(tree: Tree, options: AngularLibraryGeneratorSchema): N
 
   if (options.domain) {
     // const name = names(options.name).fileName;
-    projectDirectory = `${options.scope}/${options.domain}`;
-    tags = `scope:${options.scope},domain:${options.domain},type:${options.type},framework:angular`;
+    const domainFileName = names(options.domain).fileName;
+    projectDirectory = `${options.scope}/${domainFileName}`;
+    tags = `scope:${options.scope},domain:${domainFileName},type:${options.type},framework:angular`;
   } else {
     projectDirectory = options.scope;
     tags = `scope:${options.scope},type:${options.type},framework:angular`;
