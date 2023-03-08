@@ -24,9 +24,10 @@ export class StudentEditStore extends ComponentStore<StudentState> {
   }));
 
   // Updaters
-  readonly setLoading = this.updater((state, loading: boolean) => ({
+  readonly callingAPI = this.updater(state => ({
     ...state,
-    loading,
+    loading: true,
+    error: null,
   }));
 
   readonly setSuccess = this.updater(state => ({
@@ -43,7 +44,7 @@ export class StudentEditStore extends ComponentStore<StudentState> {
   // Effects
   readonly updateStudent = this.effect((payload$: Observable<Partial<Student>>) =>
     combineLatest([payload$, this.route.params]).pipe(
-      tap(() => this.setLoading(true)),
+      tap(() => this.callingAPI()),
       switchMap(([payload, { id }]) => {
         return this.studentService.updateStudent(id, payload).pipe(
           tapResponse(

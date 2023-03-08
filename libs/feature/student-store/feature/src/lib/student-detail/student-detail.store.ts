@@ -28,9 +28,10 @@ export class StudentDetailStore extends ComponentStore<StudentState> {
   }));
 
   // Updaters
-  readonly setLoading = this.updater((state, loading: boolean) => ({
+  readonly callingAPI = this.updater(state => ({
     ...state,
-    loading,
+    loading: true,
+    error: null,
   }));
 
   readonly setSuccess = this.updater((state, student: RDEValue<Student>) => ({
@@ -59,7 +60,7 @@ export class StudentDetailStore extends ComponentStore<StudentState> {
         return this.studentService.getStudent(id).pipe(
           startWithTap(() => {
             if (!stateData) {
-              this.setLoading(true);
+              this.callingAPI();
             }
           }),
           tapResponse(

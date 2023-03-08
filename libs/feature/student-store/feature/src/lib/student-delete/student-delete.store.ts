@@ -28,9 +28,10 @@ export class StudentDeleteStore extends ComponentStore<StudentState> {
   openDialog$ = this.select(state => state.openDialog);
 
   // Updaters
-  readonly setLoading = this.updater((state, loading: boolean) => ({
+  readonly callingAPI = this.updater(state => ({
     ...state,
-    loading,
+    loading: true,
+    error: null,
   }));
 
   readonly setSuccess = this.updater(state => ({
@@ -49,7 +50,7 @@ export class StudentDeleteStore extends ComponentStore<StudentState> {
   readonly deleteStudent = this.effect((selectedStudent$: Observable<Student | null>) =>
     selectedStudent$.pipe(
       filter(Boolean),
-      tap(() => this.setLoading(true)),
+      tap(() => this.callingAPI()),
       switchMap(student =>
         this.studentService.deleteStudent(student.id).pipe(
           tapResponse(

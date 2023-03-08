@@ -33,9 +33,10 @@ export class StudentListStore extends ComponentStore<StudentsState> {
   readonly dgState$ = this.select(state => state.dgState);
 
   // Updaters
-  readonly setLoading = this.updater((state, loading: boolean) => ({
+  readonly callingAPI = this.updater(state => ({
     ...state,
-    loading,
+    loading: true,
+    error: null,
   }));
 
   readonly setList = this.updater((state, students: RDEList<Student>) => ({
@@ -68,7 +69,7 @@ export class StudentListStore extends ComponentStore<StudentsState> {
   readonly getStudentList = this.effect((state$: Observable<ClrDatagridStateInterface>) => {
     return state$.pipe(
       dgStore(),
-      tap(() => this.setLoading(true)),
+      tap(() => this.callingAPI()),
       switchMap(state => {
         this.setDgState(state);
 
