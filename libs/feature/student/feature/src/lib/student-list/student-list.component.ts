@@ -4,7 +4,7 @@ import { StudentService } from '@seed/feature/student/data-access';
 import { Student } from '@seed/feature/student/model';
 import { ApiQuery, RDEList } from '@seed/shared/model';
 import { api, dgState, stateHandler } from '@seed/shared/util';
-import { BehaviorSubject, combineLatest, filter, map, Observable, shareReplay, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, Observable, share, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-student-list',
@@ -28,7 +28,7 @@ export class StudentListComponent {
       return this.studentService.getStudentList(params).pipe(api());
     }),
     startWith({ loading: true, error: null, data: null }), // used to trigger the first render of datagrid.
-    shareReplay(1),
+    share(),
   );
 
   total$ = this.students$.pipe(

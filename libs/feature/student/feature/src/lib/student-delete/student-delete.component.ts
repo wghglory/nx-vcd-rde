@@ -23,7 +23,6 @@ export class StudentDeleteComponent {
       this.studentService.deleteStudent(student.id).pipe(
         api(() => {
           this.close();
-          this.studentService.selectStudent(null);
           this.studentService.refreshList();
         }),
       ),
@@ -32,6 +31,7 @@ export class StudentDeleteComponent {
   );
 
   close() {
+    this.studentService.selectStudent(null);
     this.openChange.emit(false);
   }
 

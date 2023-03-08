@@ -28,12 +28,13 @@
         (clrDgSingleSelectedChange)="<%= propertyName %>Service.select<%= className %>($event!)"
       >
         <clr-dg-column><%= className %> ID</clr-dg-column>
-        <clr-dg-column [clrDgField]="'entity.name'">First Name</clr-dg-column>
+        <clr-dg-column [clrDgField]="'entity.name'">Name</clr-dg-column>
         <clr-dg-column [clrDgField]="'entity.lastModifiedDate'">Last Modified Date</clr-dg-column>
 
         <clr-dg-placeholder>No data found</clr-dg-placeholder>
 
         <clr-dg-row *ngFor="let <%= propertyName %> of apiResult.data?.values" [clrDgItem]="<%= propertyName %>.entity">
+          <clr-dg-cell>{{ <%= propertyName %>.id }}</clr-dg-cell>
           <clr-dg-cell>
             <a [routerLink]="<%= propertyName %>.id">{{ <%= propertyName %>.name }}</a>
           </clr-dg-cell>

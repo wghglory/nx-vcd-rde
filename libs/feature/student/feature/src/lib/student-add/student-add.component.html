@@ -22,7 +22,7 @@
     <seed-alert *ngIf="(add$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
 
     <div class="mt-6">
-      <button class="btn btn-outline" type="button" (click)="goBack()">{{ 'common.cancel' | vtranslate }}</button>
+      <button class="btn btn-outline" type="button" (click)="cancel()">{{ 'common.cancel' | vtranslate }}</button>
       <button class="btn btn-primary" [disabled]="studentForm.invalid" [clrLoading]="(add$ | async)?.loading === true" type="submit">
         {{ 'common.save' | vtranslate }}
       </button>

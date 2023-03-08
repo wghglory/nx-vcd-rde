@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '@seed/feature/student/data-access';
 import { api } from '@seed/shared/util';
-import { shareReplay, Subject, switchMap } from 'rxjs';
+import { share, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-student-add',
@@ -25,11 +25,18 @@ export class StudentAddComponent {
   private saveSubject = new Subject<void>();
 
   add$ = this.saveSubject.pipe(
-    switchMap(() => this.studentService.addStudent(this.studentForm.value).pipe(api(() => this.goBack()))),
-    shareReplay(1),
+    switchMap(() =>
+      this.studentService.addStudent(this.studentForm.value).pipe(
+        api(() => {
+          this.cancel();
+        }),
+      ),
+    ),
+    share(),
   );
 
-  goBack() {
+  cancel() {
+    this.studentService.selectStudent(null);
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
 

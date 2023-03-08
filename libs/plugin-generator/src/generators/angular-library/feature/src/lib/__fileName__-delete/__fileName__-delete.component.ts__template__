@@ -23,7 +23,6 @@ export class <%= className %>DeleteComponent {
       this.<%= propertyName %>Service.delete<%= className %>(<%= propertyName %>.id).pipe(
         api(() => {
           this.close();
-          this.<%= propertyName %>Service.select<%= className %>(null);
           this.<%= propertyName %>Service.refreshList();
         }),
       ),
@@ -32,6 +31,7 @@ export class <%= className %>DeleteComponent {
   );
 
   close() {
+    this.<%= propertyName %>Service.select<%= className %>(null);
     this.openChange.emit(false);
   }
 

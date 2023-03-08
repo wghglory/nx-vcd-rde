@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '@seed/feature/student/data-access';
 import { api } from '@seed/shared/util';
-import { filter, shareReplay, Subject, switchMap, take } from 'rxjs';
+import { filter, share, shareReplay, Subject, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'seed-student-edit',
@@ -29,15 +29,15 @@ export class StudentEditComponent implements OnInit {
     switchMap(student => {
       return this.studentService.updateStudent(student.id, this.studentForm.value).pipe(
         api(() => {
-          this.studentService.selectStudent(null);
-          this.goBack();
+          this.cancel();
         }),
       );
     }),
-    shareReplay(1),
+    share(),
   );
 
-  goBack() {
+  cancel() {
+    this.studentService.selectStudent(null);
     this.router.navigate(['../../..'], { relativeTo: this.route });
   }
 

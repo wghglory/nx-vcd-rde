@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
 import { api } from '@seed/shared/util';
-import { filter, shareReplay, Subject, switchMap, take } from 'rxjs';
+import { filter, share, Subject, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'seed-<%= fileName %>-edit',
@@ -24,15 +24,15 @@ export class <%= className %>EditComponent implements OnInit {
     switchMap(<%= propertyName %> => {
       return this.<%= propertyName %>Service.update<%= className %>(<%= propertyName %>.id, this.<%= propertyName %>Form.value).pipe(
         api(() => {
-          this.<%= propertyName %>Service.select<%= className %>(null);
-          this.goBack();
+          this.cancel();
         }),
       );
     }),
-    shareReplay(1),
+    share(),
   );
 
-  goBack() {
+  cancel() {
+    this.<%= propertyName %>Service.select<%= className %>(null);
     this.router.navigate(['../../..'], { relativeTo: this.route });
   }
 

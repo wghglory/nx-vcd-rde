@@ -1,4 +1,4 @@
-<seed-page-container title="Edit Student">
+<seed-page-container title="Edit <%= className %>">
   <form clrForm [formGroup]="<%= propertyName %>Form" (ngSubmit)="save()">
     <clr-control-container>
       <label class="clr-col-md-3">Name</label>
@@ -10,7 +10,7 @@
     <seed-alert *ngIf="(edit$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
 
     <div class="mt-6">
-      <button class="btn btn-outline" type="button" (click)="goBack()">{{ 'common.cancel' | vtranslate }}</button>
+      <button class="btn btn-outline" type="button" (click)="cancel()">{{ 'common.cancel' | vtranslate }}</button>
       <button class="btn btn-primary" [disabled]="<%= propertyName %>Form.invalid" [clrLoading]="(edit$ | async)?.loading === true" type="submit">
         {{ 'common.save' | vtranslate }}
       </button>
