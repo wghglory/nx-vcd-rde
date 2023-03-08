@@ -46,6 +46,10 @@ function normalizeOptions(tree: Tree, options: AngularLibraryGeneratorSchema): N
 function addFiles(tree: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
+    scopeClassName: names(options.scope).className,
+    domainClassName: names(options.domain).className,
+    scopeFileName: names(options.scope).fileName,
+    domainFileName: names(options.domain).fileName,
     ...names(options.domain),
     relativeOffset: offsetFromRoot(options.projectRoot),
     template: '',

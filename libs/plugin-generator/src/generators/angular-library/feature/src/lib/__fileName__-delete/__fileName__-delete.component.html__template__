@@ -1,0 +1,14 @@
+<clr-modal [(clrModalOpen)]="open" (clrModalOpenChange)="close()">
+  <h3 class="modal-title">Delete <%= className %> (TODO: i18n)</h3>
+  <div class="modal-body">
+    <p cds-text [innerHTML]="'common.delete_x' | vtranslate : (<%= propertyName %>Service.selected<%= className %>$ | async)?.firstName"></p>
+
+    <seed-alert data-testid="alert" *ngIf="(delete$ | async)?.error as error" [error]="error"></seed-alert>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="close()">{{ 'common.cancel' | vtranslate }}</button>
+    <button type="button" class="btn btn-primary" [clrLoading]="(delete$ | async)?.loading === true" (click)="confirm()">
+      {{ 'common.confirm' | vtranslate }}
+    </button>
+  </div>
+</clr-modal>

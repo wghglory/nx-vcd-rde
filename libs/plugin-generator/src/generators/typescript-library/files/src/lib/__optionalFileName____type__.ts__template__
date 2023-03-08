@@ -3,6 +3,9 @@ import { RDEEntityState } from '@seed/shared/model';
 
 export interface <%= className %> extends RDEEntityState {
   // TODO
+  id: string;
+  name: string;
+  lastModifiedDate: Date;
 }
 <% } %>
 

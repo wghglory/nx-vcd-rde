@@ -46,15 +46,15 @@
               // scope
               {
                 "sourceTag": "scope:provider",
-                "onlyDependOnLibsWithTags": ["scope:shared"]
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:provider"]
               },
               {
                 "sourceTag": "scope:tenant",
-                "onlyDependOnLibsWithTags": ["scope:shared"]
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:tenant"]
               },
               {
                 "sourceTag": "scope:core",
-                "onlyDependOnLibsWithTags": ["scope:shared"]
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:core"]
               },
               {
                 "sourceTag": "scope:shared",

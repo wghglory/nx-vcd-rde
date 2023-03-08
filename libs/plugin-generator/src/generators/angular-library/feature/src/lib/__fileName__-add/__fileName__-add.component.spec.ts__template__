@@ -1,0 +1,72 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router } from '@angular/router';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
+import { <%= className %> } from '@seed/<%= scopeFileName %>/<%= fileName %>/model';
+import { RDEValue } from '@seed/shared/model';
+import { SharedSpecModule } from '@seed/shared/module';
+import { of, throwError } from 'rxjs';
+
+import { <%= className %>AddComponent } from './<%= fileName %>-add.component';
+
+describe('<%= className %>AddComponent', () => {
+  let component: <%= className %>AddComponent;
+  let fixture: ComponentFixture<<%= className %>AddComponent>;
+
+  const <%= propertyName %>ServiceStub = {
+    add<%= className %>: jest.fn().mockReturnValue(of({ entity: { name: '<%= className %> name' } } as RDEValue<<%= className %>>)),
+  };
+  const routerStub = { navigate: jest.fn() };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [SharedSpecModule, NoopAnimationsModule],
+      declarations: [<%= className %>AddComponent],
+      providers: [
+        {
+          provide: <%= className %>Service,
+          useValue: <%= propertyName %>ServiceStub,
+        },
+        {
+          provide: Router,
+          useValue: routerStub,
+        },
+        { provide: ActivatedRoute, useValue: {} },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(<%= className %>AddComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should return add <%= propertyName %>', async () => {
+    const formValue = { name: '<%= className %> name' };
+    component.<%= propertyName %>Form.setValue(formValue);
+    component.save();
+
+    const observerSpy = subscribeSpyTo(component.add$);
+
+    expect(routerStub.navigate).toBeCalled();
+    expect(<%= propertyName %>ServiceStub.add<%= className %>).toBeCalledWith(formValue);
+  });
+
+  it('should catchError if add <%= propertyName %> fails', () => {
+    const formValue = { name: '<%= className %> name' };
+    <%= propertyName %>ServiceStub.add<%= className %>.mockReturnValueOnce(throwError(() => new Error('fail')));
+
+    component.<%= propertyName %>Form.setValue(formValue);
+    component.save();
+
+    const observerSpy = subscribeSpyTo(component.add$);
+
+    expect(<%= propertyName %>ServiceStub.add<%= className %>).toBeCalledWith(formValue);
+  });
+});

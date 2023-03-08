@@ -1,0 +1,41 @@
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
+import { api } from '@seed/shared/util';
+import { filter, share, Subject, switchMap } from 'rxjs';
+
+@Component({
+  selector: 'seed-<%= fileName %>-delete',
+  templateUrl: './<%= fileName %>-delete.component.html',
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class <%= className %>DeleteComponent {
+  constructor(public <%= propertyName %>Service: <%= className %>Service) {}
+
+  @Input() open = false;
+  @Output() openChange = new EventEmitter<boolean>();
+
+  private saveSubject = new Subject<void>();
+
+  delete$ = this.saveSubject.pipe(
+    switchMap(() => this.<%= propertyName %>Service.selected<%= className %>$.pipe(filter(Boolean))),
+    switchMap(<%= propertyName %> =>
+      this.<%= propertyName %>Service.delete<%= className %>(<%= propertyName %>.id).pipe(
+        api(() => {
+          this.close();
+          this.<%= propertyName %>Service.select<%= className %>(null);
+          this.<%= propertyName %>Service.refreshList();
+        }),
+      ),
+    ),
+    share(), // cannot use shareReplay as it will replay the delete when selecting an item
+  );
+
+  close() {
+    this.openChange.emit(false);
+  }
+
+  confirm() {
+    this.saveSubject.next();
+  }
+}
