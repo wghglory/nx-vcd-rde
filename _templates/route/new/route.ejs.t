@@ -3,11 +3,63 @@ to: apps/api/src/routes/<%=entityType%>.route.ts
 ---
 import express from 'express';
 
-import { <%=entityType%>Behaviors, <%=h.inflection.pluralize(entityType)%> } from '../data/<%=entityType%>.data';
+import { create<%=h.capitalize(entityType)%>, <%=h.inflection.pluralize(entityType)%> } from '../data/<%=entityType%>.data';
 import { addItemToList, removeItemFromList } from '../utils/entity';
 import { handlePagedRequest } from '../utils/pagination';
 
 export const <%=entityType%>Router = express.Router();
+
+<%=entityType%>Router.get('/', (req, res) => {
+  handlePagedRequest(req, res, <%=h.inflection.pluralize(entityType)%>);
+});
+
+<%=entityType%>Router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  const found = <%=h.inflection.pluralize(entityType)%>.values.find(p => p.id === id);
+
+  if (found) {
+    return res.send(found);
+  }
+  return res.status(404).send({ message: 'not found' });
+});
+
+<%=entityType%>Router.post('/', (req, res) => {
+  const { name, description } = req.body;
+
+  const <%=entityType%> = create<%=h.capitalize(entityType)%>({ name, description, state: 'success' });
+
+  addItemToList(<%=entityType%>, <%=h.inflection.pluralize(entityType)%>);
+
+  return res.send(<%=entityType%>);
+});
+
+<%=entityType%>Router.patch('/:id', (req, res) => {
+  const { name, description } = req.body;
+  const id = req.params.id;
+  const found = <%=h.inflection.pluralize(entityType)%>.values.find(p => p.id === id);
+
+  if (found) {
+    found.name = name;
+    found.entity.name = name;
+    found.entity.description = description;
+    res.send(found);
+  } else {
+    res.status(404).send({ message: 'not found' });
+  }
+});
+
+<%=entityType%>Router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const index = <%=h.inflection.pluralize(entityType)%>.values.findIndex(p => p.id === id);
+
+  if (index > -1) {
+    removeItemFromList(id, <%=h.inflection.pluralize(entityType)%>);
+    return res.status(204).send();
+  }
+  return res.status(404).send({ message: 'not found' });
+});
+
+// ----- RDE -----
 
 /**
  * Get <%=entityType%> list
@@ -36,10 +88,10 @@ export const <%=entityType%>Router = express.Router();
  * Get <%=entityType%> behaviors
  * entityType example:  urn:vcloud:interface:vmware:container<%=h.capitalize(entityType)%>:1.0.0
  */
-<%=entityType%>Router.get('/interfaces/:entityType(*container<%=h.capitalize(entityType)%>*)/behaviors', (req, res) => {
-  res.send(<%=entityType%>Behaviors);
-  // res.status(400).json({message: 'Failed to get <%=entityType%> behaviors'});
-});
+# <%=entityType%>Router.get('/interfaces/:entityType(*container<%=h.capitalize(entityType)%>*)/behaviors', (req, res) => {
+#   res.send(<%=entityType%>Behaviors);
+#   // res.status(400).json({message: 'Failed to get <%=entityType%> behaviors'});
+# });
 
 /**
  * Create vcd task template

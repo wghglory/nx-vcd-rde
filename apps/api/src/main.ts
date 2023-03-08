@@ -27,6 +27,7 @@ app.use(delayMiddleware, authMiddleware);
 // vcd task API
 app.use(`/api/task`, taskRouter);
 
+// <!--COMMON_ENTITY_ROUTES-->
 app.use(`/api/products`, productRouter);
 app.use(`/api/students`, studentRouter);
 
@@ -36,7 +37,7 @@ app.use(`/api`, authRouter);
 // RDE routes
 app.use(apiPrefix, [
   // DON'T DELETE BELOW COMMENT. It's hygen's insertion point
-  // <!--ENTITY_ROUTES-->
+  // <!--RDE_ENTITY_ROUTES-->
   tenantRouter,
 ]);
 

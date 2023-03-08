@@ -1,6 +1,6 @@
 ---
 inject: true
 to: apps/api/src/main.ts
-after: <!--ENTITY_ROUTES-->
+after: <!--RDE_ENTITY_ROUTES-->
 ---
   <%=entityType%>Router,
