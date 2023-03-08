@@ -1,6 +1,8 @@
 <% if (type === 'model' && typeof(className) !== "undefined") { %>
-export interface <%= className %> {
-  name: string;
+import { RDEEntityState } from '@seed/shared/model';
+
+export interface <%= className %> extends RDEEntityState {
+  // TODO
 }
 <% } %>
 
