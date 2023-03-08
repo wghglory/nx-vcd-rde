@@ -1,0 +1,122 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { <%= className %> } from '@seed/<%= scope %>/<%= fileName %>/model';
+import { RDEList, RDEValue } from '@seed/shared/model';
+
+import { <%= className %>Service } from './<%= fileName %>.service';
+
+describe('<%= className %>Service', () => {
+  let service: <%= className %>Service;
+  let controller: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
+    service = TestBed.inject(<%= className %>Service);
+    controller = TestBed.inject(HttpTestingController);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('get <%= propertyName %>s', () => {
+    service.get<%= className %>List({ page: 1 }).subscribe();
+
+    const request = controller.expectOne(req => req.method === 'GET' && req.url.includes('api/<%= fileName %>s'));
+
+    // Assert that the request is a GET.
+    expect(request.request.method).toEqual('GET');
+
+    const data = {
+      resultTotal: 1,
+      pageCount: 1,
+      page: 1,
+      pageSize: 10,
+      associations: [],
+      values: [
+        {
+          entity: {
+            // TODO
+          },
+        },
+      ],
+    } as RDEList<<%= className %>>;
+    request.flush(data);
+  });
+
+  it('get single <%= propertyName %>', () => {
+    service.get<%= className %>('mockId').subscribe();
+
+    const request = controller.expectOne(req => req.method === 'GET' && req.url.includes('api/<%= fileName %>s/mockId'));
+
+    // Assert that the request is a GET.
+    expect(request.request.method).toEqual('GET');
+    request.flush({
+      entity: {
+        id: 'mockId',
+        // TODO
+      },
+    } as RDEValue<<%= className %>>);
+  });
+
+  it('add a <%= propertyName %>', () => {
+    const payload = { }; // TODO
+    service.add<%= className %>(payload).subscribe();
+
+    const request = controller.expectOne(req => req.method === 'POST' && req.url.includes('api/<%= fileName %>s'));
+
+    // Assert that the request is a POST.
+    expect(request.request.method).toEqual('POST');
+    request.flush({
+      entity: payload,
+    } as RDEValue<<%= className %>>);
+  });
+
+  it('delete a <%= propertyName %>', () => {
+    service.delete<%= className %>('mockId').subscribe();
+
+    const request = controller.expectOne(req => req.method === 'DELETE' && req.url.includes('api/<%= fileName %>s/mockId'));
+
+    // Assert that the request is a DELETE.
+    expect(request.request.method).toEqual('DELETE');
+    request.flush(null);
+  });
+
+  it('update a <%= propertyName %>', () => {
+    const payload = { }; // TODO
+    service.update<%= className %>('mockId', payload).subscribe();
+
+    const request = controller.expectOne(req => req.method === 'PATCH' && req.url.includes('api/<%= fileName %>s/mockId'));
+
+    // Assert that the request is a PATCH.
+    expect(request.request.method).toEqual('PATCH');
+    request.flush({
+      entity: payload,
+    } as RDEValue<<%= className %>>);
+  });
+
+  it('refresh list', () => {
+    service.refreshList();
+
+    expect(subscribeSpyTo(service.refresh$).getFirstValue()).toBeUndefined();
+  });
+
+  it('select <%= propertyName %>', () => {
+    const <%= propertyName %> = {
+      id: 'mockId',
+      // TODO
+    } as <%= className %>;
+
+    service.select<%= className %>(<%= propertyName %>);
+
+    expect(subscribeSpyTo(service.selected<%= className %>$).getFirstValue()).toEqual(<%= propertyName %>);
+  });
+
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    controller.verify();
+  });
+});

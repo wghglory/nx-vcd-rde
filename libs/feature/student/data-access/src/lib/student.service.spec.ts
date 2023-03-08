@@ -69,20 +69,15 @@ describe('StudentService', () => {
   });
 
   it('add a student', () => {
-    service.addStudent({ firstName: 'Derek', lastName: 'Wang', age: 30 }).subscribe();
+    const payload = { firstName: 'Derek', lastName: 'Wang', age: 30 };
+    service.addStudent(payload).subscribe();
 
     const request = controller.expectOne(req => req.method === 'POST' && req.url.includes('api/students'));
 
     // Assert that the request is a POST.
     expect(request.request.method).toEqual('POST');
     request.flush({
-      entity: {
-        id: 'mockId',
-        firstName: 'Derek',
-        lastName: 'Wang',
-        age: 30,
-        lastModifiedDate: new Date(),
-      },
+      entity: payload,
     } as RDEValue<Student>);
   });
 
@@ -97,30 +92,25 @@ describe('StudentService', () => {
   });
 
   it('update a student', () => {
-    service.updateStudent('mockId', { firstName: 'Guanghui' }).subscribe();
+    const payload = { firstName: 'Derek', lastName: 'Wang', age: 30 };
+    service.updateStudent('mockId', payload).subscribe();
 
     const request = controller.expectOne(req => req.method === 'PATCH' && req.url.includes('api/students/mockId'));
 
     // Assert that the request is a PATCH.
     expect(request.request.method).toEqual('PATCH');
     request.flush({
-      entity: {
-        id: 'mockId',
-        firstName: 'Guanghui',
-        lastName: 'Wang',
-        lastModifiedDate: new Date(),
-        age: 30,
-      },
+      entity: payload,
     } as RDEValue<Student>);
   });
 
   it('refresh list', () => {
     service.refreshList();
 
-    expect(subscribeSpyTo(service.refreshAction$).getFirstValue()).toBeUndefined();
+    expect(subscribeSpyTo(service.refresh$).getFirstValue()).toBeUndefined();
   });
 
-  it('select item', () => {
+  it('select student', () => {
     const student = {
       id: 'mockId',
       firstName: 'Derek',
@@ -129,9 +119,9 @@ describe('StudentService', () => {
       lastModifiedDate: new Date(),
     } as Student;
 
-    service.selectItem(student);
+    service.selectStudent(student);
 
-    expect(subscribeSpyTo(service.selectedItem$).getFirstValue()).toEqual(student);
+    expect(subscribeSpyTo(service.selectedStudent$).getFirstValue()).toEqual(student);
   });
 
   afterEach(() => {

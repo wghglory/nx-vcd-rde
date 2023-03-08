@@ -10,18 +10,18 @@ import { BehaviorSubject } from 'rxjs';
 export class StudentService {
   constructor(private http: HttpClient) {}
 
-  private refreshAction = new BehaviorSubject<void>(undefined);
-  refreshAction$ = this.refreshAction.asObservable();
+  private refreshBS = new BehaviorSubject<void>(undefined);
+  refresh$ = this.refreshBS.asObservable();
 
-  private selectedItemSource = new BehaviorSubject<Student | null>(null);
-  selectedItem$ = this.selectedItemSource.asObservable();
+  private selectedStudentBS = new BehaviorSubject<Student | null>(null);
+  selectedStudent$ = this.selectedStudentBS.asObservable();
 
   refreshList() {
-    this.refreshAction.next();
+    this.refreshBS.next();
   }
 
-  selectItem(student: Student | null) {
-    this.selectedItemSource.next(student);
+  selectStudent(student: Student | null) {
+    this.selectedStudentBS.next(student);
   }
 
   getStudentList(params: Partial<PageQuery>) {

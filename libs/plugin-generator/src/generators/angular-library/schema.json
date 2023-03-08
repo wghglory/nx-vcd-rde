@@ -7,7 +7,7 @@
   "cli": "nx",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:angular-library --domain=book --scope=provider --type=data-access --no-interactive",
+      "command": "npx nx generate @seed/plugin-generator:angular-library --domain=student --scope=feature --type=data-access --no-interactive",
       "description": "create a new angular feature library: libs/provider/book/data-access"
     },
     {
