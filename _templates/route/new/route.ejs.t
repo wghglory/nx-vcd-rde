@@ -1,5 +1,5 @@
 ---
-to: routes/<%=entityType%>.route.ts
+to: apps/api/src/routes/<%=entityType%>.route.ts
 ---
 import express from 'express';
 
@@ -129,3 +129,4 @@ export const <%=entityType%>Router = express.Router();
     res.status(202).json();
   },
 );
+
