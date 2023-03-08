@@ -24,7 +24,7 @@ export class StudentService {
     this.selectedItemSource.next(student);
   }
 
-  getStudents(params: Partial<PageQuery>) {
+  getStudentList(params: Partial<PageQuery>) {
     return this.http.get<RDEList<Student>>('/api/students', { params });
   }
 

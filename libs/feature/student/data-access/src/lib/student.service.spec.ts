@@ -23,7 +23,7 @@ describe('StudentService', () => {
   });
 
   it('get students', () => {
-    service.getStudents({ page: 1 }).subscribe();
+    service.getStudentList({ page: 1 }).subscribe();
 
     const request = controller.expectOne(req => req.method === 'GET' && req.url.includes('api/students'));
 

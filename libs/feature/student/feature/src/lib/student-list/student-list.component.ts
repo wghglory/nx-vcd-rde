@@ -25,7 +25,7 @@ export class StudentListComponent {
   students$: Observable<ApiQuery<RDEList<Student>>> = combineLatest([this.dgState$, this.studentService.refreshAction$]).pipe(
     switchMap(([state]) => {
       const params = stateHandler(state);
-      return this.studentService.getStudents(params).pipe(api());
+      return this.studentService.getStudentList(params).pipe(api());
     }),
     startWith({ loading: true, error: null, data: null }), // used to trigger the first render of datagrid.
     shareReplay(1),

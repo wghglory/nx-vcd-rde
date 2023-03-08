@@ -77,7 +77,7 @@ describe('StudentListComponent', () => {
   } as RDEList<Student>;
 
   const studentServiceStub = {
-    getStudents: jest.fn().mockReturnValue(of(students1, students2)),
+    getStudentList: jest.fn().mockReturnValue(of(students1, students2)),
     refreshAction$: of(true),
     selectItem: jest.fn(),
   };
@@ -146,14 +146,14 @@ describe('StudentListComponent', () => {
 
     const apiResult = spy.getLastValue() as ApiQuery<RDEList<Student>>;
 
-    expect(studentServiceStub.getStudents).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(studentServiceStub.getStudentList).toBeCalledWith({ page: 2, pageSize: 15 });
     expect(apiResult.data).toBeDefined();
   }));
 
   it('can return students when refreshing with jest spy', fakeAsync(() => {
     const service = TestBed.inject(StudentService);
     const students = { resultTotal: 10 } as RDEList<Student>;
-    jest.spyOn(service, 'getStudents').mockReturnValue(of(students));
+    jest.spyOn(service, 'getStudentList').mockReturnValue(of(students));
 
     const spy = new ObserverSpy();
     const subscription = component.students$.subscribe(spy);
@@ -168,13 +168,13 @@ describe('StudentListComponent', () => {
 
     const apiResult = spy.getLastValue() as ApiQuery<RDEList<Student>>;
 
-    expect(service.getStudents).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(service.getStudentList).toBeCalledWith({ page: 2, pageSize: 15 });
     expect(apiResult.data).toBe(students);
   }));
 
   it('can return error if service fails', fakeAsync(() => {
     const service = TestBed.inject(StudentService);
-    jest.spyOn(service, 'getStudents').mockReturnValue(throwError(() => new Error('fail')));
+    jest.spyOn(service, 'getStudentList').mockReturnValue(throwError(() => new Error('fail')));
 
     const spy = new ObserverSpy();
     const subscription = component.students$.subscribe(spy);
@@ -189,12 +189,12 @@ describe('StudentListComponent', () => {
 
     const apiResult = spy.getLastValue() as ApiQuery<RDEList<Student>>;
 
-    expect(service.getStudents).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(service.getStudentList).toBeCalledWith({ page: 2, pageSize: 15 });
     expect(apiResult.error.message).toEqual('fail');
   }));
 
   it('should return error alert if service fails', fakeAsync(() => {
-    studentServiceStub.getStudents.mockReturnValue(throwError(() => new Error('fail')));
+    studentServiceStub.getStudentList.mockReturnValue(throwError(() => new Error('fail')));
 
     const state = {
       page: { from: 1, to: 15, size: 15, current: 2 },
