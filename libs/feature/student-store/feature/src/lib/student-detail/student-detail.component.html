@@ -1,10 +1,10 @@
 <seed-page-container [title]="'Student Detail'">
-  <ng-container *ngIf="student$ | async as apiResult">
-    <seed-spinner *ngIf="apiResult.loading"></seed-spinner>
+  <ng-container *ngIf="store.vm$ | async as vm">
+    <seed-spinner *ngIf="vm.loading"></seed-spinner>
 
-    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error"></seed-alert>
+    <seed-alert *ngIf="vm.error" [error]="vm.error"></seed-alert>
 
-    <ng-container *ngIf="apiResult.data as student">
+    <ng-container *ngIf="vm.student as student">
       <div class="flex flex-wrap">
         <span class="w-full md:w-1/4">Student Name</span>
         <strong class="w-full md:w-3/4">

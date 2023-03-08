@@ -1,41 +1,31 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { StudentService } from '@seed/feature/student/data-access';
-import { api } from '@seed/shared/util';
-import { filter, share, Subject, switchMap } from 'rxjs';
+
+import { StudentListStore } from './../student-list/student-list.store';
+import { StudentDeleteStore } from './student-delete.store';
 
 @Component({
   selector: 'seed-student-delete',
   templateUrl: './student-delete.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [StudentDeleteStore],
 })
 export class StudentDeleteComponent {
-  constructor(public studentService: StudentService) {}
+  constructor(public studentService: StudentService, public store: StudentDeleteStore, public listStore: StudentListStore) {}
 
-  @Input() open = false;
-  @Output() openChange = new EventEmitter<boolean>();
+  @Input()
+  set open(openDialog: boolean) {
+    this.store.patchState({ openDialog });
+  }
 
-  private saveSubject = new Subject<void>();
-
-  delete$ = this.saveSubject.pipe(
-    switchMap(() => this.studentService.selectedItem$.pipe(filter(Boolean))),
-    switchMap(student =>
-      this.studentService.deleteStudent(student.id).pipe(
-        api(() => {
-          this.close();
-          this.studentService.selectItem(null);
-          this.studentService.refreshList();
-        }),
-      ),
-    ),
-    share(), // cannot use shareReplay as it will replay the delete when selecting an item
-  );
+  @Output() openChange = this.store.openDialog$;
 
   close() {
-    this.openChange.emit(false);
+    this.store.patchState({ openDialog: false });
   }
 
   confirm() {
-    this.saveSubject.next();
+    this.store.deleteStudent(this.listStore.selectedStudent$);
   }
 }

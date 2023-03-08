@@ -1,42 +1,38 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ClrDatagridStateInterface } from '@clr/angular';
-import { StudentService } from '@seed/feature/student/data-access';
 import { Student } from '@seed/feature/student/model';
-import { ApiQuery, RDEList } from '@seed/shared/model';
-import { api, dgState, stateHandler } from '@seed/shared/util';
-import { BehaviorSubject, combineLatest, filter, map, Observable, shareReplay, startWith, switchMap } from 'rxjs';
+import { CLR_DG_DEFAULT_STATE } from '@seed/shared/util';
+
+import { StudentListStore } from './student-list.store';
 
 @Component({
   selector: 'seed-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [StudentListStore],
 })
 export class StudentListComponent {
-  constructor(public studentService: StudentService) {}
+  constructor(public store: StudentListStore) {}
 
   openDeleteDialog = false;
 
   selectedItem: Student | undefined;
 
-  private dgSource = new BehaviorSubject<ClrDatagridStateInterface | null>(null);
-  dgState$ = this.dgSource.pipe(dgState());
+  prevState: ClrDatagridStateInterface = CLR_DG_DEFAULT_STATE;
 
-  students$: Observable<ApiQuery<RDEList<Student>>> = combineLatest([this.dgState$, this.studentService.refreshAction$]).pipe(
-    switchMap(([state]) => {
-      const params = stateHandler(state);
-      return this.studentService.getStudents(params).pipe(api());
-    }),
-    startWith({ loading: true, error: null, data: null }), // used to trigger the first render of datagrid.
-    shareReplay(1),
-  );
-
-  total$ = this.students$.pipe(
-    filter(s => Boolean(s.data)),
-    map(res => res.data?.resultTotal),
-  );
+  selectItem(item: Student) {
+    // this.selectedItem = item;
+    // this.store.patchState({ selectedStudent: item });
+    this.store.setSelected(item);
+  }
 
   refresh(state: ClrDatagridStateInterface) {
-    this.dgSource.next(state);
+    this.prevState = state;
+    this.store.getStudentList(state);
+  }
+
+  refreshWithPrevState() {
+    this.store.getStudentList(this.prevState);
   }
 }

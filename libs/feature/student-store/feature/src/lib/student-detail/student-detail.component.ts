@@ -1,20 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { StudentService } from '@seed/feature/student/data-access';
-import { api } from '@seed/shared/util';
-import { switchMap } from 'rxjs';
+
+import { StudentDetailStore } from './student-detail.store';
 
 @Component({
   selector: 'seed-student-detail',
   templateUrl: './student-detail.component.html',
-  styles: [],
+  providers: [StudentDetailStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentDetailComponent {
-  constructor(private studentService: StudentService, private route: ActivatedRoute) {}
-
-  student$ = this.route.params.pipe(
-    switchMap(({ id }) => this.studentService.getStudent(id)),
-    api(),
-  );
+  constructor(public store: StudentDetailStore) {}
 }

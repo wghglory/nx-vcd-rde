@@ -1,14 +1,12 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { ObserverSpy, queueForAutoUnsubscribe, subscribeSpyTo } from '@hirez_io/observer-spy';
-import { StudentService } from '@seed/feature/student/data-access';
 import { Student } from '@seed/feature/student/model';
-import { ApiQuery, RDEList } from '@seed/shared/model';
+import { RDEList } from '@seed/shared/model';
 import { SharedSpecModule } from '@seed/shared/module';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 import { StudentListComponent } from './student-list.component';
+import { StudentListStore } from './student-list.store';
 
 describe('StudentListComponent', () => {
   let component: StudentListComponent;
@@ -76,10 +74,8 @@ describe('StudentListComponent', () => {
     ],
   } as RDEList<Student>;
 
-  const studentServiceStub = {
-    getStudents: jest.fn().mockReturnValue(of(students1, students2)),
-    refreshAction$: of(true),
-    selectItem: jest.fn(),
+  const studentListStoreStub = {
+    getStudentList: jest.fn().mockReturnValue(of(students1, students2)),
   };
 
   beforeEach(async () => {
@@ -88,8 +84,8 @@ describe('StudentListComponent', () => {
       declarations: [StudentListComponent],
       providers: [
         {
-          provide: StudentService,
-          useValue: studentServiceStub,
+          provide: StudentListStore,
+          useValue: studentListStoreStub,
         },
       ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -103,108 +99,4 @@ describe('StudentListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('can refresh datagrid using subscribeSpyTo', fakeAsync(() => {
-    const observerSpy = subscribeSpyTo(component.dgState$).getValues();
-
-    const state = {
-      page: { from: 1, to: 15, size: 15, current: 2 },
-    };
-    component.refresh(state);
-
-    tick();
-
-    expect(observerSpy[0]).toStrictEqual(state);
-  }));
-
-  it('can refresh datagrid using ObserverSpy', fakeAsync(() => {
-    const spy = new ObserverSpy();
-    const subscription = component.dgState$.subscribe(spy);
-    queueForAutoUnsubscribe(subscription);
-
-    const state = {
-      page: { from: 1, to: 15, size: 15, current: 2 },
-    };
-    component.refresh(state);
-
-    tick();
-
-    expect(spy.getFirstValue()).toStrictEqual(state);
-  }));
-
-  it('can return students when refreshing', fakeAsync(() => {
-    const spy = new ObserverSpy();
-    const subscription = component.students$.subscribe(spy);
-    queueForAutoUnsubscribe(subscription);
-
-    const state = {
-      page: { from: 1, to: 15, size: 15, current: 2 },
-    };
-    component.refresh(state);
-
-    tick();
-
-    const apiResult = spy.getLastValue() as ApiQuery<RDEList<Student>>;
-
-    expect(studentServiceStub.getStudents).toBeCalledWith({ page: 2, pageSize: 15 });
-    expect(apiResult.data).toBeDefined();
-  }));
-
-  it('can return students when refreshing with jest spy', fakeAsync(() => {
-    const service = TestBed.inject(StudentService);
-    const students = { resultTotal: 10 } as RDEList<Student>;
-    jest.spyOn(service, 'getStudents').mockReturnValue(of(students));
-
-    const spy = new ObserverSpy();
-    const subscription = component.students$.subscribe(spy);
-    queueForAutoUnsubscribe(subscription);
-
-    const state = {
-      page: { from: 1, to: 15, size: 15, current: 2 },
-    };
-    component.refresh(state);
-
-    tick();
-
-    const apiResult = spy.getLastValue() as ApiQuery<RDEList<Student>>;
-
-    expect(service.getStudents).toBeCalledWith({ page: 2, pageSize: 15 });
-    expect(apiResult.data).toBe(students);
-  }));
-
-  it('can return error if service fails', fakeAsync(() => {
-    const service = TestBed.inject(StudentService);
-    jest.spyOn(service, 'getStudents').mockReturnValue(throwError(() => new Error('fail')));
-
-    const spy = new ObserverSpy();
-    const subscription = component.students$.subscribe(spy);
-    queueForAutoUnsubscribe(subscription);
-
-    const state = {
-      page: { from: 1, to: 15, size: 15, current: 2 },
-    };
-    component.refresh(state);
-
-    tick();
-
-    const apiResult = spy.getLastValue() as ApiQuery<RDEList<Student>>;
-
-    expect(service.getStudents).toBeCalledWith({ page: 2, pageSize: 15 });
-    expect(apiResult.error.message).toEqual('fail');
-  }));
-
-  it('should return error alert if service fails', fakeAsync(() => {
-    studentServiceStub.getStudents.mockReturnValue(throwError(() => new Error('fail')));
-
-    const state = {
-      page: { from: 1, to: 15, size: 15, current: 2 },
-    };
-    component.refresh(state); // trigger load data
-
-    tick();
-    fixture.detectChanges();
-
-    const alert = fixture.debugElement.query(By.css(`seed-alert`));
-    expect(alert.nativeElement).toBeInTheDocument();
-  }));
 });

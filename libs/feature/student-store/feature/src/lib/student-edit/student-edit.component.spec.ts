@@ -10,31 +10,17 @@ import { SharedSpecModule } from '@seed/shared/module';
 import { of, throwError } from 'rxjs';
 
 import { StudentEditComponent } from './student-edit.component';
+import { StudentEditStore } from './student-edit.store';
 
 describe('StudentEditComponent', () => {
   let component: StudentEditComponent;
   let fixture: ComponentFixture<StudentEditComponent>;
-  const studentServiceStub = {
-    updateStudent: jest.fn(),
-    selectedItem$: of({
-      id: 'student-id',
-      entity: { lastName: 'Wang', firstName: 'Derek', age: 30, id: 'student-id' },
-    } as RDEValue<Student>),
-    refreshList: jest.fn(),
-    selectItem: jest.fn(),
-  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SharedSpecModule, NoopAnimationsModule],
       declarations: [StudentEditComponent],
-      providers: [
-        {
-          provide: StudentService,
-          useValue: studentServiceStub,
-        },
-        { provide: ActivatedRoute, useValue: {} },
-      ],
+      providers: [StudentEditStore, { provide: ActivatedRoute, useValue: {} }],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
@@ -45,30 +31,5 @@ describe('StudentEditComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should edit student when confirm', async () => {
-    const formValue = { lastName: 'Wang', firstName: 'Derek', age: 30 };
-    component.studentForm.setValue(formValue);
-
-    studentServiceStub.updateStudent.mockImplementation(id => of(formValue));
-
-    component.save();
-
-    const observerSpy = subscribeSpyTo(component.edit$);
-
-    expect(studentServiceStub.updateStudent).toBeCalledWith('student-id', formValue);
-  });
-
-  it('should catchError if update student fails', () => {
-    const formValue = { lastName: 'Wang', firstName: 'Derek', age: 30 };
-    component.studentForm.setValue(formValue);
-    studentServiceStub.updateStudent.mockReturnValueOnce(throwError(() => new Error('fail')));
-
-    component.save();
-
-    const observerSpy = subscribeSpyTo(component.edit$);
-
-    expect(studentServiceStub.updateStudent).toBeCalledWith('student-id', formValue);
   });
 });

@@ -1,20 +1,21 @@
 <seed-page-container title="Students">
-  <ng-container *ngIf="students$ | async as apiResult">
+  <ng-container *ngIf="store.vm$ | async as vm">
     <div>
       <!-- Actions -->
       <div>
-        <button class="btn btn-outline" (click)="studentService.refreshList()" [disabled]="apiResult.loading">
+        <button class="btn btn-outline" (click)="refreshWithPrevState()" [disabled]="vm.loading">
           {{ 'common.refresh' | vtranslate }}
         </button>
         <button class="btn btn-outline" [routerLink]="'@/add'">{{ 'common.add' | vtranslate }}</button>
         <button
           class="btn btn-outline"
-          [disabled]="(studentService.selectedItem$ | async) === null"
-          [routerLink]="['@/edit', (studentService.selectedItem$ | async)?.id]"
+          [disabled]="vm.selectedStudent === null"
+          [routerLink]="['@/edit', vm.selectedStudent?.id]"
+          [state]="vm.selectedStudent!"
         >
           {{ 'common.edit' | vtranslate }}
         </button>
-        <button class="btn btn-outline" [disabled]="(studentService.selectedItem$ | async) === null" (click)="openDeleteDialog = true">
+        <button class="btn btn-outline" [disabled]="(store.selectedStudent$ | async) === null" (click)="openDeleteDialog = true">
           {{ 'common.delete' | vtranslate }}
         </button>
       </div>
@@ -23,9 +24,9 @@
       <clr-datagrid
         class="min-h-[200px]"
         (clrDgRefresh)="refresh($event)"
-        [clrDgLoading]="apiResult.loading === true"
+        [clrDgLoading]="vm.loading"
         [(clrDgSingleSelected)]="selectedItem"
-        (clrDgSingleSelectedChange)="studentService.selectItem($event!)"
+        (clrDgSingleSelectedChange)="selectItem($event!)"
       >
         <clr-dg-column>Student ID</clr-dg-column>
         <clr-dg-column [clrDgField]="'entity.firstName'">First Name</clr-dg-column>
@@ -35,9 +36,9 @@
 
         <clr-dg-placeholder>No data found</clr-dg-placeholder>
 
-        <clr-dg-row *ngFor="let student of apiResult.data?.values" [clrDgItem]="student.entity">
+        <clr-dg-row *ngFor="let student of vm.students?.values" [clrDgItem]="student.entity">
           <clr-dg-cell>
-            <a [routerLink]="student.id">{{ student.name }}</a>
+            <a [routerLink]="student.id" [state]="student">{{ student.name }}</a>
           </clr-dg-cell>
           <clr-dg-cell>{{ student.entity.firstName }}</clr-dg-cell>
           <clr-dg-cell>{{ student.entity.lastName }}</clr-dg-cell>
@@ -46,13 +47,13 @@
         </clr-dg-row>
 
         <clr-dg-footer>
-          {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ total$ | async }} items
-          <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="(total$ | async) || 0"></clr-dg-pagination>
+          {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ vm.students?.resultTotal }} items
+          <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="vm.students?.resultTotal || 0"></clr-dg-pagination>
         </clr-dg-footer>
       </clr-datagrid>
     </div>
 
-    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error" class="mb-4"></seed-alert>
+    <seed-alert *ngIf="vm.error" [error]="vm.error" class="mb-4"></seed-alert>
   </ng-container>
 </seed-page-container>
 

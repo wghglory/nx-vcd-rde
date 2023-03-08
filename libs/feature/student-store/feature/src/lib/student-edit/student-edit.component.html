@@ -19,11 +19,11 @@
       <clr-control-error>{{ 'common.required' | vtranslate }} and Must be a positive number</clr-control-error>
     </clr-control-container>
 
-    <seed-alert *ngIf="(edit$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
+    <seed-alert *ngIf="(store.vm$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
 
     <div class="mt-6">
       <button class="btn btn-outline" type="button" (click)="goBack()">{{ 'common.cancel' | vtranslate }}</button>
-      <button class="btn btn-primary" [disabled]="studentForm.invalid" [clrLoading]="(edit$ | async)?.loading === true" type="submit">
+      <button class="btn btn-primary" [disabled]="studentForm.invalid" [clrLoading]="(store.vm$ | async)?.loading === true" type="submit">
         {{ 'common.save' | vtranslate }}
       </button>
     </div>
