@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { StudentService } from '@seed/feature/student/data-access';
 import { Student } from '@seed/feature/student/model';
+import { StudentService } from '@seed/feature/student-store/data-access';
 import { filter, Observable, switchMap, tap } from 'rxjs';
 
 import { StudentListStore } from '../student-list/student-list.store';

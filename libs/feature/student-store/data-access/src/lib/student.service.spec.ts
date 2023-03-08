@@ -114,26 +114,6 @@ describe('StudentService', () => {
     } as RDEValue<Student>);
   });
 
-  it('refresh list', () => {
-    service.refreshList();
-
-    expect(subscribeSpyTo(service.refreshAction$).getFirstValue()).toBeUndefined();
-  });
-
-  it('select item', () => {
-    const student = {
-      id: 'mockId',
-      firstName: 'Derek',
-      lastName: 'Wang',
-      age: 30,
-      lastModifiedDate: new Date(),
-    } as Student;
-
-    service.selectItem(student);
-
-    expect(subscribeSpyTo(service.selectedItem$).getFirstValue()).toEqual(student);
-  });
-
   afterEach(() => {
     // After every test, assert that there are no more pending requests.
     controller.verify();
