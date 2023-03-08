@@ -41,7 +41,7 @@ describe('ProductListComponent', () => {
       ],
     } as RDEList<Product>),
     selectItem: jest.fn(),
-    refreshAction$: of(true),
+    refresh$: of(true),
   };
 
   it('should render', async () => {

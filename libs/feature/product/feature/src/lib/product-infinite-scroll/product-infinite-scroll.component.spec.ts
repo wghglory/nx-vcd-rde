@@ -74,7 +74,7 @@ describe('ProductInfiniteScrollComponent', () => {
 
   const productServiceStub = {
     getProducts: jest.fn().mockReturnValue(of(products1, products2)),
-    refreshAction$: of(true),
+    refresh$: of(true),
     selectItem: jest.fn(),
   };
 

@@ -25,11 +25,11 @@ export class StudentEditComponent implements OnInit {
   private saveSubject = new Subject<void>();
 
   edit$ = this.saveSubject.pipe(
-    switchMap(() => this.studentService.selectedItem$.pipe(filter(Boolean))),
+    switchMap(() => this.studentService.selectedStudent$.pipe(filter(Boolean))),
     switchMap(student => {
       return this.studentService.updateStudent(student.id, this.studentForm.value).pipe(
         api(() => {
-          this.studentService.selectItem(null);
+          this.studentService.selectStudent(null);
           this.goBack();
         }),
       );
@@ -47,7 +47,7 @@ export class StudentEditComponent implements OnInit {
 
   ngOnInit() {
     // init form
-    this.studentService.selectedItem$.pipe(filter(Boolean), take(1)).subscribe(student => {
+    this.studentService.selectedStudent$.pipe(filter(Boolean), take(1)).subscribe(student => {
       this.studentForm.setValue({
         firstName: student.firstName,
         lastName: student.lastName,

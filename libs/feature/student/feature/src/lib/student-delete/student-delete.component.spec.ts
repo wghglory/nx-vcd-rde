@@ -15,12 +15,12 @@ import { StudentDeleteComponent } from './student-delete.component';
 
 const studentServiceStub = {
   deleteStudent: jest.fn().mockImplementation(id => of({})),
-  selectedItem$: of({
+  selectedStudent$: of({
     id: 'student-id',
     entity: { lastName: 'Wang', firstName: 'Derek', age: 30, id: 'student-id' },
   } as RDEValue<Student>),
   refreshList: jest.fn(),
-  selectItem: jest.fn(),
+  selectStudent: jest.fn(),
 };
 
 describe('StudentDeleteComponent', () => {
@@ -52,7 +52,7 @@ describe('StudentDeleteComponent', () => {
 
   it('should delete student when confirm', async () => {
     jest.spyOn(component, 'close');
-    jest.spyOn(studentServiceStub, 'selectItem');
+    jest.spyOn(studentServiceStub, 'selectStudent');
     jest.spyOn(studentServiceStub, 'refreshList');
 
     component.confirm();
@@ -61,7 +61,7 @@ describe('StudentDeleteComponent', () => {
 
     expect(studentServiceStub.deleteStudent).toBeCalledWith('student-id');
     expect(component.close).toBeCalled();
-    expect(studentServiceStub.selectItem).toBeCalledWith(null);
+    expect(studentServiceStub.selectStudent).toBeCalledWith(null);
     expect(studentServiceStub.refreshList).toBeCalled();
   });
 });
@@ -117,7 +117,7 @@ describe('StudentDeleteComponent use testing library', () => {
       ],
     });
 
-    jest.spyOn(studentServiceStub, 'selectItem');
+    jest.spyOn(studentServiceStub, 'selectStudent');
     jest.spyOn(studentServiceStub, 'refreshList');
 
     const confirmBtn = screen.getByRole('button', { name: /confirm/i });
@@ -130,7 +130,7 @@ describe('StudentDeleteComponent use testing library', () => {
     // expect(confirmBtn).not.toBeInTheDocument();
 
     expect(studentServiceStub.deleteStudent).toBeCalledWith('student-id');
-    expect(studentServiceStub.selectItem).toBeCalledWith(null);
+    expect(studentServiceStub.selectStudent).toBeCalledWith(null);
     expect(studentServiceStub.refreshList).toBeCalled();
   });
 });

@@ -78,8 +78,8 @@ describe('StudentListComponent', () => {
 
   const studentServiceStub = {
     getStudentList: jest.fn().mockReturnValue(of(students1, students2)),
-    refreshAction$: of(true),
-    selectItem: jest.fn(),
+    refresh$: of(true),
+    selectStudent: jest.fn(),
   };
 
   beforeEach(async () => {

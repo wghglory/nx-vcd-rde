@@ -1,7 +1,7 @@
 <seed-page-container title="Students">
   <ng-container *ngIf="students$ | async as apiResult">
     <div>
-      <!-- Actions -->
+      <!-- ----------------------------------- Actions ----------------------------------- -->
       <div>
         <button class="btn btn-outline" (click)="studentService.refreshList()" [disabled]="apiResult.loading">
           {{ 'common.refresh' | vtranslate }}
@@ -9,23 +9,23 @@
         <button class="btn btn-outline" [routerLink]="'@/add'">{{ 'common.add' | vtranslate }}</button>
         <button
           class="btn btn-outline"
-          [disabled]="(studentService.selectedItem$ | async) === null"
-          [routerLink]="['@/edit', (studentService.selectedItem$ | async)?.id]"
+          [disabled]="(studentService.selectedStudent$ | async) === null"
+          [routerLink]="['@/edit', (studentService.selectedStudent$ | async)?.id]"
         >
           {{ 'common.edit' | vtranslate }}
         </button>
-        <button class="btn btn-outline" [disabled]="(studentService.selectedItem$ | async) === null" (click)="openDeleteDialog = true">
+        <button class="btn btn-outline" [disabled]="(studentService.selectedStudent$ | async) === null" (click)="openDeleteDialog = true">
           {{ 'common.delete' | vtranslate }}
         </button>
       </div>
 
-      <!-- Datagrid -->
+      <!-- ----------------------------------- Datagrid ----------------------------------- -->
       <clr-datagrid
         class="min-h-[200px]"
         (clrDgRefresh)="refresh($event)"
         [clrDgLoading]="apiResult.loading === true"
-        [(clrDgSingleSelected)]="selectedItem"
-        (clrDgSingleSelectedChange)="studentService.selectItem($event!)"
+        [(clrDgSingleSelected)]="selectedStudent"
+        (clrDgSingleSelectedChange)="studentService.selectStudent($event!)"
       >
         <clr-dg-column>Student ID</clr-dg-column>
         <clr-dg-column [clrDgField]="'entity.firstName'">First Name</clr-dg-column>
@@ -56,5 +56,5 @@
   </ng-container>
 </seed-page-container>
 
-<!-- modal -->
+<!-- ----------------------------------- modal----------------------------------- -->
 <seed-student-delete *ngIf="openDeleteDialog" [(open)]="openDeleteDialog"> </seed-student-delete>

@@ -16,12 +16,12 @@ describe('StudentEditComponent', () => {
   let fixture: ComponentFixture<StudentEditComponent>;
   const studentServiceStub = {
     updateStudent: jest.fn(),
-    selectedItem$: of({
+    selectedStudent$: of({
       id: 'student-id',
       entity: { lastName: 'Wang', firstName: 'Derek', age: 30, id: 'student-id' },
     } as RDEValue<Student>),
     refreshList: jest.fn(),
-    selectItem: jest.fn(),
+    selectStudent: jest.fn(),
   };
 
   beforeEach(async () => {

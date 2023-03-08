@@ -21,7 +21,7 @@ export class ProductCardListComponent {
 
   @Output() deleteEvent = new EventEmitter();
 
-  // products$ = this.productService.refreshAction$.pipe(
+  // products$ = this.productService.refresh$.pipe(
   //   switchMap(() => {
   //     return this.productService.products$;
   //   }),
@@ -60,7 +60,7 @@ export class ProductCardListComponent {
     }),
   );
 
-  refresh$ = this.productService.refreshAction$.pipe(
+  refresh$ = this.productService.refresh$.pipe(
     tap(() => {
       this.currentPage$.next(1);
     }),

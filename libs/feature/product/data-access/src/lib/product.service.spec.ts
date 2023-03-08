@@ -111,7 +111,7 @@ describe('ProductService', () => {
   it('refresh list', () => {
     service.refreshList();
 
-    expect(subscribeSpyTo(service.refreshAction$).getFirstValue()).toBeUndefined();
+    expect(subscribeSpyTo(service.refresh$).getFirstValue()).toBeUndefined();
   });
 
   it('select item', () => {

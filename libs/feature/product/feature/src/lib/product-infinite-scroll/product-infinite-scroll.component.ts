@@ -30,7 +30,7 @@ export class ProductInfiniteScrollComponent {
 
   state$ = new BehaviorSubject<CardState>({ current: 1, filters: [] });
 
-  refresh$ = this.productService.refreshAction$.pipe(
+  refresh$ = this.productService.refresh$.pipe(
     tap(() => {
       this.state$.next({ ...this.state$.value, current: 1 });
     }),

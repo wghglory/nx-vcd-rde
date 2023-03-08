@@ -20,30 +20,30 @@ export class ProductDatagridComponent {
 
   selectedItem: Product | undefined;
 
-  private loadingSource = new BehaviorSubject<boolean>(true);
-  loading$ = this.loadingSource.asObservable();
-  private errorSource = new Subject<HttpErrorResponse | null>();
-  error$ = this.errorSource.asObservable();
+  private loadingSubject = new BehaviorSubject<boolean>(true);
+  loading$ = this.loadingSubject.asObservable();
+  private errorSubject = new Subject<HttpErrorResponse | null>();
+  error$ = this.errorSubject.asObservable();
 
   private dgSource = new BehaviorSubject<ClrDatagridStateInterface | null>(null);
   dgState$ = this.dgSource.pipe(dgState());
 
   products$ = combineLatest([
     this.dgState$,
-    this.productService.refreshAction$, // actions like successful deletion to refresh the data
+    this.productService.refresh$, // actions like successful deletion to refresh the data
   ]).pipe(
     switchMap(([state]) => {
       const params = stateHandler(state);
       return this.productService.getProducts(params).pipe(
         startWithTap(() => {
-          this.loadingSource.next(true);
-          this.errorSource.next(null);
+          this.loadingSubject.next(true);
+          this.errorSubject.next(null);
         }),
         finalize(() => {
-          this.loadingSource.next(false);
+          this.loadingSubject.next(false);
         }),
         catchError(err => {
-          this.errorSource.next(err);
+          this.errorSubject.next(err);
           return EMPTY;
         }),
       );

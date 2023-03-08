@@ -18,12 +18,12 @@ export class StudentDeleteComponent {
   private saveSubject = new Subject<void>();
 
   delete$ = this.saveSubject.pipe(
-    switchMap(() => this.studentService.selectedItem$.pipe(filter(Boolean))),
+    switchMap(() => this.studentService.selectedStudent$.pipe(filter(Boolean))),
     switchMap(student =>
       this.studentService.deleteStudent(student.id).pipe(
         api(() => {
           this.close();
-          this.studentService.selectItem(null);
+          this.studentService.selectStudent(null);
           this.studentService.refreshList();
         }),
       ),

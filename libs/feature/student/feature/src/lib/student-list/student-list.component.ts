@@ -17,12 +17,12 @@ export class StudentListComponent {
 
   openDeleteDialog = false;
 
-  selectedItem: Student | undefined;
+  selectedStudent: Student | undefined;
 
   private dgSource = new BehaviorSubject<ClrDatagridStateInterface | null>(null);
   dgState$ = this.dgSource.pipe(dgState());
 
-  students$: Observable<ApiQuery<RDEList<Student>>> = combineLatest([this.dgState$, this.studentService.refreshAction$]).pipe(
+  students$: Observable<ApiQuery<RDEList<Student>>> = combineLatest([this.dgState$, this.studentService.refresh$]).pipe(
     switchMap(([state]) => {
       const params = stateHandler(state);
       return this.studentService.getStudentList(params).pipe(api());

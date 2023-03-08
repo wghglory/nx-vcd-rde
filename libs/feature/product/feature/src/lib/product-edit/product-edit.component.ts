@@ -28,17 +28,17 @@ export class ProductEditComponent implements OnInit {
 
   private saveSubject = new Subject<void>();
 
-  private errorSource = new Subject<HttpErrorResponse | null>();
-  error$ = this.errorSource.asObservable();
-  private loadingSource = new Subject<boolean>();
-  loading$ = this.loadingSource.asObservable();
+  private errorSubject = new Subject<HttpErrorResponse | null>();
+  error$ = this.errorSubject.asObservable();
+  private loadingSubject = new Subject<boolean>();
+  loading$ = this.loadingSubject.asObservable();
 
   edit$ = combineLatest([this.productService.selectedItem$.pipe(filter(Boolean)), this.saveSubject]).pipe(
     switchMap(([product, _]) => {
       return this.productService.updateProduct(product.id, this.productForm.value).pipe(
-        finalize(() => this.loadingSource.next(false)),
+        finalize(() => this.loadingSubject.next(false)),
         catchError(err => {
-          this.errorSource.next(err);
+          this.errorSubject.next(err);
           return EMPTY;
         }),
       );
@@ -56,8 +56,8 @@ export class ProductEditComponent implements OnInit {
   }
 
   confirm() {
-    this.loadingSource.next(true);
-    this.errorSource.next(null);
+    this.loadingSubject.next(true);
+    this.errorSubject.next(null);
     this.saveSubject.next();
   }
 

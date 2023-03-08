@@ -29,7 +29,7 @@ export class ProductListComponent {
 
   error$ = new Subject<HttpErrorResponse | null>();
 
-  products$ = this.productService.refreshAction$.pipe(
+  products$ = this.productService.refresh$.pipe(
     switchMap(() => this.productService.products$),
     catchError(err => {
       this.error$.next(err);

@@ -13,7 +13,7 @@ export class ProductService {
   products$ = this.http.get<RDEList<Product>>('/api/products');
 
   private refreshAction = new BehaviorSubject<void>(undefined);
-  refreshAction$ = this.refreshAction.asObservable();
+  refresh$ = this.refreshAction.asObservable();
 
   private selectedItemSource = new BehaviorSubject<Product | null>(null); // product-delete *ngIf initializes late, so using Subject won't work.
   selectedItem$ = this.selectedItemSource.asObservable();
