@@ -9,14 +9,14 @@
         <tr>
           <th>Name</th>
           <th>Description</th>
-          <th>Date</th>
+          <th class="date-column">Date</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of apiResult.data">
           <td>{{ item.entity.name }}</td>
           <td>{{ item.entity.description }}</td>
-          <td>{{ item.entity.productionDate | date }}</td>
+          <td class="date-column">{{ item.entity.productionDate | date }}</td>
         </tr>
       </tbody>
     </table>

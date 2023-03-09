@@ -1,7 +1,18 @@
-.mb2 {
-  margin-bottom: 2rem;
-}
+:host {
+  .mb2 {
+    margin-bottom: 2rem;
+  }
 
-.mt0 {
-  margin-top: 0;
+  .mt0 {
+    margin-top: 0;
+  }
+
+  td {
+    text-align: left;
+  }
+
+  .date-column {
+    min-width: 10rem;
+    text-align: center;
+  }
 }
