@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RemoteApp } from '@seed/shared/model';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -8,14 +9,14 @@ import { map } from 'rxjs';
 export class MfeLookupService {
   constructor(private http: HttpClient) {}
 
-  // { name: 'Shop App', path: 'shop-mfe' }
+  // { name: 'Shop App', url: 'http://localhost:4301', path: 'shop-mfe' }
   mfeApps$ = this.http.get<Record<string, string>>('assets/module-federation.manifest.json').pipe(
     map(json => {
-      const result: { name: string; url: string; path: string }[] = [];
+      const apps: RemoteApp[] = [];
       for (const [key, value] of Object.entries(json)) {
-        result.push({ name: key, url: value, path: `../${key}` });
+        apps.push({ name: key, url: value, path: `../${key}` });
       }
-      return result;
+      return apps;
     }),
   );
 }

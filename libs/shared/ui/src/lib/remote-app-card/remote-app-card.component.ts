@@ -2,8 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-
-import { RemoteApp } from './remote-app.model';
+import { RemoteApp } from '@seed/shared/model';
 
 @Component({
   selector: 'seed-remote-app-card',

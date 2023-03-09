@@ -13,6 +13,6 @@ import { PageContainerComponent, RemoteAppCardComponent, SharedUiModule } from '
 export class MfeContainerComponent {
   constructor(private mfeLookupService: MfeLookupService) {}
 
-  // { name: 'Shop App', path: '/shop-mfe' }
+  // { name: 'Shop App', url: 'http://localhost:4301', path: 'shop-mfe' }
   mfeApps$ = this.mfeLookupService.mfeApps$;
 }

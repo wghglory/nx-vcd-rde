@@ -1,4 +1,5 @@
 export interface RemoteApp {
   name: string;
   path: string;
+  url: string;
 }

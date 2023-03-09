@@ -41,7 +41,7 @@ export class HeaderDropdownComponent {
 
   readonly DEFAULT_ICON_SIZE = DEFAULT_ICON_SIZE;
 
-  // { name: 'Shop App', path: '/shop-mfe' }
+  // { name: 'Shop App', url: 'http://localhost:4301', path: 'shop-mfe' }
   mfeApps$ = this.mfeLookupService.mfeApps$;
 
   openRemoteAppMfeTab(remoteApp: RemoteApp): void {
