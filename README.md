@@ -128,3 +128,7 @@ TypeError: Cannot read properties of undefined (reading 'ɵcmp')
 ```
 
 e.g. `export * from './alert/alert.component';` although it is exported from the alert module.
+
+### Shared Service Data issue
+
+StudentService shared the selected student, but if navigating to other routes and come back, the selected student still exists as the service is not destroyed. Thus, Delete button is still enabled without selecting any student in UI.
