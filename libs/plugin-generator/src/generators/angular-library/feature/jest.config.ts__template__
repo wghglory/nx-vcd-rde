@@ -8,9 +8,7 @@ export default {
   ],
   globals: {},
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
-  coverageReporters: ['lcov', 'json', 'text-summary'],
-  collectCoverage: true,
-  coverageDirectory: '<%= relativeOffset %>coverage/<%= projectRoot %>',
+  coverageReporters: ['lcov', 'json', 'text-summary'],  coverageDirectory: '<%= relativeOffset %>coverage/<%= projectRoot %>',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

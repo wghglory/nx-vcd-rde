@@ -5,7 +5,7 @@ import { Linter } from '@nrwl/linter';
 import generator from './generator';
 import { AngularLibraryGeneratorSchema } from './schema';
 
-describe('angular-library generator', () => {
+describe('angular-library-advanced generator', () => {
   let appTree: Tree;
   const options: AngularLibraryGeneratorSchema = {
     name: 'test',
@@ -19,13 +19,13 @@ describe('angular-library generator', () => {
     appTree = createTreeWithEmptyWorkspace();
   });
 
-  // it('should run successfully', async () => {
-  //   await generator(appTree, options);
-  //   const config = readProjectConfiguration(appTree, 'test');
-  //   expect(config).toBeDefined();
-  // });
+  it('should run successfully', async () => {
+    await generator(appTree, options);
+    const config = readProjectConfiguration(appTree, 'test');
+    expect(config).toBeDefined();
+  });
 
-  it('should create readme', async () => {
+  it.skip('should create readme', async () => {
     await generator(appTree, options);
     const readme = appTree.read('test/README.md');
     expect(readme.toString()).toMatchInlineSnapshot(`

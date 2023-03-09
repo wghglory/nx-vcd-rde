@@ -12,7 +12,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'html', 'js', 'json', 'mjs'],
-  coverageReporters: ['lcov', 'json', 'text-summary'],
-  collectCoverage: true,
-  coverageDirectory: '<%= relativeOffset %>coverage/<%= projectRoot %>',
+  coverageReporters: ['lcov', 'json', 'text-summary'],  coverageDirectory: '<%= relativeOffset %>coverage/<%= projectRoot %>',
 };

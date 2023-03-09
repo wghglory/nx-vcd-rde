@@ -9,7 +9,6 @@ export default {
   globals: {},
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
-  collectCoverage: true,
   coverageDirectory: '../../../../coverage/libs/feature/student/ui',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

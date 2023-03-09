@@ -13,6 +13,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
-  collectCoverage: true,
   coverageDirectory: '../../../../coverage/libs/tenant/home/util',
 };

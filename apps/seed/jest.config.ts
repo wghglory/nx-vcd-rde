@@ -6,7 +6,6 @@ export default {
   globals: {},
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
-  collectCoverage: true,
   coverageDirectory: '../../coverage/apps/seed',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
