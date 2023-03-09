@@ -17,6 +17,7 @@ describe('<%= className %>AddComponent', () => {
 
   const <%= propertyName %>ServiceStub = {
     add<%= className %>: jest.fn().mockReturnValue(of({ entity: { name: '<%= className %> name' } } as RDEValue<<%= className %>>)),
+    select<%= className %>: jest.fn(),
   };
   const routerStub = { navigate: jest.fn() };
 
@@ -49,10 +50,17 @@ describe('<%= className %>AddComponent', () => {
 
   it('should return add <%= propertyName %>', async () => {
     const formValue = { name: '<%= className %> name' };
+
+    const observerSpy = subscribeSpyTo(component.add$);
+
     component.<%= propertyName %>Form.setValue(formValue);
     component.save();
 
-    const observerSpy = subscribeSpyTo(component.add$);
+    expect(observerSpy.getLastValue()).toStrictEqual({
+      data: { entity: formValue },
+      error: null,
+      loading: false,
+    });
 
     expect(routerStub.navigate).toBeCalled();
     expect(<%= propertyName %>ServiceStub.add<%= className %>).toBeCalledWith(formValue);
@@ -62,10 +70,16 @@ describe('<%= className %>AddComponent', () => {
     const formValue = { name: '<%= className %> name' };
     <%= propertyName %>ServiceStub.add<%= className %>.mockReturnValueOnce(throwError(() => new Error('fail')));
 
+    const observerSpy = subscribeSpyTo(component.add$);
+
     component.<%= propertyName %>Form.setValue(formValue);
     component.save();
 
-    const observerSpy = subscribeSpyTo(component.add$);
+    expect(observerSpy.getLastValue()).toStrictEqual({
+      data: null,
+      error: Error('fail'),
+      loading: false,
+    });
 
     expect(<%= propertyName %>ServiceStub.add<%= className %>).toBeCalledWith(formValue);
   });

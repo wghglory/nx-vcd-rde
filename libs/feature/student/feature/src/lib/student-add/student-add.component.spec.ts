@@ -17,6 +17,7 @@ describe('StudentAddComponent', () => {
 
   const studentServiceStub = {
     addStudent: jest.fn().mockReturnValue(of({ entity: { lastName: 'Wang', firstName: 'Derek', age: 30 } } as RDEValue<Student>)),
+    selectStudent: jest.fn(),
   };
   const routerStub = { navigate: jest.fn() };
 
@@ -49,10 +50,17 @@ describe('StudentAddComponent', () => {
 
   it('should return add student', async () => {
     const formValue = { lastName: 'Wang', firstName: 'Derek', age: 30 };
+
+    const observerSpy = subscribeSpyTo(component.add$);
+
     component.studentForm.setValue(formValue);
     component.save();
 
-    const observerSpy = subscribeSpyTo(component.add$);
+    expect(observerSpy.getLastValue()).toStrictEqual({
+      data: { entity: { age: 30, firstName: 'Derek', lastName: 'Wang' } },
+      error: null,
+      loading: false,
+    });
 
     expect(routerStub.navigate).toBeCalled();
     expect(studentServiceStub.addStudent).toBeCalledWith(formValue);
@@ -62,10 +70,16 @@ describe('StudentAddComponent', () => {
     const formValue = { lastName: 'Wang', firstName: 'Derek', age: 30 };
     studentServiceStub.addStudent.mockReturnValueOnce(throwError(() => new Error('fail')));
 
+    const observerSpy = subscribeSpyTo(component.add$);
+
     component.studentForm.setValue(formValue);
     component.save();
 
-    const observerSpy = subscribeSpyTo(component.add$);
+    expect(observerSpy.getLastValue()).toStrictEqual({
+      data: null,
+      error: Error('fail'),
+      loading: false,
+    });
 
     expect(studentServiceStub.addStudent).toBeCalledWith(formValue);
   });
