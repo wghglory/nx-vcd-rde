@@ -6,18 +6,19 @@ export default {
     '<rootDir>/src/test-setup.ts',
     '<rootDir>/../../../node_modules/@hirez_io/observer-spy/dist/setup-auto-unsubscribe.js',
   ],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
+  globals: {},
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
   collectCoverage: true,
   coverageDirectory: '../../../coverage/libs/shared/data-access',
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
   moduleNameMapper: {
     '@cds/core/icon/(.*)$': '<rootDir>/../../../node_modules/@cds/core/icon/index.js',

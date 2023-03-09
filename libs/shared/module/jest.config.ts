@@ -3,18 +3,19 @@ export default {
   displayName: 'shared-module',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
+  globals: {},
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   coverageReporters: ['lcov', 'json', 'text-summary'],
   collectCoverage: true,
   coverageDirectory: '../../../coverage/libs/shared/module',
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|mjs|js|html)$': [
+      'jest-preset-angular',
+      {
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+      },
+    ],
   },
   moduleNameMapper: {
     '@cds/core/icon/(.*)$': '<rootDir>/../../../node_modules/@cds/core/icon/index.js',
