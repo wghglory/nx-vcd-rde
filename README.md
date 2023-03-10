@@ -18,7 +18,7 @@ vpat folder will be created. Use these commands after finishing the development.
 
 ```shell
 # add remote app
-npx nx g @nrwl/angular:remote shop-mfe --host=seed
+npx nx generate @nrwl/angular:remote content-hub-mfe --host=seed --addTailwind --backendProject=api --port=4303 --style=scss --tags=type:app --no-interactive
 ```
 
 ## How to generate this repo?
