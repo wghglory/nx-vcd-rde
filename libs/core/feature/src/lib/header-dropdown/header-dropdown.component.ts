@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ClarityIcons, pluginIcon } from '@cds/core/icon';
 import { MfeLookupService } from '@seed/shared/data-access';
+import { RemoteApp } from '@seed/shared/model';
 import { SharedModule } from '@seed/shared/module';
 import { DEFAULT_ICON_SIZE } from '@seed/shared/style';
 import { VmwClarityTheme } from '@vmw/ngx-utils';
@@ -12,11 +13,6 @@ import { map } from 'rxjs';
 
 // const darkThemeHeaderClass = 'header-8';
 // const lightThemeHeaderClass = 'header-7';
-
-type RemoteApp = {
-  name: string; // shop app
-  url: string; // http://localhost:8080
-};
 
 /**
  * Dropdown addition to the CSP header - USED IN LOCAL DEV MODE ONLY
@@ -41,10 +37,9 @@ export class HeaderDropdownComponent {
 
   readonly DEFAULT_ICON_SIZE = DEFAULT_ICON_SIZE;
 
-  // { name: 'Shop App', url: 'http://localhost:4301', path: 'shop-mfe' }
   mfeApps$ = this.mfeLookupService.mfeApps$;
 
-  openRemoteAppMfeTab(remoteApp: RemoteApp): void {
+  openRemoteAppMfeTab(remoteApp: RemoteApp) {
     window.open(remoteApp.url);
   }
 }

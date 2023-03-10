@@ -1,4 +1,6 @@
 {
   "remoteName": "shop-mfe",
-  "displayName": "Shop MFE"
+  "displayName": "Shop MFE",
+  "url": "http://localhost:4301",
+  "description": "This is a remote app. Shop whatever you like."
 }
