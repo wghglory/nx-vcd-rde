@@ -12,6 +12,10 @@ const layout = (process.env['NX_MODE'] || 'sidebar') as Layout;
 
 export const routes: Route[] = [
   {
+    path: 'harbor-mfe',
+    loadChildren: () => loadRemoteModule('harbor-mfe', './Module').then(m => m.RemoteEntryModule),
+  },
+  {
     path: 'provider',
     canActivate: [AuthGuard],
     data: { layout },

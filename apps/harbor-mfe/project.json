@@ -1,0 +1,117 @@
+{
+  "name": "harbor-mfe",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/harbor-mfe/src",
+  "prefix": "seed",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/harbor-mfe",
+        "index": "apps/harbor-mfe/src/index.html",
+        "main": "apps/harbor-mfe/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/harbor-mfe/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/harbor-mfe/src/favicon.ico", "apps/harbor-mfe/src/assets"],
+        "styles": ["apps/harbor-mfe/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/harbor-mfe/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/harbor-mfe/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "harbor-mfe:build:production"
+        },
+        "development": {
+          "browserTarget": "harbor-mfe:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4302,
+        "proxyConfig": "apps/harbor-mfe/proxy.conf.json",
+        "publicHost": "http://localhost:4302"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "harbor-mfe:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/harbor-mfe/**/*.ts", "apps/harbor-mfe/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/harbor-mfe/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "harbor-mfe:build",
+        "port": 4302
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "harbor-mfe:build:development"
+        },
+        "production": {
+          "buildTarget": "harbor-mfe:build:production"
+        }
+      }
+    }
+  },
+  "tags": ["type:app"]
+}
