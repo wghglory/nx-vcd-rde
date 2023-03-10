@@ -29,6 +29,7 @@
       "@seed/feature/student/feature": ["libs/feature/student/feature/src/index.ts"],
       "@seed/feature/student/model": ["libs/feature/student/model/src/index.ts"],
       "@seed/feature/student/ui": ["libs/feature/student/ui/src/index.ts"],
+      "@seed/mfe/harbor/feature": ["libs/mfe/harbor/feature/src/index.ts"],
       "@seed/mfe/shop/data-access": ["libs/mfe/shop/data-access/src/index.ts"],
       "@seed/mfe/shop/feature": ["libs/mfe/shop/feature/src/index.ts"],
       "@seed/mfe/shop/model": ["libs/mfe/shop/model/src/index.ts"],

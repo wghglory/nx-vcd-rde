@@ -28,6 +28,11 @@
             "glob": "clr-ui.min.css",
             "input": "node_modules/@clr/ui",
             "output": "/assets/css"
+          },
+          {
+            "input": "libs/common-assets/src/assets",
+            "glob": "**/*",
+            "output": "/assets/"
           }
         ],
         "stylePreprocessorOptions": {

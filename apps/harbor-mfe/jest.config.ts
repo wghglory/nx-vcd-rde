@@ -3,6 +3,7 @@ export default {
   displayName: 'harbor-mfe',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  globals: {},
   coverageDirectory: '../../coverage/apps/harbor-mfe',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [

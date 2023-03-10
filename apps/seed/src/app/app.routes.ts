@@ -12,10 +12,6 @@ const layout = (process.env['NX_MODE'] || 'sidebar') as Layout;
 
 export const routes: Route[] = [
   {
-    path: 'harbor-mfe',
-    loadChildren: () => loadRemoteModule('harbor-mfe', './Module').then(m => m.RemoteEntryModule),
-  },
-  {
     path: 'provider',
     canActivate: [AuthGuard],
     data: { layout },
@@ -33,10 +29,14 @@ export const routes: Route[] = [
         path: 'mfe',
         component: MfeContainerComponent,
       },
-      // npx nx g @nrwl/angular:remote shop-mfe --host=seed
+      // MFE placeholder
       {
         path: 'shop-mfe',
         loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
+      },
+      {
+        path: 'harbor-mfe',
+        loadChildren: () => loadRemoteModule('harbor-mfe', './Module').then(m => m.RemoteEntryModule),
       },
     ],
   },

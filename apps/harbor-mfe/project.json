@@ -1,6 +1,6 @@
 {
   "name": "harbor-mfe",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/harbor-mfe/src",
   "prefix": "seed",
@@ -9,13 +9,35 @@
       "executor": "@nrwl/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "allowedCommonJsDependencies": ["decimal.js-light", "lodash", "dompurify"],
         "outputPath": "dist/apps/harbor-mfe",
         "index": "apps/harbor-mfe/src/index.html",
         "main": "apps/harbor-mfe/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/harbor-mfe/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/harbor-mfe/src/favicon.ico", "apps/harbor-mfe/src/assets"],
+        "assets": [
+          "apps/harbor-mfe/src/favicon.ico",
+          "apps/harbor-mfe/src/assets",
+          {
+            "glob": "clr-ui-dark.min.css",
+            "input": "node_modules/@clr/ui",
+            "output": "/assets/css"
+          },
+          {
+            "glob": "clr-ui.min.css",
+            "input": "node_modules/@clr/ui",
+            "output": "/assets/css"
+          },
+          {
+            "input": "libs/common-assets/src/assets",
+            "glob": "**/*",
+            "output": "/assets/"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/style/src/lib/scss"]
+        },
         "styles": ["apps/harbor-mfe/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
@@ -28,12 +50,12 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "6kb"
             }
           ],
           "outputHashing": "all",
@@ -65,8 +87,8 @@
       "defaultConfiguration": "development",
       "options": {
         "port": 4302,
-        "proxyConfig": "apps/harbor-mfe/proxy.conf.json",
-        "publicHost": "http://localhost:4302"
+        "publicHost": "http://localhost:4302",
+        "proxyConfig": "apps/seed/proxy.conf.mjs"
       }
     },
     "extract-i18n": {
