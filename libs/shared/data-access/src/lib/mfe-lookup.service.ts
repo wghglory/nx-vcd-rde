@@ -9,9 +9,13 @@ import { map } from 'rxjs';
 export class MfeLookupService {
   constructor(private http: HttpClient) {}
 
-  // { name: 'Shop App', url: 'http://localhost:4301', path: 'shop-mfe' }
+  /**
+   * Get Base App's module-federation.manifest config, containing all mfe name and url
+   * return { name: 'shop-mfe', url: 'http://localhost:4301', path: '../shop-mfe' }
+   */
   mfeApps$ = this.http.get<Record<string, string>>('assets/module-federation.manifest.json').pipe(
     map(json => {
+      // TODO: read from each mfe app assets' mfe-config
       const apps: RemoteApp[] = [];
       for (const [key, value] of Object.entries(json)) {
         apps.push({ name: key, url: value, path: `../${key}` });
