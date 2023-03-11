@@ -1,0 +1,41 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
+import { api } from '@seed/shared/util';
+import { share, Subject, switchMap } from 'rxjs';
+
+@Component({
+  selector: 'seed-<%= fileName %>-add',
+  templateUrl: './<%= fileName %>-add.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class <%= className %>AddComponent {
+  constructor(public <%= propertyName %>Service: <%= className %>Service, private router: Router, private route: ActivatedRoute) {}
+
+  <%= propertyName %>Form = new FormGroup({
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+  });
+
+  private saveSubject = new Subject<void>();
+
+  add$ = this.saveSubject.pipe(
+    switchMap(() =>
+      this.<%= propertyName %>Service.add<%= className %>(this.<%= propertyName %>Form.value).pipe(
+        api(() => {
+          this.cancel();
+        }),
+      ),
+    ),
+    share(),
+  );
+
+  cancel() {
+    this.<%= propertyName %>Service.select<%= className %>(null);
+    this.router.navigate(['../../'], { relativeTo: this.route });
+  }
+
+  save() {
+    this.saveSubject.next();
+  }
+}

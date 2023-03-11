@@ -1,6 +1,6 @@
 {
   "name": "<%= projectName %>",
-  "$schema": "<%= relativeOffset %>node_modules/nx/schemas/project-schema.json",
+  "$schema": "<%= offsetFromRoot %>node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "<%= projectRoot %>/src",
   "projectType": "library",
   "targets": {

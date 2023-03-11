@@ -39,14 +39,13 @@ export default async function (tree: Tree, options: AngularLibraryGeneratorSchem
   // const libraryRoot = readProjectConfiguration(tree, projectName);
 
   // https://nx.dev/packages/devkit/documents/index#offsetfromroot
-  const relativeOffset = offsetFromRoot(projectRoot); // ../../../
 
   // Add own custom files
   generateFiles(
     tree, // the virtual file system
     joinPathFragments(__dirname, './files'), // path to the file templates)
     projectRoot, // destination path of the files
-    { ...options, projectRoot, projectName, relativeOffset, ...names(options.name), template: '' }, // config object to replace variable in file templates
+    { ...options, projectRoot, projectName, offsetFromRoot: offsetFromRoot(projectRoot), ...names(options.name), template: '' }, // config object to replace variable in file templates
   );
 
   await formatFiles(tree);

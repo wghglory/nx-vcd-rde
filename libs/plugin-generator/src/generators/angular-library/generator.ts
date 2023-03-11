@@ -46,18 +46,16 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     scopeFileName: names(options.scope).fileName,
     domainFileName: names(options.domain).fileName,
     ...names(options.domain),
-    relativeOffset: offsetFromRoot(options.projectRoot),
+    offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };
 
-  const type = options.type;
-  generateFiles(tree, path.join(__dirname, type), options.projectRoot, templateOptions);
+  generateFiles(tree, path.join(__dirname, options.type), options.projectRoot, templateOptions);
 }
 
 export default async function (tree: Tree, options: AngularLibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
 
-  // console.log(normalizedOptions);
   await libraryGenerator(tree, { ...normalizedOptions });
 
   addFiles(tree, normalizedOptions);

@@ -84,7 +84,7 @@ function normalizeOptions(tree: Tree, options: TypescriptLibraryGeneratorSchema)
 function addFiles(tree: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
-    relativeOffset: offsetFromRoot(options.projectRoot),
+    offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };
   generateFiles(tree, path.join(__dirname, 'files'), options.projectRoot, templateOptions);

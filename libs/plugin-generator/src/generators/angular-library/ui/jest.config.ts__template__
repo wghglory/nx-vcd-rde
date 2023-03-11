@@ -1,14 +1,14 @@
 /* eslint-disable */
 export default {
   displayName: '<%= projectName %>',
-  preset: '<%= relativeOffset %>jest.preset.js',
+  preset: '<%= offsetFromRoot %>jest.preset.js',
   setupFilesAfterEnv: [
     '<rootDir>/src/test-setup.ts',
-    '<rootDir>/<%= relativeOffset %>node_modules/@hirez_io/observer-spy/dist/setup-auto-unsubscribe.js',
+    '<rootDir>/<%= offsetFromRoot %>node_modules/@hirez_io/observer-spy/dist/setup-auto-unsubscribe.js',
   ],
   globals: {},
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
-  coverageReporters: ['lcov', 'json', 'text-summary'],  coverageDirectory: '<%= relativeOffset %>coverage/<%= projectRoot %>',
+  coverageReporters: ['lcov', 'json', 'text-summary'],  coverageDirectory: '<%= offsetFromRoot %>coverage/<%= projectRoot %>',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
@@ -19,7 +19,7 @@ export default {
     ],
   },
   moduleNameMapper: {
-    '@cds/core/icon/(.*)$': '<rootDir>/<%= relativeOffset %>node_modules/@cds/core/icon/index.js',
+    '@cds/core/icon/(.*)$': '<rootDir>/<%= offsetFromRoot %>node_modules/@cds/core/icon/index.js',
   },
   transformIgnorePatterns: ['node_modules/(?!(@cds|@lit|lit|ramda|.*\\.mjs$))'], // ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
