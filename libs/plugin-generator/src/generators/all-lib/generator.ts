@@ -1,5 +1,5 @@
 import { formatFiles, names, Tree } from '@nrwl/devkit';
-import { readFile, unlink, writeFile } from 'fs';
+import { readFile, readFileSync, unlink, writeFile, writeFileSync } from 'fs';
 
 import generateAngularLib from '../ng-lib/generator';
 import generateTypescriptLib from '../ts-lib/generator';
@@ -11,60 +11,49 @@ export default async function (tree: Tree, options: AllLibGeneratorSchema) {
   const angularTypes: AngularGeneratorType[] = ['feature', 'data-access', 'ui'];
   const typescriptTypes: TypescriptGeneratorType[] = ['model', 'util'];
 
-  // // feature --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=feature
-  // for (const type of angularTypes) {
-  //   await generateAngularLib(tree, { ...options, type, name: type });
-  // }
-  // for (const type of typescriptTypes) {
-  //   await generateTypescriptLib(tree, { ...options, type, name: type });
-  // }
-
-  modifyFiles(options);
+  // feature --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=feature
+  for (const type of angularTypes) {
+    await generateAngularLib(tree, { ...options, type, name: type });
+  }
+  for (const type of typescriptTypes) {
+    await generateTypescriptLib(tree, { ...options, type, name: type });
+  }
 
   await formatFiles(tree);
-}
 
-function modifyFiles(options: AllLibGeneratorSchema) {
-  // create router link in navbar
-  readFile(navbarHtml, 'utf8', (err, text) => {
-    if (err) throw err;
-
-    const insertPoint = text.indexOf('<!--INJECTION_POINT_DO_NOT_DELETE-->');
-
-    const link = `<a routerLink="/${options.directory}/${names(options.domain).fileName}" routerLinkActive="active" class="nav-link">
+  return () => {
+    modifyFile(
+      navbarHtml,
+      '<!--INJECTION_POINT_DO_NOT_DELETE-->',
+      `<a routerLink="/${options.directory}/${names(options.domain).fileName}" routerLinkActive="active" class="nav-link">
       <span class="nav-text">${names(options.domain).className}</span>
     </a>
-    `;
+    `,
+    );
 
-    const updatedText = `${text.slice(0, insertPoint)}${link}${text.slice(insertPoint)}`;
-
-    // Write the modified content back to the file
-    writeFile(navbarHtml, updatedText, err => {
-      if (err) throw err;
-      console.log(`${navbarHtml} updated.`);
-    });
-  });
-
-  readFile(appRoute, 'utf8', (err, html) => {
-    if (err) throw err;
-
-    const insertPoint = html.indexOf('// <!--INJECTION_POINT_DO_NOT_DELETE-->');
-
-    const link = `{
-    path: '${names(options.domain).fileName}',
+    modifyFile(
+      appRoute,
+      '// <!--INJECTION_POINT_DO_NOT_DELETE-->',
+      `{
+    path: '${options.directory}/${names(options.domain).fileName}',
     loadChildren: () => import('@seed/${options.directory}/${names(options.domain).fileName}/feature').then(m => m.${
-      names(options.directory).className
-    }${names(options.domain).className}FeatureModule),
+        names(options.directory).className
+      }${names(options.domain).className}FeatureModule),
     data: { layout },
   },
-  `;
+  `,
+    );
+  };
+}
 
-    const updatedText = `${html.slice(0, insertPoint)}${link}${html.slice(insertPoint)}`;
+function modifyFile(filePath: string, injectPlaceholder: string, insertedText: string) {
+  const content = readFileSync(filePath, 'utf8');
 
-    // Write the modified content back to the file
-    writeFile(appRoute, updatedText, err => {
-      if (err) throw err;
-      console.log('----- app.routes.ts file has been updated. -----');
-    });
-  });
+  const insertPoint = content.indexOf(injectPlaceholder);
+
+  const updatedText = `${content.slice(0, insertPoint)}${insertedText}${content.slice(insertPoint)}`;
+
+  writeFileSync(filePath, updatedText);
+
+  console.log(`${filePath} updated.`);
 }
