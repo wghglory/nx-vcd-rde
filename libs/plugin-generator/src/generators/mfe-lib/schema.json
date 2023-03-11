@@ -12,16 +12,36 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "mfe lib name?"
     },
-    "tags": {
+    "domain": {
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    }, 
-    "directory": {
+      "description": "Library domain.",
+      "default": "",
+      "x-prompt": "Library domain?"
+    },
+    "type": {
+      "description": "Library type",
       "type": "string",
-      "description": "A directory where the project is placed"
+      "alias": "t",
+      "x-prompt": {
+        "message": "Select library type?",
+        "type": "list",
+        "items": [
+          {
+            "value": "data-access",
+            "label": "Data Access"
+          },
+          {
+            "value": "feature",
+            "label": "Feature"
+          },
+          {
+            "value": "ui",
+            "label": "Ui"
+          }
+        ]
+      }
     }
   },
   "required": ["name"]

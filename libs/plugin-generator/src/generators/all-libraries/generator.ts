@@ -10,9 +10,9 @@ export default async function (tree: Tree, options: AllLibrariesGeneratorSchema)
   const typescriptTypes: TypescriptGeneratorType[] = ['model', 'util'];
 
   for (const type of angularTypes) {
-    await generateAngularLib(tree, { ...options, type: type, name: type });
+    await generateAngularLib(tree, { ...options, type, name: type });
   }
   for (const type of typescriptTypes) {
-    await generateTypescriptLib(tree, { ...options, type: type });
+    await generateTypescriptLib(tree, { ...options, type });
   }
 }

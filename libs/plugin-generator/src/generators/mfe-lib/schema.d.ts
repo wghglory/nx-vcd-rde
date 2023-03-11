@@ -1,5 +1,7 @@
+import { AngularGeneratorType } from '../generator.model';
+
 export interface MfeLibGeneratorSchema {
-    name: string;
-    tags?: string;
-    directory?: string;
+  name: string;
+  type: AngularGeneratorType;
+  domain: string;
 }

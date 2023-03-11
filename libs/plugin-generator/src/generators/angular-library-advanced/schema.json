@@ -14,7 +14,7 @@
       "description": "create a new angular feature library under provider directory: libs/provider/book"
     },
     {
-      "command": "npx nx generate @seed/plugin-generator:angular-library-advanced data-access --scope=provider --type=data-access --directory=provider/book --domain=book",
+      "command": "npx nx generate @seed/plugin-generator:angular-library-advanced feature --scope=mfe --type=feature --directory=mfe/harbor",
       "description": "generate a data-access library: libs/provider/book/data-access"
     }
   ],
