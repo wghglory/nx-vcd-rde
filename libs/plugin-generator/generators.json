@@ -3,26 +3,6 @@
   "name": "plugin-generator",
   "version": "0.0.1",
   "generators": {
-    "angular-library": {
-      "factory": "./src/generators/angular-library/generator",
-      "schema": "./src/generators/angular-library/schema.json",
-      "description": "Create an Angular library (data-access,feature,ui)"
-    },
-    "angular-library-advanced": {
-      "factory": "./src/generators/angular-library-advanced/generator",
-      "schema": "./src/generators/angular-library-advanced/schema.json",
-      "description": "Create an empty Angular library(name,scope,type,optionalDomain)"
-    },
-    "typescript-library": {
-      "factory": "./src/generators/typescript-library/generator",
-      "schema": "./src/generators/typescript-library/schema.json",
-      "description": "Typescript library for model and util"
-    },
-    "all-libraries": {
-      "factory": "./src/generators/all-libraries/generator",
-      "schema": "./src/generators/all-libraries/schema.json",
-      "description": "Generate a feature"
-    },
     "mfe-app": {
       "factory": "./src/generators/mfe-app/generator",
       "schema": "./src/generators/mfe-app/schema.json",
@@ -33,20 +13,40 @@
       "schema": "./src/generators/mfe-lib/schema.json",
       "description": "Generate data-access, feature libs for a remote app"
     },
-    "ng-lib": {
-      "factory": "./src/generators/ng-lib/generator",
-      "schema": "./src/generators/ng-lib/schema.json",
-      "description": "Generate Angular Libraries"
-    },
     "all-lib": {
       "factory": "./src/generators/all-lib/generator",
       "schema": "./src/generators/all-lib/schema.json",
       "description": "all-lib generator"
+    },
+    "ng-lib": {
+      "factory": "./src/generators/ng-lib/generator",
+      "schema": "./src/generators/ng-lib/schema.json",
+      "description": "Generate Angular Libraries"
     },
     "ts-lib": {
       "factory": "./src/generators/ts-lib/generator",
       "schema": "./src/generators/ts-lib/schema.json",
       "description": "ts-lib generator"
     }
+    // "angular-library": {
+    //   "factory": "./src/generators/deprecated-as-reference/angular-library/generator",
+    //   "schema": "./src/generators/deprecated-as-reference/angular-library/schema.json",
+    //   "description": "Create an Angular library (data-access,feature,ui)"
+    // },
+    // "angular-library-advanced": {
+    //   "factory": "./src/generators/deprecated-as-reference/angular-library-advanced/generator",
+    //   "schema": "./src/generators/deprecated-as-reference/angular-library-advanced/schema.json",
+    //   "description": "Create an empty Angular library(name,scope,type,optionalDomain)"
+    // },
+    // "typescript-library": {
+    //   "factory": "./src/generators/deprecated-as-reference/typescript-library/generator",
+    //   "schema": "./src/generators/deprecated-as-reference/typescript-library/schema.json",
+    //   "description": "Typescript library for model and util"
+    // },
+    // "all-libraries": {
+    //   "factory": "./src/generators/deprecated-as-reference/all-libraries/generator",
+    //   "schema": "./src/generators/deprecated-as-reference/all-libraries/schema.json",
+    //   "description": "Generate a feature"
+    // }
   }
 }

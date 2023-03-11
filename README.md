@@ -11,7 +11,8 @@ vpat folder will be created. Use these commands after finishing the development.
 
 ## Generate CRUD
 
-- UI: `npx nx generate @seed/plugin-generator:all-libraries --domain=book --scope=feature --no-interactive`
+<!-- Deprecated UI generator: `npx nx generate @seed/plugin-generator:all-libraries --domain=book --scope=feature --no-interactive` -->
+
 - UI: `npx nx generate @seed/plugin-generator:all-lib --directory=feature --domain=book --mfeName= --scope=feature --no-interactive`
 - Mock: `npx hygen route new` and type the domain name, e.g. book.
 
