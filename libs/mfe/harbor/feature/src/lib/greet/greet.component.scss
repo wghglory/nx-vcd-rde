@@ -1,3 +1,11 @@
-.greet {
-  font-size: 1rem;
+:host {
+  height: 100%;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .greet {
+    font-size: 1.25rem;
+  }
 }

@@ -9,7 +9,7 @@
     "api": "npx nx serve api",
     "dev:standalone": "NX_BUILD_DATE=$(date) NX_MODE=standalone npx nx serve seed",
     "dev.host": "NX_BUILD_DATE=$(date) npx nx serve seed",
-    "dev": "npm run dev.host -- --open --devRemotes=shop-mfe",
+    "dev": "npm run dev.host -- --open --devRemotes=harbor-mfe",
     "build": "NX_BUILD_DATE=$(date) npx nx build seed",
     "start": "npm run api & npm run dev",
     "e2e": "npx nx run seed-e2e:e2e",
