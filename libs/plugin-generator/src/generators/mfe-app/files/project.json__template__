@@ -86,8 +86,8 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "port": 4302,
-        "publicHost": "http://localhost:4302",
+        "port": <%= port %>,
+        "publicHost": "http://localhost:<%= port %>",
         "proxyConfig": "apps/seed/proxy.conf.mjs"
       }
     },

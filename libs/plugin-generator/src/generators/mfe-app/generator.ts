@@ -1,8 +1,19 @@
 import { remote } from '@nrwl/angular/generators';
-import { addProjectConfiguration, formatFiles, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import {
+  addProjectConfiguration,
+  formatFiles,
+  generateFiles,
+  getWorkspaceLayout,
+  names,
+  offsetFromRoot,
+  Tree,
+  updateJson,
+} from '@nrwl/devkit';
 import { unlink } from 'fs';
 import * as path from 'path';
 
+import generateAllRemoteLibs from '../all-lib/generator';
+import { mfeConfigPath } from '../generator.const';
 import { MfeAppGeneratorSchema } from './schema';
 
 interface NormalizedSchema extends MfeAppGeneratorSchema {
@@ -29,7 +40,6 @@ function normalizeOptions(tree: Tree, options: MfeAppGeneratorSchema): Normalize
 
   options.tags = `type:app`;
   options.style = 'scss';
-  options.addTailwind = true;
   options.displayName = options.displayName || `${names(options.name).className}`;
 
   return {
@@ -67,7 +77,17 @@ export default async function (tree: Tree, options: MfeAppGeneratorSchema) {
 
   await remote(tree, normalizedOptions);
 
+  await generateAllRemoteLibs(tree, {
+    ...normalizedOptions,
+    scope: 'mfe',
+    directory: 'mfe',
+    mfeName: removePrefix(options.name, '-mfe'),
+    richTemplate: true,
+  });
+
   addFiles(tree, normalizedOptions);
+
+  modifyFiles(tree, normalizedOptions);
 
   await formatFiles(tree);
 
@@ -78,4 +98,21 @@ export default async function (tree: Tree, options: MfeAppGeneratorSchema) {
 
 function removePrefix(source: string, prefix: string) {
   return source.replace(prefix, '');
+}
+
+function modifyFiles(tree: Tree, normalizedOptions: MfeAppGeneratorSchema) {
+  try {
+    // Add entry to local-plugins.json
+    updateJson(tree, mfeConfigPath, jsonArr => {
+      jsonArr.push({
+        remoteName: normalizedOptions.name,
+        displayName: normalizedOptions.displayName,
+        url: `http://localhost:${normalizedOptions.port}`,
+        description: 'This is the default description of your remote app. You can edit it in seed/src/assets/mfe-configs.json.',
+      });
+      return jsonArr;
+    });
+  } catch (error) {
+    console.log(`WARNING: failed to update ${mfeConfigPath}. ` + error);
+  }
 }
