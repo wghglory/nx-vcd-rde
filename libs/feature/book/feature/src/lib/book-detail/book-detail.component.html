@@ -1,0 +1,16 @@
+<seed-page-container [title]="'Book Detail (TODO: i18n)'">
+  <ng-container *ngIf="book$ | async as apiResult">
+    <seed-spinner *ngIf="apiResult.loading"></seed-spinner>
+
+    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error"></seed-alert>
+
+    <ng-container *ngIf="apiResult.data as book">
+      <div class="flex flex-wrap">
+        <span class="w-full md:w-1/4">Book Name</span>
+        <strong class="w-full md:w-3/4">
+          {{ book.entity.name }}
+        </strong>
+      </div>
+    </ng-container>
+  </ng-container>
+</seed-page-container>
