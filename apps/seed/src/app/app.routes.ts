@@ -10,6 +10,17 @@ import { Layout } from './layout/layout';
 
 const layout = (process.env['NX_MODE'] || 'sidebar') as Layout;
 
+const mfeRoutes: Route[] = [
+  {
+    path: 'shop-mfe',
+    loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
+  },
+  {
+    path: 'harbor-mfe',
+    loadChildren: () => loadRemoteModule('harbor-mfe', './Module').then(m => m.RemoteEntryModule),
+  },
+];
+
 export const routes: Route[] = [
   {
     path: 'provider',
@@ -30,14 +41,7 @@ export const routes: Route[] = [
         component: MfeContainerComponent,
       },
       // MFE placeholder
-      {
-        path: 'shop-mfe',
-        loadChildren: () => loadRemoteModule('shop-mfe', './Module').then(m => m.RemoteEntryModule),
-      },
-      {
-        path: 'harbor-mfe',
-        loadChildren: () => loadRemoteModule('harbor-mfe', './Module').then(m => m.RemoteEntryModule),
-      },
+      ...mfeRoutes,
     ],
   },
   {

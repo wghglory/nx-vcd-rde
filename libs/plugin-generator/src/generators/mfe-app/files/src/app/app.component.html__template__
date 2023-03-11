@@ -1,0 +1,13 @@
+<div class="main-container">
+  <!-- global alerts -->
+  <seed-advanced-alert></seed-advanced-alert>
+
+  <seed-header-mfe name="<%= displayName %>"></seed-header-mfe>
+
+  <div class="content-container">
+    <main class="content-area">
+      <router-outlet></router-outlet>
+      <seed-toast-host></seed-toast-host>
+    </main>
+  </div>
+</div>

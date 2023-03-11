@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Tailwind not working in remote apps: https://github.com/nrwl/nx/issues/9784
+// The reason to config css in remote app is that we need remote app to read host tailwind css classes,
+// e.g. seed-page-container has classes `container space-y-6`.
+// So in standalone remote app, it can render UI just like inside the host app.
+
+/* You can add global styles to this file, and also import other style files */

@@ -1,0 +1,6 @@
+{
+  "remoteName": "<%= fileName %>",
+  "displayName": "<%= displayName %>",
+  "url": "http://localhost:<%= port %>",
+  "description": "<%= description %>"
+}

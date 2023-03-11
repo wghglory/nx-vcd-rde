@@ -1,0 +1,5 @@
+import { Route } from '@angular/router';
+
+export const remoteRoutes: Route[] = [
+  { path: '', loadChildren: () => import('@seed/mfe/<%= removePrefix(fileName, "-mfe") %>/feature').then(m => m.Mfe<%= removePrefix(className, "Mfe") %>FeatureModule) },
+];

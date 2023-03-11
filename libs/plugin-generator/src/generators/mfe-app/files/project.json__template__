@@ -1,0 +1,139 @@
+{
+  "name": "<%= fileName %>",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/<%= fileName %>/src",
+  "prefix": "seed",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "allowedCommonJsDependencies": ["decimal.js-light", "lodash", "dompurify"],
+        "outputPath": "dist/apps/<%= fileName %>",
+        "index": "apps/<%= fileName %>/src/index.html",
+        "main": "apps/<%= fileName %>/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/<%= fileName %>/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/<%= fileName %>/src/favicon.ico",
+          "apps/<%= fileName %>/src/assets",
+          {
+            "glob": "clr-ui-dark.min.css",
+            "input": "node_modules/@clr/ui",
+            "output": "/assets/css"
+          },
+          {
+            "glob": "clr-ui.min.css",
+            "input": "node_modules/@clr/ui",
+            "output": "/assets/css"
+          },
+          {
+            "input": "libs/common-assets/src/assets",
+            "glob": "**/*",
+            "output": "/assets/"
+          }
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/style/src/lib/scss"]
+        },
+        "styles": ["apps/<%= fileName %>/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/<%= fileName %>/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "6kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/<%= fileName %>/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "<%= fileName %>:build:production"
+        },
+        "development": {
+          "browserTarget": "<%= fileName %>:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4302,
+        "publicHost": "http://localhost:4302",
+        "proxyConfig": "apps/seed/proxy.conf.mjs"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "<%= fileName %>:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/<%= fileName %>/**/*.ts", "apps/<%= fileName %>/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/<%= fileName %>/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "<%= fileName %>:build",
+        "port": 4302
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "<%= fileName %>:build:development"
+        },
+        "production": {
+          "buildTarget": "<%= fileName %>:build:production"
+        }
+      }
+    }
+  },
+  "tags": ["type:app"]
+}

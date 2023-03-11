@@ -12,17 +12,30 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "remote app name"
     },
-    "tags": {
+    "port": {
+      "type": "number",
+      "description": "remote app port",
+      "x-prompt": "remote app port? e.g. 4300"
+    },
+    "host": {
       "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    }, 
-    "directory": {
+      "description": "host app name",
+      "default": "seed",
+      "x-prompt": "host app name"
+    },
+    "displayName": {
       "type": "string",
-      "description": "A directory where the project is placed"
+      "description": "remote app displayName",
+      "x-prompt": "remote app displayName"
+    },
+    "description": {
+      "type": "string",
+      "description": "remote app description",
+      "default": "This is the default description of your remote app. You can edit it in seed/src/assets/mfe-configs.json.",
+      "x-prompt": "remote app description"
     }
   },
-  "required": ["name"]
+  "required": ["name", "port"]
 }
