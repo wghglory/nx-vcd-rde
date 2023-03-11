@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "TsLib",
+  "title": "",
+  "type": "object",
+  "examples": [
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib model --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=model",
+      "description": "create a new typescript model library: libs/mfe/ose/book/model"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib model --directory=mfe --domain= --mfeName=ose --scope=mfe --type=model",
+      "description": "create a new typescript model library: libs/mfe/ose/model"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib model --directory=shared --domain= --mfeName= --scope=shared --type=model",
+      "description": "create a new typescript model library: libs/shared/model"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib util --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=util",
+      "description": "create a new typescript util library: libs/mfe/ose/book/util"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib util --directory=mfe --domain= --mfeName=ose --scope=mfe --type=util",
+      "description": "create a new typescript util library: libs/mfe/ose/util"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib util --directory=shared --domain= --mfeName= --scope=shared --type=util",
+      "description": "create a new typescript util library: libs/shared/util"
+    }
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the library.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the library?",
+      "pattern": "^[a-zA-Z].*$"
+    },
+    "type": {
+      "description": "Library type",
+      "type": "string",
+      "alias": "t",
+      "x-prompt": {
+        "message": "Select library type?",
+        "type": "list",
+        "items": [
+          {
+            "value": "model",
+            "label": "Model"
+          },
+          {
+            "value": "util",
+            "label": "Util"
+          }
+        ]
+      }
+    },
+    "scope": {
+      "type": "string",
+      "description": "A scope for the lib.",
+      "alias": "sc",
+      "x-prompt": {
+        "message": "What's the scope?",
+        "items": ["shared", "core", "provider", "tenant", "mfe"]
+      }
+    },
+    "mfeName": {
+      "type": "string",
+      "description": "remote app name",
+      "x-prompt": "remote app name?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "directory",
+      "x-prompt": "optional directory?"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Library domain.",
+      "default": "",
+      "x-prompt": "Optional Library domain"
+    },
+    "richTemplate": {
+      "type": "boolean",
+      "default": true,
+      "description": "use rich templates for CRUD",
+      "x-prompt": "use rich templates? Otherwise empty templates"
+    }
+  },
+  "required": ["type", "domain", "scope", "name"]
+}

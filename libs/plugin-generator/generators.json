@@ -42,6 +42,11 @@
       "factory": "./src/generators/all-lib/generator",
       "schema": "./src/generators/all-lib/schema.json",
       "description": "all-lib generator"
+    },
+    "ts-lib": {
+      "factory": "./src/generators/ts-lib/generator",
+      "schema": "./src/generators/ts-lib/schema.json",
+      "description": "ts-lib generator"
     }
   }
 }
