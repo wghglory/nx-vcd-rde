@@ -6,19 +6,15 @@
   "cli": "nx",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:angular-library --domain=book --scope=provider --type=data-access --no-interactive",
-      "description": "create a new angular feature library: libs/provider/book/data-access"
-    },
-    {
-      "command": "npx nx generate @seed/plugin-generator:angular-library --scope=shared --type=data-access --no-interactive",
-      "description": "create a new angular feature library: libs/shared/data-access"
+      "command": "npx nx generate @seed/plugin-generator:mfe-lib --mfeName=harbor --type=feature --no-interactive --verbose",
+      "description": "create a new angular feature library: libs/mfe/harbor/data-access"
     }
   ],
   "properties": {
-    "domain": {
+    "mfeName": {
       "type": "string",
-      "description": "Library domain.",
-      "x-prompt": "Library domain?"
+      "description": "remote app name",
+      "x-prompt": "remote app name?"
     },
     "type": {
       "description": "Library type",
@@ -226,5 +222,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["type", "domain"]
+  "required": ["type", "mfeName"]
 }

@@ -4,9 +4,9 @@ import * as path from 'path';
 
 import { MfeLibGeneratorSchema } from './schema';
 
-// inputs: type(feature,data-access,ui), domain(harbor)
+// inputs: type(feature,data-access,ui), mfeName(harbor)
 // internally set: scope=mfe, tags
-// npx nx generate @seed/plugin-generator:angular-library-advanced feature --scope=mfe --type=feature --directory=mfe/harbor --domain=harbor
+// npx nx generate @seed/plugin-generator:angular-library-advanced feature --scope=mfe --type=feature --directory=mfe/harbor --mfeName=harbor
 
 interface NormalizedSchema extends MfeLibGeneratorSchema {
   projectName: string;
@@ -15,17 +15,21 @@ interface NormalizedSchema extends MfeLibGeneratorSchema {
 }
 
 function normalizeOptions(tree: Tree, options: MfeLibGeneratorSchema): NormalizedSchema {
-  const domainFileName = names(options.domain).fileName; // harbor
+  const mfeNameFileName = names(options.mfeName).fileName; // harbor
   const name = names(options.type).fileName; // data-access
+  options.name = name;
 
-  const projectDirectory = `mfe/${domainFileName}`;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-
-  options.tags = `scope:${options.scope},domain:${domainFileName},type:${options.type},framework:angular`;
-
+  const projectDirectory = `mfe/${mfeNameFileName}`;
   options.directory = projectDirectory;
+
+  const root = `${projectDirectory}/${name}`;
+
+  const projectName = root.replace(new RegExp('/', 'g'), '-');
+  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${root}`;
+
   options.changeDetection = 'OnPush';
+  options.scope = 'mfe';
+  options.tags = `scope:${options.scope},mfeName:${mfeNameFileName},type:${options.type},framework:angular`;
 
   return {
     ...options,
@@ -39,10 +43,10 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
     scopeClassName: names(options.scope).className,
-    domainClassName: names(options.domain).className,
+    mfeNameClassName: names(options.mfeName).className,
     scopeFileName: names(options.scope).fileName,
-    domainFileName: names(options.domain).fileName,
-    ...names(options.domain),
+    mfeNameFileName: names(options.mfeName).fileName,
+    ...names(options.mfeName),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };

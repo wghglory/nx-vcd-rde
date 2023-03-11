@@ -3,7 +3,7 @@ import { AngularGeneratorType } from '../generator.model';
 export interface MfeLibGeneratorSchema {
   type: AngularGeneratorType;
   scope: GeneratorScope;
-  domain: string;
+  mfeName: string;
   name: string;
   addTailwind?: boolean;
   skipFormat?: boolean;
