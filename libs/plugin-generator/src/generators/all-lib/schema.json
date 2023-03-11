@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "AllLib",
+  "title": "Generate feature, ui, data-access, util, model libs",
+  "type": "object",
+  "examples": [
+    {
+      "command": "npx nx generate @seed/plugin-generator:all-libraries --domain=bookStore --scope=provider --no-interactive",
+      "description": "create a bunch of libraries: libs/provider/book-store/"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:all-libraries --domain=shop --scope=mfe --no-interactive",
+      "description": "create a bunch of libraries: libs/mfe/shop/"
+    }
+  ],
+  "properties": {
+    "scope": {
+      "type": "string",
+      "description": "A scope for the lib.",
+      "alias": "sc",
+      "x-prompt": {
+        "message": "What's the scope?",
+        "items": ["shared", "core", "provider", "tenant", "mfe"]
+      }
+    },
+    "mfeName": {
+      "type": "string",
+      "description": "remote app name",
+      "x-prompt": "remote app name?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "directory",
+      "x-prompt": "optional directory?"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Library domain.",
+      "default": "",
+      "x-prompt": "Optional Library domain"
+    },
+    "richTemplate": {
+      "type": "boolean",
+      "default": true,
+      "description": "use rich templates for CRUD",
+      "x-prompt": "use rich templates? Otherwise empty templates"
+    }
+  },
+  "required": ["scope", "domain"]
+}
