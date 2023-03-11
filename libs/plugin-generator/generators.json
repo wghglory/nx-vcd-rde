@@ -37,6 +37,11 @@
       "factory": "./src/generators/ng-lib/generator",
       "schema": "./src/generators/ng-lib/schema.json",
       "description": "Generate Angular Libraries"
+    },
+    "all-lib": {
+      "factory": "./src/generators/all-lib/generator",
+      "schema": "./src/generators/all-lib/schema.json",
+      "description": "all-lib generator"
     }
   }
 }
