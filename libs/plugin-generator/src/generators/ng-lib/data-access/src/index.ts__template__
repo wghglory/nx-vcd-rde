@@ -1,1 +1,1 @@
-export * from './lib/<%= fileName %>.service';
+export * from './lib/<%= entityFileName %>.service';

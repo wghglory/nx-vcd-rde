@@ -1,14 +1,18 @@
 import { AngularGeneratorType } from '../generator.model';
 
 export interface NgLibGeneratorSchema {
+  // custom fields
   type: AngularGeneratorType;
   scope: GeneratorScope;
-  mfeName: string;
-  domain: string;
+  domain?: string;
+  mfeName?: string;
+  richTemplate?: boolean;
 
   // angular defaults
   name: string;
   directory?: string;
+
+  // Not important below
   addTailwind?: boolean;
   skipFormat?: boolean;
   simpleName?: boolean;
