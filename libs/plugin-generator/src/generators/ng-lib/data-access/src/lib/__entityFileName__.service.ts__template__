@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { <%= entityClassName %> } from '@seed/<%= scope %>/<%= entityFileName %>/model';
+import { <%= entityClassName %> } from '@seed/<%= directory %>/model';
 import { PageQuery, RDEList, RDEValue } from '@seed/shared/model';
 import { BehaviorSubject } from 'rxjs';
 

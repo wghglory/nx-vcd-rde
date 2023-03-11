@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { <%= entityClassName %> } from '@seed/<%= scope %>/<%= entityFileName %>/model';
+import { <%= entityClassName %> } from '@seed/<%= directory %>/model';
 import { RDEList, RDEValue } from '@seed/shared/model';
 
 import { <%= entityClassName %>Service } from './<%= entityFileName %>.service';
