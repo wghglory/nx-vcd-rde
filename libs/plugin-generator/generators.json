@@ -22,6 +22,16 @@
       "factory": "./src/generators/all-libraries/generator",
       "schema": "./src/generators/all-libraries/schema.json",
       "description": "Generate a feature"
+    },
+    "mfe-app": {
+      "factory": "./src/generators/mfe-app/generator",
+      "schema": "./src/generators/mfe-app/schema.json",
+      "description": "Generate a remote app"
+    },
+    "mfe-lib": {
+      "factory": "./src/generators/mfe-lib/generator",
+      "schema": "./src/generators/mfe-lib/schema.json",
+      "description": "Generate data-access, feature libs for a remote app"
     }
   }
 }
