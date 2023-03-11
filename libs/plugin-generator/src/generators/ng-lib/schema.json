@@ -6,8 +6,16 @@
   "cli": "nx",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:mfe-lib --mfeName=harbor --type=feature --no-interactive --verbose",
-      "description": "create a new angular feature library: libs/mfe/harbor/data-access"
+      "command": "npx nx generate @seed/plugin-generator:ng-lib data-access --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=data-access",
+      "description": "create a new angular data-access library: libs/mfe/ose/book/data-access"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib data-access --directory=mfe --domain= --mfeName=ose --scope=mfe --type=data-access",
+      "description": "create a new angular data-access library: libs/mfe/ose/data-access"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib data-access --directory=shared --domain= --mfeName= --scope=shared --type=data-access",
+      "description": "create a new angular data-access library: libs/shared/data-access"
     }
   ],
   "properties": {
@@ -20,26 +28,6 @@
       },
       "x-prompt": "What name would you like to use for the library?",
       "pattern": "^[a-zA-Z].*$"
-    },
-    "mfeName": {
-      "type": "string",
-      "description": "remote app name",
-      "x-prompt": "remote app name?"
-    },
-    "scope": {
-      "type": "string",
-      "description": "A scope for the lib.",
-      "alias": "sc",
-      "x-prompt": {
-        "message": "What's the scope?",
-        "items": ["shared", "core", "provider", "tenant", "mfe"]
-      }
-    },
-    "domain": {
-      "type": "string",
-      "description": "Library domain.",
-      "default": "",
-      "x-prompt": "Optional Library domain"
     },
     "type": {
       "description": "Library type",
@@ -63,6 +51,37 @@
           }
         ]
       }
+    },
+    "scope": {
+      "type": "string",
+      "description": "A scope for the lib.",
+      "alias": "sc",
+      "x-prompt": {
+        "message": "What's the scope?",
+        "items": ["shared", "core", "provider", "tenant", "mfe"]
+      }
+    },
+    "mfeName": {
+      "type": "string",
+      "description": "remote app name",
+      "x-prompt": "remote app name?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "directory",
+      "x-prompt": "optional directory?"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Library domain.",
+      "default": "",
+      "x-prompt": "Optional Library domain"
+    },
+    "richTemplate": {
+      "type": "boolean",
+      "default": true,
+      "description": "use rich templates for CRUD",
+      "x-prompt": "use rich templates? Otherwise empty templates"
     },
     "publishable": {
       "type": "boolean",
@@ -216,13 +235,13 @@
       "description": "The change detection strategy to use in the new component. Disclaimer: This option is only valid when `--standalone` is set to `true`.",
       "enum": ["Default", "OnPush"],
       "type": "string",
-      "default": "Default",
+      "default": "OnPush",
       "alias": "c"
     },
     "style": {
       "description": "The file extension or preprocessor to use for style files, or `none` to skip generating the style file. Disclaimer: This option is only valid when `--standalone` is set to `true`.",
       "type": "string",
-      "default": "css",
+      "default": "scss",
       "enum": ["css", "scss", "sass", "less", "none"]
     },
     "skipTests": {
