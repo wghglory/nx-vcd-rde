@@ -78,7 +78,7 @@ export const routes: Route[] = [
     pathMatch: 'full',
     data: { layout },
   },
-  // <!--UI_ENTITY_ROUTES-->
+  // <!--INJECTION_POINT_DO_NOT_DELETE-->
   {
     path: 'products',
     children: productRoutes,
