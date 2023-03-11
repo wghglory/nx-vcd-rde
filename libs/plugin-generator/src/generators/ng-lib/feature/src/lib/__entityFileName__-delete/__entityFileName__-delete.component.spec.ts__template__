@@ -4,46 +4,46 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
-import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
-import { <%= className %> } from '@seed/<%= scopeFileName %>/<%= fileName %>/model';
+import { <%= entityClassName %>Service } from '@seed/<%= directory %>/data-access';
+import { <%= entityClassName %> } from '@seed/<%= directory %>/model';
 import { RDEValue } from '@seed/shared/model';
 import { SharedSpecModule } from '@seed/shared/module';
 import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/angular';
 import { of, throwError } from 'rxjs';
 
-import { <%= className %>DeleteComponent } from './<%= fileName %>-delete.component';
+import { <%= entityClassName %>DeleteComponent } from './<%= entityFileName %>-delete.component';
 
-const <%= propertyName %>ServiceStub = {
-  delete<%= className %>: jest.fn().mockImplementation(id => of({})),
-  selected<%= className %>$: of({
-    id: '<%= propertyName %>-id',
+const <%= entityPropertyName %>ServiceStub = {
+  delete<%= entityClassName %>: jest.fn().mockImplementation(id => of({})),
+  selected<%= entityClassName %>$: of({
+    id: '<%= entityPropertyName %>-id',
     entity: {
       // TODO
     },
-  } as RDEValue<<%= className %>>),
+  } as RDEValue<<%= entityClassName %>>),
   refreshList: jest.fn(),
-  select<%= className %>: jest.fn(),
+  select<%= entityClassName %>: jest.fn(),
 };
 
-describe('<%= className %>DeleteComponent', () => {
-  let component: <%= className %>DeleteComponent;
-  let fixture: ComponentFixture<<%= className %>DeleteComponent>;
+describe('<%= entityClassName %>DeleteComponent', () => {
+  let component: <%= entityClassName %>DeleteComponent;
+  let fixture: ComponentFixture<<%= entityClassName %>DeleteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SharedSpecModule, NoopAnimationsModule],
-      declarations: [<%= className %>DeleteComponent],
+      declarations: [<%= entityClassName %>DeleteComponent],
       providers: [
         {
-          provide: <%= className %>Service,
-          useValue: <%= propertyName %>ServiceStub,
+          provide: <%= entityClassName %>Service,
+          useValue: <%= entityPropertyName %>ServiceStub,
         },
         { provide: ActivatedRoute, useValue: {} },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(<%= className %>DeleteComponent);
+    fixture = TestBed.createComponent(<%= entityClassName %>DeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -52,32 +52,32 @@ describe('<%= className %>DeleteComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should delete <%= propertyName %> when confirm', async () => {
+  it('should delete <%= entityPropertyName %> when confirm', async () => {
     jest.spyOn(component, 'close');
-    jest.spyOn(<%= propertyName %>ServiceStub, 'select<%= className %>');
-    jest.spyOn(<%= propertyName %>ServiceStub, 'refreshList');
+    jest.spyOn(<%= entityPropertyName %>ServiceStub, 'select<%= entityClassName %>');
+    jest.spyOn(<%= entityPropertyName %>ServiceStub, 'refreshList');
 
     component.confirm();
 
     const observerSpy = subscribeSpyTo(component.delete$);
 
-    expect(<%= propertyName %>ServiceStub.delete<%= className %>).toBeCalledWith('<%= propertyName %>-id');
+    expect(<%= entityPropertyName %>ServiceStub.delete<%= entityClassName %>).toBeCalledWith('<%= entityPropertyName %>-id');
     expect(component.close).toBeCalled();
-    expect(<%= propertyName %>ServiceStub.select<%= className %>).toBeCalledWith(null);
-    expect(<%= propertyName %>ServiceStub.refreshList).toBeCalled();
+    expect(<%= entityPropertyName %>ServiceStub.select<%= entityClassName %>).toBeCalledWith(null);
+    expect(<%= entityPropertyName %>ServiceStub.refreshList).toBeCalled();
   });
 });
 
-describe('<%= className %>DeleteComponent use testing library', () => {
+describe('<%= entityClassName %>DeleteComponent use testing library', () => {
   it('should display error when delete api fails', async () => {
-    await render(<%= className %>DeleteComponent, {
+    await render(<%= entityClassName %>DeleteComponent, {
       componentInputs: {
         open: true,
       },
       imports: [SharedSpecModule, NoopAnimationsModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: <%= className %>Service, useValue: <%= propertyName %>ServiceStub },
+        { provide: <%= entityClassName %>Service, useValue: <%= entityPropertyName %>ServiceStub },
         {
           // '[cdkFocusInitial]' is not focusable warning, when running jest unit test of a dialog component with cdkFocusInitial?
           provide: InteractivityChecker,
@@ -88,19 +88,19 @@ describe('<%= className %>DeleteComponent use testing library', () => {
       ],
     });
 
-    <%= propertyName %>ServiceStub.delete<%= className %>.mockReturnValueOnce(throwError(() => new Error('fail')));
+    <%= entityPropertyName %>ServiceStub.delete<%= entityClassName %>.mockReturnValueOnce(throwError(() => new Error('fail')));
 
     const confirmBtn = screen.getByRole('button', { name: /confirm/i });
     fireEvent.click(confirmBtn);
 
-    expect(<%= propertyName %>ServiceStub.delete<%= className %>).toBeCalledWith('<%= propertyName %>-id');
+    expect(<%= entityPropertyName %>ServiceStub.delete<%= entityClassName %>).toBeCalledWith('<%= entityPropertyName %>-id');
 
     const alert = await screen.findByTestId('alert');
     expect(alert).toBeVisible();
   });
 
   it('should close dialog after delete successfully', async () => {
-    await render(<%= className %>DeleteComponent, {
+    await render(<%= entityClassName %>DeleteComponent, {
       componentInputs: {
         open: true,
       },
@@ -108,7 +108,7 @@ describe('<%= className %>DeleteComponent use testing library', () => {
       imports: [SharedSpecModule, NoopAnimationsModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: <%= className %>Service, useValue: <%= propertyName %>ServiceStub },
+        { provide: <%= entityClassName %>Service, useValue: <%= entityPropertyName %>ServiceStub },
         {
           // '[cdkFocusInitial]' is not focusable warning, when running jest unit test of a dialog component with cdkFocusInitial?
           provide: InteractivityChecker,
@@ -119,20 +119,20 @@ describe('<%= className %>DeleteComponent use testing library', () => {
       ],
     });
 
-    jest.spyOn(<%= propertyName %>ServiceStub, 'select<%= className %>');
-    jest.spyOn(<%= propertyName %>ServiceStub, 'refreshList');
+    jest.spyOn(<%= entityPropertyName %>ServiceStub, 'select<%= entityClassName %>');
+    jest.spyOn(<%= entityPropertyName %>ServiceStub, 'refreshList');
 
     const confirmBtn = screen.getByRole('button', { name: /confirm/i });
     fireEvent.click(confirmBtn);
 
-    expect(<%= propertyName %>ServiceStub.delete<%= className %>).toBeCalledWith('<%= propertyName %>-id');
+    expect(<%= entityPropertyName %>ServiceStub.delete<%= entityClassName %>).toBeCalledWith('<%= entityPropertyName %>-id');
 
     // since no parent component to control delete component, close will not happen
     // await waitForElementToBeRemoved(() => screen.findByRole('button', { name: /confirm/i }));
     // expect(confirmBtn).not.toBeInTheDocument();
 
-    expect(<%= propertyName %>ServiceStub.delete<%= className %>).toBeCalledWith('<%= propertyName %>-id');
-    expect(<%= propertyName %>ServiceStub.select<%= className %>).toBeCalledWith(null);
-    expect(<%= propertyName %>ServiceStub.refreshList).toBeCalled();
+    expect(<%= entityPropertyName %>ServiceStub.delete<%= entityClassName %>).toBeCalledWith('<%= entityPropertyName %>-id');
+    expect(<%= entityPropertyName %>ServiceStub.select<%= entityClassName %>).toBeCalledWith(null);
+    expect(<%= entityPropertyName %>ServiceStub.refreshList).toBeCalled();
   });
 });

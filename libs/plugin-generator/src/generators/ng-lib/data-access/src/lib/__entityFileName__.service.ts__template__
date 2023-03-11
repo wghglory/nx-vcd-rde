@@ -20,8 +20,8 @@ export class <%= entityClassName %>Service {
     this.refreshBS.next();
   }
 
-  select<%= entityClassName %>(<%= propertyName %>: <%= entityClassName %> | null) {
-    this.selected<%= entityClassName %>BS.next(<%= propertyName %>);
+  select<%= entityClassName %>(<%= entityPropertyName %>: <%= entityClassName %> | null) {
+    this.selected<%= entityClassName %>BS.next(<%= entityPropertyName %>);
   }
 
   get<%= entityClassName %>List(params: Partial<PageQuery>) {

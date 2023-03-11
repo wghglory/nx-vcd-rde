@@ -1,5 +1,5 @@
-<seed-page-container title="Edit <%= className %>">
-  <form clrForm [formGroup]="<%= propertyName %>Form" (ngSubmit)="save()">
+<seed-page-container title="Edit <%= entityClassName %>">
+  <form clrForm [formGroup]="<%= entityPropertyName %>Form" (ngSubmit)="save()">
     <clr-control-container>
       <label class="clr-col-md-3">Name</label>
       <input class="clr-col-md-9" clrControl formControlName="name" />
@@ -11,7 +11,7 @@
 
     <div class="mt-6">
       <button class="btn btn-outline" type="button" (click)="cancel()">{{ 'common.cancel' | vtranslate }}</button>
-      <button class="btn btn-primary" [disabled]="<%= propertyName %>Form.invalid" [clrLoading]="(edit$ | async)?.loading === true" type="submit">
+      <button class="btn btn-primary" [disabled]="<%= entityPropertyName %>Form.invalid" [clrLoading]="(edit$ | async)?.loading === true" type="submit">
         {{ 'common.save' | vtranslate }}
       </button>
     </div>

@@ -2,19 +2,19 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ObserverSpy, queueForAutoUnsubscribe, subscribeSpyTo } from '@hirez_io/observer-spy';
-import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
-import { <%= className %> } from '@seed/<%= scopeFileName %>/<%= fileName %>/model';
+import { <%= entityClassName %>Service } from '@seed/<%= directory %>/data-access';
+import { <%= entityClassName %> } from '@seed/<%= directory %>/model';
 import { ApiQuery, RDEList } from '@seed/shared/model';
 import { SharedSpecModule } from '@seed/shared/module';
 import { of, throwError } from 'rxjs';
 
-import { <%= className %>ListComponent } from './<%= fileName %>-list.component';
+import { <%= entityClassName %>ListComponent } from './<%= entityFileName %>-list.component';
 
-describe('<%= className %>ListComponent', () => {
-  let component: <%= className %>ListComponent;
-  let fixture: ComponentFixture<<%= className %>ListComponent>;
+describe('<%= entityClassName %>ListComponent', () => {
+  let component: <%= entityClassName %>ListComponent;
+  let fixture: ComponentFixture<<%= entityClassName %>ListComponent>;
 
-  const <%= propertyName %>s1 = {
+  const <%= entityPropertyName %>s1 = {
     resultTotal: 2,
     pageCount: 1,
     page: 1,
@@ -23,8 +23,8 @@ describe('<%= className %>ListComponent', () => {
     values: [
       {
         id: 'uuid-1',
-        entityType: 'urn:vcloud:type:vmware:<%= propertyName %>:1.0.0',
-        name: 'test-<%= propertyName %>',
+        entityType: 'urn:vcloud:type:vmware:<%= entityPropertyName %>:1.0.0',
+        name: 'test-<%= entityPropertyName %>',
         externalId: null,
         entity: {
           id: 'uuid-1',
@@ -40,9 +40,9 @@ describe('<%= className %>ListComponent', () => {
         org: { name: 'System', id: 'faker.datatype.uuid()' },
       },
     ],
-  } as RDEList<<%= className %>>;
+  } as RDEList<<%= entityClassName %>>;
 
-  const <%= propertyName %>s2 = {
+  const <%= entityPropertyName %>s2 = {
     resultTotal: 2,
     pageCount: 1,
     page: 1,
@@ -51,8 +51,8 @@ describe('<%= className %>ListComponent', () => {
     values: [
       {
         id: 'uuid-2',
-        entityType: 'urn:vcloud:type:vmware:<%= propertyName %>:1.0.0',
-        name: 'test-<%= propertyName %>',
+        entityType: 'urn:vcloud:type:vmware:<%= entityPropertyName %>:1.0.0',
+        name: 'test-<%= entityPropertyName %>',
         externalId: null,
         entity: {
           id: 'uuid-2',
@@ -68,28 +68,28 @@ describe('<%= className %>ListComponent', () => {
         org: { name: 'System', id: 'faker.datatype.uuid()' },
       },
     ],
-  } as RDEList<<%= className %>>;
+  } as RDEList<<%= entityClassName %>>;
 
-  const <%= propertyName %>ServiceStub = {
-    get<%= className %>List: jest.fn().mockReturnValue(of(<%= propertyName %>s1, <%= propertyName %>s2)),
+  const <%= entityPropertyName %>ServiceStub = {
+    get<%= entityClassName %>List: jest.fn().mockReturnValue(of(<%= entityPropertyName %>s1, <%= entityPropertyName %>s2)),
     refresh$: of(true),
-    select<%= className %>: jest.fn(),
+    select<%= entityClassName %>: jest.fn(),
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SharedSpecModule],
-      declarations: [<%= className %>ListComponent],
+      declarations: [<%= entityClassName %>ListComponent],
       providers: [
         {
-          provide: <%= className %>Service,
-          useValue: <%= propertyName %>ServiceStub,
+          provide: <%= entityClassName %>Service,
+          useValue: <%= entityPropertyName %>ServiceStub,
         },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(<%= className %>ListComponent);
+    fixture = TestBed.createComponent(<%= entityClassName %>ListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -126,9 +126,9 @@ describe('<%= className %>ListComponent', () => {
     expect(spy.getFirstValue()).toStrictEqual(state);
   }));
 
-  it('can return <%= propertyName %>s when refreshing', fakeAsync(() => {
+  it('can return <%= entityPropertyName %>s when refreshing', fakeAsync(() => {
     const spy = new ObserverSpy();
-    const subscription = component.<%= propertyName %>s$.subscribe(spy);
+    const subscription = component.<%= entityPropertyName %>s$.subscribe(spy);
     queueForAutoUnsubscribe(subscription);
 
     const state = {
@@ -138,19 +138,19 @@ describe('<%= className %>ListComponent', () => {
 
     tick();
 
-    const apiResult = spy.getLastValue() as ApiQuery<RDEList<<%= className %>>>;
+    const apiResult = spy.getLastValue() as ApiQuery<RDEList<<%= entityClassName %>>>;
 
-    expect(<%= propertyName %>ServiceStub.get<%= className %>List).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(<%= entityPropertyName %>ServiceStub.get<%= entityClassName %>List).toBeCalledWith({ page: 2, pageSize: 15 });
     expect(apiResult.data).toBeDefined();
   }));
 
-  it('can return <%= propertyName %>s when refreshing with jest spy', fakeAsync(() => {
-    const service = TestBed.inject(<%= className %>Service);
-    const <%= propertyName %>s = { resultTotal: 10 } as RDEList<<%= className %>>;
-    jest.spyOn(service, 'get<%= className %>List').mockReturnValue(of(<%= propertyName %>s));
+  it('can return <%= entityPropertyName %>s when refreshing with jest spy', fakeAsync(() => {
+    const service = TestBed.inject(<%= entityClassName %>Service);
+    const <%= entityPropertyName %>s = { resultTotal: 10 } as RDEList<<%= entityClassName %>>;
+    jest.spyOn(service, 'get<%= entityClassName %>List').mockReturnValue(of(<%= entityPropertyName %>s));
 
     const spy = new ObserverSpy();
-    const subscription = component.<%= propertyName %>s$.subscribe(spy);
+    const subscription = component.<%= entityPropertyName %>s$.subscribe(spy);
     queueForAutoUnsubscribe(subscription);
 
     const state = {
@@ -160,18 +160,18 @@ describe('<%= className %>ListComponent', () => {
 
     tick();
 
-    const apiResult = spy.getLastValue() as ApiQuery<RDEList<<%= className %>>>;
+    const apiResult = spy.getLastValue() as ApiQuery<RDEList<<%= entityClassName %>>>;
 
-    expect(service.get<%= className %>List).toBeCalledWith({ page: 2, pageSize: 15 });
-    expect(apiResult.data).toBe(<%= propertyName %>s);
+    expect(service.get<%= entityClassName %>List).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(apiResult.data).toBe(<%= entityPropertyName %>s);
   }));
 
   it('can return error if service fails', fakeAsync(() => {
-    const service = TestBed.inject(<%= className %>Service);
-    jest.spyOn(service, 'get<%= className %>List').mockReturnValue(throwError(() => new Error('fail')));
+    const service = TestBed.inject(<%= entityClassName %>Service);
+    jest.spyOn(service, 'get<%= entityClassName %>List').mockReturnValue(throwError(() => new Error('fail')));
 
     const spy = new ObserverSpy();
-    const subscription = component.<%= propertyName %>s$.subscribe(spy);
+    const subscription = component.<%= entityPropertyName %>s$.subscribe(spy);
     queueForAutoUnsubscribe(subscription);
 
     const state = {
@@ -181,14 +181,14 @@ describe('<%= className %>ListComponent', () => {
 
     tick();
 
-    const apiResult = spy.getLastValue() as ApiQuery<RDEList<<%= className %>>>;
+    const apiResult = spy.getLastValue() as ApiQuery<RDEList<<%= entityClassName %>>>;
 
-    expect(service.get<%= className %>List).toBeCalledWith({ page: 2, pageSize: 15 });
+    expect(service.get<%= entityClassName %>List).toBeCalledWith({ page: 2, pageSize: 15 });
     expect(apiResult.error.message).toEqual('fail');
   }));
 
   it('should return error alert if service fails', fakeAsync(() => {
-    <%= propertyName %>ServiceStub.get<%= className %>List.mockReturnValue(throwError(() => new Error('fail')));
+    <%= entityPropertyName %>ServiceStub.get<%= entityClassName %>List.mockReturnValue(throwError(() => new Error('fail')));
 
     const state = {
       page: { from: 1, to: 15, size: 15, current: 2 },

@@ -1,19 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
+import { <%= entityClassName %>Service } from '@seed/<%= directory %>/data-access';
 import { api } from '@seed/shared/util';
 import { share, Subject, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'seed-<%= fileName %>-add',
-  templateUrl: './<%= fileName %>-add.component.html',
+  selector: 'seed-<%= entityFileName %>-add',
+  templateUrl: './<%= entityFileName %>-add.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class <%= className %>AddComponent {
-  constructor(public <%= propertyName %>Service: <%= className %>Service, private router: Router, private route: ActivatedRoute) {}
+export class <%= entityClassName %>AddComponent {
+  constructor(public <%= entityPropertyName %>Service: <%= entityClassName %>Service, private router: Router, private route: ActivatedRoute) {}
 
-  <%= propertyName %>Form = new FormGroup({
+  <%= entityPropertyName %>Form = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
@@ -21,7 +21,7 @@ export class <%= className %>AddComponent {
 
   add$ = this.saveSubject.pipe(
     switchMap(() =>
-      this.<%= propertyName %>Service.add<%= className %>(this.<%= propertyName %>Form.value).pipe(
+      this.<%= entityPropertyName %>Service.add<%= entityClassName %>(this.<%= entityPropertyName %>Form.value).pipe(
         api(() => {
           this.cancel();
         }),
@@ -31,7 +31,7 @@ export class <%= className %>AddComponent {
   );
 
   cancel() {
-    this.<%= propertyName %>Service.select<%= className %>(null);
+    this.<%= entityPropertyName %>Service.select<%= entityClassName %>(null);
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
 

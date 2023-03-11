@@ -16,6 +16,30 @@
     {
       "command": "npx nx generate @seed/plugin-generator:ng-lib data-access --directory=shared --domain= --mfeName= --scope=shared --type=data-access",
       "description": "create a new angular data-access library: libs/shared/data-access"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib feature --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=feature",
+      "description": "create a new angular feature library: libs/mfe/ose/book/feature"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib feature --directory=mfe --domain= --mfeName=ose --scope=mfe --type=feature",
+      "description": "create a new angular feature library: libs/mfe/ose/feature"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib feature --directory=shared --domain= --mfeName= --scope=shared --type=feature",
+      "description": "create a new angular feature library: libs/shared/feature"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib ui --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=ui",
+      "description": "create a new angular ui library: libs/mfe/ose/book/ui"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib ui --directory=mfe --domain= --mfeName=ose --scope=mfe --type=ui",
+      "description": "create a new angular ui library: libs/mfe/ose/ui"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ng-lib ui --directory=shared --domain= --mfeName= --scope=shared --type=ui",
+      "description": "create a new angular ui library: libs/shared/ui"
     }
   ],
   "properties": {

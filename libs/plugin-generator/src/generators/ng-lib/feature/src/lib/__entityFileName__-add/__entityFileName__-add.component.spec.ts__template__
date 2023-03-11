@@ -1,0 +1,86 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, Router } from '@angular/router';
+import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { <%= entityClassName %>Service } from '@seed/<%= directory %>/data-access';
+import { <%= entityClassName %> } from '@seed/<%= directory %>/model';
+import { RDEValue } from '@seed/shared/model';
+import { SharedSpecModule } from '@seed/shared/module';
+import { of, throwError } from 'rxjs';
+
+import { <%= entityClassName %>AddComponent } from './<%= entityFileName %>-add.component';
+
+describe('<%= entityClassName %>AddComponent', () => {
+  let component: <%= entityClassName %>AddComponent;
+  let fixture: ComponentFixture<<%= entityClassName %>AddComponent>;
+
+  const <%= entityPropertyName %>ServiceStub = {
+    add<%= entityClassName %>: jest.fn().mockReturnValue(of({ entity: { name: '<%= entityClassName %> name' } } as RDEValue<<%= entityClassName %>>)),
+    select<%= entityClassName %>: jest.fn(),
+  };
+  const routerStub = { navigate: jest.fn() };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [SharedSpecModule, NoopAnimationsModule],
+      declarations: [<%= entityClassName %>AddComponent],
+      providers: [
+        {
+          provide: <%= entityClassName %>Service,
+          useValue: <%= entityPropertyName %>ServiceStub,
+        },
+        {
+          provide: Router,
+          useValue: routerStub,
+        },
+        { provide: ActivatedRoute, useValue: {} },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(<%= entityClassName %>AddComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should return add <%= entityPropertyName %>', async () => {
+    const formValue = { name: '<%= entityClassName %> name' };
+
+    const observerSpy = subscribeSpyTo(component.add$);
+
+    component.<%= entityPropertyName %>Form.setValue(formValue);
+    component.save();
+
+    expect(observerSpy.getLastValue()).toStrictEqual({
+      data: { entity: formValue },
+      error: null,
+      loading: false,
+    });
+
+    expect(routerStub.navigate).toBeCalled();
+    expect(<%= entityPropertyName %>ServiceStub.add<%= entityClassName %>).toBeCalledWith(formValue);
+  });
+
+  it('should catchError if add <%= entityPropertyName %> fails', () => {
+    const formValue = { name: '<%= entityClassName %> name' };
+    <%= entityPropertyName %>ServiceStub.add<%= entityClassName %>.mockReturnValueOnce(throwError(() => new Error('fail')));
+
+    const observerSpy = subscribeSpyTo(component.add$);
+
+    component.<%= entityPropertyName %>Form.setValue(formValue);
+    component.save();
+
+    expect(observerSpy.getLastValue()).toStrictEqual({
+      data: null,
+      error: Error('fail'),
+      loading: false,
+    });
+
+    expect(<%= entityPropertyName %>ServiceStub.add<%= entityClassName %>).toBeCalledWith(formValue);
+  });
+});

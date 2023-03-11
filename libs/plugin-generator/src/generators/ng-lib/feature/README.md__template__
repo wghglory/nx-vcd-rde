@@ -1,6 +1,6 @@
-# <%= className %> <%= type %>
+# <%= entityClassName %> <%= type %>
 
-This is Angular library for <%= className %> <%= type %>
+This is Angular library for <%= entityClassName %> <%= type %>
 
 type: <%= type %>
 scope: <%= scope %>

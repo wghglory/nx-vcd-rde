@@ -1,0 +1,16 @@
+<seed-page-container [title]="'<%= entityClassName %> Detail (TODO: i18n)'">
+  <ng-container *ngIf="<%= entityPropertyName %>$ | async as apiResult">
+    <seed-spinner *ngIf="apiResult.loading"></seed-spinner>
+
+    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error"></seed-alert>
+
+    <ng-container *ngIf="apiResult.data as <%= entityPropertyName %>">
+      <div class="flex flex-wrap">
+        <span class="w-full md:w-1/4"><%= entityClassName %> Name</span>
+        <strong class="w-full md:w-3/4">
+          {{ <%= entityPropertyName %>.entity.name }}
+        </strong>
+      </div>
+    </ng-container>
+  </ng-container>
+</seed-page-container>
