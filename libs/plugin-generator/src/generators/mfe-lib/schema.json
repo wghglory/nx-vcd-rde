@@ -7,7 +7,7 @@
   "examples": [
     {
       "command": "npx nx generate @seed/plugin-generator:mfe-lib --mfeName=harbor --type=feature --no-interactive --verbose",
-      "description": "create a new angular feature library: libs/mfe/harbor/data-access"
+      "description": "create a new angular feature library: libs/mfe/harbor/feature"
     }
   ],
   "properties": {

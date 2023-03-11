@@ -4,6 +4,12 @@
   "$id": "MfeApp",
   "title": "",
   "type": "object",
+  "examples": [
+    {
+      "command": "npx nx generate @seed/plugin-generator:mfe-app ose --displayName='Object Storage' --port=5000 --no-interactive",
+      "description": "create a remote app:  apps/ose-mfe"
+    }
+  ],
   "properties": {
     "name": {
       "type": "string",
