@@ -11,6 +11,13 @@ interface NormalizedSchema extends NgLibGeneratorSchema {
   entityFileName: string;
   entityClassName: string;
   entityPropertyName: string;
+  names: (name: string) => {
+    name: string;
+    className: string;
+    propertyName: string;
+    constantName: string;
+    fileName: string;
+  };
 }
 
 function normalizeOptions(tree: Tree, options: NgLibGeneratorSchema): NormalizedSchema {
@@ -35,7 +42,7 @@ function normalizeOptions(tree: Tree, options: NgLibGeneratorSchema): Normalized
     entityName = options.domain;
   }
 
-  const directoryWithName = directory.join('/');
+  const directoryWithoutName = directory.join('/');
   directory.push(name);
 
   // const projectDirectory = options.directory ? `${names(options.directory).fileName}/${name}` : name;
@@ -45,7 +52,7 @@ function normalizeOptions(tree: Tree, options: NgLibGeneratorSchema): Normalized
 
   // Update options:
   options.tags = tags.join(', ');
-  options.directory = directoryWithName;
+  options.directory = directoryWithoutName;
 
   return {
     ...options,
@@ -55,6 +62,7 @@ function normalizeOptions(tree: Tree, options: NgLibGeneratorSchema): Normalized
     entityFileName: names(entityName).fileName,
     entityClassName: names(entityName).className,
     entityPropertyName: names(entityName).propertyName,
+    names,
   };
 }
 

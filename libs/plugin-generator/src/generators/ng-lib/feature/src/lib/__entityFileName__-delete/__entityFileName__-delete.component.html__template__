@@ -1,7 +1,7 @@
 <clr-modal [(clrModalOpen)]="open" (clrModalOpenChange)="close()">
-  <h3 class="modal-title">Delete <%= className %> (TODO: i18n)</h3>
+  <h3 class="modal-title">Delete <%= entityClassName %> (TODO: i18n)</h3>
   <div class="modal-body">
-    <p cds-text [innerHTML]="'common.delete_x' | vtranslate : (<%= propertyName %>Service.selected<%= className %>$ | async)?.name"></p>
+    <p cds-text [innerHTML]="'common.delete_x' | vtranslate : (<%= entityPropertyName %>Service.selected<%= entityClassName %>$ | async)?.name"></p>
 
     <seed-alert data-testid="alert" *ngIf="(delete$ | async)?.error as error" [error]="error"></seed-alert>
   </div>

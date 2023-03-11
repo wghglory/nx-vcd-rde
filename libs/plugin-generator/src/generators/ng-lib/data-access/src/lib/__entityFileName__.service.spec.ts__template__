@@ -22,7 +22,7 @@ describe('<%= entityClassName %>Service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('get <%= propertyName %>s', () => {
+  it('get <%= entityPropertyName %>s', () => {
     service.get<%= entityClassName %>List({ page: 1 }).subscribe();
 
     const request = controller.expectOne(req => req.method === 'GET' && req.url.includes('api/<%= entityFileName %>s'));
@@ -47,7 +47,7 @@ describe('<%= entityClassName %>Service', () => {
     request.flush(data);
   });
 
-  it('get single <%= propertyName %>', () => {
+  it('get single <%= entityPropertyName %>', () => {
     service.get<%= entityClassName %>('mockId').subscribe();
 
     const request = controller.expectOne(req => req.method === 'GET' && req.url.includes('api/<%= entityFileName %>s/mockId'));
@@ -62,7 +62,7 @@ describe('<%= entityClassName %>Service', () => {
     } as RDEValue<<%= entityClassName %>>);
   });
 
-  it('add a <%= propertyName %>', () => {
+  it('add a <%= entityPropertyName %>', () => {
     const payload = { }; // TODO
     service.add<%= entityClassName %>(payload).subscribe();
 
@@ -75,7 +75,7 @@ describe('<%= entityClassName %>Service', () => {
     } as RDEValue<<%= entityClassName %>>);
   });
 
-  it('delete a <%= propertyName %>', () => {
+  it('delete a <%= entityPropertyName %>', () => {
     service.delete<%= entityClassName %>('mockId').subscribe();
 
     const request = controller.expectOne(req => req.method === 'DELETE' && req.url.includes('api/<%= entityFileName %>s/mockId'));
@@ -85,7 +85,7 @@ describe('<%= entityClassName %>Service', () => {
     request.flush(null);
   });
 
-  it('update a <%= propertyName %>', () => {
+  it('update a <%= entityPropertyName %>', () => {
     const payload = { }; // TODO
     service.update<%= entityClassName %>('mockId', payload).subscribe();
 
@@ -104,15 +104,15 @@ describe('<%= entityClassName %>Service', () => {
     expect(subscribeSpyTo(service.refresh$).getFirstValue()).toBeUndefined();
   });
 
-  it('select <%= propertyName %>', () => {
-    const <%= propertyName %> = {
+  it('select <%= entityPropertyName %>', () => {
+    const <%= entityPropertyName %> = {
       id: 'mockId',
       // TODO
     } as <%= entityClassName %>;
 
-    service.select<%= entityClassName %>(<%= propertyName %>);
+    service.select<%= entityClassName %>(<%= entityPropertyName %>);
 
-    expect(subscribeSpyTo(service.selected<%= entityClassName %>$).getFirstValue()).toEqual(<%= propertyName %>);
+    expect(subscribeSpyTo(service.selected<%= entityClassName %>$).getFirstValue()).toEqual(<%= entityPropertyName %>);
   });
 
   afterEach(() => {

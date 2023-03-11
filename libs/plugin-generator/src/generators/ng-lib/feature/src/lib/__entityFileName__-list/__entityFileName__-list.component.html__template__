@@ -1,20 +1,20 @@
-<seed-page-container title="<%= className %>s">
-  <ng-container *ngIf="<%= propertyName %>s$ | async as apiResult">
+<seed-page-container title="<%= entityClassName %>s">
+  <ng-container *ngIf="<%= entityPropertyName %>s$ | async as apiResult">
     <div>
       <!-- ----------------------------------- Actions ----------------------------------- -->
       <div>
-        <button class="btn btn-outline" (click)="<%= propertyName %>Service.refreshList()" [disabled]="apiResult.loading">
+        <button class="btn btn-outline" (click)="<%= entityPropertyName %>Service.refreshList()" [disabled]="apiResult.loading">
           {{ 'common.refresh' | vtranslate }}
         </button>
         <button class="btn btn-outline" [routerLink]="'@/add'">{{ 'common.add' | vtranslate }}</button>
         <button
           class="btn btn-outline"
-          [disabled]="(<%= propertyName %>Service.selected<%= className %>$ | async) === null"
-          [routerLink]="['@/edit', (<%= propertyName %>Service.selected<%= className %>$ | async)?.id]"
+          [disabled]="(<%= entityPropertyName %>Service.selected<%= entityClassName %>$ | async) === null"
+          [routerLink]="['@/edit', (<%= entityPropertyName %>Service.selected<%= entityClassName %>$ | async)?.id]"
         >
           {{ 'common.edit' | vtranslate }}
         </button>
-        <button class="btn btn-outline" [disabled]="(<%= propertyName %>Service.selected<%= className %>$ | async) === null" (click)="openDeleteDialog = true">
+        <button class="btn btn-outline" [disabled]="(<%= entityPropertyName %>Service.selected<%= entityClassName %>$ | async) === null" (click)="openDeleteDialog = true">
           {{ 'common.delete' | vtranslate }}
         </button>
       </div>
@@ -24,21 +24,21 @@
         class="min-h-[200px]"
         (clrDgRefresh)="refresh($event)"
         [clrDgLoading]="apiResult.loading === true"
-        [(clrDgSingleSelected)]="selected<%= className %>"
-        (clrDgSingleSelectedChange)="<%= propertyName %>Service.select<%= className %>($event!)"
+        [(clrDgSingleSelected)]="selected<%= entityClassName %>"
+        (clrDgSingleSelectedChange)="<%= entityPropertyName %>Service.select<%= entityClassName %>($event!)"
       >
-        <clr-dg-column><%= className %> ID</clr-dg-column>
+        <clr-dg-column><%= entityClassName %> ID</clr-dg-column>
         <clr-dg-column [clrDgField]="'entity.name'">Name</clr-dg-column>
         <clr-dg-column [clrDgField]="'entity.lastModifiedDate'">Last Modified Date</clr-dg-column>
 
         <clr-dg-placeholder>No data found</clr-dg-placeholder>
 
-        <clr-dg-row *ngFor="let <%= propertyName %> of apiResult.data?.values" [clrDgItem]="<%= propertyName %>.entity">
-          <clr-dg-cell>{{ <%= propertyName %>.id }}</clr-dg-cell>
+        <clr-dg-row *ngFor="let <%= entityPropertyName %> of apiResult.data?.values" [clrDgItem]="<%= entityPropertyName %>.entity">
+          <clr-dg-cell>{{ <%= entityPropertyName %>.id }}</clr-dg-cell>
           <clr-dg-cell>
-            <a [routerLink]="<%= propertyName %>.id">{{ <%= propertyName %>.name }}</a>
+            <a [routerLink]="<%= entityPropertyName %>.id">{{ <%= entityPropertyName %>.name }}</a>
           </clr-dg-cell>
-          <clr-dg-cell>{{ <%= propertyName %>.entity.lastModifiedDate | date }}</clr-dg-cell>
+          <clr-dg-cell>{{ <%= entityPropertyName %>.entity.lastModifiedDate | date }}</clr-dg-cell>
         </clr-dg-row>
 
         <clr-dg-footer>
@@ -53,4 +53,4 @@
 </seed-page-container>
 
 <!-- ----------------------------------- modal----------------------------------- -->
-<seed-<%= propertyName %>-delete *ngIf="openDeleteDialog" [(open)]="openDeleteDialog"> </seed-<%= propertyName %>-delete>
+<seed-<%= entityPropertyName %>-delete *ngIf="openDeleteDialog" [(open)]="openDeleteDialog"> </seed-<%= entityPropertyName %>-delete>

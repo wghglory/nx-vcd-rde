@@ -1,22 +1,22 @@
 import { Route } from '@angular/router';
 
-import { <%= className %>AddComponent } from './<%= fileName %>-add/<%= fileName %>-add.component';
-import { <%= className %>DetailComponent } from './<%= fileName %>-detail/<%= fileName %>-detail.component';
-import { <%= className %>EditComponent } from './<%= fileName %>-edit/<%= fileName %>-edit.component';
-import { <%= className %>ListComponent } from './<%= fileName %>-list/<%= fileName %>-list.component';
+import { <%= entityClassName %>AddComponent } from './<%= entityFileName %>-add/<%= entityFileName %>-add.component';
+import { <%= entityClassName %>DetailComponent } from './<%= entityFileName %>-detail/<%= entityFileName %>-detail.component';
+import { <%= entityClassName %>EditComponent } from './<%= entityFileName %>-edit/<%= entityFileName %>-edit.component';
+import { <%= entityClassName %>ListComponent } from './<%= entityFileName %>-list/<%= entityFileName %>-list.component';
 
 export const routes: Route[] = [
-  { path: '', component: <%= className %>ListComponent },
+  { path: '', component: <%= entityClassName %>ListComponent },
   {
     path: ':id',
-    component: <%= className %>DetailComponent,
+    component: <%= entityClassName %>DetailComponent,
   },
   {
     path: '@/add',
-    component: <%= className %>AddComponent,
+    component: <%= entityClassName %>AddComponent,
   },
   {
     path: '@/edit/:id',
-    component: <%= className %>EditComponent,
+    component: <%= entityClassName %>EditComponent,
   },
 ];

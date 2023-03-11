@@ -1,0 +1,17 @@
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { PageContainerComponent, SharedUiModule } from '@seed/shared/ui';
+
+import { routes } from './lib.routes';
+import { <%= entityClassName %>AddComponent } from './<%= entityFileName %>-add/<%= entityFileName %>-add.component';
+import { <%= entityClassName %>DeleteComponent } from './<%= entityFileName %>-delete/<%= entityFileName %>-delete.component';
+import { <%= entityClassName %>DetailComponent } from './<%= entityFileName %>-detail/<%= entityFileName %>-detail.component';
+import { <%= entityClassName %>EditComponent } from './<%= entityFileName %>-edit/<%= entityFileName %>-edit.component';
+import { <%= entityClassName %>ListComponent } from './<%= entityFileName %>-list/<%= entityFileName %>-list.component';
+
+@NgModule({
+  imports: [SharedUiModule, RouterModule.forChild(routes), PageContainerComponent, ReactiveFormsModule],
+  declarations: [<%= entityClassName %>ListComponent, <%= entityClassName %>AddComponent, <%= entityClassName %>DeleteComponent, <%= entityClassName %>EditComponent, <%= entityClassName %>DetailComponent],
+})
+export class <%= names(directory).className %>FeatureModule {}
