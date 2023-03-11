@@ -6,12 +6,16 @@
   "type": "object",
   "examples": [
     {
-      "command": "npx nx generate @seed/plugin-generator:all-libraries --domain=bookStore --scope=provider --no-interactive",
-      "description": "create a bunch of libraries: libs/provider/book-store/"
+      "command": "npx nx generate @seed/plugin-generator:ts-lib  --directory=mfe --domain=book --mfeName=ose --scope=mfe",
+      "description": "create all libraries: libs/mfe/ose/book/*"
     },
     {
-      "command": "npx nx generate @seed/plugin-generator:all-libraries --domain=shop --scope=mfe --no-interactive",
-      "description": "create a bunch of libraries: libs/mfe/shop/"
+      "command": "npx nx generate @seed/plugin-generator:ts-lib --directory=mfe --domain= --mfeName=ose --scope=mfe",
+      "description": "create all libraries: libs/mfe/ose/*"
+    },
+    {
+      "command": "npx nx generate @seed/plugin-generator:ts-lib --directory=shared --domain= --mfeName= --scope=shared",
+      "description": "create all libraries: libs/shared/*"
     }
   ],
   "properties": {

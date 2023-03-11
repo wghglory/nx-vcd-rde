@@ -1,6 +1,7 @@
 import { Tree } from '@nrwl/devkit';
 
 import generateAngularLib from '../ng-lib/generator';
+import generateTypescriptLib from '../ts-lib/generator';
 import { AngularGeneratorType, TypescriptGeneratorType } from './../generator.model';
 import { AllLibGeneratorSchema } from './schema';
 
@@ -11,5 +12,8 @@ export default async function (tree: Tree, options: AllLibGeneratorSchema) {
   // feature --directory=mfe --domain=book --mfeName=ose --scope=mfe --type=feature
   for (const type of angularTypes) {
     await generateAngularLib(tree, { ...options, type, name: type });
+  }
+  for (const type of typescriptTypes) {
+    await generateTypescriptLib(tree, { ...options, type, name: type });
   }
 }
