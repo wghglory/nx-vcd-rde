@@ -1,0 +1,42 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ClrDatagridStateInterface } from '@clr/angular';
+import { <%= className %>Service } from '@seed/<%= scopeFileName %>/<%= fileName %>/data-access';
+import { <%= className %> } from '@seed/<%= scopeFileName %>/<%= fileName %>/model';
+import { ApiQuery, RDEList } from '@seed/shared/model';
+import { api, dgState, stateHandler } from '@seed/shared/util';
+import { BehaviorSubject, combineLatest, filter, map, Observable, share, startWith, switchMap } from 'rxjs';
+
+@Component({
+  selector: 'seed-<%= fileName %>-list',
+  templateUrl: './<%= fileName %>-list.component.html',
+  styleUrls: ['./<%= fileName %>-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class <%= className %>ListComponent {
+  constructor(public <%= propertyName %>Service: <%= className %>Service) {}
+
+  openDeleteDialog = false;
+
+  selected<%= className %>: <%= className %> | undefined;
+
+  private dgSource = new BehaviorSubject<ClrDatagridStateInterface | null>(null);
+  dgState$ = this.dgSource.pipe(dgState());
+
+  <%= propertyName %>s$: Observable<ApiQuery<RDEList<<%= className %>>>> = combineLatest([this.dgState$, this.<%= propertyName %>Service.refresh$]).pipe(
+    switchMap(([state]) => {
+      const params = stateHandler(state);
+      return this.<%= propertyName %>Service.get<%= className %>List(params).pipe(api());
+    }),
+    startWith({ loading: true, error: null, data: null }), // used to trigger the first render of datagrid.
+    share(),
+  );
+
+  total$ = this.<%= propertyName %>s$.pipe(
+    filter(s => Boolean(s.data)),
+    map(res => res.data?.resultTotal),
+  );
+
+  refresh(state: ClrDatagridStateInterface) {
+    this.dgSource.next(state);
+  }
+}
