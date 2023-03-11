@@ -1,0 +1,46 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { <%= className %> } from '@seed/<%= scope %>/<%= fileName %>/model';
+import { PageQuery, RDEList, RDEValue } from '@seed/shared/model';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class <%= className %>Service {
+  constructor(private http: HttpClient) {}
+
+  private refreshBS = new BehaviorSubject<void>(undefined);
+  refresh$ = this.refreshBS.asObservable();
+
+  private selected<%= className %>BS = new BehaviorSubject<<%= className %> | null>(null);
+  selected<%= className %>$ = this.selected<%= className %>BS.asObservable();
+
+  refreshList() {
+    this.refreshBS.next();
+  }
+
+  select<%= className %>(<%= propertyName %>: <%= className %> | null) {
+    this.selected<%= className %>BS.next(<%= propertyName %>);
+  }
+
+  get<%= className %>List(params: Partial<PageQuery>) {
+    return this.http.get<RDEList<<%= className %>>>('/api/<%= fileName %>s', { params });
+  }
+
+  get<%= className %>(id: string) {
+    return this.http.get<RDEValue<<%= className %>>>(`/api/<%= fileName %>s/${id}`);
+  }
+
+  add<%= className %>(payload: Partial<<%= className %>>) {
+    return this.http.post<RDEValue<<%= className %>>>(`/api/<%= fileName %>s`, payload);
+  }
+
+  update<%= className %>(id: string, payload: Partial<<%= className %>>) {
+    return this.http.patch<RDEValue<<%= className %>>>(`/api/<%= fileName %>s/${id}`, payload);
+  }
+
+  delete<%= className %>(id: string) {
+    return this.http.delete<void>(`/api/<%= fileName %>s/${id}`);
+  }
+}

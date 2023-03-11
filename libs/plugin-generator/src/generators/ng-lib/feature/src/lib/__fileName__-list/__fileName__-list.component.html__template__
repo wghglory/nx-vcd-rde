@@ -1,0 +1,56 @@
+<seed-page-container title="<%= className %>s">
+  <ng-container *ngIf="<%= propertyName %>s$ | async as apiResult">
+    <div>
+      <!-- ----------------------------------- Actions ----------------------------------- -->
+      <div>
+        <button class="btn btn-outline" (click)="<%= propertyName %>Service.refreshList()" [disabled]="apiResult.loading">
+          {{ 'common.refresh' | vtranslate }}
+        </button>
+        <button class="btn btn-outline" [routerLink]="'@/add'">{{ 'common.add' | vtranslate }}</button>
+        <button
+          class="btn btn-outline"
+          [disabled]="(<%= propertyName %>Service.selected<%= className %>$ | async) === null"
+          [routerLink]="['@/edit', (<%= propertyName %>Service.selected<%= className %>$ | async)?.id]"
+        >
+          {{ 'common.edit' | vtranslate }}
+        </button>
+        <button class="btn btn-outline" [disabled]="(<%= propertyName %>Service.selected<%= className %>$ | async) === null" (click)="openDeleteDialog = true">
+          {{ 'common.delete' | vtranslate }}
+        </button>
+      </div>
+
+      <!-- ----------------------------------- Datagrid ----------------------------------- -->
+      <clr-datagrid
+        class="min-h-[200px]"
+        (clrDgRefresh)="refresh($event)"
+        [clrDgLoading]="apiResult.loading === true"
+        [(clrDgSingleSelected)]="selected<%= className %>"
+        (clrDgSingleSelectedChange)="<%= propertyName %>Service.select<%= className %>($event!)"
+      >
+        <clr-dg-column><%= className %> ID</clr-dg-column>
+        <clr-dg-column [clrDgField]="'entity.name'">Name</clr-dg-column>
+        <clr-dg-column [clrDgField]="'entity.lastModifiedDate'">Last Modified Date</clr-dg-column>
+
+        <clr-dg-placeholder>No data found</clr-dg-placeholder>
+
+        <clr-dg-row *ngFor="let <%= propertyName %> of apiResult.data?.values" [clrDgItem]="<%= propertyName %>.entity">
+          <clr-dg-cell>{{ <%= propertyName %>.id }}</clr-dg-cell>
+          <clr-dg-cell>
+            <a [routerLink]="<%= propertyName %>.id">{{ <%= propertyName %>.name }}</a>
+          </clr-dg-cell>
+          <clr-dg-cell>{{ <%= propertyName %>.entity.lastModifiedDate | date }}</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+          {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ total$ | async }} items
+          <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="(total$ | async) || 0"></clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+
+    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error" class="mb-4"></seed-alert>
+  </ng-container>
+</seed-page-container>
+
+<!-- ----------------------------------- modal----------------------------------- -->
+<seed-<%= propertyName %>-delete *ngIf="openDeleteDialog" [(open)]="openDeleteDialog"> </seed-<%= propertyName %>-delete>
