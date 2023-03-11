@@ -2,7 +2,7 @@ import { Tree } from '@nrwl/devkit';
 
 import generateAngularLib from '../angular-library/generator';
 import generateTypescriptLib from '../typescript-library/generator';
-import { AngularGeneratorType, TypescriptGeneratorType } from './../generator.model';
+import { AngularGeneratorType, TypescriptGeneratorType } from '../../generator.model';
 import { AllLibrariesGeneratorSchema } from './schema';
 
 export default async function (tree: Tree, options: AllLibrariesGeneratorSchema) {

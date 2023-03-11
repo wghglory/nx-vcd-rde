@@ -1,4 +1,4 @@
-import { AngularGeneratorType, GeneratorScope } from './../generator.model';
+import { AngularGeneratorType, GeneratorScope } from '../generator.model';
 
 export interface AngularLibraryGeneratorSchema {
   type: AngularGeneratorType;
@@ -7,10 +7,6 @@ export interface AngularLibraryGeneratorSchema {
   name: string;
   addTailwind?: boolean;
   skipFormat?: boolean;
-  /**
-   * @deprecated Use `simpleName` instead. It will be removed in v16.
-   */
-  simpleModuleName?: boolean;
   simpleName?: boolean;
   addModuleSpec?: boolean;
   directory?: string;
