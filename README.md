@@ -19,8 +19,17 @@ vpat folder will be created. Use these commands after finishing the development.
 ## Generate MFE
 
 ```shell
-# add remote app
+# add remote app official command
 npx nx generate @nrwl/angular:remote content-hub-mfe --host=seed --addTailwind --backendProject=api --port=4303 --style=scss --tags=type:app --no-interactive
+
+# create remote app and libraries for UI
+npx nx generate @seed/plugin-generator:mfe-app ose --displayName='Object Storage' --port=4303 --no-interactive
+
+# create remote app's mock data
+npx hygen route new # type "sample"
+
+# run host and remote app
+NX_BUILD_DATE=$(date) npx nx serve seed --open --devRemotes=harbor-mfe,ose-mfe
 ```
 
 ## How to generate this repo?
