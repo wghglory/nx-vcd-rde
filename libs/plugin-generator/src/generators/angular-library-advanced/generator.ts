@@ -23,7 +23,7 @@ export default async function (tree: Tree, options: AngularLibraryGeneratorSchem
   // const directory = `${options.scope}/${options.domain}/${options.type}`; // shared/products/ui
 
   options.domain = domain;
-  options.tags = `scope:${options.scope},domain:${domain},type:${options.type}`;
+  options.tags = `scope:${options.scope},domain:${domain},type:${options.type},framework:angular`;
   options.changeDetection = 'OnPush';
   // options.importPath = `@seed/${directory}/${options.name}`; // add path in tsconfig.base.json
 

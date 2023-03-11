@@ -8,38 +8,33 @@ interface NormalizedSchema extends AngularLibraryGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
-  tags: string;
-  directory: string;
-  name: string;
 }
 
 function normalizeOptions(tree: Tree, options: AngularLibraryGeneratorSchema): NormalizedSchema {
   let projectDirectory = '';
-  let tags = '';
 
   if (options.domain) {
     // const name = names(options.name).fileName;
     const domainFileName = names(options.domain).fileName;
     projectDirectory = `${options.scope}/${domainFileName}`;
-    tags = `scope:${options.scope},domain:${domainFileName},type:${options.type},framework:angular`;
+    options.tags = `scope:${options.scope},domain:${domainFileName},type:${options.type},framework:angular`;
   } else {
     projectDirectory = options.scope;
-    tags = `scope:${options.scope},type:${options.type},framework:angular`;
+    options.tags = `scope:${options.scope},type:${options.type},framework:angular`;
   }
+
+  options.name = options.type;
+  options.directory = projectDirectory;
+  options.changeDetection = 'OnPush';
 
   const projectName = `${projectDirectory.replace(new RegExp('/', 'g'), '-')}-${options.type}`;
   const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}/${options.type}`;
-  const name = options.type;
-  const directory = projectDirectory;
 
   return {
     ...options,
     projectName,
     projectRoot,
     projectDirectory,
-    tags,
-    name,
-    directory,
   };
 }
 

@@ -6,22 +6,22 @@
     "angular-library": {
       "factory": "./src/generators/angular-library/generator",
       "schema": "./src/generators/angular-library/schema.json",
-      "description": "angular-library generator"
+      "description": "Create an Angular library (data-access,feature,ui)"
     },
     "angular-library-advanced": {
       "factory": "./src/generators/angular-library-advanced/generator",
       "schema": "./src/generators/angular-library-advanced/schema.json",
-      "description": "angular-library-advanced generator"
+      "description": "Create an empty Angular library(name,scope,type,optionalDomain)"
     },
     "typescript-library": {
       "factory": "./src/generators/typescript-library/generator",
       "schema": "./src/generators/typescript-library/schema.json",
-      "description": "typescript-library generator"
+      "description": "Typescript library for model and util"
     },
     "all-libraries": {
       "factory": "./src/generators/all-libraries/generator",
       "schema": "./src/generators/all-libraries/schema.json",
-      "description": "all-libraries generator"
+      "description": "Generate a feature"
     }
   }
 }

@@ -1,8 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "$id": "AngularLibraryAdvanced",
-  "title": "Create a library",
-  "description": "Creates an Angular library.",
+  "title": "Create an empty Angular library(name,scope,type,optionalDomain)",
   "type": "object",
   "cli": "nx",
   "examples": [
