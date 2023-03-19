@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { StudentService } from '@seed/feature/student/data-access';
 import { api } from '@seed/shared/util';
-import { filter, share, Subject, switchMap } from 'rxjs';
+import { filter, share, shareReplay, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-student-delete',
@@ -18,16 +18,22 @@ export class StudentDeleteComponent {
   private saveSubject = new Subject<void>();
 
   delete$ = this.saveSubject.pipe(
-    switchMap(() => this.studentService.selectedStudent$.pipe(filter(Boolean))),
-    switchMap(student =>
-      this.studentService.deleteStudent(student.id).pipe(
+    switchMap(() => {
+      return this.studentService.selectedStudent$.pipe(filter(Boolean));
+    }),
+    switchMap(student => {
+      console.log(student);
+
+      return this.studentService.deleteStudent(student.id).pipe(
         api(() => {
           this.close();
           this.studentService.refreshList();
         }),
-      ),
-    ),
-    share(), // cannot use shareReplay as it will replay the delete when selecting an item
+      );
+    }),
+    // shareReplay({ refCount: true, bufferSize: 1 }),
+    share(), // or shareReplay({ refCount: true }), which makes sure unsubscribe when count is 0
+    // if refCount is false (default), selectedStudent$ is still alive, every time selecting a student, will trigger the delete.
   );
 
   close() {
