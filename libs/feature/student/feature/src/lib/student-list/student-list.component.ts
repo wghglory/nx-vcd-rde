@@ -4,7 +4,8 @@ import { StudentService } from '@seed/feature/student/data-access';
 import { Student } from '@seed/feature/student/model';
 import { ApiQuery, RDEList } from '@seed/shared/model';
 import { api, dgState, stateHandler } from '@seed/shared/util';
-import { BehaviorSubject, combineLatest, filter, map, Observable, share, startWith, switchMap } from 'rxjs';
+import { isEqual } from 'lodash';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, share, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-student-list',
@@ -33,6 +34,7 @@ export class StudentListComponent {
 
   total$ = this.students$.pipe(
     filter(s => Boolean(s.data)),
+    distinctUntilChanged(isEqual),
     map(res => res.data?.resultTotal),
   );
 

@@ -4,7 +4,8 @@ import { <%= entityClassName %>Service } from '@seed/<%= directory %>/data-acces
 import { <%= entityClassName %> } from '@seed/<%= directory %>/model';
 import { ApiQuery, RDEList } from '@seed/shared/model';
 import { api, dgState, stateHandler } from '@seed/shared/util';
-import { BehaviorSubject, combineLatest, filter, map, Observable, share, startWith, switchMap } from 'rxjs';
+import { isEqual } from 'lodash';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, share, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'seed-<%= entityFileName %>-list',
@@ -33,6 +34,7 @@ export class <%= entityClassName %>ListComponent {
 
   total$ = this.<%= entityPropertyName %>s$.pipe(
     filter(s => Boolean(s.data)),
+    distinctUntilChanged(isEqual),
     map(res => res.data?.resultTotal),
   );
 
