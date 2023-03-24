@@ -53,4 +53,4 @@
 </seed-page-container>
 
 <!-- ----------------------------------- modal----------------------------------- -->
-<seed-<%= entityPropertyName %>-delete *ngIf="openDeleteDialog" [(open)]="openDeleteDialog"> </seed-<%= entityPropertyName %>-delete>
+<seed-<%= entityFileName %>-delete *ngIf="openDeleteDialog" [(open)]="openDeleteDialog"> </seed-<%= entityFileName %>-delete>
