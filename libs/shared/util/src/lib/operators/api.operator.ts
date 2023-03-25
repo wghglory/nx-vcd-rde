@@ -43,7 +43,7 @@ import { catchError, map, Observable, of, pipe, startWith, tap, UnaryFunction } 
  * @param errorCallback error callback, e.g. send toast alert
  */
 export function api<T>(
-  callback?: (source?: T) => void,
+  callback?: (source: T) => void,
   errorCallback?: (error: HttpErrorResponse) => void,
 ): UnaryFunction<Observable<T>, Observable<ApiQuery<T>>> {
   return pipe(
