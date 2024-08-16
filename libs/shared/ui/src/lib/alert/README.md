@@ -1,7 +1,7 @@
 # Global Alert Message
 
 ```bash
-npx nx generate @nrwl/angular:ngrx alerts --parent=libs/core/ui/src/lib/alert/alert.module.ts --module=libs/core/ui/src/lib/alert/alert.module.ts --no-interactive
+npx nx generate @nx/angular:ngrx alerts --parent=libs/core/ui/src/lib/alert/alert.module.ts --module=libs/core/ui/src/lib/alert/alert.module.ts --no-interactive
 ```
 
 ## How to send alerts?

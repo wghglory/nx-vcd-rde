@@ -1,5 +1,5 @@
-import { Tree, formatFiles, installPackagesTask, names, generateFiles, joinPathFragments } from '@nrwl/devkit';
-import { libraryGenerator } from '@nrwl/workspace/generators';
+import { Tree, formatFiles, installPackagesTask, names, generateFiles, joinPathFragments } from '@nx/devkit';
+import { libraryGenerator } from '@nx/workspace/generators';
 
 interface NewArticleSchemaOptions {
   title: string;

@@ -20,7 +20,7 @@ vpat folder will be created. Use these commands after finishing the development.
 
 ```shell
 # add remote app official command
-npx nx generate @nrwl/angular:remote content-hub-mfe --host=seed --addTailwind --backendProject=api --port=4303 --style=scss --tags=type:app --no-interactive
+npx nx generate @nx/angular:remote content-hub-mfe --host=seed --addTailwind --backendProject=api --port=4303 --style=scss --tags=type:app --no-interactive
 
 # create remote app and libraries for UI
 npx nx generate @seed/plugin-generator:mfe-app ose --displayName='Object Storage' --port=4303 --no-interactive
@@ -38,9 +38,9 @@ NX_BUILD_DATE=$(date) npx nx serve seed --open --devRemotes=harbor-mfe,ose-mfe
 2. repository name: seed; application name: seed
 3. add clarity
 4. generate tailwind
-5. add `@nrwl/express`, and generate api express server
-6. generate shared models: `nx generate @nrwl/workspace:library models --skipBabelrc --directory=shared  --no-standaloneConfig --testEnvironment=node --unitTestRunner=none`
-7. generate feature lib: `npx nx generate @nrwl/angular:library product --style=scss --directory=feature --changeDetection=OnPush --inlineStyle --lazy --routing --standalone`
+5. add `@nx/express`, and generate api express server
+6. generate shared models: `nx generate @nx/workspace:library models --skipBabelrc --directory=shared  --no-standaloneConfig --testEnvironment=node --unitTestRunner=none`
+7. generate feature lib: `npx nx generate @nx/angular:library product --style=scss --directory=feature --changeDetection=OnPush --inlineStyle --lazy --routing --standalone`
 
 ## What's included?
 
@@ -111,7 +111,7 @@ Feature Libraries:
 ## TODOS
 
 1. [x] - Display a welcome page (Shared ui) for both provider and tenant. Wire route for home page.
-   1. `npx nx generate @nrwl/angular:component welcome --project=shared-ui --changeDetection=OnPush --standalone --no-interactive`
+   1. `npx nx generate @nx/angular:component welcome --project=shared-ui --changeDetection=OnPush --standalone --no-interactive`
 1. [x] - UT
 1. [x] - Cypress
 1. [x] - Schematics

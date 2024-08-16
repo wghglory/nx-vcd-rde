@@ -74,13 +74,6 @@
 }
 
 .dismiss-bg {
-  .dismiss {
-    cds-icon[shape='times'] {
-      fill: #adbbc4;
-      margin-top: -8px;
-      margin-left: 1px;
-    }
-  }
   background: transparent;
   width: 30px;
   height: 30px;
@@ -94,6 +87,14 @@
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .dismiss {
+    cds-icon[shape='times'] {
+      fill: #adbbc4;
+      margin-top: -8px;
+      margin-left: 1px;
+    }
   }
 }
 

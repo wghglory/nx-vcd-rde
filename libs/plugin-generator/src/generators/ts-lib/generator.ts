@@ -1,5 +1,5 @@
-import { formatFiles, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nrwl/devkit';
-import { libraryGenerator } from '@nrwl/workspace/generators';
+import { formatFiles, generateFiles, getWorkspaceLayout, names, offsetFromRoot, Tree } from '@nx/devkit';
+import { libraryGenerator } from '@nx/workspace/generators';
 import * as path from 'path';
 
 import { TsLibGeneratorSchema } from './schema';

@@ -1,4 +1,4 @@
-import { formatFiles, names, Tree } from '@nrwl/devkit';
+import { formatFiles, names, Tree } from '@nx/devkit';
 import { readFile, readFileSync, unlink, writeFile, writeFileSync } from 'fs';
 
 import generateAngularLib from '../ng-lib/generator';

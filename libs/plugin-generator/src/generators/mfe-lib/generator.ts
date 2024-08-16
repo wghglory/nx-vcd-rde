@@ -1,5 +1,5 @@
-import { libraryGenerator } from '@nrwl/angular/generators';
-import { formatFiles, generateFiles, getWorkspaceLayout, installPackagesTask, names, offsetFromRoot, Tree } from '@nrwl/devkit';
+import { libraryGenerator } from '@nx/angular/generators';
+import { formatFiles, generateFiles, getWorkspaceLayout, installPackagesTask, names, offsetFromRoot, Tree } from '@nx/devkit';
 import * as path from 'path';
 
 import { MfeLibGeneratorSchema } from './schema';
