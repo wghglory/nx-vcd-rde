@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedSpecModule } from '@seed/shared/module';
-import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
+import { VmwThemeToolsModule } from '@vmw/ngx-utils';
 
 import { VerticalNavComponent } from './vertical-nav.component';
 
@@ -11,7 +11,7 @@ describe('VerticalNavComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SharedSpecModule, VerticalNavComponent, VmwThemeToolsModule],
-      providers: [VmwClarityThemeService],
+      providers: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(VerticalNavComponent);

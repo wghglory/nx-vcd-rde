@@ -7,13 +7,14 @@ import { RDEList } from '@seed/shared/model';
 import { SharedUiModule } from '@seed/shared/ui';
 import { CardState, cardStateHandler, startWithTap } from '@seed/shared/util';
 import { VmwInfiniteScrollDirectiveModule } from '@vmw/ngx-utils';
+import { AlertComponent } from 'clr-lift';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BehaviorSubject, catchError, concatMap, EMPTY, finalize, scan, Subject, tap, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'seed-product-infinite-scroll',
   standalone: true,
-  imports: [SharedUiModule, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, RouterModule],
+  imports: [SharedUiModule, AlertComponent, InfiniteScrollModule, VmwInfiniteScrollDirectiveModule, RouterModule],
   templateUrl: './product-infinite-scroll.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,

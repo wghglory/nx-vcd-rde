@@ -26,22 +26,17 @@
           "apps/seed/src/favicon.ico",
           "apps/seed/src/assets",
           {
-            "glob": "clr-ui-dark.min.css",
-            "input": "node_modules/@clr/ui",
-            "output": "/assets/css"
-          },
-          {
-            "glob": "clr-ui.min.css",
-            "input": "node_modules/@clr/ui",
-            "output": "/assets/css"
-          },
-          {
             "input": "libs/common-assets/src/assets",
             "glob": "**/*",
             "output": "/assets/"
           }
         ],
-        "styles": ["apps/seed/src/styles.scss"],
+        "styles": [
+          "./node_modules/@cds/core/global.min.css",
+          "./node_modules/@cds/core/styles/theme.dark.min.css",
+          "./node_modules/@clr/ui/clr-ui.min.css",
+          "apps/seed/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {

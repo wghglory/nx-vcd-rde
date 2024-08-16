@@ -20,16 +20,6 @@
           "apps/harbor-mfe/src/favicon.ico",
           "apps/harbor-mfe/src/assets",
           {
-            "glob": "clr-ui-dark.min.css",
-            "input": "node_modules/@clr/ui",
-            "output": "/assets/css"
-          },
-          {
-            "glob": "clr-ui.min.css",
-            "input": "node_modules/@clr/ui",
-            "output": "/assets/css"
-          },
-          {
             "input": "libs/common-assets/src/assets",
             "glob": "**/*",
             "output": "/assets/"
@@ -38,7 +28,12 @@
         "stylePreprocessorOptions": {
           "includePaths": ["libs/shared/style/src/lib/scss"]
         },
-        "styles": ["apps/harbor-mfe/src/styles.scss"],
+        "styles": [
+          "./node_modules/@cds/core/global.min.css",
+          "./node_modules/@cds/core/styles/theme.dark.min.css",
+          "./node_modules/@clr/ui/clr-ui.min.css",
+          "apps/harbor-mfe/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/harbor-mfe/webpack.config.js"

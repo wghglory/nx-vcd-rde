@@ -12,9 +12,8 @@ import { NavbarComponent, VerticalNavComponent } from '@seed/core/feature';
 import { interceptorProviders } from '@seed/core/interceptor';
 import { bootstrapFactory, PreloadService } from '@seed/shared/data-access';
 import { COMMON_ICONS } from '@seed/shared/style';
-import { themeFactory } from '@seed/shared/util';
 import { initVIPConfig } from '@seed/shared/vip';
-import { VmwClarityThemeService, VmwThemeToolsModule } from '@vmw/ngx-utils';
+import { VmwThemeToolsModule } from '@vmw/ngx-utils';
 import { LocaleService, VIPModule, VIPService } from '@vmw/ngx-vip';
 import { AlertContainerComponent, ToastContainerComponent } from 'clr-lift';
 
@@ -70,12 +69,7 @@ import { StandaloneLayoutComponent } from './layout/standalone-layout/standalone
       deps: [VIPService, LocaleService],
       multi: true,
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: themeFactory,
-      deps: [VmwClarityThemeService],
-      multi: true,
-    },
+
     {
       provide: APP_INITIALIZER,
       useFactory: bootstrapFactory,
