@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { loadRemoteModule } from '@nrwl/angular/mf';
-import { NoAccessComponent, NotFoundComponent } from '@seed/core/feature';
+import { loadRemoteModule } from '@nx/angular/mf';
+import { LoginComponent, NoAccessComponent, NotFoundComponent } from '@seed/core/feature';
 import { productRoutes } from '@seed/feature/product/feature';
 import { AuthGuard } from '@seed/shared/data-access';
 import { MfeContainerComponent } from '@seed/shared/feature';
@@ -65,7 +65,7 @@ export const routes: Route[] = [
     data: {
       layout: 'blank' as Layout,
     },
-    children: [{ path: '', loadComponent: () => import('@seed/core/feature').then(m => m.LoginComponent) }],
+    children: [{ path: '', component: LoginComponent }],
   },
   {
     path: 'no-access',

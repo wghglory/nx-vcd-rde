@@ -1,5 +1,5 @@
 // https://javascript.plainenglish.io/how-to-build-generators-schematics-with-the-superior-nx-devkit-689d8f529fa6
-import { Tree, formatFiles, generateFiles, getProjects, names, joinPathFragments } from '@nrwl/devkit';
+import { Tree, formatFiles, generateFiles, getProjects, names, joinPathFragments } from '@nx/devkit';
 import * as path from 'path';
 
 export interface InterfaceSchema {

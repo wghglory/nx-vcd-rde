@@ -5,8 +5,8 @@ import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AuthService } from '@seed/shared/data-access';
 import { SharedSpecModule } from '@seed/shared/module';
-import { AlertModule } from '@seed/shared/ui';
-import { MockModule } from 'ng-mocks';
+import { AlertContainerComponent } from 'clr-lift';
+import { MockComponent, MockModule } from 'ng-mocks';
 import { of } from 'rxjs';
 
 import { AppComponent } from './app.component';
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [MockModule(ClarityModule), MockModule(AlertModule), SharedSpecModule],
+      imports: [MockModule(ClarityModule), MockComponent(AlertContainerComponent), SharedSpecModule],
       providers: [
         AuthService,
         provideMockStore({ initialState }),

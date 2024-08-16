@@ -1,4 +1,4 @@
-import { libraryGenerator } from '@nrwl/angular/generators';
+import { libraryGenerator } from '@nx/angular/generators';
 import {
   formatFiles,
   generateFiles,
@@ -9,7 +9,7 @@ import {
   offsetFromRoot,
   readProjectConfiguration,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 
 import { AngularLibraryGeneratorSchema } from './schema';
 

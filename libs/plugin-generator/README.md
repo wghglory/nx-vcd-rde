@@ -1,8 +1,8 @@
 # plugin-generator
 
 ```bash
-npm install @nrwl/nx-plugin -D
-npx nx generate @nrwl/nx-plugin:plugin plugin-generator
+npm install @nx/plugin -D
+npx nx generate @nx/plugin:plugin plugin-generator
 ```
 
 ## Set plugin as default collection
@@ -20,7 +20,7 @@ So now instead of `npx nx generate @seed/plugin-generator:plugin-generator <a-cu
 ## Create a new generator by a generator
 
 ```bash
-npx nx generate @nrwl/nx-plugin:generator angular-library --project=plugin-generator
+npx nx generate @nx/plugin:generator angular-library --project=plugin-generator
 ```
 
 It will create a new `angular-library` generator.

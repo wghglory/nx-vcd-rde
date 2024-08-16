@@ -3,7 +3,7 @@
   <div class="modal-body">
     <p cds-text [innerHTML]="'common.delete_x' | vtranslate : (<%= entityPropertyName %>Service.selected<%= entityClassName %>$ | async)?.name"></p>
 
-    <seed-alert data-testid="alert" *ngIf="(delete$ | async)?.error as error" [error]="error"></seed-alert>
+    <cll-alert data-testid="alert" *ngIf="(delete$ | async)?.error as error" [error]="error"></cll-alert>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="close()">{{ 'common.cancel' | vtranslate }}</button>

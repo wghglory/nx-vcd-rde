@@ -6,7 +6,7 @@
       {{ (productService.selectedItem$ | async)?.name }}?
     </p>
 
-    <seed-alert *ngIf="error$ | async as error" [error]="error"></seed-alert>
+    <cll-alert *ngIf="error$ | async as error" [error]="error"></cll-alert>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="close()">{{ 'common.cancel' | vtranslate }}</button>

@@ -7,7 +7,7 @@
       <clr-control-error>{{ 'common.required' | vtranslate }}</clr-control-error>
     </clr-control-container>
 
-    <seed-alert *ngIf="(add$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
+    <cll-alert *ngIf="(add$ | async)?.error as error" [error]="error" class="mt-6"></cll-alert>
 
     <div class="mt-6">
       <button class="btn btn-outline" type="button" (click)="cancel()">{{ 'common.cancel' | vtranslate }}</button>

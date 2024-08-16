@@ -13,7 +13,7 @@
         <clr-control-error>{{ 'common.required' | vtranslate }}</clr-control-error>
       </clr-textarea-container>
 
-      <seed-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></seed-alert>
+      <cll-alert *ngIf="error$ | async as error" [error]="error" class="mt-6"></cll-alert>
     </form>
   </div>
   <div class="modal-footer">

@@ -2,28 +2,31 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { AuthService } from '@seed/shared/data-access';
 import { Role, SignInPayload } from '@seed/shared/model';
 import { SharedModule } from '@seed/shared/module';
-import { alertActions, AlertModule } from '@seed/shared/ui';
 import { NAV_CONFIG } from '@seed/shared/util';
+import { AlertComponent } from 'clr-lift';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'seed-login',
   standalone: true,
-  imports: [SharedModule, FormsModule, AlertModule],
+  imports: [SharedModule, FormsModule, AlertComponent],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router, private store: Store) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   username = '';
   password = '';
   submitting = false;
   alertKey = 'loginKey';
+  error?: HttpErrorResponse;
 
   // private readonly redirectURL = this.activatedRoute.snapshot.queryParamMap.get('redirect') || '/';
 
@@ -39,7 +42,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(payload: SignInPayload) {
-    this.store.dispatch(alertActions.clearAlerts());
     this.submitting = true;
 
     this.authService
@@ -55,14 +57,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (err: HttpErrorResponse) => {
-          this.store.dispatch(
-            alertActions.addAlert({
-              alert: {
-                message: err.error?.message,
-                alertKey: this.alertKey,
-              },
-            }),
-          );
+          this.error = err;
         },
       });
   }

@@ -1,4 +1,4 @@
-import { remote } from '@nrwl/angular/generators';
+import { remote } from '@nx/angular/generators';
 import {
   addProjectConfiguration,
   formatFiles,
@@ -8,7 +8,7 @@ import {
   offsetFromRoot,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { unlink } from 'fs';
 import * as path from 'path';
 
@@ -23,7 +23,7 @@ interface NormalizedSchema extends MfeAppGeneratorSchema {
   removePrefix: (source: string, prefix: string) => string;
 }
 
-// official command to generate a remote app: npx nx generate @nrwl/angular:remote content-hub-mfe --host=seed --addTailwind --backendProject=api --port=4303 --style=scss --tags=type:app --no-interactive
+// official command to generate a remote app: npx nx generate @nx/angular:remote content-hub-mfe --host=seed --addTailwind --backendProject=api --port=4303 --style=scss --tags=type:app --no-interactive
 
 // Our generator inputs: name, host?=seed, port?=findNextPort, displayName, description
 // Set tailwind, style, tags internally
