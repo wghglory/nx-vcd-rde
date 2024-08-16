@@ -2,7 +2,7 @@
   <ng-container *ngIf="data$ | async as apiResult">
     <seed-spinner *ngIf="apiResult.loading"></seed-spinner>
 
-    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error"></seed-alert>
+    <cll-alert *ngIf="apiResult.error" [error]="apiResult.error"></cll-alert>
 
     <table *ngIf="apiResult.data" class="mb2 table">
       <thead>

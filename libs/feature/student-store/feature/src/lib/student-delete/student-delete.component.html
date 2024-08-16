@@ -1,9 +1,9 @@
 <clr-modal [clrModalOpen]="(store.openDialog$ | async) === true" (clrModalOpenChange)="close()">
   <h3 class="modal-title">Delete Student</h3>
   <div class="modal-body">
-    <p cds-text [innerHTML]="'common.delete_x' | vtranslate : (listStore.selectedStudent$ | async)?.firstName"></p>
+    <p cds-text [innerHTML]="'common.delete_x' | vtranslate: (listStore.selectedStudent$ | async)?.firstName"></p>
 
-    <seed-alert data-testid="alert" *ngIf="(store.vm$ | async)?.error as error" [error]="error"></seed-alert>
+    <cll-alert data-testid="alert" *ngIf="(store.vm$ | async)?.error as error" [error]="error"></cll-alert>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="close()">{{ 'common.cancel' | vtranslate }}</button>

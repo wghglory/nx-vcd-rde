@@ -2,7 +2,7 @@
   <ng-container *ngIf="store.vm$ | async as vm">
     <seed-spinner *ngIf="vm.loading"></seed-spinner>
 
-    <seed-alert *ngIf="vm.error" [error]="vm.error"></seed-alert>
+    <cll-alert *ngIf="vm.error" [error]="vm.error"></cll-alert>
 
     <ng-container *ngIf="vm.student as student">
       <div class="flex flex-wrap">

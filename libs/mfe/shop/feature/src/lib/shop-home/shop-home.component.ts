@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { AuthService } from '@seed/shared/data-access';
 import { SharedModule } from '@seed/shared/module';
-import { alertActions, PageContainerComponent } from '@seed/shared/ui';
+import { PageContainerComponent } from '@seed/shared/ui';
+import { AlertService } from 'clr-lift';
 
 @Component({
   selector: 'seed-shop-home',
@@ -13,15 +13,13 @@ import { alertActions, PageContainerComponent } from '@seed/shared/ui';
   imports: [SharedModule, RouterModule, PageContainerComponent],
 })
 export class ShopHomeComponent {
-  constructor(private authService: AuthService, private store: Store) {
-    this.store.dispatch(
-      alertActions.addAlert({
-        alert: {
-          message: 'A demo alert sent from remote app to host.',
-          alertKey: 'global',
-        },
-      }),
-    );
+  constructor(
+    private authService: AuthService,
+    private alertService: AlertService,
+  ) {
+    this.alertService.addAlert({
+      content: 'A demo alert sent from remote app to host.',
+    });
   }
 
   user$ = this.authService.currentUser$;

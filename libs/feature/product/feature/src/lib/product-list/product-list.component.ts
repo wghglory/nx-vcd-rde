@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ProductService } from '@seed/feature/product/data-access';
 import { Product } from '@seed/feature/product/model';
-import { LoadingOrErrorComponent, SharedUiModule, toastActions } from '@seed/shared/ui';
+import { LoadingOrErrorComponent, SharedUiModule } from '@seed/shared/ui';
 import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 
 @Component({
@@ -17,12 +17,15 @@ import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListComponent {
-  constructor(private productService: ProductService, private store: Store) {
-    store.dispatch(
-      toastActions.addToast({
-        toast: { title: 'First Toast', description: 'Hi, test toast component', timeoutSeconds: -1 },
-      }),
-    );
+  constructor(
+    private productService: ProductService,
+    private store: Store,
+  ) {
+    // store.dispatch(
+    //   toastActions.addToast({
+    //     toast: { title: 'First Toast', description: 'Hi, test toast component', timeoutSeconds: -1 },
+    //   }),
+    // );
   }
 
   selectedItem: Product | undefined;

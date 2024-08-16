@@ -1,12 +1,12 @@
 <clr-main-container class="main-container">
   <!-- global alerts -->
-  <seed-advanced-alert></seed-advanced-alert>
+  <cll-alert-container />
 
   <seed-navbar></seed-navbar>
   <div class="content-container">
     <main class="content-area">
       <router-outlet></router-outlet>
-      <seed-toast-host></seed-toast-host>
+      <cll-toast-container [timeoutSeconds]="8" />
     </main>
   </div>
 </clr-main-container>

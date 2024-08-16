@@ -19,7 +19,7 @@
       <clr-control-error>{{ 'common.required' | vtranslate }} and Must be a positive number</clr-control-error>
     </clr-control-container>
 
-    <seed-alert *ngIf="(store.vm$ | async)?.error as error" [error]="error" class="mt-6"></seed-alert>
+    <cll-alert *ngIf="(store.vm$ | async)?.error as error" [error]="error" class="mt-6"></cll-alert>
 
     <div class="mt-6">
       <button class="btn btn-outline" type="button" (click)="goBack()">{{ 'common.cancel' | vtranslate }}</button>

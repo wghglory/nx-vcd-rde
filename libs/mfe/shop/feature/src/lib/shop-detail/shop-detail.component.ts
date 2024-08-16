@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ShopService } from '@seed/mfe/shop/data-access';
 import { SharedModule } from '@seed/shared/module';
-import { AlertComponent, PageContainerComponent, SpinnerComponent } from '@seed/shared/ui';
+import { PageContainerComponent, SpinnerComponent } from '@seed/shared/ui';
 import { api, logger } from '@seed/shared/util';
+import { AlertComponent } from 'clr-lift';
 
 @Component({
   selector: 'seed-shop-detail',

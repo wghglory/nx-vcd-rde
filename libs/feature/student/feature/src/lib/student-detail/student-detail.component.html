@@ -2,7 +2,7 @@
   <ng-container *ngIf="student$ | async as apiResult">
     <seed-spinner *ngIf="apiResult.loading"></seed-spinner>
 
-    <seed-alert *ngIf="apiResult.error" [error]="apiResult.error"></seed-alert>
+    <cll-alert *ngIf="apiResult.error" [error]="apiResult.error"></cll-alert>
 
     <ng-container *ngIf="apiResult.data as student">
       <div class="flex flex-wrap">

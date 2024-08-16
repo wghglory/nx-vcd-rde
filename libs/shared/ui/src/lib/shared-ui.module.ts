@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { VIPModule } from '@vmw/ngx-vip';
 
-import { AlertComponent } from './alert';
 import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
-  imports: [AlertComponent, SpinnerComponent],
-  exports: [ClarityModule, CommonModule, VIPModule, AlertComponent, SpinnerComponent],
+  imports: [SpinnerComponent],
+  exports: [ClarityModule, CommonModule, VIPModule, SpinnerComponent],
 })
 export class SharedUiModule {}

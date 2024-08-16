@@ -204,7 +204,7 @@ describe('StudentListComponent', () => {
     tick();
     fixture.detectChanges();
 
-    const alert = fixture.debugElement.query(By.css(`seed-alert`));
+    const alert = fixture.debugElement.query(By.css(`cll-alert`));
     expect(alert.nativeElement).toBeInTheDocument();
   }));
 });
