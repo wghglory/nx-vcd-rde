@@ -1,4 +1,4 @@
-<header class="header-6">
+<clr-header class="header-6">
   <!-- <button class="btn btn-primary skip-to-main" (click)="focusOnMain()">
     {{ 'common.skipToMain' | vtranslate }}
   </button> -->
@@ -31,7 +31,7 @@
     <!--INJECTION_POINT_DO_NOT_DELETE-->
   </div>
   <div class="header-actions">
-    <div>
+    <div style="line-height: 60px">
       <vmw-theme-switch-button classes="nav-icon nav-link"></vmw-theme-switch-button>
       <span class="mx-4">{{ (user$ | async)?.user }}</span>
     </div>
@@ -48,6 +48,6 @@
       </clr-dropdown-menu>
     </clr-dropdown>
   </div>
-</header>
+</clr-header>
 
 <seed-about-dialog *ngIf="aboutDialogOpen" [(dialogOpen)]="aboutDialogOpen" [activeElement]="activeElement"></seed-about-dialog>
